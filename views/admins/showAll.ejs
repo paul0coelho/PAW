@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Admin Detail</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  <div class="container">
+    <h3><a href="/admins">Admin List</a></h3>
+    <h1>Admin Detail</h1>
+    <% admins.forEach(admin=> {%>
+      <table>
+        <tbody>
+          <tr>
+            <td>Name</td>
+            <td>:</td>
+            <td>
+              <%= admin.name %>
+            </td>
+          </tr>
+          <tr>
+            <td>Email</td>
+            <td>:</td>
+            <td>
+              <%= admin.email %>
+            </td>
+          </tr>
+          <tr>
+            <td>UserName</td>
+            <td>:</td>
+            <td>
+              <%= admin.userName %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3><a href="/admins/edit/<%=admin._id%>">EDIT</a></h3>
+        <form action="/admins/delete/<%=admin._id%>" method="post">
+          <button type="submit">DELETE</button>
+        </form>
+      <% });%>    
+  </div>
+</body>
+
+</html>

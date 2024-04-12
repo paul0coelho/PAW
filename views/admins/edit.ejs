@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Edit Admin</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div class="container">
+      <h3><a href="/admins">Admin List</a></h3>
+      <h1>Edit Admin</h1>
+      <form action="/admins/update/<%= admin._id%>" method="post">
+        <table>
+          <tbody>
+            <tr>
+              <td>Name</td>
+              <td><input type="text" name="name" value="<%= admin.name %>" /></td>
+            </tr>
+            <tr>
+              <td>Email</td>
+              <td><input type="text" name="email" value="<%= admin.email %>" /></td>
+            </tr>
+            <tr>
+              <td>UserName</td>
+              <td><input type="text" name="userName" value="<%= admin.userName %>" /></td>
+            </tr>
+            <tr>
+              <td colspan="2"><button type="submit">Update</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+  </body>
+</html>
