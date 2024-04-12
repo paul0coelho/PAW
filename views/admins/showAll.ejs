@@ -2,19 +2,19 @@
 <html>
 
 <head>
-  <title>Admin Detail</title>
+  <title>Detalhes dos administradores</title>
   <link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
 
 <body>
   <div class="container">
-    <h3><a href="/admins">Admin List</a></h3>
-    <h1>Admin Detail</h1>
+    <h3><a href="/admins">Lista de administradores</a></h3>
+    <h1>Detalhes do administrador</h1>
     <% admins.forEach(admin=> {%>
       <table>
         <tbody>
           <tr>
-            <td>Name</td>
+            <td>Nome</td>
             <td>:</td>
             <td>
               <%= admin.name %>

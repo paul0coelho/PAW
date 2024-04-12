@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Edit Admin</title>
+    <title>Editar Administrador</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
     <div class="container">
-      <h3><a href="/admins">Admin List</a></h3>
-      <h1>Edit Admin</h1>
+      <h3><a href="/admins">Lista de Administradores</a></h3>
+      <h1>Editar Administrador</h1>
       <form action="/admins/update/<%= admin._id%>" method="post">
         <table>
           <tbody>
             <tr>
-              <td>Name</td>
+              <td>Nome</td>
               <td><input type="text" name="name" value="<%= admin.name %>" /></td>
             </tr>
             <tr>

@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Edit Donator</title>
+    <title>Editar Doador</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
     <div class="container">
-      <h3><a href="/donators">Donator List</a></h3>
-      <h1>Edit Donator</h1>
+      <h3><a href="/donators">Lista de doadores</a></h3>
+      <h1>Editar Doador</h1>
       <form action="/donators/update/<%= donator._id %>" method="post">
         <table>
           <tbody>
             <tr>
-              <td>Name</td>
+              <td>Nome</td>
               <td><input type="text" name="name" value="<%= donator.name %>" /></td>
             </tr>
             <tr>
-              <td>Phone</td>
+              <td>Telefone</td>
               <td><input type="text" name="phone" value="<%= donator.phone %>" /></td>
             </tr>
             <tr>
-              <td>Address</td>
+              <td>Morada</td>
               <td><input type="text" name="address" value="<%= donator.address %>" /></td>
             </tr>
             <tr>

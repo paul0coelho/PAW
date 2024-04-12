@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Admin List</title>
+    <title>Lista de Administradores</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
     <div class="container">
-      <h3><a href="/admins/create">Create Admin</a></h3>
-      <h1>Admin List</h1>
+      <h3><a href="/admins/create">Criar Administrador</a></h3>
+      <h1>Lista de Administradores</h1>
       <% if(admins.length>0) { %>
       <table class="list-table">
         <thead>
           <tr>
-            <th>Admin Name</th>
-            <th>Position</th>
+            <th>Nome do administrador</th>
+            <th>Email</th>
           </tr>
         </thead>
         <tbody>
@@ -21,13 +21,13 @@
           <% for(var i=0; i<admins.length;i++) { %>
             <tr>
               <td><a href="/admins/show/<%= admins[i]._id%>"><%= admins[i].name%></a></td>
-              <td><%= admins[i].position%></td>
+              <td><%= admins[i].email%></td>
             </tr>
           <% } %>
         </tbody>
       </table>
       <% } else { %>
-        <div>No admins found.</div>
+        <div>Nenhum administrador encontrado.</div>
       <% } %>
     </div>
   </body>

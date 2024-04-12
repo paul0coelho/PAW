@@ -2,34 +2,34 @@
 <html>
 
 <head>
-  <title>Donator Detail</title>
+  <title>Detalhes dos Doadores</title>
   <link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
 
 <body>
   <div class="container">
-    <h3><a href="/donators">Donator List</a></h3>
-    <h1>Donator Details</h1>
+    <h3><a href="/donators">Lista de Doadores </a></h3>
+    <h1>Detalhes do Doador</h1>
     <% donators.forEach(donator => { %>
       <table>
         <tbody>
           <tr>
-            <td>Name</td>
+            <td>Nome</td>
             <td>:</td>
             <td><%= donator.name %></td>
           </tr>
           <tr>
-            <td>Phone</td>
+            <td>Telefone</td>
             <td>:</td>
             <td><%= donator.phone %></td>
           </tr>
           <tr>
-            <td>Address</td>
+            <td>Morada</td>
             <td>:</td>
             <td><%= donator.address %></td>
           </tr>
           <tr>
-            <td>Gained Points</td>
+            <td>Pontos acumulados</td>
             <td>:</td>
             <td><%= donator.gainedPoints %></td>
           </tr>

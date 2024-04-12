@@ -1,32 +1,34 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Donator List</title>
+    <title>Lista de Doadores</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
     <div class="container">
-      <h3><a href="/donators/create">Create Donator</a></h3>
-      <h1>Donator List</h1>
+      <h3><a href="/donators/create">Criar Doador</a></h3>
+      <h1>Lista de Doadores</h1>
       <% if(donators.length>0) { %>
       <table class="list-table">
         <thead>
           <tr>
-            <th>Donator Name</th>
-            <th>Position</th>
+            <th>Nome do doador</th>
+            <th>Telefone</th>
+            <th>Pontos acumulados</th>
           </tr>
         </thead>
         <tbody>
           <% for(var i=0; i<donators.length; i++) { %>
             <tr>
               <td><a href="/donators/show/<%= donators[i]._id %>"><%= donators[i].name %></a></td>
-              <td><%= donators[i].position %></td>
+              <td><%= donators[i].phone %></td>
+              <td><%= donators[i].gainedPoints %></td>
             </tr>
           <% } %>
         </tbody>
       </table>
       <% } else { %>
-        <div>No donators found.</div>
+        <div>Nenhum doador encontrado.</div>
       <% } %>
     </div>
   </body>
