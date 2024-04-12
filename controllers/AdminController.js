@@ -76,4 +76,4 @@ adminController.delete = function(req, res) {
   });
 };
 
-module.exports = employeeController;
+module.exports = adminController;
