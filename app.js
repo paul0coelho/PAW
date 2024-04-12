@@ -12,7 +12,7 @@ mongoose.connect('mongodb+srv://paul0:1234@cluster0.gat7grz.mongodb.net/PAW?retr
   .catch((err) => console.error(err));
 
 var index = require('./routes/index');
-var employees = require('./routes/employees');
+var admins = require('./routes/admins');
 
 var app = express();
 
@@ -27,7 +27,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/employees', employees);
+app.use('/admins', admins);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

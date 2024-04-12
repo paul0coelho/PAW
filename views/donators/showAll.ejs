@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Donator Detail</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  <div class="container">
+    <h3><a href="/donators">Donator List</a></h3>
+    <h1>Donator Details</h1>
+    <% donators.forEach(donator => { %>
+      <table>
+        <tbody>
+          <tr>
+            <td>Name</td>
+            <td>:</td>
+            <td><%= donator.name %></td>
+          </tr>
+          <tr>
+            <td>Phone</td>
+            <td>:</td>
+            <td><%= donator.phone %></td>
+          </tr>
+          <tr>
+            <td>Address</td>
+            <td>:</td>
+            <td><%= donator.address %></td>
+          </tr>
+          <tr>
+            <td>Gained Points</td>
+            <td>:</td>
+            <td><%= donator.gainedPoints %></td>
+          </tr>
+        </tbody>
+      </table>
+      <h3><a href="/donators/edit/<%= donator._id %>">EDIT</a></h3>
+      <form action="/donators/delete/<%= donator._id %>" method="post">
+        <button type="submit">DELETE</button>
+      </form>
+    <% }); %>
+  </div>
+</body>
+
+</html>
