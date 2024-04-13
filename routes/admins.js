@@ -1,40 +1,40 @@
 var express = require('express');
 var router = express.Router();
-var employee = require("../controllers/AdminController.js");
+var admin = require("../controllers/AdminController.js");
 
 // Get all employees
 router.get('/', function(req, res) {
-  employee.list(req, res);
+  admin.list(req, res);
 });
 
 // Get single employee by id
 router.get('/show/:id', function(req, res) {
-  employee.show(req, res);
+  admin.show(req, res);
 });
 
 // Create employee
 router.get('/create', function(req, res) {
-  employee.create(req, res);
+  admin.create(req, res);
 });
 
 // Save employee
 router.post('/save', function(req, res) {
-  employee.save(req, res);
+  admin.save(req, res);
 });
 
 // Edit employee
 router.get('/edit/:id', function(req, res) {
-  employee.edit(req, res);
+  admin.edit(req, res);
 });
 
 // Edit update
 router.post('/update/:id', function(req, res) {
-  employee.update(req, res);
+  admin.update(req, res);
 });
 
 // Edit update
 router.post('/delete/:id', function(req, res, next) {
-  employee.delete(req, res);
+  admin.delete(req, res);
 });
 
 module.exports = router;

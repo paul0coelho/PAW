@@ -8,24 +8,31 @@ mongoose.connect('mongodb+srv://paul0:1234@cluster0.gat7grz.mongodb.net/PAW?retr
 .catch((err)=>console.error(err));
 
 adminController.list = function(req, res) {
- Admin.find().exec (function(err,admin){
-  if(err){
-    console.log("Error:",err);
-  }else{
-    res.render("../views/admins/showAll",{admins:admin});
-  }
-});
+  Admin.find().exec()
+    .then(admins => {
+      res.render("../views/admins/showAll", {admins: admins});
+    })
+    .catch(err => {
+      console.log("Error:", err);
+      res.status(500).send('Internal Server Error');
+    });
 };
 
+
 adminController.show = function(req, res) {
-  Admin.findOne({_id:req.params.id}).exec (function(err,admin){
-    if(err){
-      console.log("Error:",err);
-    }else{
-      res.render("../views/admins/show",{admin:admin});
-    }
-  });
+  Admin.findOne({_id: req.params.id}).exec()
+    .then(admin => {
+      if (!admin) {
+        return res.status(404).send('Admin not found');
+      }
+      res.render("../views/admins/show", {admin: admin});
+    })
+    .catch(err => {
+      console.log("Error:", err);
+      res.status(500).send('Internal Server Error');
+    });
 };
+
 
 adminController.create = function(req, res) {
   res.render("../views/admins/create");
@@ -34,46 +41,63 @@ adminController.create = function(req, res) {
 adminController.save = function(req, res) {
   var admin = new Admin(req.body);
 
-  admin.save(function(err){
-    if(err){
+  admin.save()
+    .then(savedAdmin => {
+      console.log('Successfully created an admin.');
+      res.redirect("show/" + savedAdmin._id);
+    })
+    .catch(err => {
       console.log(err);
       res.render('../views/admins/create');
-    }else{
-      console.log('Successfully created an admin.');
-      res.redirect("show/"+employee._id)
-    }
-  });
+    });
 };
 
+
 adminController.edit = function(req, res) {
-  Admin.findOne({_id:req.params.id}).exec(function (err,admin){
-   if(err){
-    console.log("Error:",err); 
-   }else{
-    res.render("../views/admins/edit",{admin:admin});
-   }
-  });
+  Admin.findOne({_id: req.params.id}).exec()
+    .then(admin => {
+      if (!admin) {
+        return res.status(404).send('Admin not found');
+      }
+      res.render("../views/admins/edit", {admin: admin});
+    })
+    .catch(err => {
+      console.log("Error:", err);
+      res.status(500).send('Internal Server Error');
+    });
 };
 
 adminController.update = function(req, res) {
-  Admin.findByIdAndUpdate(req.params.id,{$set:{name:req.body.name,email:req.body.email,userName:req.body.userName,password:req.body.password }},{new:true},function(err,admin){
-    if(err){
+  Admin.findByIdAndUpdate(req.params.id, {
+      $set: {
+        name: req.body.name,
+        email: req.body.email,
+        userName: req.body.userName
+      }
+    }, { new: true })
+    .then(admin => {
+      if (!admin) {
+        return res.status(404).send('Admin not found');
+      }
+      res.redirect("/admins/show/" + admin._id);
+    })
+    .catch(err => {
       console.log(err);
-      res.render("../views/admins/edit",{employee:req.body});
-    }
-    res.redirect("/admins/show/"+employee._id);
-  });
+      res.render("../views/admins/edit", { admin: req.body });
+    });
 };
 
 adminController.delete = function(req, res) {
-  Admin.remove({_id:req.params.id},function(err){
-    if(err){
-      console.log(err);
-    }else{
-      console.log("Admin detected!");
+  Admin.deleteOne({ _id: req.params.id })
+    .then(() => {
+      console.log("Admin deleted!");
       res.redirect("/admins");
-    }
-  });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).send('Internal Server Error');
+    });
 };
+
 
 module.exports = adminController;
