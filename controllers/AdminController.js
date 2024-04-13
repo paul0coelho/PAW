@@ -72,7 +72,8 @@ adminController.update = function(req, res) {
       $set: {
         name: req.body.name,
         email: req.body.email,
-        userName: req.body.userName
+        userName: req.body.userName,
+        password:req.body.password
       }
     }, { new: true })
     .then(admin => {
