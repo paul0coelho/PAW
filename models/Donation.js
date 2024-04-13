@@ -19,7 +19,8 @@ var DonationSchema = new mongoose.Schema({
   },
   gainedPoints:{
     type: Number,
-    required: true
+    required: true,
+    min: 1,
   },
   updated_at: { type: Date, default: Date.now },
 });
