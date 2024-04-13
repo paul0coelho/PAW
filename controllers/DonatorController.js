@@ -8,23 +8,28 @@ mongoose.connect('mongodb+srv://paul0:1234@cluster0.gat7grz.mongodb.net/PAW?retr
 .catch((err) => console.error(err));
 
 donatorController.list = function(req, res) {
-  Donator.find().exec(function(err, donators) {
-    if(err) {
+  Donator.find().exec()
+    .then(donators => {
+      res.render("../views/donators/showAll", {donators: donators});
+    })
+    .catch(err => {
       console.log("Error:", err);
-    } else {
-      res.render("../views/donators/showAll", { donators: donators });
-    }
-  });
+      res.status(500).send('Internal Server Error');
+    });
 };
 
 donatorController.show = function(req, res) {
-  Donator.findOne({ _id: req.params.id }).exec(function(err, donator) {
-    if(err) {
+  Donator.findOne({_id: req.params.id}).exec()
+    .then(donator => {
+      if (!donator) {
+        return res.status(404).send('Donator not found');
+      }
+      res.render("../views/donators/show", {donator: donator});
+    })
+    .catch(err => {
       console.log("Error:", err);
-    } else {
-      res.render("../views/donators/show", { donator: donator });
-    }
-  });
+      res.status(500).send('Internal Server Error');
+    });
 };
 
 donatorController.create = function(req, res) {
@@ -32,52 +37,63 @@ donatorController.create = function(req, res) {
 };
 
 donatorController.save = function(req, res) {
-  var donator = new Donator(req.body);
+  var donator = new Admin(req.body);
 
-  donator.save(function(err) {
-    if(err) {
+  donator.save()
+    .then(savedDonator => {
+      console.log('Successfully created a donator.');
+      res.redirect("show/" + savedDonator._id);
+    })
+    .catch(err => {
       console.log(err);
       res.render('../views/donators/create');
-    } else {
-      console.log('Successfully created a donator.');
-      res.redirect("show/" + donator._id);
-    }
-  });
+    });
 };
 
 donatorController.edit = function(req, res) {
-  Donator.findOne({ _id: req.params.id }).exec(function(err, donator) {
-    if(err) {
+  Donator.findOne({_id: req.params.id}).exec()
+    .then(donator => {
+      if (!donator) {
+        return res.status(404).send('Donator not found');
+      }
+      res.render("../views/donators/edit", {donator: donator});
+    })
+    .catch(err => {
       console.log("Error:", err);
-    } else {
-      res.render("../views/donators/edit", { donator: donator });
-    }
-  });
+      res.status(500).send('Internal Server Error');
+    });
 };
 
 donatorController.update = function(req, res) {
-  Donator.findByIdAndUpdate(req.params.id,
-    { $set: { name: req.body.name, phone: req.body.phone, address: req.body.address}},
-    { new: true },
-    function(err, donator) {
-      if(err) {
-        console.log(err);
-        res.render("../views/donators/edit", { donator: req.body });
+  Donator.findByIdAndUpdate(req.params.id,{ 
+    $set: { 
+      name: req.body.name, 
+      phone: req.body.phone, 
+      address: req.body.address
+    }
+  },{ new: true })
+    .then(donator => {
+      if (!donator) {
+        return res.status(404).send('Donator not found');
       }
       res.redirect("/donators/show/" + donator._id);
-    }
-  );
+    })
+    .catch(err => {
+      console.log(err);
+      res.render("../views/donators/edit", { donator: req.body });
+    });
 };
 
 donatorController.delete = function(req, res) {
-  Donator.remove({ _id: req.params.id }, function(err) {
-    if(err) {
-      console.log(err);
-    } else {
+  Donator.deleteOne({ _id: req.params.id })
+    .then(() => {
       console.log("Donator deleted!");
       res.redirect("/donators");
-    }
-  });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).send('Internal Server Error');
+    });
 };
 
 module.exports = donatorController;

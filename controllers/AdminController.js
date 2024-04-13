@@ -18,7 +18,6 @@ adminController.list = function(req, res) {
     });
 };
 
-
 adminController.show = function(req, res) {
   Admin.findOne({_id: req.params.id}).exec()
     .then(admin => {
@@ -32,7 +31,6 @@ adminController.show = function(req, res) {
       res.status(500).send('Internal Server Error');
     });
 };
-
 
 adminController.create = function(req, res) {
   res.render("../views/admins/create");
@@ -51,7 +49,6 @@ adminController.save = function(req, res) {
       res.render('../views/admins/create');
     });
 };
-
 
 adminController.edit = function(req, res) {
   Admin.findOne({_id: req.params.id}).exec()
