@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lista de Doações</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div class="container">
+      <h3><a href="/donations/create">Criar Doação</a></h3>
+      <h1>Lista de Doações</h1>
+      <% if(donations.length > 0) { %>
+      <table class="list-table">
+        <thead>
+          <tr>
+            <th>Doador</th>
+            <th>Número de Peças Superiores</th>
+            <th>Número de Peças Inferiores</th>
+            <th>Número de Peças de Roupa Interior</th>
+            <th>Pontos Obtidos</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% donations.forEach(function(donation) { %>
+            <tr>
+              <td><a href="/donations/show/<%= donation._id %>"><%= donation.donator %></a></td>
+              <td><%= donation.topPiecesNumber %></td>
+              <td><%= donation.bottomPiecesNumber %></td>
+              <td><%= donation.underwearPiecesNumber %></td>
+              <td><%= donation.gainedPoints %></td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+      <% } else { %>
+        <div>Nenhuma doação encontrada.</div>
+      <% } %>
+    </div>
+  </body>
+</html>

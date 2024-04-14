@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Registar Doação</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div class="container">
+      <h3><a href="/donations">Lista de Doações</a></h3>
+      <h1>Registar nova Doação</h1>
+      <form action="/donations/save" method="post">
+        <table>
+          <tbody>
+            <tr>
+              <td>Doador</td>
+              <td><input type="text" name="donator" /></td>
+            </tr>
+            <tr>
+              <td>Número de Peças Superiores</td>
+              <td><input type="number" name="topPiecesNumber" /></td>
+            </tr>
+            <tr>
+              <td>Número de Peças Inferiores</td>
+              <td><input type="number" name="bottomPiecesNumber" /></td>
+            </tr>
+            <tr>
+              <td>Número de Peças de Roupa Interior</td>
+              <td><input type="number" name="underwearPiecesNumber" /></td>
+            </tr>
+            <tr>
+              <td colspan="2"><button type="submit">Salvar</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+  </body>
+</html>

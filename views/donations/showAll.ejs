@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Detalhes de Todas as Doações</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div class="container">
+      <% donations.forEach(function(donation) { %>
+      <table>
+        <tbody>
+          <tr>
+            <td>Doador</td>
+            <td>:</td>
+            <td><%= donation.donator %></td>
+          </tr>
+          <tr>
+            <td>Número de Peças Superiores</td>
+            <td>:</td>
+            <td><%= donation.topPiecesNumber %></td>
+          </tr>
+          <tr>
+            <td>Número de Peças Inferiores</td>
+            <td>:</td>
+            <td><%= donation.bottomPiecesNumber %></td>
+          </tr>
+          <tr>
+            <td>Número de Peças de Roupa Interior</td>
+            <td>:</td>
+            <td><%= donation.underwearPiecesNumber %></td>
+          </tr>
+          <tr>
+            <td>Pontos Obtidos</td>
+            <td>:</td>
+            <td><%= donation.gainedPoints %></td>
+          </tr>
+        </tbody>
+      </table>
+      <h3><a href="/donations/edit/<%= donation._id %>">Editar</a></h3>
+      <form action="/donations/delete/<%= donation._id %>" method="post">
+        <button type="submit">Apagar</button>
+      </form>
+      <% }); %>
+    </div>
+  </body>
+</html>
