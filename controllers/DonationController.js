@@ -119,9 +119,11 @@ function addPointsGainedByDonation(pointsGained, donatorName) {
 
 function calculateGainedPoints(topPiecesNumber, bottomPiecesNumber, underwearPiecesNumber) {
   var gainedPoints = 0;
+
   gainedPoints += topPiecesNumber * 5;
   gainedPoints += bottomPiecesNumber * 5;
   gainedPoints += underwearPiecesNumber * 10;
+  
   return gainedPoints;
 }
 
