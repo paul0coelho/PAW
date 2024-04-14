@@ -37,6 +37,11 @@ entityController.create = function(req, res) {
 };
 
 entityController.save = function(req, res) {
+  if (!isValidEmail(req.body.email)) {
+    console.log('Email inválido.');
+    return res.render('../views/entities/create', { error: 'Email inválido' });
+  }
+  
   var entity = new Entity(req.body);
 
   entity.save()
@@ -65,6 +70,11 @@ entityController.edit = function(req, res) {
 };
 
 entityController.update = function(req, res) {
+  if (!isValidEmail(req.body.email)) {
+    console.log('Email inválido.');
+    return res.render('../views/entities/edit', { admin: req.body, error: 'Email inválido' });
+  }
+  
   Entity.findByIdAndUpdate(req.params.id,{ 
     $set: { 
       name: req.body.name, 
@@ -97,5 +107,10 @@ entityController.delete = function(req, res) {
       res.status(500).send('Internal Server Error');
     });
 };
+
+function isValidEmail(email) {
+  var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
 
 module.exports = entityController;

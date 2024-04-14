@@ -13,6 +13,8 @@ mongoose.connect('mongodb+srv://paul0:1234@cluster0.gat7grz.mongodb.net/PAW?retr
 
 var index = require('./routes/index');
 var admins = require('./routes/admins');
+var entities = require('./routes/entities');
+var donators = require('./routes/donators');
 
 var app = express();
 
@@ -28,6 +30,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/admins', admins);
+app.use('/entities', entities);
+app.use('/donators', donators);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

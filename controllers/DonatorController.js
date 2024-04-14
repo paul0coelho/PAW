@@ -37,7 +37,7 @@ donatorController.create = function(req, res) {
 };
 
 donatorController.save = function(req, res) {
-  var donator = new Admin(req.body);
+  var donator = new Donator(req.body);
 
   donator.save()
     .then(savedDonator => {

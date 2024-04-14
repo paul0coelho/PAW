@@ -37,16 +37,21 @@ adminController.create = function(req, res) {
 };
 
 adminController.save = function(req, res) {
+  if (!isValidEmail(req.body.email)) {
+    console.log('Email inválido.');
+    return res.render('../views/admins/create', { error: 'Email inválido' });
+  }
+
   var admin = new Admin(req.body);
 
   admin.save()
     .then(savedAdmin => {
-      console.log('Successfully created an admin.');
+      console.log('Admin criado com sucesso.');
       res.redirect("show/" + savedAdmin._id);
     })
     .catch(err => {
       console.log(err);
-      res.render('../views/admins/create');
+      res.render('../views/admins/create', { error: 'Erro ao criar o admin' });
     });
 };
 
@@ -65,6 +70,11 @@ adminController.edit = function(req, res) {
 };
 
 adminController.update = function(req, res) {
+  if (!isValidEmail(req.body.email)) {
+    console.log('Email inválido.');
+    return res.render('../views/admins/edit', { admin: req.body, error: 'Email inválido' });
+  }
+
   Admin.findByIdAndUpdate(req.params.id, {
       $set: {
         name: req.body.name,
@@ -75,13 +85,13 @@ adminController.update = function(req, res) {
     }, { new: true })
     .then(admin => {
       if (!admin) {
-        return res.status(404).send('Admin not found');
+        return res.status(404).send('Admin não encontrado');
       }
       res.redirect("/admins/show/" + admin._id);
     })
     .catch(err => {
       console.log(err);
-      res.render("../views/admins/edit", { admin: req.body });
+      res.render("../views/admins/edit", { admin: req.body, error: 'Erro ao atualizar o admin' });
     });
 };
 
@@ -97,5 +107,9 @@ adminController.delete = function(req, res) {
     });
 };
 
+function isValidEmail(email) {
+  var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
 
 module.exports = adminController;
