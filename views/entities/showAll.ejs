@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Detalhes das Entidades</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+  <div class="container">
+    <h1>Detalhes da Entidade</h1>
+    <% entities.forEach(entity => { %>
+      <table>
+        <tbody>
+          <tr>
+            <td>Nome</td>
+            <td>:</td>
+            <td><%= entity.name %></td>
+          </tr>
+          <tr>
+            <td>Descrição</td>
+            <td>:</td>
+            <td><%= entity.description %></td>
+          </tr>
+          <tr>
+            <td>Morada</td>
+            <td>:</td>
+            <td><%= entity.address %></td>
+          </tr>
+          <tr>
+            <td>Email</td>
+            <td>:</td>
+            <td><%= entity.email %></td>
+          </tr>
+          <tr>
+            <td>Telefone</td>
+            <td>:</td>
+            <td><%= entity.phone %></td>
+          </tr>
+        </tbody>
+      </table>
+      <h3><a href="/entities/edit/<%= entity._id %>">EDIT</a></h3>
+      <form action="/entities/delete/<%= entity._id %>" method="post">
+        <button type="submit">DELETE</button>
+      </form>
+    <% }); %>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lista de Entidades</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div class="container">
+      <h3><a href="/entities/create">Criar Entidade</a></h3>
+      <h1>Lista de Entidades</h1>
+      <% if(donators.length>0) { %>
+      <table class="list-table">
+        <thead>
+          <tr>
+            <th>Nome do entidade</th>
+            <th>Descrição</th>
+            <th>Morada</th>
+            <th>Email</th>
+            <th>Telefone</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for(var i=0; i<entities.length; i++) { %>
+            <tr>
+              <td><a href="/entities/show/<%= entities[i]._id %>"><%= entities[i].name %></a></td>
+              <td><%= entities[i].description %></td>
+              <td><%= entities[i].address %></td>
+              <td><%= entities[i].email %></td>
+              <td><%= entities[i].phone %></td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+      <% } else { %>
+        <div>Nenhum entidade encontrado.</div>
+      <% } %>
+    </div>
+  </body>
+</html>

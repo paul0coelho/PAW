@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Editar Entidade</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Editar Entidade</h1>
+      <form action="/entities/update/<%= entity._id %>" method="post">
+        <table>
+          <tbody>
+            <tr>
+              <td>Nome</td>
+              <td><input type="text" name="name" value="<%= entity.name %>" /></td>
+            </tr>
+            <tr>
+              <td>Descrição</td>
+              <td><input type="text" name="description" value="<%= entity.description %>" /></td>
+            </tr>
+            <tr>
+              <td>Morada</td>
+              <td><input type="text" name="address" value="<%= entity.address %>" /></td>
+            </tr>
+            <tr>
+              <td>Email</td>
+              <td><input type="text" name="email" value="<%= entity.email %>" /></td>
+            </tr>
+            <tr>
+              <td>Telefone</td>
+              <td><input type="number" name="phone" value="<%= entity.phone %>" /></td>
+            </tr>
+            <tr>
+              <td colspan="2"><button type="submit">Update</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+  </body>
+</html>

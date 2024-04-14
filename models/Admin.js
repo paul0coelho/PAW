@@ -7,7 +7,8 @@ var AdminSchema = new mongoose.Schema({
   },
   email: {
     type: String,
-    required: true
+    required: true,
+    unique:true
   },
   userName: {
     type: String,
