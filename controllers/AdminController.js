@@ -8,7 +8,7 @@ mongoose.connect('mongodb+srv://paul0:1234@cluster0.gat7grz.mongodb.net/PAW?retr
 .catch((err)=>console.error(err));
 
 adminController.list = function(req, res) {
-  Admin.find().exec()
+  Admin.find()
     .then(admins => {
       res.render("../views/admins/showAll", {admins: admins});
     })
@@ -19,7 +19,7 @@ adminController.list = function(req, res) {
 };
 
 adminController.show = function(req, res) {
-  Admin.findOne({_id: req.params.id}).exec()
+  Admin.findOne({_id: req.params.id})
     .then(admin => {
       if (!admin) {
         return res.status(404).send('Admin not found');
@@ -56,7 +56,7 @@ adminController.save = function(req, res) {
 };
 
 adminController.edit = function(req, res) {
-  Admin.findOne({_id: req.params.id}).exec()
+  Admin.findOne({_id: req.params.id})
     .then(admin => {
       if (!admin) {
         return res.status(404).send('Admin not found');

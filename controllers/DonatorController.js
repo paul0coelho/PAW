@@ -8,7 +8,7 @@ mongoose.connect('mongodb+srv://paul0:1234@cluster0.gat7grz.mongodb.net/PAW?retr
 .catch((err) => console.error(err));
 
 donatorController.list = function(req, res) {
-  Donator.find().exec()
+  Donator.find()
     .then(donators => {
       res.render("../views/donators/showAll", {donators: donators});
     })
@@ -19,7 +19,7 @@ donatorController.list = function(req, res) {
 };
 
 donatorController.show = function(req, res) {
-  Donator.findOne({_id: req.params.id}).exec()
+  Donator.findOne({_id: req.params.id})
     .then(donator => {
       if (!donator) {
         return res.status(404).send('Donator not found');
@@ -51,7 +51,7 @@ donatorController.save = function(req, res) {
 };
 
 donatorController.edit = function(req, res) {
-  Donator.findOne({_id: req.params.id}).exec()
+  Donator.findOne({_id: req.params.id})
     .then(donator => {
       if (!donator) {
         return res.status(404).send('Donator not found');

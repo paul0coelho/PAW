@@ -8,7 +8,7 @@ mongoose.connect('mongodb+srv://paul0:1234@cluster0.gat7grz.mongodb.net/PAW?retr
 .catch((err) => console.error(err));
 
 entityController.list = function(req, res) {
-  Entity.find().exec()
+  Entity.find()
     .then(entities => {
       res.render("../views/entities/showAll", {entities: entities});
     })
@@ -19,7 +19,7 @@ entityController.list = function(req, res) {
 };
 
 entityController.show = function(req, res) {
-  Entity.findOne({_id: req.params.id}).exec()
+  Entity.findOne({_id: req.params.id})
     .then(entity => {
       if (!entity) {
         return res.status(404).send('Entity not found');
@@ -56,7 +56,7 @@ entityController.save = function(req, res) {
 };
 
 entityController.edit = function(req, res) {
-  Entity.findOne({_id: req.params.id}).exec()
+  Entity.findOne({_id: req.params.id})
     .then(entity => {
       if (!entity) {
         return res.status(404).send('Entity not found');

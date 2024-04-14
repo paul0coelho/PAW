@@ -9,7 +9,7 @@ mongoose.connect('mongodb+srv://paul0:1234@cluster0.gat7grz.mongodb.net/PAW?retr
   .catch((err) => console.error(err));
 
 donationController.list = function(req, res) {
-  Donation.find().exec()
+  Donation.find()
     .then(donations => {
       res.render("../views/donations/showAll", { donations: donations });
     })
@@ -20,7 +20,7 @@ donationController.list = function(req, res) {
 };
 
 donationController.show = function(req, res) {
-  Donation.findOne({ _id: req.params.id }).exec()
+  Donation.findOne({ _id: req.params.id })
     .then(donation => {
       if (!donation) {
         return res.status(404).send('Donation not found');
@@ -59,7 +59,7 @@ donationController.save = function(req, res) {
 };
 
 donationController.edit = function(req, res) {
-  Donation.findOne({ _id: req.params.id }).exec()
+  Donation.findOne({ _id: req.params.id })
     .then(donation => {
       if (!donation) {
         return res.status(404).send('Donation not found');
@@ -107,7 +107,7 @@ donationController.delete = function(req, res) {
 };
 
 function addPointsGainedByDonation(pointsGained, donatorName) {
-  return Donator.findOne({ name: donatorName }).exec()
+  return Donator.findOne({ name: donatorName })
     .then(donator => {
       if (!donator) {
         throw new Error('Donator not found');
