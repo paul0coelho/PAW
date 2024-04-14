@@ -18,9 +18,8 @@ var EntitySchema = new mongoose.Schema({
   },
   phone: {
     type: Number,
-    min: 9000000000,
-    max: 9999999999,
-    required: true,
+    min: 900000000,
+    max: 999999999,
     unique:true
   },
   updated_at: { type: Date, default: Date.now },
