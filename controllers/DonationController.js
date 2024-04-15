@@ -58,54 +58,6 @@ donationController.save = function(req, res) {
     });
 };
 
-donationController.edit = function(req, res) {
-  Donation.findOne({ _id: req.params.id })
-    .then(donation => {
-      if (!donation) {
-        return res.status(404).send('Donation not found');
-      }
-      res.render("../views/donations/edit", { donation: donation });
-    })
-    .catch(err => {
-      console.log("Error:", err);
-      res.status(500).send('Internal Server Error');
-    });
-};
-
-donationController.update = function(req, res) {
-  Donation.findByIdAndUpdate(req.params.id, {
-      $set: {
-        donator: req.body.donator,
-        topPiecesNumber: req.body.topPiecesNumber,
-        bottomPiecesNumber: req.body.bottomPiecesNumber,
-        underwearPiecesNumber: req.body.underwearPiecesNumber,
-        gainedPoints: calculateGainedPoints(req.body.topPiecesNumber, req.body.bottomPiecesNumber, req.body.underwearPiecesNumber)
-      }
-    }, { new: true })
-    .then(donation => {
-      if (!donation) {
-        return res.status(404).send('Donation not found');
-      }
-      res.redirect("/donations/show/" + donation._id);
-    })
-    .catch(err => {
-      console.log(err);
-      res.render("../views/donations/edit", { donation: req.body });
-    });
-};
-
-donationController.delete = function(req, res) {
-  Donation.deleteOne({ _id: req.params.id })
-    .then(() => {
-      console.log("Donation deleted!");
-      res.redirect("/donations");
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).send('Internal Server Error');
-    });
-};
-
 function addPointsGainedByDonation(pointsGained, donatorName) {
   return Donator.findOne({ name: donatorName })
     .then(donator => {

@@ -22,19 +22,4 @@ router.post('/save', function(req, res) {
   donationController.save(req, res);
 });
 
-// Editar uma doação
-router.get('/edit/:id', function(req, res) {
-  donationController.edit(req, res);
-});
-
-// Atualizar uma doação
-router.post('/update/:id', function(req, res) {
-  donationController.update(req, res);
-});
-
-// Excluir uma doação
-router.post('/delete/:id', function(req, res, next) {
-  donationController.delete(req, res);
-});
-
 module.exports = router;
