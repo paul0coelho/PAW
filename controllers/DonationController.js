@@ -44,7 +44,7 @@ donationController.save = function(req, res) {
 
   donation.gainedPoints = gainedPoints;
 
-  addPointsGainedByDonation(gainedPoints, req.body.donator)
+  addPointsGainedByDonation(gainedPoints, req.body.donatorPhone)
     .then(() => {
       return donation.save();
     })
@@ -58,8 +58,8 @@ donationController.save = function(req, res) {
     });
 };
 
-function addPointsGainedByDonation(pointsGained, donatorName) {
-  return Donator.findOne({ name: donatorName })
+function addPointsGainedByDonation(pointsGained, donatorPhone) {
+  return Donator.findOne({ phone: donatorPhone })
     .then(donator => {
       if (!donator) {
         throw new Error('Donator not found');

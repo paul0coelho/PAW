@@ -9,7 +9,8 @@ var DonatorSchema = new mongoose.Schema({
     type: Number,
     min: 900000000,
     max: 999999999,
-    unique:true
+    unique:true,
+    required:true
   },
   address: {
     type: String,
