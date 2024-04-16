@@ -2,37 +2,45 @@
 <html>
   <head>
     <title>Criar Administrador</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/add.css' />
   </head>
   <body>
-    <div class="container">
-      <h3><a href="/admins">Lista de Administradores</a></h3>
-      <h1>Criar novo Administrador</h1>
+    <div class="header">
+      <h1>Recicla Têxtil</h1>
+    </div>
+    <div class="header2">
+      <h2>Adicionar administrador</h2>
+    </div>
       <form action="/admins/save" method="post">
         <table>
-          <tbody>
             <tr>
               <td>Nome</td>
-              <td><input type="text" name="name" /></td>
+            </tr>
+            <tr>
+              <td><input type="text" name="name" value="Nome"/></td>
             </tr>
             <tr>
               <td>Email</td>
-              <td><input type="text" name="email" /></td>
+            </tr>
+            <tr>
+              <td><input type="text" name="email" value="Email"/></td>
             </tr>
             <tr>
               <td>UserName</td>
-              <td><input type="text" name="userName" /></td>
+            </tr>
+            <tr>
+              <td><input type="text" name="userName" value="UserName"/></td>
             </tr>
             <tr>
               <td>Password</td>
-              <td><input type="text" name="password" /></td>
+            </tr>
+            <tr>
+              <td><input type="text" name="password" value="Password"/></td>
             </tr>
             <tr>
               <td colspan="2"><button type="submit">Save</button></td>
             </tr>
-          </tbody>
         </table>
       </form>
-    </div>
   </body>
 </html>

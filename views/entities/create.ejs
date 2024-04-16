@@ -2,38 +2,53 @@
 <html>
   <head>
     <title>Criar Entidade</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/add.css' />
   </head>
   <body>
-    <div class="container">
-      <h3><a href="/entities">Lista de entidades</a></h3>
-      <h1>Criar nova Entidade</h1>
+      <div class="header">
+        <h1>Recicla Têxtil</h1>
+      </div>
+      <div class="header2">
+        <h2>Adicionar entidade</h2>
+      </div>
       <form action="/entities/save" method="post">
         <table>
           <tbody>
             <tr>
               <td>Nome</td>
-              <td><input type="text" name="name" /></td>
+            </tr>
+            <tr>
+              <td><input type="text" name="name" value="Nome"/></td>
             </tr>
             <tr>
               <td>Descrição</td>
-              <td><input type="text" name="description" /></td>
+            </tr>
+            <tr>
+              <td><input type="text" name="description" value="Descrição"/></td>
             </tr>
             <tr>
               <td>Morada</td>
-              <td><input type="text" name="address" /></td>
+            </tr>
+            <tr>
+              <td><input type="text" name="address" value="Morada"/></td>
             </tr>
             <tr>
               <td>Email</td>
-              <td><input type="text" name="email" /></td>
+            </tr>
+            <tr>
+              <td><input type="text" name="email" value="Email"/></td>
             </tr>
             <tr>
               <td>Telefone</td>
-              <td><input type="number" name="phone" /></td>
+            </tr>
+            <tr>
+              <td><input type="number" name="phone" value="Telefone"/></td>
             </tr>
             <tr>
               <td>Imagem / Logotipo</td>
-              <td><input type="file" name="image" /></td>
+            </tr>
+            <tr>
+              <td><input type="file" name="image"/></td>
             </tr>
             <tr>
               <td colspan="2"><button type="submit">Save</button></td>
@@ -41,6 +56,5 @@
           </tbody>
         </table>
       </form>
-    </div>
   </body>
 </html>

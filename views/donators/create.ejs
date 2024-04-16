@@ -2,33 +2,38 @@
 <html>
   <head>
     <title>Criar Doador</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/add.css' />
   </head>
   <body>
-    <div class="container">
-      <h3><a href="/donators">Lista de Doadores</a></h3>
-      <h1>Criar novo doador</h1>
+      <div class="header">
+        <h1>Recicla Têxtil</h1>
+      </div>
+      <div class="header2">
+        <h2>Adicionar doador</h2>
+      </div>
       <form action="/donators/save" method="post">
         <table>
-          <tbody>
             <tr>
               <td>Nome</td>
-              <td><input type="text" name="name" /></td>
+            </tr>
+            <tr>  
+              <td><input type="text" name="name" value="Nome" /></td>
             </tr>
             <tr>
               <td>Telefone</td>
-              <td><input type="number" name="phone" /></td>
+            </tr>
+              <td><input type="number" name="phone" value="Telefone" /></td>
             </tr>
             <tr>
               <td>Morada</td>
-              <td><input type="text" name="address" /></td>
             </tr>
             <tr>
-              <td colspan="2"><button type="submit">Save</button></td>
+              <td><input type="text" name="address" value="Morada"/></td>
             </tr>
-          </tbody>
+            <tr>
+              <td colspan="2"><button type="submit">Criar</button></td>
+            </tr>
         </table>
       </form>
-    </div>
   </body>
 </html>
