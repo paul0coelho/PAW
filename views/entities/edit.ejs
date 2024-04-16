@@ -2,40 +2,51 @@
 <html>
   <head>
     <title>Editar Entidade</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/add&edit.css' />
   </head>
   <body>
-    <div class="container">
-      <h1>Editar Entidade</h1>
+      <div class="header">
+        <h1>Recicla Têxtil</h1>
+      </div>
+      <div class="header2">
+        <h2>Editar doador</h2>
+      </div>
       <form action="/entities/update/<%= entity._id %>" method="post">
         <table>
-          <tbody>
             <tr>
               <td>Nome</td>
+            </tr>
+            <tr>
               <td><input type="text" name="name" value="<%= entity.name %>" /></td>
             </tr>
             <tr>
               <td>Descrição</td>
+            </tr>
+            <tr>
               <td><input type="text" name="description" value="<%= entity.description %>" /></td>
             </tr>
             <tr>
               <td>Morada</td>
+            </tr>
+            <tr>
               <td><input type="text" name="address" value="<%= entity.address %>" /></td>
             </tr>
             <tr>
               <td>Email</td>
+            </tr>
+            <tr>
               <td><input type="text" name="email" value="<%= entity.email %>" /></td>
             </tr>
             <tr>
               <td>Telefone</td>
+            </tr>
+            <tr>
               <td><input type="number" name="phone" value="<%= entity.phone %>" /></td>
             </tr>
             <tr>
               <td colspan="2"><button type="submit">Update</button></td>
             </tr>
-          </tbody>
         </table>
       </form>
-    </div>
   </body>
 </html>

@@ -2,32 +2,37 @@
 <html>
   <head>
     <title>Editar Doador</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/add&edit.css' />
   </head>
   <body>
-    <div class="container">
-      <h1>Editar Doador</h1>
+      <div class="header">
+        <h1>Recicla Têxtil</h1>
+      </div>
+      <div class="header2">
+        <h2>Editar doador</h2>
+      </div>
       <form action="/donators/update/<%= donator._id %>" method="post">
         <table>
-          <tbody>
             <tr>
               <td>Nome</td>
+            </tr>
+            <tr>
               <td><input type="text" name="name" value="<%= donator.name %>" /></td>
             </tr>
             <tr>
               <td>Telefone</td>
+            </tr>
               <td><input type="text" name="phone" value="<%= donator.phone %>" /></td>
             </tr>
             <tr>
               <td>Morada</td>
+            </tr>
               <td><input type="text" name="address" value="<%= donator.address %>" /></td>
             </tr>
             <tr>
-              <td colspan="2"><button type="submit">Update</button></td>
+              <td colspan="2"><button type="submit">Editar</button></td>
             </tr>
-          </tbody>
         </table>
       </form>
-    </div>
   </body>
 </html>

@@ -2,36 +2,45 @@
 <html>
   <head>
     <title>Editar Administrador</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/add&edit.css' />
   </head>
   <body>
-    <div class="container">
-      <h1>Editar Administrador</h1>
+      <div class="header">
+        <h1>Recicla Têxtil</h1>
+      </div>
+      <div class="header2">
+        <h2>Editar administrador</h2>
+      </div>
       <form action="/admins/update/<%= admin._id%>" method="post">
-        <table>
-          <tbody>
+          <tabela>
             <tr>
               <td>Nome</td>
+            </tr>
+            <tr>
               <td><input type="text" name="name" value="<%= admin.name %>" /></td>
             </tr>
             <tr>
               <td>Email</td>
+            </tr>
+            <tr>
               <td><input type="text" name="email" value="<%= admin.email %>" /></td>
             </tr>
             <tr>
               <td>UserName</td>
+            </tr>
+            <tr>
               <td><input type="text" name="userName" value="<%= admin.userName %>" /></td>
             </tr>
             <tr>
               <td>Password</td>
+            </tr>
+            <tr>
               <td><input type="text" name="password" value="<%= admin.password %>" /></td>
             </tr>
             <tr>
               <td colspan="2"><button type="submit">Update</button></td>
             </tr>
-          </tbody>
         </table>
       </form>
-    </div>
   </body>
 </html>
