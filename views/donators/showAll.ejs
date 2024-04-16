@@ -1,45 +1,54 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <title>Detalhes dos Doadores</title>
-  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <link rel='stylesheet' href='/stylesheets/management.css' />
 </head>
-
 <body>
-  <div class="container">
-    <h1>Detalhes do Doador</h1>
-    <% donators.forEach(donator => { %>
-      <table>
-        <tbody>
-          <tr>
-            <td>Nome</td>
-            <td>:</td>
-            <td><%= donator.name %></td>
-          </tr>
-          <tr>
-            <td>Telefone</td>
-            <td>:</td>
-            <td><%= donator.phone %></td>
-          </tr>
-          <tr>
-            <td>Morada</td>
-            <td>:</td>
-            <td><%= donator.address %></td>
-          </tr>
-          <tr>
-            <td>Pontos acumulados</td>
-            <td>:</td>
-            <td><%= donator.gainedPoints %></td>
-          </tr>
-        </tbody>
-      </table>
-      <h3><a href="/donators/edit/<%= donator._id %>">EDIT</a></h3>
-      <form action="/donators/delete/<%= donator._id %>" method="post">
-        <button type="submit">DELETE</button>
-      </form>
-    <% }); %>
+  <div class="header">
+    <h1>Recicla Têxtil</h1>
   </div>
+  <div class="header2">
+    <h2>Gestão de Doadores</h2>
+  </div>
+  <div class="container">
+    <form action="/outra-rota" method="get">
+      <input type="text" name="search" value="Procurar por Nº de Telefone"/>
+      <button type="submit"><i class="fas fa-search" id="search"></i></button>
+    </form>
+    <form action="/donators/create" method="get">
+      <button type="submit" class="add"><i class="fas fa-plus" id="add-button"></i>Adicionar Doador</button>
+    </form>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Telefone</th>
+        <th>Morada</th>
+        <th>Pontos acumulados</th>
+        <th> </th>
+        <th> </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% donators.forEach(donator => { %>
+      <tr>
+        <td><%= donator.name %></td>
+        <td><%= donator.phone %></td>
+        <td><%= donator.address %></td>
+        <td><%= donator.gainedPoints %></td>
+        <td id="edit-row"><h3><a href="/donators/edit/<%= donator._id %>"><i class="fas fa-pencil-alt"></i></a></h3></td>
+        <td id="remove-row">
+          <form action="/donators/delete/<%= donator._id %>" method="post">
+            <button type="submit" id="eliminate-button"><i class="fas fa-times"></i></button>
+          </form>
+        </td>
+      </tr>
+      <% }); %>
+    </tbody>
+  </table>
 </body>
-
 </html>
