@@ -1,46 +1,54 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Detalhes de Todas as Doações</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <div class="container">
-      <% donations.forEach(function(donation) { %>
-      <table>
-        <tbody>
-          <tr>
-            <td>Doador</td>
-            <td>:</td>
-            <td><%= donation.donator %></td>
-          </tr>
-          <tr>
-            <td>Número de Peças Superiores</td>
-            <td>:</td>
-            <td><%= donation.topPiecesNumber %></td>
-          </tr>
-          <tr>
-            <td>Número de Peças Inferiores</td>
-            <td>:</td>
-            <td><%= donation.bottomPiecesNumber %></td>
-          </tr>
-          <tr>
-            <td>Número de Peças de Roupa Interior</td>
-            <td>:</td>
-            <td><%= donation.underwearPiecesNumber %></td>
-          </tr>
-          <tr>
-            <td>Pontos Obtidos</td>
-            <td>:</td>
-            <td><%= donation.gainedPoints %></td>
-          </tr>
-        </tbody>
-      </table>
-      <h3><a href="/donations/edit/<%= donation._id %>">Editar</a></h3>
-      <form action="/donations/delete/<%= donation._id %>" method="post">
-        <button type="submit">Apagar</button>
-      </form>
+<head>
+  <title>Detalhes das Doações</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <link rel='stylesheet' href='/stylesheets/management.css' />
+</head>
+<body>
+  <div class="header">
+    <h1>Recicla Têxtil</h1>
+  </div>
+  <div class="header2">
+    <h2>Gestão de Doações</h2>
+  </div>
+  <div class="container">
+    <form action="/outra-rota" method="get">
+      <input type="text" name="search" value="Procurar por Nº de Telefone"/>
+      <button type="submit"><i class="fas fa-search" id="search"></i></button>
+    </form>
+    <form action="/donations/create" method="get">
+      <button type="submit" class="add"><i class="fas fa-plus" id="add-button"></i>Adicionar Doador</button>
+    </form>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Contacto do Doador</th>
+        <th>Número de Peças Superiores</th>
+        <th>Número de Peças Inferiores</th>
+        <th>Número de Peças de Roupa Interior</th>
+        <th>Pontos obtidos</th>
+        <th> </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% donations.forEach(donation => { %>
+      <tr>
+        <td><%= donation.donatorPhone %></td>
+        <td><%= donation.topPiecesNumber %></td>
+        <td><%= donation.bottomPiecesNumber %></td>
+        <td><%= donation.underwearPiecesNumber %></td>
+        <td><%= donation.gainedPoints %></td>
+        <td id="remove-row">
+          <form action="/donations/delete/<%= donation._id %>" method="post">
+            <button type="submit" id="eliminate-button"><i class="fas fa-times"></i></button>
+          </form>
+        </td>
+      </tr>
       <% }); %>
-    </div>
-  </body>
+    </tbody>
+  </table>
+</body>
 </html>
