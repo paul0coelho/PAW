@@ -17,7 +17,7 @@ body {
     font-size: 24px;
     color: #fff;
     background-color: rgb(8, 87, 167);
-    padding: 50px 30px;
+    padding: 52px 30px;
     margin-left: -50px;
     border-right: 5px solid #fff;
     
@@ -25,11 +25,11 @@ body {
 
 .navbar-links {
     display: flex;
-    gap: 150px;
+    gap: 100px;
     
 }
 
-.nav-link, .dropdown-item {
+.nav-link {
     color: #fff;
     text-decoration: none;
     padding: 5px 10px;
@@ -38,7 +38,7 @@ body {
     margin-right: 0px;
 }
 
-.nav-link:hover, .dropdown-item:hover {
+.nav-link:hover {
     background-color: #0091ff;
 }
 .profile-pic {
@@ -48,15 +48,13 @@ body {
     cursor: pointer;
 }
 
-.dropdown-menu {
-    display: none;
-    position: absolute;
-    background-color: #333;
-    border-radius: 5px;
-    margin-top: 5px;
-    right: 20px;
-}
+
 
 .container {
     padding: 20px;
+}
+
+i{
+    margin-right:10px ;
+    color: #fff;
 }
