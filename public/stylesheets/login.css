@@ -3,7 +3,6 @@ body {
     font-family: Arial, sans-serif;
     justify-content: center;
     align-items: center;
-    height: 100vh;
     background-color: rgb(8, 87, 167);
 }   
 
@@ -13,7 +12,11 @@ body {
     padding-inline: 250px;
     border-radius: 30px;
     width: 300px;
-    margin-left: 350px;  
+    margin-left: 350px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .form-group {
@@ -24,8 +27,8 @@ body {
 h2 {
     text-align: center;
     margin-bottom: 20px;
-    margin-left: 50px;
 }
+
 h1 {
     margin-top: 100px;
     margin-left: 350px;
@@ -58,7 +61,6 @@ button {
     cursor: pointer;
     font-weight: bold;
     font-size: 15px;
-    margin-left: 55px;
     margin-top:20px;
 }
 
