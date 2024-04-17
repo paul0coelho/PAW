@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Detalhes dos Pontos atribuídos</title>
+    <link rel='stylesheet' href='/stylesheets/show.css' />
+  </head>
+  <body>
+    <div class="header">
+      <h1>Recicla Têxtil</h1>
+    </div>
+    <div class="header2">
+      <h2>Pontos atribuídos por cada tipo de peça doada</h2>
+    </div>
+    <div class="container">
+      <table>
+        <tbody>
+          <tr>
+            <td>Pontos atribuídos por cada peça superior doada</td>
+            <td>:</td>
+            <td><%= points.topPiecesPoints %></td>
+          </tr>
+          <tr>
+            <td>Pontos atribuídos por cada peça inferior doada</td>
+            <td>:</td>
+            <td><%= points.bottomPiecesPoints %></td>
+          </tr>
+          <tr>
+            <td>Pontos atribuídos por cada peça de roupa interior doada</td>
+            <td>:</td>
+            <td><%= points.underwearPiecesPoints %></td>
+          </tr>
+        </tbody>
+      </table>
+      <h3><a href="/points/edit/661ff5afe10497c901313a23">EDIT</a></h3>
+    </div>
+  </body>
+</html>

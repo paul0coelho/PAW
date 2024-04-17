@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pontos</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <link rel='stylesheet' href='/stylesheets/management.css' />
+</head>
+<body>
+  <div class="header">
+    <a href="/menuAdmin">
+      <h1>Recicla Têxtil</h1>
+    </a>
+  </div>
+  <div class="header2">
+    <h2>Sistema de Pontos</h2>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Pontos atribuídos por cada peça superior doada</th>
+        <th>Pontos atribuídos por cada peça inferior doada</th>
+        <th>Pontos atribuídos por cada peça de roupa interior doada</th>
+        <th> </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% points.forEach(points=> { %>
+      <tr>
+        <td id="points-column"><%= points.topPiecesPoints %></td>
+        <td id="points-column"><%= points.bottomPiecesPoints %></td>
+        <td id="points-column"><%= points.underwearPiecesPoints %></td>
+        <td id="edit-row"><h3><a href="/points/edit/661ff5afe10497c901313a23"><i class="fas fa-pencil-alt"></i></a></h3></td>
+      </tr>
+      <% }); %>
+    </tbody>
+  </table>
+</body>
+</html>
+

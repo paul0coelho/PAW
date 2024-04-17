@@ -1,6 +1,7 @@
 var mongoose = require("mongoose");
 var Donation = require("../models/Donation");
 var Donator = require("../models/Donator");
+var Points = require("../models/Points");
 
 var donationController = {};
 
@@ -70,13 +71,19 @@ function addPointsGainedByDonation(pointsGained, donatorPhone) {
 }
 
 function calculateGainedPoints(topPiecesNumber, bottomPiecesNumber, underwearPiecesNumber) {
-  var gainedPoints = 0;
+  Points.findById('661ff5afe10497c901313a23')
+    .then(points => {
+      if (!points) {
+        throw new Error('Pontos não encontrados');
+      }
+      
+      var gainedPoints = 0;
+      gainedPoints += topPiecesNumber * points.topPiecesPoints;
+      gainedPoints += bottomPiecesNumber * points.bottomPiecesPoints;
+      gainedPoints += underwearPiecesNumber * points.underwearPiecesPoints;
 
-  gainedPoints += topPiecesNumber * 5;
-  gainedPoints += bottomPiecesNumber * 5;
-  gainedPoints += underwearPiecesNumber * 10;
-  
-  return gainedPoints;
+      return gainedPoints;
+    })
 }
 
 module.exports = donationController;

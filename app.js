@@ -16,6 +16,7 @@ var admins = require('./routes/admins');
 var entities = require('./routes/entities');
 var donators = require('./routes/donators');
 var donations = require('./routes/donations');
+var points = require('./routes/points');
 
 var app = express();
 
@@ -34,6 +35,7 @@ app.use('/admins', admins);
 app.use('/entities', entities);
 app.use('/donators', donators);
 app.use('/donations', donations);
+app.use('/points', points);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Editar Pontos atribuídos a cada tipo de peça</title>
+    <link rel='stylesheet' href='/stylesheets/add&edit.css' />
+  </head>
+  <body>
+      <div class="header">
+        <h1>Recicla Têxtil</h1>
+      </div>
+      <div class="header2">
+        <h2>Editar Pontos atribuídos a cada tipo de peça</h2>
+      </div>
+      <form action="/points/update/661ff5afe10497c901313a23" method="post">
+        <table>
+            <tr>
+              <td>Pontos atribuídos por cada peça superior doada</td>
+            </tr>
+            <tr>
+              <td><input type="text" name="topPiecesPoints" placeholder="<%= points.topPiecesPoints %>" /></td>
+            </tr>
+            <tr>
+              <td>Pontos atribuídos por cada peça inferior doada</td>
+            </tr>
+            <tr>
+              <td><input type="text" name="bottomPiecesPoints" placeholder="<%= points.bottomPiecesPoints %>" /></td>
+            </tr>
+            <tr>
+              <td>Pontos atribuídos por cada peça de roupa interior doada</td>
+            </tr>
+            <tr>
+              <td><input type="text" name="underwearPiecesPoints" placeholder="<%= points.underwearPiecesPoints %>" /></td>
+            </tr>
+            <tr>
+              <td colspan="2"><button type="submit">Atualizar</button></td>
+            </tr>
+        </table>
+    </form>    
+  </body>
+</html>
