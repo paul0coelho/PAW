@@ -8,7 +8,7 @@ router.get('/', function(req, res) {
 });
 
 // Get single employee by id
-router.get('/show/:id', function(req, res) {
+router.get('/show/:email', function(req, res) {
   admin.show(req, res);
 });
 

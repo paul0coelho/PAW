@@ -42,7 +42,7 @@ donatorController.save = function(req, res) {
   donator.save()
     .then(savedDonator => {
       console.log('Successfully created a donator.');
-      res.redirect("show/" + savedDonator._id);
+      res.redirect("show/" + savedDonator.phone);
     })
     .catch(err => {
       console.log(err);
@@ -76,7 +76,7 @@ donatorController.update = function(req, res) {
       if (!donator) {
         return res.status(404).send('Donator not found');
       }
-      res.redirect("/donators/show/" + donator._id);
+      res.redirect("/donators/show/" + donator.phone);
     })
     .catch(err => {
       console.log(err);

@@ -8,7 +8,7 @@ router.get('/', function(req, res) {
 });
 
 // Get single donator by id
-router.get('/show/:id', function(req, res) {
+router.get('/show/:phone', function(req, res) {
   donator.show(req, res);
 });
 

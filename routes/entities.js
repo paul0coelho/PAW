@@ -8,7 +8,7 @@ router.get('/', function(req, res) {
 });
 
 // Get single entity by id
-router.get('/show/:id', function(req, res) {
+router.get('/show/:phone', function(req, res) {
   entity.show(req, res);
 });
 

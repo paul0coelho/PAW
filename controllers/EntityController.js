@@ -47,7 +47,7 @@ entityController.save = function(req, res) {
   entity.save()
     .then(savedEntity => {
       console.log('Successfully created an entity.');
-      res.redirect("show/" + savedEntity._id);
+      res.redirect("show/" + savedEntity.phone);
     })
     .catch(err => {
       console.log(err);
@@ -88,7 +88,7 @@ entityController.update = function(req, res) {
       if (!entity) {
         return res.status(404).send('Entity not found');
       }
-      res.redirect("/entities/show/" + entity._id);
+      res.redirect("/entities/show/" + entity.phone);
     })
     .catch(err => {
       console.log(err);

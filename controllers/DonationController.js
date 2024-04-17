@@ -50,7 +50,7 @@ donationController.save = function(req, res) {
     })
     .then(savedDonation => {
       console.log('Successfully created a donation.');
-      res.redirect("show/" + savedDonation._id);
+      res.redirect("show/" + savedDonation.donatorPhone);
     })
     .catch(err => {
       console.log(err);

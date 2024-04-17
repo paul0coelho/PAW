@@ -19,7 +19,7 @@ adminController.list = function(req, res) {
 };
 
 adminController.show = function(req, res) {
-  Admin.findOne({_id: req.params.id})
+  Admin.findOne({email: req.params.email})
     .then(admin => {
       if (!admin) {
         return res.status(404).send('Admin not found');
@@ -47,7 +47,7 @@ adminController.save = function(req, res) {
   admin.save()
     .then(savedAdmin => {
       console.log('Admin criado com sucesso.');
-      res.redirect("show/" + savedAdmin._id);
+      res.redirect("show/" + savedAdmin.email);
     })
     .catch(err => {
       console.log(err);
@@ -87,7 +87,7 @@ adminController.update = function(req, res) {
       if (!admin) {
         return res.status(404).send('Admin não encontrado');
       }
-      res.redirect("/admins/show/" + admin._id);
+      res.redirect("/admins/show/" + admin.email);
     })
     .catch(err => {
       console.log(err);
