@@ -20,8 +20,7 @@ var EntitySchema = new mongoose.Schema({
     type: Number,
     min: 900000000,
     max: 999999999,
-    unique:true,
-    required:true
+    unique:true
   },
   updated_at: { type: Date, default: Date.now },
 });

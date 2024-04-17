@@ -8,7 +8,7 @@ router.get('/', function(req, res) {
 });
 
 // Obter uma única doação pelo ID
-router.get('/show/:donatorPhone', function(req, res) {
+router.get('/show/:id', function(req, res) {
   donationController.show(req, res);
 });
 
