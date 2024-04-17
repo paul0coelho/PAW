@@ -101,6 +101,10 @@ td#remove-row{
     text-align: center;
 }
 
+td#points-column{
+    text-align: center;
+}
+
 a{
     text-decoration: none; 
     color: inherit;
