@@ -100,3 +100,8 @@ td#edit-row{
 td#remove-row{
     text-align: center;
 }
+
+a{
+    text-decoration: none; 
+    color: inherit;
+}
