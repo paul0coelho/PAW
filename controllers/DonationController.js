@@ -41,11 +41,11 @@ donationController.create = function(req, res) {
 donationController.save = function(req, res) {
   var donation = new Donation(req.body);
 
-  var gainedPoints = calculateGainedPoints(req.body.topPiecesNumber, req.body.bottomPiecesNumber, req.body.underwearPiecesNumber);
-
-  donation.gainedPoints = gainedPoints;
-
-  addPointsGainedByDonation(gainedPoints, req.body.donatorPhone)
+  calculateGainedPoints(req.body.topPiecesNumber, req.body.bottomPiecesNumber, req.body.underwearPiecesNumber)
+    .then(gainedPoints => {
+      donation.gainedPoints = gainedPoints;
+      return addPointsGainedByDonation(gainedPoints, req.body.donatorPhone);
+    })
     .then(() => {
       return donation.save();
     })
@@ -59,19 +59,21 @@ donationController.save = function(req, res) {
     });
 };
 
+
+
 function addPointsGainedByDonation(pointsGained, donatorPhone) {
   return Donator.findOne({ phone: donatorPhone })
     .then(donator => {
       if (!donator) {
         throw new Error('Donator not found');
       }
-      donator.gainedPoints += pointsGained;
+      donator.gainedPoints += parseInt(pointsGained);
       return donator.save();
     });
 }
 
 function calculateGainedPoints(topPiecesNumber, bottomPiecesNumber, underwearPiecesNumber) {
-  Points.findById('661ff5afe10497c901313a23')
+  return Points.findOne({_id:'661ff5afe10497c901313a23'})
     .then(points => {
       if (!points) {
         throw new Error('Pontos não encontrados');
@@ -82,8 +84,8 @@ function calculateGainedPoints(topPiecesNumber, bottomPiecesNumber, underwearPie
       gainedPoints += bottomPiecesNumber * points.bottomPiecesPoints;
       gainedPoints += underwearPiecesNumber * points.underwearPiecesPoints;
 
-      return gainedPoints;
-    })
+      return parseInt(gainedPoints);
+    });
 }
 
 module.exports = donationController;

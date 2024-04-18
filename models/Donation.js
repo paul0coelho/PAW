@@ -5,7 +5,6 @@ var DonationSchema = new mongoose.Schema({
     type: Number,
     min: 900000000,
     max: 999999999,
-    unique:true,
     required:true
   },
   topPiecesNumber: {
