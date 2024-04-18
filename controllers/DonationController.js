@@ -59,8 +59,6 @@ donationController.save = function(req, res) {
     });
 };
 
-
-
 function addPointsGainedByDonation(pointsGained, donatorPhone) {
   return Donator.findOne({ phone: donatorPhone })
     .then(donator => {
