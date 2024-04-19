@@ -1,7 +1,10 @@
+var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
-var logger = require('morgan');
 var cookieParser = require('cookie-parser');
+var logger = require('morgan');
+var multer  = require('multer');
+var cors  = require('cors');
 var bodyParser = require('body-parser');
 
 var mongoose = require('mongoose');
@@ -18,7 +21,25 @@ var donators = require('./routes/donators');
 var donations = require('./routes/donations');
 var points = require('./routes/points');
 
+var storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, './images');
+  },
+  filename: function(req, file, cb) {
+    cb(null, req.body._id);
+  }
+});
+
+var upload = multer({ storage: storage });
+
 var app = express();
+
+app.use(upload.single('file'));
+
+app.use(express.urlencoded({extended: true }));
+app.use(express.json());
+
+app.use(cors());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
