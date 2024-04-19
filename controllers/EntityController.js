@@ -32,6 +32,20 @@ entityController.show = function(req, res) {
     });
 };
 
+entityController.searchByPhone = function(req, res) {
+  Entity.findOne({phone: req.query.phone})
+    .then(entity => {
+      if (!entity) {
+        return res.status(404).send('Entity not found');
+      }
+      res.render("../views/entities/show", {entity: entity});
+    })
+    .catch(err => {
+      console.log("Error:", err);
+      res.status(500).send('Internal Server Error');
+    });
+};
+
 entityController.create = function(req, res) {
   res.render("../views/entities/create");
 };

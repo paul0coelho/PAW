@@ -32,6 +32,20 @@ adminController.show = function(req, res) {
     });
 };
 
+adminController.searchByEmail = function(req, res) {
+  Admin.findOne({email: req.query.email})
+    .then(admin => {
+      if (!admin) {
+        return res.status(404).send('Admin not found');
+      }
+      res.render("../views/admins/show", {admin: admin});
+    })
+    .catch(err => {
+      console.log("Error:", err);
+      res.status(500).send('Internal Server Error');
+    });
+};
+
 adminController.create = function(req, res) {
   res.render("../views/admins/create");
 };

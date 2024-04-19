@@ -12,6 +12,10 @@ router.get('/show/:id', function(req, res) {
   admin.show(req, res);
 });
 
+router.get('/searchByEmail', function(req, res) {
+  admin.searchByEmail(req, res);
+});
+
 // Create employee
 router.get('/create', function(req, res) {
   admin.create(req, res);

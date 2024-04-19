@@ -32,6 +32,20 @@ donatorController.show = function(req, res) {
     });
 };
 
+donatorController.searchByPhone = function(req, res) {
+  Donator.findOne({phone: req.query.phone})
+    .then(donator => {
+      if (!donator) {
+        return res.status(404).send('Donator not found');
+      }
+      res.render("../views/donators/show", {donator: donator});
+    })
+    .catch(err => {
+      console.log("Error:", err);
+      res.status(500).send('Internal Server Error');
+    });
+};
+
 donatorController.create = function(req, res) {
   res.render("../views/donators/create");
 };

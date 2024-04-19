@@ -12,6 +12,10 @@ router.get('/show/:id', function(req, res) {
   entity.show(req, res);
 });
 
+router.get('/searchByPhone', function(req, res) {
+  entity.searchByPhone(req, res);
+});
+
 // Create entity
 router.get('/create', function(req, res) {
   entity.create(req, res);

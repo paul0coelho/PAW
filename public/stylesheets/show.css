@@ -68,3 +68,7 @@ table{
 h3{
     margin-left: 20px;
 }
+a{
+    text-decoration: none; 
+    color: inherit;
+}

@@ -16,8 +16,8 @@
     <h2>Gestão de Doações</h2>
   </div>
   <div class="container">
-    <form action="/outra-rota" method="get">
-      <input type="text" name="search" placeholder="Procurar por Nº de Telefone"/>
+    <form action="/donations/searchByPhone" method="get">
+      <input type="number" name="phone" id="phone" placeholder="Procurar por Nº de Telefone"/>
       <button type="submit"><i class="fas fa-search" id="search"></i></button>
     </form>
     <form action="/donations/create" method="get">

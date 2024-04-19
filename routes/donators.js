@@ -12,6 +12,10 @@ router.get('/show/:id', function(req, res) {
   donator.show(req, res);
 });
 
+router.get('/searchByPhone', function(req, res) {
+  donator.searchByPhone(req, res);
+});
+
 // Create donator
 router.get('/create', function(req, res) {
   donator.create(req, res);
