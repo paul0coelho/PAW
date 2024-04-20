@@ -24,17 +24,15 @@ var points = require('./routes/points');
 var storage = multer.diskStorage({
   destination: function(req, file, cb) {
     cb(null, './images');
-  },
-  filename: function(req, file, cb) {
-    cb(null, req.body._id);
   }
 });
+
 
 var upload = multer({ storage: storage });
 
 var app = express();
 
-app.use(upload.single('file'));
+app.use(upload.single('image'));
 
 app.use(express.urlencoded({extended: true }));
 app.use(express.json());

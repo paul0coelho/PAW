@@ -61,7 +61,17 @@ entityController.save = function(req, res) {
   entity.save()
     .then(savedEntity => {
       console.log('Successfully created an entity.');
-      res.redirect("show/" + savedEntity._id);
+
+      var fileDestination = path.join(__dirname, "..", "images", savedEntity._id.toString() + ".png");
+
+      fs.rename(req.file.path, fileDestination, function(err) {
+        if (err) {
+          console.error("Error moving file:", err);
+          return res.status(500).send("Error uploading file");
+        }
+
+        res.redirect("show/" + savedEntity._id);
+      });
     })
     .catch(err => {
       console.log(err);
