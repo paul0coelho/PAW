@@ -62,17 +62,24 @@ entityController.save = function(req, res) {
     .then(savedEntity => {
       console.log('Successfully created an entity.');
 
-      var fileDestination = path.join(__dirname, "..", "images", savedEntity._id.toString() + ".png");
+      var fileDestination = path.join(__dirname, "..", "images", req.params.id + ".png");
 
-      fs.rename(req.file.path, fileDestination, function(err) {
+      fs.readFile(req.file.path, function(err, data) {
         if (err) {
-          console.error("Error moving file:", err);
-          return res.status(500).send("Error uploading file");
+          console.error("Error reading file:", err);
+          return res.status(500).send("Error reading file");
         }
 
-        res.redirect("show/" + savedEntity._id);
-      });
-    })
+        fs.writeFile(fileDestination, data, function(err) {
+          if (err) {
+            console.error("Error writing file:", err);
+            return res.status(500).send("Error writing file");
+          }
+
+            res.redirect("show/" + savedEntity._id);
+          });
+        });
+      })
     .catch(err => {
       console.log(err);
       res.render('../views/entities/create');
