@@ -41,9 +41,9 @@
             <td>:</td>
             <td><%= entity.phone %></td>
           </tr>
-          <tr><img src="./images/<%= entity.email %>.png"></tr>
         </tbody>
       </table>
+      <img src="/images/<%= entity.email %>.jpg">
       <h3><a href="/entities/edit/<%= entity._id %>">EDIT</a></h3>
       <form action="/entities/delete/<%= entity._id %>" method="post">
         <button type="submit">DELETE</button>

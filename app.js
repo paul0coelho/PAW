@@ -26,7 +26,7 @@ var storage = multer.diskStorage({
     cb(null, './images');
   },
   filename: function(req, file, cb) {
-    cb(null, req.body.email + ".png");
+    cb(null, req.body.email + ".jpg");
   }
 });
 

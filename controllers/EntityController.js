@@ -62,7 +62,7 @@ entityController.save = function(req, res) {
     .then(savedEntity => {
       console.log('Successfully created an entity.');
 
-      var fileDestination = path.join(__dirname, "..", "images", req.body.email + ".png");
+      var fileDestination = path.join(__dirname, "..", "images", req.body.email + ".jpg");
 
       fs.readFile(req.file.path, function(err, data) {
         if (err) {

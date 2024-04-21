@@ -3,7 +3,8 @@ var mongoose = require('mongoose');
 var EntitySchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true
+    required: true,
+    unique:true
   },
   description: {
     type: String
