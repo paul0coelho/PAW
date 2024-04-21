@@ -11,7 +11,7 @@
       </a>
     </div>
     <div class="header2">
-      <h2>Informações da Doação</h2>
+      <h2>Histórico de doações do doador</h2>
     </div>
     <div class="container">
       <% donations.forEach(donation => { %>
@@ -44,10 +44,6 @@
           </tr>
         </tbody>
       </table>
-      <h3><a href="/donations/edit/<%= donation._id %>">Editar</a></h3>
-      <form action="/donations/delete/<%= donation._id %>" method="post">
-        <button type="submit">Apagar</button>
-      </form>
       <% }); %>
     </div>
   </body>
