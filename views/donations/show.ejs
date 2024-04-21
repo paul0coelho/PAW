@@ -14,6 +14,7 @@
       <h2>Informações da Doação</h2>
     </div>
     <div class="container">
+      <% donations.forEach(donation => { %>
       <table>
         <tbody>
           <tr>
@@ -47,6 +48,7 @@
       <form action="/donations/delete/<%= donation._id %>" method="post">
         <button type="submit">Apagar</button>
       </form>
+      <% }); %>
     </div>
   </body>
 </html>

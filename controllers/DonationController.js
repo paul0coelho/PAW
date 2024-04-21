@@ -35,12 +35,12 @@ donationController.show = function(req, res) {
 };
 
 donationController.searchByPhone = function(req, res) {
-  Donation.findOne({donatorPhone: req.query.phone})
-    .then(donation => {
-      if (!donation) {
+  Donation.find({donatorPhone: req.query.phone})
+    .then(donations => {
+      if (!donations) {
         return res.status(404).send('Donation not found');
       }
-      res.render("../views/donations/show", {donation: donation});
+      res.render("../views/donations/show", {donations: donations});
     })
     .catch(err => {
       console.log("Error:", err);
