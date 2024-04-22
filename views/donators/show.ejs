@@ -38,9 +38,11 @@
           </tr>
         </tbody>
       </table>
-      <h3><a href="/donators/edit/<%= donator._id %>">EDIT</a></h3>
+      <form action="/donators/edit/<%= donator._id %>" method="get">
+        <button type="submit">EDITAR</button>
+      </form>
       <form action="/donators/delete/<%= donator._id %>" method="post">
-        <button type="submit">DELETE</button>
+        <button type="submit">REMOVER</button>
       </form>
     </div>
   </body>

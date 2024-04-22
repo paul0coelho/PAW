@@ -63,6 +63,7 @@ table{
     margin-top: 20px;
     display: flex;
     flex-direction: column;
+    width: fit-content;
 }
 
 h3{
@@ -71,4 +72,8 @@ h3{
 a{
     text-decoration: none; 
     color: inherit;
+}
+
+img{
+    margin-left: 20px;
 }

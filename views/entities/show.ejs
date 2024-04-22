@@ -44,9 +44,11 @@
         </tbody>
       </table>
       <img src="/images/<%= entity.email %>.jpg">
-      <h3><a href="/entities/edit/<%= entity._id %>">EDIT</a></h3>
+      <form action="/entities/edit/<%= entity._id %>" method="get">
+        <button type="submit">EDITAR</button>
+      </form>
       <form action="/entities/delete/<%= entity._id %>" method="post">
-        <button type="submit">DELETE</button>
+        <button type="submit">REMOVER</button>
       </form>
     </div>
   </body>
