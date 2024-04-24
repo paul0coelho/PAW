@@ -26,4 +26,8 @@ router.post('/save', function(req, res) {
   donation.save(req, res);
 });
 
+router.get('/returnDonations', function(req, res) {
+  donation.returnDonations(req, res);
+});
+
 module.exports = router;

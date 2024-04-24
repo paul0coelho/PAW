@@ -5,6 +5,7 @@
     <title>Menu Admin - Recicla Têxtil</title>
     <link rel="stylesheet" href="stylesheets/menuAdmin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src='https://cdn.plot.ly/plotly-2.31.1.min.js'></script>
 </head>
 <body>
     
@@ -29,9 +30,113 @@
         
     </nav>
 
+    <h1>Dashboard</h1>
+
     <div class="container">
-        <!-- Conteúdo Principal -->
+        <div id="box">
+            <p id="totalDonations"></p>
+        </div>
+        <div id="box1">
+          <p id="totalEntities"></p>
+        </div>
+        <div id="box2">
+          <p id="totalDonators"></p>
+        </div>
+        <div id="box3">
+          <p id="totalPoints"></p>
+        </div>
     </div>
+    <div class="chartContainer">
+        <div id='barChart'>
+        </div>
+        <div id='donutChart'>
+        </div>
+    </div>
+
+    <script>
+      fetch('/donators/returnDonators')
+      .then(response => response.json())
+      .then(donators => {
+        let totalDonors = donators.length;
+        document.getElementById('totalDonators').innerHTML = "<p>Número de doadores<p> " + totalDonors;
+      })
+      .catch(err => {
+        console.error('Erro ao buscar dados de doadores:', err);
+      });
+
+      fetch('/entities/returnEntities')
+      .then(response => response.json())
+      .then(entities => {
+        let totalEntities = entities.length;
+        document.getElementById('totalEntities').innerHTML = "<p>Número de entidades<p> " + totalEntities;
+      })
+      .catch(err => {
+        console.error('Erro ao buscar dados de doadores:', err);
+      });
+
+      fetch('/donations/returnDonations')
+      .then(response => response.json())
+      .then(donations => {
+      let totalTopPieces = 0;
+      let totalBottomPieces = 0;
+      let totalUnderwearPieces = 0;
+      let totalDonations = donations.length;
+      let totalDonors = 0;
+      let totalPoints = 0;
+    
+      donations.forEach(donation => {
+        totalTopPieces += donation.topPiecesNumber;
+        totalBottomPieces += donation.bottomPiecesNumber;
+        totalUnderwearPieces += donation.underwearPiecesNumber;
+        totalPoints +=  donation.gainedPoints;
+      });
+    
+      var total = totalTopPieces + totalBottomPieces + totalUnderwearPieces;
+    
+      var data = [{
+          x: ['Peças superiores', 'Peças inferiores', 'Roupa Interior'],
+          y: [totalTopPieces, totalBottomPieces, totalUnderwearPieces],
+          type: 'bar'
+      }];
+    
+      var data1 = [{
+          values: [totalTopPieces, totalBottomPieces, totalUnderwearPieces],
+          labels: ['Peças superiores', 'Peças inferiores', 'Roupa Interior'],
+          type: 'pie',
+          hole: 0.4,
+          marker: {
+            colors: ['#6534e4', '#4fa8f8', '#bec1c9']
+          }
+      }];
+    
+      var layout = {
+        height: 400,
+        width: 500,
+        annotations: [
+              {
+            font: {
+            size: 20,
+            color: '#000000'
+            },
+            showarrow: false,
+            text: 'Total <br>' + total,
+            x: 0.5,
+            y: 0.5,
+            align: 'center',
+            valign: 'middle'
+          }
+        ]
+      };
+    
+      Plotly.newPlot('barChart', data);
+      Plotly.newPlot('donutChart', data1, layout);
+      document.getElementById('totalDonations').innerHTML = "<p>Número de doações <p>" + totalDonations;
+      document.getElementById('totalPoints').innerHTML = "<p>Pontos distribuídos <p>" + totalPoints;
+      })
+      .catch(err => {
+        console.error('Erro ao buscar dados de doação:', err);
+      });
+      </script>
 
 </body>
 </html>

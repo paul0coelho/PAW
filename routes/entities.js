@@ -41,4 +41,8 @@ router.post('/delete/:id', function(req, res, next) {
   entity.delete(req, res);
 });
 
+router.get('/returnEntities', function(req, res) {
+  entity.returnEntities(req, res);
+});
+
 module.exports = router;

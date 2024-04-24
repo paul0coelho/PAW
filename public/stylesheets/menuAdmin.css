@@ -9,7 +9,7 @@ body {
     background-color: transparent; 
     padding: 0;
     border: none; 
-    height: 130px;
+    height: 100px;
 }
 
 .navbar-brand {
@@ -64,9 +64,59 @@ body {
     margin-right: 20px;
 }
 
-
-
+h1{
+    margin-left: 50px;
+    font-size: 30px;
+}
 i{
     margin-right:10px ;
     color: #fff;
+}
+
+.container{
+    display: flex;
+    flex-direction: row;
+    margin-left: 250px;
+}
+
+.chartContainer{
+    display: flex;
+    flex-direction: row;
+    margin-left: 180px;
+}
+
+#box{
+    width: 200px;
+    height: 105px;
+    background-color: #f2f8fc;
+    text-align: center;
+    margin-right: 100px;
+}
+
+#box1{
+    width: 200px;
+    height: 105px;
+    background-color: #f4f1fd;
+    text-align: center;
+    margin-right: 100px;
+}
+
+#box2{
+    width: 200px;
+    height: 105px; 
+    background-color: #fcf1f7;
+    text-align: center;
+    margin-right: 100px;
+}
+
+#box3{
+    width: 200px;
+    height: 105px;
+    background-color: #fdf3f0;
+    text-align: center;
+}
+
+#barChart{
+    height: 50;
+    width: 50;
 }

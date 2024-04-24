@@ -100,4 +100,15 @@ function calculateGainedPoints(topPiecesNumber, bottomPiecesNumber, underwearPie
     });
 }
 
+donationController.returnDonations = function(req, res) {
+  Donation.find()
+    .then(donations => {
+      res.json(donations);
+    })
+    .catch(err => {
+      console.log("Erro:", err);
+      res.status(500).json({ error: 'Erro interno do servidor' });
+    });
+};
+
 module.exports = donationController;

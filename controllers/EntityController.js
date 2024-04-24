@@ -139,6 +139,17 @@ entityController.delete = function(req, res) {
     });
 };
 
+entityController.returnEntities = function(req, res) {
+  Entity.find()
+    .then(entities => {
+      res.json(entities);
+    })
+    .catch(err => {
+      console.log("Erro:", err);
+      res.status(500).json({ error: 'Erro interno do servidor' });
+    });
+};
+
 function isValidEmail(email) {
   var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);

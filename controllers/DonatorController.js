@@ -110,4 +110,15 @@ donatorController.delete = function(req, res) {
     });
 };
 
+donatorController.returnDonators = function(req, res) {
+  Donator.find()
+    .then(donators => {
+      res.json(donators);
+    })
+    .catch(err => {
+      console.log("Erro:", err);
+      res.status(500).json({ error: 'Erro interno do servidor' });
+    });
+};
+
 module.exports = donatorController;

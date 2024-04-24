@@ -41,4 +41,8 @@ router.post('/delete/:id', function(req, res, next) {
   donator.delete(req, res);
 });
 
+router.get('/returnDonators', function(req, res) {
+  donator.returnDonators(req, res);
+});
+
 module.exports = router;
