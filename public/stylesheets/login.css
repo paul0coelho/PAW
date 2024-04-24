@@ -67,3 +67,21 @@ button {
 .form{
     margin-left: -100px;
 }
+
+.password-container {
+    position: relative;
+}
+
+.password-container input[type="password"] {
+    padding-right: 100px; /* Espaço para o ícone */
+}
+
+.password-container i {
+    position: absolute;
+    top: 50%;
+    left: 340px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    
+}
+
