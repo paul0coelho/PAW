@@ -20,6 +20,7 @@ var entities = require('./routes/entities');
 var donators = require('./routes/donators');
 var donations = require('./routes/donations');
 var points = require('./routes/points');
+var login = require('./routes/login');
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -58,6 +59,7 @@ app.use('/entities', entities);
 app.use('/donators', donators);
 app.use('/donations', donations);
 app.use('/points', points);
+app.use('/login', login);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

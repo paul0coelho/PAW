@@ -1,5 +1,6 @@
 var mongoose = require("mongoose");
 var Admin = require("../models/Admin");
+var bcrypt = require('bcryptjs');
 
 var adminController = {};
 
@@ -50,23 +51,32 @@ adminController.create = function(req, res) {
   res.render("../views/admins/create");
 };
 
-adminController.save = function(req, res) {
+adminController.save =  async function(req, res) {
   if (!isValidEmail(req.body.email)) {
     console.log('Email inválido.');
     return res.render('../views/admins/create', { error: 'Email inválido' });
   }
+  try {
+    
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
-  var admin = new Admin(req.body);
-
-  admin.save()
-    .then(savedAdmin => {
-      console.log('Admin criado com sucesso.');
-      res.redirect("show/" + savedAdmin._id);
-    })
-    .catch(err => {
-      console.log(err);
-      res.render('../views/admins/create', { error: 'Erro ao criar o admin' });
+    
+    const admin = new Admin({
+      userName: req.body.userName,
+      name: req.body.name,
+      email: req.body.email,
+      password: hashedPassword
     });
+
+    
+    const savedAdmin = await admin.save();
+    console.log('Admin criado com sucesso.');
+    res.redirect("show/" + savedAdmin._id);
+
+  } catch (err) {
+    console.log(err);
+    res.render('../views/admins/create', { error: 'Erro ao criar o admin' });
+  }
 };
 
 adminController.edit = function(req, res) {
