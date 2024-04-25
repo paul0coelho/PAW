@@ -14,6 +14,7 @@
       <h2>Histórico de doações do doador</h2>
     </div>
     <div class="container">
+      <% donations.forEach(donation => { %>
       <table>
         <tbody>
           <tr>
@@ -43,6 +44,7 @@
           </tr>
         </tbody>
       </table>
+      <% }); %>
     </div>
   </body>
 </html>

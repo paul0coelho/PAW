@@ -40,7 +40,7 @@ donationController.searchByPhone = function(req, res) {
       if (!donations) {
         return res.status(404).send('Donation not found');
       }
-      res.render("../views/donations/show", {donations: donations});
+      res.render("../views/donations/donationHistory", {donations: donations});
     })
     .catch(err => {
       console.log("Error:", err);
