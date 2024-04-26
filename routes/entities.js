@@ -1,9 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var entity = require("../controllers/EntityController.js");
+var loginController = require("../controllers/LoginController.js");
 
 // Get all entities
-router.get('/', function(req, res) {
+router.get('/',loginController.verifyLoginUser, function(req, res) {
   entity.list(req, res);
 });
 
@@ -17,7 +18,7 @@ router.get('/searchByPhone', function(req, res) {
 });
 
 // Create entity
-router.get('/create', function(req, res) {
+router.get('/create',loginController.verifyLoginUser, function(req, res) {
   entity.create(req, res);
 });
 

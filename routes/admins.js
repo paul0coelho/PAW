@@ -1,9 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var admin = require("../controllers/AdminController.js");
+var loginController = require("../controllers/LoginController.js");
 
 // Get all employees
-router.get('/', function(req, res) {
+router.get('/',loginController.verifyLoginUser, function(req, res) {
   admin.list(req, res);
 });
 
@@ -17,7 +18,7 @@ router.get('/searchByEmail', function(req, res) {
 });
 
 // Create employee
-router.get('/create', function(req, res) {
+router.get('/create',loginController.verifyLoginUser, function(req, res) {
   admin.create(req, res);
 });
 
