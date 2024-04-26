@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Detalhes da Doação</title>
-    <link rel='stylesheet' href='/stylesheets/show.css' />
+    <link rel='stylesheet' href='/stylesheets/show.css' enctype = "multipart/form-data"/>
   </head>
   <body>
     <div class="header">
@@ -43,6 +43,7 @@
           </tr>
         </tbody>
       </table>
+      <img src="/images/<%= donation._id %>.jpg">
     </div>
   </body>
 </html>

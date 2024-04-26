@@ -1,6 +1,8 @@
 var mongoose = require("mongoose");
 var Admin = require("../models/Admin");
 var bcrypt = require('bcryptjs');
+var path = require('path');
+var fs = require("fs");
 
 var adminController = {};
 
@@ -71,8 +73,29 @@ adminController.save =  async function(req, res) {
     
     const savedAdmin = await admin.save();
     console.log('Admin criado com sucesso.');
-    res.redirect("show/" + savedAdmin._id);
 
+    var fileDestination = path.join(__dirname, "..", "images", savedAdmin._id.toString() + ".jpg");
+
+      fs.readFile(req.file.path, function(err, data) {
+        if (err) {
+          console.error("Erro ao ler o arquivo:", err);
+          return res.status(500).send("Erro ao ler o arquivo");
+        }
+
+        fs.writeFile(fileDestination, data, function(err) {
+          if (err) {
+            console.error("Erro ao escrever o arquivo na pasta 'images':", err);
+            return res.status(500).send("Erro ao escrever o arquivo na pasta 'images'");
+          }
+
+          fs.unlink(req.file.path, function(err) {
+            if (err) {
+              console.error("Erro ao remover o arquivo da pasta 'tmp':", err);
+            }
+          });
+        });
+      });
+    res.redirect("show/" + savedAdmin._id);
   } catch (err) {
     console.log(err);
     res.render('../views/admins/create', { error: 'Erro ao criar o admin' });
@@ -120,14 +143,27 @@ adminController.update = function(req, res) {
 };
 
 adminController.delete = function(req, res) {
-  Admin.deleteOne({ _id: req.params.id })
-    .then(() => {
-      console.log("Admin deleted!");
+  Admin.findOneAndDelete({ _id: req.params.id })
+    .then(admin => {
+      if (!admin) {
+        return res.status(404).send('Entidade não encontrada');
+      }
+
+      var imagePath = path.join(__dirname, '..', 'images', admin._id.toString() + '.jpg');
+      if (fs.existsSync(imagePath)) {
+        fs.unlink(imagePath, function(err) {
+          if (err) {
+            console.error('Erro ao remover a imagem associada à entidade:', err);
+          }
+        });
+      }
+
+      console.log("Administrador excluído!");
       res.redirect("/admins");
     })
     .catch(err => {
       console.log(err);
-      res.status(500).send('Internal Server Error');
+      res.status(500).send('Erro interno do servidor');
     });
 };
 
