@@ -6,12 +6,25 @@ var logger = require('morgan');
 var multer = require('multer');
 var cors = require('cors');
 var bodyParser = require('body-parser');
+var fs = require('fs');
+
+function tmpExists() {
+  const tmpFolderPath = './tmp';
+
+  if (!fs.existsSync(tmpFolderPath)) {
+    fs.mkdirSync(tmpFolderPath);
+    console.log('Pasta "tmp" criada com sucesso.');
+  } else {
+    console.log('Pasta "tmp" já existe.');
+  }
+}
+
+tmpExists();
 
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 mongoose.connect('mongodb+srv://paul0:1234@cluster0.gat7grz.mongodb.net/PAW?retryWrites=true&w=majority&appName=Cluster0', { useNewUrlParser: true })
-  .then(() => console.log('connection succesful'))
   .catch((err) => console.error(err));
 
 var index = require('./routes/index');

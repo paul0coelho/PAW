@@ -62,26 +62,32 @@ entityController.save = function(req, res) {
 
   entity.save()
     .then(savedEntity => {
-      console.log('Successfully created an entity.');
+      console.log('Entidade criada com sucesso.');
 
       var fileDestination = path.join(__dirname, "..", "images", savedEntity._id.toString() + ".jpg");
 
       fs.readFile(req.file.path, function(err, data) {
         if (err) {
-          console.error("Error reading file:", err);
-          return res.status(500).send("Error reading file");
+          console.error("Erro ao ler o arquivo:", err);
+          return res.status(500).send("Erro ao ler o arquivo");
         }
 
         fs.writeFile(fileDestination, data, function(err) {
           if (err) {
-            console.error("Error writing file:", err);
-            return res.status(500).send("Error writing file");
+            console.error("Erro ao escrever o arquivo na pasta 'images':", err);
+            return res.status(500).send("Erro ao escrever o arquivo na pasta 'images'");
           }
 
-            res.redirect("show/" + savedEntity._id);
+          fs.unlink(req.file.path, function(err) {
+            if (err) {
+              console.error("Erro ao remover o arquivo da pasta 'tmp':", err);
+            }
           });
+
+          res.redirect("show/" + savedEntity._id);
         });
-      })
+      });
+    })
     .catch(err => {
       console.log(err);
       res.render('../views/entities/create');
@@ -105,7 +111,7 @@ entityController.edit = function(req, res) {
 entityController.update = function(req, res) {
   if (!isValidEmail(req.body.email)) {
     console.log('Email inválido.');
-    return res.render('../views/entities/edit', { admin: req.body, error: 'Email inválido' });
+    return res.render('../views/entities/edit', { entity: req.body, error: 'Email inválido' });
   }
   
   Entity.findByIdAndUpdate(req.params.id,{ 
@@ -130,14 +136,27 @@ entityController.update = function(req, res) {
 };
 
 entityController.delete = function(req, res) {
-  Entity.deleteOne({ _id: req.params.id })
-    .then(() => {
-      console.log("Entity deleted!");
+  Entity.findOneAndDelete({ _id: req.params.id })
+    .then(entity => {
+      if (!entity) {
+        return res.status(404).send('Entidade não encontrada');
+      }
+
+      var imagePath = path.join(__dirname, '..', 'images', entity._id.toString() + '.jpg');
+      if (fs.existsSync(imagePath)) {
+        fs.unlink(imagePath, function(err) {
+          if (err) {
+            console.error('Erro ao remover a imagem associada à entidade:', err);
+          }
+        });
+      }
+
+      console.log("Entidade excluída!");
       res.redirect("/entities");
     })
     .catch(err => {
       console.log(err);
-      res.status(500).send('Internal Server Error');
+      res.status(500).send('Erro interno do servidor');
     });
 };
 
