@@ -24,7 +24,7 @@ var login = require('./routes/login');
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, './images');
+    cb(null, './tmp');
   },
   filename: function (req, file, cb) {
     cb(null, req.body.email + ".jpg");

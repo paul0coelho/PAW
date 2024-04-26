@@ -1,5 +1,7 @@
 var mongoose = require("mongoose");
 var Entity = require("../models/Entity");
+var path = require('path');
+var fs = require("fs");
 
 var entityController = {};
 
@@ -62,7 +64,7 @@ entityController.save = function(req, res) {
     .then(savedEntity => {
       console.log('Successfully created an entity.');
 
-      var fileDestination = path.join(__dirname, "..", "images", req.body.email + ".jpg");
+      var fileDestination = path.join(__dirname, "..", "images", savedEntity._id.toString() + ".jpg");
 
       fs.readFile(req.file.path, function(err, data) {
         if (err) {
