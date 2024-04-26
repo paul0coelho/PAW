@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var donator = require("../controllers/DonatorController.js");
-
+var loginController = require("../controllers/LoginController.js");
 // Get all donators
-router.get('/', function(req, res) {
+router.get('/',loginController.verifyLoginUser, function(req, res) {
   donator.list(req, res);
 });
 
@@ -17,7 +17,7 @@ router.get('/searchByPhone', function(req, res) {
 });
 
 // Create donator
-router.get('/create', function(req, res) {
+router.get('/create',loginController.verifyLoginUser, function(req, res) {
   donator.create(req, res);
 });
 

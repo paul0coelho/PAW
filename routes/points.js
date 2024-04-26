@@ -1,9 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var points = require("../controllers/PointsController.js");
+var loginController = require("../controllers/LoginController.js");
 
 // Get all employees
-router.get('/', function(req, res) {
+router.get('/',loginController.verifyLoginUser, function(req, res) {
   points.list(req, res);
 });
 
