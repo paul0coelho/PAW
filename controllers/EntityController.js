@@ -83,7 +83,6 @@ entityController.save = function(req, res) {
               console.error("Erro ao remover o arquivo da pasta 'tmp':", err);
             }
           });
-
           res.redirect("show/" + savedEntity._id);
         });
       });

@@ -40,7 +40,7 @@ var storage = multer.diskStorage({
     cb(null, './tmp');
   },
   filename: function (req, file, cb) {
-    cb(null, req.body.email + ".jpg");
+    cb(null, req.body.phone.toString() + ".jpg");
   }
 });
 

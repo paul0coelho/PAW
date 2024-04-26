@@ -1,5 +1,7 @@
 var mongoose = require("mongoose");
 var Donator = require("../models/Donator");
+var path = require('path');
+var fs = require("fs");
 
 var donatorController = {};
 
@@ -56,7 +58,29 @@ donatorController.save = function(req, res) {
   donator.save()
     .then(savedDonator => {
       console.log('Successfully created a donator.');
-      res.redirect("show/" + savedDonator._id);
+
+      var fileDestination = path.join(__dirname, "..", "images", savedDonator._id.toString() + ".jpg");
+
+      fs.readFile(req.file.path, function(err, data) {
+        if (err) {
+          console.error("Erro ao ler o arquivo:", err);
+          return res.status(500).send("Erro ao ler o arquivo");
+        }
+
+        fs.writeFile(fileDestination, data, function(err) {
+          if (err) {
+            console.error("Erro ao escrever o arquivo na pasta 'images':", err);
+            return res.status(500).send("Erro ao escrever o arquivo na pasta 'images'");
+          }
+
+          fs.unlink(req.file.path, function(err) {
+            if (err) {
+              console.error("Erro ao remover o arquivo da pasta 'tmp':", err);
+            }
+          });
+          res.redirect("show/" + savedDonator._id);
+        });
+      });
     })
     .catch(err => {
       console.log(err);
@@ -99,14 +123,27 @@ donatorController.update = function(req, res) {
 };
 
 donatorController.delete = function(req, res) {
-  Donator.deleteOne({ _id: req.params.id })
-    .then(() => {
-      console.log("Donator deleted!");
+  Donator.findOneAndDelete({ _id: req.params.id })
+    .then(donator => {
+      if (!donator) {
+        return res.status(404).send('Entidade não encontrada');
+      }
+
+      var imagePath = path.join(__dirname, '..', 'images', donator._id.toString() + '.jpg');
+      if (fs.existsSync(imagePath)) {
+        fs.unlink(imagePath, function(err) {
+          if (err) {
+            console.error('Erro ao remover a imagem associada à entidade:', err);
+          }
+        });
+      }
+
+      console.log("Doador excluído!");
       res.redirect("/donators");
     })
     .catch(err => {
       console.log(err);
-      res.status(500).send('Internal Server Error');
+      res.status(500).send('Erro interno do servidor');
     });
 };
 
