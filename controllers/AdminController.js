@@ -64,7 +64,7 @@ adminController.save =  async function(req, res) {
 
     
     const admin = new Admin({
-      userName: req.body.userName,
+      phone: req.body.phone,
       name: req.body.name,
       email: req.body.email,
       password: hashedPassword
@@ -126,7 +126,7 @@ adminController.update = function(req, res) {
       $set: {
         name: req.body.name,
         email: req.body.email,
-        userName: req.body.userName,
+        phone: req.body.phone,
         password:req.body.password
       }
     }, { new: true })

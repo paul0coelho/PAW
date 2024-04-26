@@ -10,10 +10,11 @@ var AdminSchema = new mongoose.Schema({
     required: true,
     unique:true
   },
-  userName: {
-    type: String,
-    required: true,
-    unique:true
+  phone: {
+    type: Number,
+    min: 900000000,
+    max: 999999999,
+    required:true
   },
   password: {
     type: String,
