@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var DonationSchema = new mongoose.Schema({
-  donatorPhone: {
+  phone: {
     type: Number,
     min: 900000000,
     max: 999999999,

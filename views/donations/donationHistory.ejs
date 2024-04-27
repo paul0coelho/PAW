@@ -20,7 +20,7 @@
           <tr>
             <td>Contacto do doador</td>
             <td>:</td>
-            <td><%= donation.donatorPhone %></td>
+            <td><%= donation.phone %></td>
           </tr>
           <tr>
             <td>Número de Peças Superiores</td>
@@ -42,6 +42,7 @@
             <td>:</td>
             <td><%= donation.gainedPoints %></td>
           </tr>
+          <tr><img src="/images/<%= donation._id %>.jpg"></tr>
         </tbody>
       </table>
       <% }); %>

@@ -2,6 +2,8 @@ var mongoose = require("mongoose");
 var Donation = require("../models/Donation");
 var Donator = require("../models/Donator");
 var Points = require("../models/Points");
+var path = require('path');
+var fs = require("fs");
 
 var donationController = {};
 
@@ -35,7 +37,7 @@ donationController.show = function(req, res) {
 };
 
 donationController.searchByPhone = function(req, res) {
-  Donation.find({donatorPhone: req.query.phone})
+  Donation.find({phone: req.query.phone})
     .then(donations => {
       if (!donations) {
         return res.status(404).send('Donation not found');
@@ -58,14 +60,36 @@ donationController.save = function(req, res) {
   calculateGainedPoints(req.body.topPiecesNumber, req.body.bottomPiecesNumber, req.body.underwearPiecesNumber)
     .then(gainedPoints => {
       donation.gainedPoints = gainedPoints;
-      return addPointsGainedByDonation(gainedPoints, req.body.donatorPhone);
+      return addPointsGainedByDonation(gainedPoints, req.body.phone);
     })
     .then(() => {
       return donation.save();
     })
     .then(savedDonation => {
       console.log('Successfully created a donation.');
-      res.redirect("show/" + savedDonation._id);
+
+      var fileDestination = path.join(__dirname, "..", "images", savedDonation._id.toString() + ".jpg");
+
+      fs.readFile(req.file.path, function(err, data) {
+        if (err) {
+          console.error("Erro ao ler o arquivo:", err);
+          return res.status(500).send("Erro ao ler o arquivo");
+        }
+
+        fs.writeFile(fileDestination, data, function(err) {
+          if (err) {
+            console.error("Erro ao escrever o arquivo na pasta 'images':", err);
+            return res.status(500).send("Erro ao escrever o arquivo na pasta 'images'");
+          }
+
+          fs.unlink(req.file.path, function(err) {
+            if (err) {
+              console.error("Erro ao remover o arquivo da pasta 'tmp':", err);
+            }
+          });
+          res.redirect("show/" + savedDonation._id);
+        });
+      });
     })
     .catch(err => {
       console.log(err);
@@ -73,8 +97,8 @@ donationController.save = function(req, res) {
     });
 };
 
-function addPointsGainedByDonation(pointsGained, donatorPhone) {
-  return Donator.findOne({ phone: donatorPhone })
+function addPointsGainedByDonation(pointsGained, phone) {
+  return Donator.findOne({ phone: phone })
     .then(donator => {
       if (!donator) {
         throw new Error('Donator not found');
