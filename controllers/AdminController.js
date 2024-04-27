@@ -127,7 +127,6 @@ adminController.update = function(req, res) {
         name: req.body.name,
         email: req.body.email,
         phone: req.body.phone,
-        password:req.body.password
       }
     }, { new: true })
     .then(admin => {
@@ -171,5 +170,20 @@ function isValidEmail(email) {
   var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
 }
+adminController.profile = function(req, res) {
+  const userEmail = req.userEmail;
+  Admin.findOne({ email: userEmail })
+      .then(admin => {
+          if (!admin) {
+              return res.status(404).send("Administrador não encontrado");
+          }
+          res.render('profile', { admin: admin });
+      })
+      .catch(err => {
+          console.log('Erro ao buscar informações do administrador:', err);
+          res.status(500).send("Erro interno do servidor");
+      });
+};
+
 
 module.exports = adminController;

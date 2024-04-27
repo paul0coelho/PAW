@@ -48,8 +48,8 @@ loginController.verifyLoginUser = function(req, res, next) {
             if (err) {
                 return res.redirect('/login');
             }
-            req.userEmail = decoded
-            next()
+            req.userEmail = decoded.email;
+            next();
         })
     } else {
         //res.render('error', {message:"not authenticated!", error: {status:"",stack:""}})
