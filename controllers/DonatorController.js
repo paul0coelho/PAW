@@ -103,24 +103,65 @@ donatorController.edit = function(req, res) {
 };
 
 donatorController.update = function(req, res) {
-  Donator.findByIdAndUpdate(req.params.id,{ 
-    $set: { 
-      name: req.body.name, 
-      phone: req.body.phone, 
-      address: req.body.address
-    }
-  },{ new: true })
+  Donator.findById(req.params.id)
     .then(donator => {
       if (!donator) {
-        return res.status(404).send('Donator not found');
+        return res.status(404).send('Doador não encontrado');
       }
-      res.redirect("/donators/show/" + donator._id);
+
+      donator.name = req.body.name;
+      donator.phone = req.body.phone;
+      donator.address = req.body.address;
+
+      if (req.file) {
+        var fileDestination = path.join(__dirname, "..", "images", donator._id.toString() + ".jpg");
+
+        fs.readFile(req.file.path, function(err, data) {
+          if (err) {
+            console.error("Erro ao ler o arquivo:", err);
+            return res.status(500).send("Erro ao ler o arquivo");
+          }
+
+          fs.writeFile(fileDestination, data, function(err) {
+            if (err) {
+              console.error("Erro ao escrever o arquivo na pasta 'images':", err);
+              return res.status(500).send("Erro ao escrever o arquivo na pasta 'images'");
+            }
+
+            fs.unlink(req.file.path, function(err) {
+              if (err) {
+                console.error("Erro ao remover o arquivo da pasta 'tmp':", err);
+              }
+            });
+            donator.save()
+              .then(updatedDonator => {
+                console.log('Doador atualizado com sucesso.');
+                res.redirect("/donators/show/" + updatedDonator._id);
+              })
+              .catch(err => {
+                console.log(err);
+                res.render("../views/donators/edit", { donator: req.body });
+              });
+          });
+        });
+      } else {
+        donator.save()
+          .then(updatedDonator => {
+            console.log('Doador atualizado com sucesso.');
+            res.redirect("/donators/show/" + updatedDonator._id);
+          })
+          .catch(err => {
+            console.log(err);
+            res.render("../views/donators/edit", { donator: req.body });
+          });
+      }
     })
     .catch(err => {
       console.log(err);
       res.render("../views/donators/edit", { donator: req.body });
     });
 };
+
 
 donatorController.delete = function(req, res) {
   Donator.findOneAndDelete({ _id: req.params.id })

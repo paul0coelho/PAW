@@ -122,22 +122,63 @@ adminController.update = function(req, res) {
     return res.render('../views/admins/edit', { admin: req.body, error: 'Email inválido' });
   }
 
-  Admin.findByIdAndUpdate(req.params.id, {
-      $set: {
-        name: req.body.name,
-        email: req.body.email,
-        phone: req.body.phone,
-      }
-    }, { new: true })
+  Admin.findById(req.params.id)
     .then(admin => {
       if (!admin) {
-        return res.status(404).send('Admin não encontrado');
+        return res.status(404).send('Administrador não encontrado');
       }
-      res.redirect("/admins/show/" + admin._id);
+
+      admin.name = req.body.name;
+      admin.email = req.body.email;
+      admin.phone = req.body.phone;
+
+      if (req.file) {
+        var fileDestination = path.join(__dirname, "..", "images", admin._id.toString() + ".jpg");
+
+        fs.readFile(req.file.path, function(err, data) {
+          if (err) {
+            console.error("Erro ao ler o arquivo:", err);
+            return res.status(500).send("Erro ao ler o arquivo");
+          }
+
+          fs.writeFile(fileDestination, data, function(err) {
+            if (err) {
+              console.error("Erro ao escrever o arquivo na pasta 'images':", err);
+              return res.status(500).send("Erro ao escrever o arquivo na pasta 'images'");
+            }
+
+            fs.unlink(req.file.path, function(err) {
+              if (err) {
+                console.error("Erro ao remover o arquivo da pasta 'tmp':", err);
+              }
+            });
+
+            admin.save()
+              .then(updatedAdmin => {
+                console.log('Administrador atualizado com sucesso.');
+                res.redirect("/admins/show/" + updatedAdmin._id);
+              })
+              .catch(err => {
+                console.log(err);
+                res.render("../views/admins/edit", { admin: req.body });
+              });
+          });
+        });
+      } else {
+        admin.save()
+          .then(updatedAdmin => {
+            console.log('Administrador atualizado com sucesso.');
+            res.redirect("/admins/show/" + updatedAdmin._id);
+          })
+          .catch(err => {
+            console.log(err);
+            res.render("../views/admins/edit", { admin: req.body });
+          });
+      }
     })
     .catch(err => {
       console.log(err);
-      res.render("../views/admins/edit", { admin: req.body, error: 'Erro ao atualizar o admin' });
+      res.render("../views/admins/edit", { admin: req.body });
     });
 };
 
@@ -170,6 +211,7 @@ function isValidEmail(email) {
   var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
 }
+
 adminController.profile = function(req, res) {
   const userEmail = req.userEmail;
   Admin.findOne({ email: userEmail })

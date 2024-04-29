@@ -28,7 +28,7 @@
       <tr>
         <th>Nome</th>
         <th>Email</th>
-        <th>UserName</th>
+        <th>Telefone</th>
         <th> </th>
         <th> </th>
       </tr>
@@ -38,7 +38,7 @@
       <tr>
         <td><%= admin.name %></td>
         <td><%= admin.email %></td>
-        <td><%= admin.userName %></td>
+        <td><%= admin.phone %></td>
         <td id="edit-row"><h3><a href="/admins/edit/<%= admin._id %>"><i class="fas fa-pencil-alt"></i></a></h3></td>
         <td id="remove-row">
           <form action="/admins/delete/<%= admin._id %>" method="post">

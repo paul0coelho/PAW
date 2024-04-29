@@ -112,21 +112,63 @@ entityController.update = function(req, res) {
     console.log('Email inválido.');
     return res.render('../views/entities/edit', { entity: req.body, error: 'Email inválido' });
   }
-  
-  Entity.findByIdAndUpdate(req.params.id,{ 
-    $set: { 
-      name: req.body.name, 
-      description: req.body.description, 
-      address: req.body.address,
-      email: req.body.email,
-      phone: req.body.phone
-    }
-  },{ new: true })
+
+  Entity.findById(req.params.id)
     .then(entity => {
       if (!entity) {
         return res.status(404).send('Entity not found');
       }
-      res.redirect("/entities/show/" + entity._id);
+
+      entity.name = req.body.name;
+      entity.description = req.body.description;
+      entity.address = req.body.address;
+      entity.email = req.body.email;
+      entity.phone = req.body.phone;
+
+      if (req.file) {
+        var fileDestination = path.join(__dirname, "..", "images", entity._id.toString() + ".jpg");
+
+        fs.readFile(req.file.path, function(err, data) {
+          if (err) {
+            console.error("Erro ao ler o arquivo:", err);
+            return res.status(500).send("Erro ao ler o arquivo");
+          }
+
+          fs.writeFile(fileDestination, data, function(err) {
+            if (err) {
+              console.error("Erro ao escrever o arquivo na pasta 'images':", err);
+              return res.status(500).send("Erro ao escrever o arquivo na pasta 'images'");
+            }
+
+            fs.unlink(req.file.path, function(err) {
+              if (err) {
+                console.error("Erro ao remover o arquivo da pasta 'tmp':", err);
+              }
+            });
+
+            entity.save()
+              .then(updatedEntity => {
+                console.log('Entidade atualizada com sucesso.');
+                res.redirect("/entities/show/" + updatedEntity._id);
+              })
+              .catch(err => {
+                console.log(err);
+                res.render("../views/entities/edit", { entity: req.body });
+              });
+          });
+        });
+      } else {
+        
+        entity.save()
+          .then(updatedEntity => {
+            console.log('Entidade atualizada com sucesso.');
+            res.redirect("/entities/show/" + updatedEntity._id);
+          })
+          .catch(err => {
+            console.log(err);
+            res.render("../views/entities/edit", { entity: req.body });
+          });
+      }
     })
     .catch(err => {
       console.log(err);

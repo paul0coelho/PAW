@@ -11,7 +11,7 @@
       <div class="header2">
         <h2>Editar Entidade</h2>
       </div>
-      <form action="/entities/update/<%= entity._id %>" method="post">
+      <form action="/entities/update/<%= entity._id %>" method="post" enctype = "multipart/form-data">
         <table>
             <tr>
               <td>Nome</td>

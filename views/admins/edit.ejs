@@ -11,7 +11,7 @@
       <div class="header2">
         <h2>Editar administrador</h2>
       </div>
-      <form action="/admins/update/<%= admin._id%>" method="post">
+      <form action="/admins/update/<%= admin._id%>" method="post" enctype = "multipart/form-data">
           <table>
             <tr>
               <td>Nome</td>
@@ -32,8 +32,10 @@
               <td><input type="number" name="phone" placeholder="<%= admin.phone %>" /></td>
             </tr>
             <tr>
-              
-              <td><a href="">Alterar password</a></td>
+              <td>Fotografia</td>
+            </tr>
+            <tr>
+              <td><input type="file" name="image" accept="image/*"/></td>
             </tr>
             <tr>
               <td colspan="2"><button type="submit">Atualizar</button></td>
