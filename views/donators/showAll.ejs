@@ -30,6 +30,7 @@
         <th>Telefone</th>
         <th>Morada</th>
         <th>Pontos acumulados</th>
+        <th>Vouchers ganhos</th>
         <th> </th>
         <th> </th>
       </tr>
@@ -41,6 +42,7 @@
         <td><%= donator.phone %></td>
         <td><%= donator.address %></td>
         <td><%= donator.gainedPoints %></td>
+        <td><%= donator.vouchers %></td>
         <td id="edit-row"><h3><a href="/donators/edit/<%= donator._id %>"><i class="fas fa-pencil-alt"></i></a></h3></td>
         <td id="remove-row">
           <form action="/donators/delete/<%= donator._id %>" method="post">

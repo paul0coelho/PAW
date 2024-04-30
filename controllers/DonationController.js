@@ -104,6 +104,11 @@ function addPointsGainedByDonation(pointsGained, phone) {
         throw new Error('Doador não encontrado');
       }
       donator.gainedPoints += parseInt(pointsGained);
+
+      if(donator.gainedPoints >= 100){
+        donator.vouchers++;
+        donator.gainedPoints = (donator.gainedPoints - 100);
+      }
       return donator.save();
     });
 }
