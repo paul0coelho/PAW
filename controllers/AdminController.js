@@ -227,5 +227,38 @@ adminController.profile = function(req, res) {
       });
 };
 
+adminController.editPassword = async function(req, res) {
+  const userEmail = req.userEmail;
+  const { currentPassword, newPassword, confirmPassword } = req.body;
+
+  try {
+      const admin = await Admin.findOne({ email: userEmail }).exec();
+      if (!admin) {
+          return res.status(404).send("Administrador não encontrado");
+      }
+
+      
+      const isPasswordValid = await bcrypt.compare(currentPassword, admin.password);
+      if (!isPasswordValid) {
+        return res.render("admins/editPassword", { error: "Password atual incorreta" });
+      }
+
+      
+      if (newPassword !== confirmPassword) {
+        return res.render("admins/editPassword", { error: "Password não coincide" });
+      }
+
+      
+      const hashedPassword = await bcrypt.hash(newPassword, 10);
+      admin.password = hashedPassword;
+      await admin.save();
+
+      res.redirect('/profile'); 
+  } catch (err) {
+      console.error("Erro ao trocar a password:", err);
+      res.status(500).send("Erro interno do servidor");
+  }
+};
+
 
 module.exports = adminController;

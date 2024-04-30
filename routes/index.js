@@ -17,4 +17,11 @@ router.get('/menuAdmin', loginController.verifyLoginUser, function(req, res, nex
 router.get('/profile', loginController.verifyLoginUser, function(req, res) {
   adminController.profile(req, res);
 });
+
+router.get('/editPassword', loginController.verifyLoginUser, function(req, res) {
+  res.render("admins/editPassword");
+});
+
+router.post('/editPassword', loginController.verifyLoginUser, adminController.editPassword);
+
 module.exports = router;

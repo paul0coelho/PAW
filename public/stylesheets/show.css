@@ -79,3 +79,7 @@ img{
     margin-top: 20px;
     width:200px;
 }
+
+.password{
+    text-decoration: underline;
+}
