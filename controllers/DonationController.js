@@ -105,7 +105,7 @@ function addPointsGainedByDonation(pointsGained, phone) {
       }
       donator.gainedPoints += parseInt(pointsGained);
 
-      if(donator.gainedPoints >= 100){
+      while(donator.gainedPoints >= 100){
         donator.vouchers++;
         donator.gainedPoints = (donator.gainedPoints - 100);
       }
