@@ -3,45 +3,47 @@ var router = express.Router();
 var entity = require("../controllers/EntityController.js");
 var loginController = require("../controllers/LoginController.js");
 
-// Get all entities
+// Menu de gestão de entidades
 router.get('/',loginController.verifyLoginUser, function(req, res) {
   entity.list(req, res);
 });
 
-// Get single entity by id
+// Obter uma entidade através do _id
 router.get('/show/:id', function(req, res) {
   entity.show(req, res);
 });
 
+// Obter uma entidade através do telefone
 router.get('/searchByPhone', function(req, res) {
   entity.searchByPhone(req, res);
 });
 
-// Create entity
+// Registar uma nova entidade
 router.get('/create',loginController.verifyLoginUser, function(req, res) {
   entity.create(req, res);
 });
 
-// Save entity
+// Guardar uma entidade
 router.post('/save', function(req, res) {
   entity.save(req, res);
 });
 
-// Edit entity
+// Editar uma entidade
 router.get('/edit/:id', function(req, res) {
   entity.edit(req, res);
 });
 
-// Update entity
+// Atualizar uma entidade após edição
 router.post('/update/:id', function(req, res) {
   entity.update(req, res);
 });
 
-// Delete entity
+// Eliminar uma entidade
 router.post('/delete/:id', function(req, res, next) {
   entity.delete(req, res);
 });
 
+// Obter entidades no formato JSON
 router.get('/returnEntities', function(req, res) {
   entity.returnEntities(req, res);
 });

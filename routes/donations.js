@@ -3,30 +3,32 @@ var router = express.Router();
 var donation = require("../controllers/DonationController.js");
 var loginController = require("../controllers/LoginController.js");
 
-// Obter todas as doações
+// Menu de gestão de doações
 router.get('/',loginController.verifyLoginUser, function(req, res) {
   donation.list(req, res);
 });
 
-// Obter uma única doação pelo ID
+// Obter uma doação pelo _id
 router.get('/show/:id', function(req, res) {
   donation.show(req, res);
 });
 
+// Obter uma doação pelo contacto do doador
 router.get('/searchByPhone', function(req, res) {
   donation.searchByPhone(req, res);
 });
 
-// Criar uma doação
+// Registar uma doação
 router.get('/create',loginController.verifyLoginUser, function(req, res) {
   donation.create(req, res);
 });
 
-// Salvar uma doação
+// Guardar uma doação
 router.post('/save', function(req, res) {
   donation.save(req, res);
 });
 
+// Obter doações no formato JSON
 router.get('/returnDonations', function(req, res) {
   donation.returnDonations(req, res);
 });

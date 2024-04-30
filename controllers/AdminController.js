@@ -25,7 +25,7 @@ adminController.show = function(req, res) {
   Admin.findOne({_id: req.params.id})
     .then(admin => {
       if (!admin) {
-        return res.status(404).send('Admin not found');
+        return res.status(404).send('Administrador não encontrado');
       }
       res.render("../views/admins/show", {admin: admin});
     })
@@ -39,7 +39,7 @@ adminController.searchByEmail = function(req, res) {
   Admin.findOne({email: req.query.email})
     .then(admin => {
       if (!admin) {
-        return res.status(404).send('Admin not found');
+        return res.status(404).send('Administrador não encontrado');
       }
       res.render("../views/admins/show", {admin: admin});
     })
@@ -106,7 +106,7 @@ adminController.edit = function(req, res) {
   Admin.findOne({_id: req.params.id})
     .then(admin => {
       if (!admin) {
-        return res.status(404).send('Admin not found');
+        return res.status(404).send('Administrador não encontrado');
       }
       res.render("../views/admins/edit", {admin: admin});
     })
@@ -186,14 +186,14 @@ adminController.delete = function(req, res) {
   Admin.findOneAndDelete({ _id: req.params.id })
     .then(admin => {
       if (!admin) {
-        return res.status(404).send('Entidade não encontrada');
+        return res.status(404).send('Administrador não encontrado');
       }
 
       var imagePath = path.join(__dirname, '..', 'images', admin._id.toString() + '.jpg');
       if (fs.existsSync(imagePath)) {
         fs.unlink(imagePath, function(err) {
           if (err) {
-            console.error('Erro ao remover a imagem associada à entidade:', err);
+            console.error('Erro ao remover a imagem associada ao administrador:', err);
           }
         });
       }
@@ -203,7 +203,7 @@ adminController.delete = function(req, res) {
     })
     .catch(err => {
       console.log(err);
-      res.status(500).send('Erro interno do servidor');
+      res.status(500).send('Internal Server Error');
     });
 };
 
@@ -222,8 +222,8 @@ adminController.profile = function(req, res) {
           res.render('profile', { admin: admin });
       })
       .catch(err => {
-          console.log('Erro ao buscar informações do administrador:', err);
-          res.status(500).send("Erro interno do servidor");
+          console.log("Error:", err);
+          res.status(500).send('Internal Server Error');
       });
 };
 

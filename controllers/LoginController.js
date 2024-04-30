@@ -1,4 +1,3 @@
-
 const mongoose = require('mongoose')
 const mongoUser = require('../models/Admin')
 const jwt = require('jsonwebtoken')
@@ -14,7 +13,7 @@ loginController.submittedLogin = function(req, res, next) {
     mongoUser.findOne({email:emailInput})
         .then(function(admin){
             if(!admin) {
-                return res.redirect('/login'); // e-mail não encontrado
+                return res.redirect('/login');
             }
             bcrypt.compare(passwordInput, admin.password)
                 .then(function(result){
@@ -52,7 +51,6 @@ loginController.verifyLoginUser = function(req, res, next) {
             next();
         })
     } else {
-        //res.render('error', {message:"not authenticated!", error: {status:"",stack:""}})
         res.redirect('/login')
     }
 }

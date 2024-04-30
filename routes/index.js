@@ -8,10 +8,12 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+// Menu do administrador
 router.get('/menuAdmin', loginController.verifyLoginUser, function(req, res, next) {
   res.render('admin/menuAdmin'); 
 });
 
+// Perfil do administrador autenticado
 router.get('/profile', loginController.verifyLoginUser, function(req, res) {
   adminController.profile(req, res);
 });

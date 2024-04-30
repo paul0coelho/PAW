@@ -8,7 +8,6 @@
     <script src='https://cdn.plot.ly/plotly-2.31.1.min.js'></script>
 </head>
 <body>
-    
     <nav class="navbar">
         <div class="navbar-brand">
             <span>Recicla Têxtil</span>
@@ -28,12 +27,8 @@
                 </div>
             </li>
         </ul>
-
-        
     </nav>
-
     <h1>Dashboard</h1>
-
     <div class="container">
         <div id="box">
             <p id="totalDonations"></p>
@@ -54,7 +49,6 @@
         <div id='donutChart'>
         </div>
     </div>
-
     <script>
       fetch('/donators/returnDonators')
       .then(response => response.json())
@@ -139,6 +133,5 @@
         console.error('Erro ao buscar dados de doação:', err);
       });
       </script>
-
 </body>
 </html>

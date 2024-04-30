@@ -24,7 +24,7 @@ donatorController.show = function(req, res) {
   Donator.findOne({_id: req.params.id})
     .then(donator => {
       if (!donator) {
-        return res.status(404).send('Donator not found');
+        return res.status(404).send('Doador não encontrado');
       }
       res.render("../views/donators/show", {donator: donator});
     })
@@ -38,7 +38,7 @@ donatorController.searchByPhone = function(req, res) {
   Donator.findOne({phone: req.query.phone})
     .then(donator => {
       if (!donator) {
-        return res.status(404).send('Donator not found');
+        return res.status(404).send('Doador não encontrado');
       }
       res.render("../views/donators/show", {donator: donator});
     })
@@ -57,7 +57,7 @@ donatorController.save = function(req, res) {
 
   donator.save()
     .then(savedDonator => {
-      console.log('Successfully created a donator.');
+      console.log('Doador registado com sucesso.');
 
       var fileDestination = path.join(__dirname, "..", "images", savedDonator._id.toString() + ".jpg");
 
@@ -92,7 +92,7 @@ donatorController.edit = function(req, res) {
   Donator.findOne({_id: req.params.id})
     .then(donator => {
       if (!donator) {
-        return res.status(404).send('Donator not found');
+        return res.status(404).send('Doador não encontrado');
       }
       res.render("../views/donators/edit", {donator: donator});
     })
@@ -183,8 +183,8 @@ donatorController.delete = function(req, res) {
       res.redirect("/donators");
     })
     .catch(err => {
-      console.log(err);
-      res.status(500).send('Erro interno do servidor');
+      console.log("Error:", err);
+      res.status(500).send('Internal Server Error');
     });
 };
 
@@ -194,8 +194,8 @@ donatorController.returnDonators = function(req, res) {
       res.json(donators);
     })
     .catch(err => {
-      console.log("Erro:", err);
-      res.status(500).json({ error: 'Erro interno do servidor' });
+      console.log("Error:", err);
+      res.status(500).send('Internal Server Error');
     });
 };
 

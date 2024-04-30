@@ -26,7 +26,7 @@ donationController.show = function(req, res) {
   Donation.findOne({ _id: req.params.id })
     .then(donation => {
       if (!donation) {
-        return res.status(404).send('Donation not found');
+        return res.status(404).send('Doação não encontrada');
       }
       res.render("../views/donations/show", { donation: donation });
     })
@@ -40,7 +40,7 @@ donationController.searchByPhone = function(req, res) {
   Donation.find({phone: req.query.phone})
     .then(donations => {
       if (!donations) {
-        return res.status(404).send('Donation not found');
+        return res.status(404).send('Doação não encontrada');
       }
       res.render("../views/donations/donationHistory", {donations: donations});
     })
@@ -66,7 +66,7 @@ donationController.save = function(req, res) {
       return donation.save();
     })
     .then(savedDonation => {
-      console.log('Successfully created a donation.');
+      console.log('Doação registada com sucesso.');
 
       var fileDestination = path.join(__dirname, "..", "images", savedDonation._id.toString() + ".jpg");
 
@@ -101,7 +101,7 @@ function addPointsGainedByDonation(pointsGained, phone) {
   return Donator.findOne({ phone: phone })
     .then(donator => {
       if (!donator) {
-        throw new Error('Donator not found');
+        throw new Error('Doador não encontrado');
       }
       donator.gainedPoints += parseInt(pointsGained);
       return donator.save();
@@ -130,8 +130,8 @@ donationController.returnDonations = function(req, res) {
       res.json(donations);
     })
     .catch(err => {
-      console.log("Erro:", err);
-      res.status(500).json({ error: 'Erro interno do servidor' });
+      console.log("Error:", err);
+      res.status(500).send('Internal Server Error');
     });
 };
 

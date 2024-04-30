@@ -24,7 +24,7 @@ entityController.show = function(req, res) {
   Entity.findOne({_id: req.params.id})
     .then(entity => {
       if (!entity) {
-        return res.status(404).send('Entity not found');
+        return res.status(404).send('Entidade não encontrada');
       }
       res.render("../views/entities/show", {entity: entity});
     })
@@ -38,7 +38,7 @@ entityController.searchByPhone = function(req, res) {
   Entity.findOne({phone: req.query.phone})
     .then(entity => {
       if (!entity) {
-        return res.status(404).send('Entity not found');
+        return res.status(404).send('Entidade não encontrada');
       }
       res.render("../views/entities/show", {entity: entity});
     })
@@ -62,7 +62,7 @@ entityController.save = function(req, res) {
 
   entity.save()
     .then(savedEntity => {
-      console.log('Entidade criada com sucesso.');
+      console.log('Entidade registada com sucesso.');
 
       var fileDestination = path.join(__dirname, "..", "images", savedEntity._id.toString() + ".jpg");
 
@@ -97,7 +97,7 @@ entityController.edit = function(req, res) {
   Entity.findOne({_id: req.params.id})
     .then(entity => {
       if (!entity) {
-        return res.status(404).send('Entity not found');
+        return res.status(404).send('Entidade não encontrada');
       }
       res.render("../views/entities/edit", {entity: entity});
     })
@@ -116,7 +116,7 @@ entityController.update = function(req, res) {
   Entity.findById(req.params.id)
     .then(entity => {
       if (!entity) {
-        return res.status(404).send('Entity not found');
+        return res.status(404).send('Entidade não encontrada');
       }
 
       entity.name = req.body.name;
@@ -196,8 +196,8 @@ entityController.delete = function(req, res) {
       res.redirect("/entities");
     })
     .catch(err => {
-      console.log(err);
-      res.status(500).send('Erro interno do servidor');
+      console.log("Error:", err);
+      res.status(500).send('Internal Server Error');
     });
 };
 
@@ -207,8 +207,8 @@ entityController.returnEntities = function(req, res) {
       res.json(entities);
     })
     .catch(err => {
-      console.log("Erro:", err);
-      res.status(500).json({ error: 'Erro interno do servidor' });
+      console.log("Error:", err);
+      res.status(500).send('Internal Server Error');
     });
 };
 

@@ -37,7 +37,6 @@ pointsController.save = function(req, res) {
   
     points.save()
       .then(savedPoints => {
-        console.log('Successfully created a donator.');
         res.redirect("show/" + savedPoints._id);
       })
       .catch(err => {
