@@ -103,15 +103,29 @@ function addPointsAndVouchersGainedByDonation(pointsGained, phone) {
       if (!donator) {
         throw new Error('Doador não encontrado');
       }
-      donator.gainedPoints += parseInt(pointsGained);
 
-      while(donator.gainedPoints >= 100){
-        donator.vouchers++;
-        donator.gainedPoints = (donator.gainedPoints - 100);
-      }
-      return donator.save();
+      return Points.findOne({_id:'661ff5afe10497c901313a23'})
+        .then(points => {
+          if (!points) {
+            throw new Error('Pontos não encontrados');
+          }
+          
+          donator.gainedPoints += pointsGained;
+
+          var gainedVouchers = 0;
+
+          while(donator.gainedPoints >= points.pointsPerVoucher){
+            gainedVouchers++;
+            donator.gainedPoints -= points.pointsPerVoucher;
+          }
+
+          donator.vouchers += gainedVouchers;
+          
+          return donator.save();
+        });
     });
 }
+
 
 function calculateGainedPoints(topPiecesNumber, bottomPiecesNumber, underwearPiecesNumber) {
   return Points.findOne({_id:'661ff5afe10497c901313a23'})

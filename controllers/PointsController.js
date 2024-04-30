@@ -64,7 +64,8 @@ pointsController.save = function(req, res) {
       $set: { 
         topPiecesPoints: req.body.topPiecesPoints, 
         bottomPiecesPoints: req.body.bottomPiecesPoints, 
-        underwearPiecesPoints: req.body.underwearPiecesPoints
+        underwearPiecesPoints: req.body.underwearPiecesPoints,
+        pointsPerVoucher: req.body.pointsPerVoucher
       }
     },{ new: true })
       .then(points => {

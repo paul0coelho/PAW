@@ -31,9 +31,16 @@
             <td>:</td>
             <td><%= points.underwearPiecesPoints %></td>
           </tr>
+          <tr>
+            <td>Pontos necessários para obter um vale</td>
+            <td>:</td>
+            <td><%= points.pointsPerVoucher %></td>
+          </tr>
         </tbody>
       </table>
-      <h3><a href="/points/edit/661ff5afe10497c901313a23">EDIT</a></h3>
+      <form action="/points/edit/661ff5afe10497c901313a23" method="get">
+        <button type="submit">ATUALIZAR</button>
+      </form>
     </div>
   </body>
 </html>
