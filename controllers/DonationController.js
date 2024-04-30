@@ -60,7 +60,7 @@ donationController.save = function(req, res) {
   calculateGainedPoints(req.body.topPiecesNumber, req.body.bottomPiecesNumber, req.body.underwearPiecesNumber)
     .then(gainedPoints => {
       donation.gainedPoints = gainedPoints;
-      return addPointsGainedByDonation(gainedPoints, req.body.phone);
+      return addPointsAndVouchersGainedByDonation(gainedPoints, req.body.phone);
     })
     .then(() => {
       return donation.save();
@@ -97,7 +97,7 @@ donationController.save = function(req, res) {
     });
 };
 
-function addPointsGainedByDonation(pointsGained, phone) {
+function addPointsAndVouchersGainedByDonation(pointsGained, phone) {
   return Donator.findOne({ phone: phone })
     .then(donator => {
       if (!donator) {
