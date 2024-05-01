@@ -59,7 +59,7 @@ donatorController.save = function(req, res) {
     .then(savedDonator => {
       console.log('Doador registado com sucesso.');
 
-      var fileDestination = path.join(__dirname, "..", "images", savedDonator._id.toString() + ".jpg");
+      var fileDestination = path.join(__dirname, "..", "images", "donators",savedDonator._id.toString() + ".jpg");
 
       fs.readFile(req.file.path, function(err, data) {
         if (err) {
@@ -114,7 +114,7 @@ donatorController.update = function(req, res) {
       donator.address = req.body.address;
 
       if (req.file) {
-        var fileDestination = path.join(__dirname, "..", "images", donator._id.toString() + ".jpg");
+        var fileDestination = path.join(__dirname, "..", "images", "donators", donator._id.toString() + ".jpg");
 
         fs.readFile(req.file.path, function(err, data) {
           if (err) {
@@ -170,7 +170,7 @@ donatorController.delete = function(req, res) {
         return res.status(404).send('Entidade não encontrada');
       }
 
-      var imagePath = path.join(__dirname, '..', 'images', donator._id.toString() + '.jpg');
+      var imagePath = path.join(__dirname, '..', 'images', "donators", donator._id.toString() + '.jpg');
       if (fs.existsSync(imagePath)) {
         fs.unlink(imagePath, function(err) {
           if (err) {

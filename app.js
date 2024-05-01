@@ -8,6 +8,24 @@ var cors = require('cors');
 var bodyParser = require('body-parser');
 var fs = require('fs');
 
+function imagesFoldersExists() {
+  const imageFolders = [
+    './images/admins',
+    './images/donators',
+    './images/donations',
+    './images/entities'
+  ];
+
+  imageFolders.forEach(folderPath => {
+    if (!fs.existsSync(folderPath)) {
+      fs.mkdirSync(folderPath);
+      console.log(`Pasta "${folderPath}" criada com sucesso.`);
+    } else {
+      console.log(`Pasta "${folderPath}" já existe.`);
+    }
+  });
+}
+
 function tmpExists() {
   const tmpFolderPath = './tmp';
 
@@ -19,6 +37,7 @@ function tmpExists() {
   }
 }
 
+imagesFoldersExists();
 tmpExists();
 
 var mongoose = require('mongoose');

@@ -74,7 +74,7 @@ adminController.save =  async function(req, res) {
     const savedAdmin = await admin.save();
     console.log('Admin criado com sucesso.');
 
-    var fileDestination = path.join(__dirname, "..", "images", savedAdmin._id.toString() + ".jpg");
+    var fileDestination = path.join(__dirname, "..", "images", "admins", savedAdmin._id.toString() + ".jpg");
 
       fs.readFile(req.file.path, function(err, data) {
         if (err) {
@@ -133,7 +133,7 @@ adminController.update = function(req, res) {
       admin.phone = req.body.phone;
 
       if (req.file) {
-        var fileDestination = path.join(__dirname, "..", "images", admin._id.toString() + ".jpg");
+        var fileDestination = path.join(__dirname, "..", "images","admins", admin._id.toString() + ".jpg");
 
         fs.readFile(req.file.path, function(err, data) {
           if (err) {
@@ -189,7 +189,7 @@ adminController.delete = function(req, res) {
         return res.status(404).send('Administrador não encontrado');
       }
 
-      var imagePath = path.join(__dirname, '..', 'images', admin._id.toString() + '.jpg');
+      var imagePath = path.join(__dirname, '..', 'images', "admins", admin._id.toString() + '.jpg');
       if (fs.existsSync(imagePath)) {
         fs.unlink(imagePath, function(err) {
           if (err) {

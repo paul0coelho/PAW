@@ -68,7 +68,7 @@ donationController.save = function(req, res) {
     .then(savedDonation => {
       console.log('Doação registada com sucesso.');
 
-      var fileDestination = path.join(__dirname, "..", "images", savedDonation._id.toString() + ".jpg");
+      var fileDestination = path.join(__dirname, "..", "images", "donations", savedDonation._id.toString() + ".jpg");
 
       fs.readFile(req.file.path, function(err, data) {
         if (err) {

@@ -18,10 +18,12 @@ router.get('/profile', loginController.verifyLoginUser, function(req, res) {
   adminController.profile(req, res);
 });
 
+// Editar a palavra passe do administrador autenticado
 router.get('/editPassword', loginController.verifyLoginUser, function(req, res) {
   res.render("admins/editPassword");
 });
 
+// Editar a palavra passe do administrador autenticado
 router.post('/editPassword', loginController.verifyLoginUser, adminController.editPassword);
 
 module.exports = router;
