@@ -31,7 +31,7 @@ h1, h2 {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-input[type="text"], input[type="number"] {
+input[type="text"], input[type="number"], input[type="password"] {
   width: 306px; 
   height: 36px; 
   padding-left: 12px; 

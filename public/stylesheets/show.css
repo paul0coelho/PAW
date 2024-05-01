@@ -56,6 +56,7 @@ td{
     font-weight: 700;
     margin-left: 20px;
     font-family: Arial, Helvetica, sans-serif;
+    margin-bottom: 100px;
 }
 
 table{
@@ -82,4 +83,7 @@ img{
 
 .password{
     text-decoration: underline;
+}
+tr{
+    margin-bottom: 20px;
 }

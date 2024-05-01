@@ -42,7 +42,11 @@
             <td>:</td>
             <td><%= donation.gainedPoints %></td>
           </tr>
-          <tr><img src="/images/<%= donation._id %>.jpg"></tr>
+          <tr>
+            <td>
+              <img src="/images/<%= donation._id %>.jpg">
+            </td>
+          </tr>
         </tbody>
       </table>
       <% }); %>
