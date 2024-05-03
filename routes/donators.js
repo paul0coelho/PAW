@@ -9,12 +9,12 @@ router.get('/',loginController.verifyLoginUser, function(req, res) {
 });
 
 // Obter um doador pelo _id
-router.get('/show/:id', function(req, res) {
+router.get('/show/:id', loginController.verifyLoginUser, function(req, res) {
   donator.show(req, res);
 });
 
 // Obter um doador pelo contacto do doador
-router.get('/searchByPhone', function(req, res) {
+router.get('/searchByPhone', loginController.verifyLoginUser, function(req, res) {
   donator.searchByPhone(req, res);
 });
 
@@ -24,27 +24,27 @@ router.get('/create',loginController.verifyLoginUser, function(req, res) {
 });
 
 // Guardar um doador
-router.post('/save', function(req, res) {
+router.post('/save', loginController.verifyLoginUser, function(req, res) {
   donator.save(req, res);
 });
 
 // Editar um doador
-router.get('/edit/:id', function(req, res) {
+router.get('/edit/:id', loginController.verifyLoginUser, function(req, res) {
   donator.edit(req, res);
 });
 
 // Atualizar um doador após edição
-router.post('/update/:id', function(req, res) {
+router.post('/update/:id', loginController.verifyLoginUser, function(req, res) {
   donator.update(req, res);
 });
 
 // Eliminar um doador
-router.post('/delete/:id', function(req, res, next) {
+router.post('/delete/:id', loginController.verifyLoginUser, function(req, res, next) {
   donator.delete(req, res);
 });
 
 // Obter doadores no formato JSON
-router.get('/returnDonators', function(req, res) {
+router.get('/returnDonators', loginController.verifyLoginUser, function(req, res) {
   donator.returnDonators(req, res);
 });
 

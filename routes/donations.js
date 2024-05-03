@@ -9,12 +9,12 @@ router.get('/',loginController.verifyLoginUser, function(req, res) {
 });
 
 // Obter uma doação pelo _id
-router.get('/show/:id', function(req, res) {
+router.get('/show/:id', loginController.verifyLoginUser, function(req, res) {
   donation.show(req, res);
 });
 
 // Obter uma doação pelo contacto do doador
-router.get('/searchByPhone', function(req, res) {
+router.get('/searchByPhone', loginController.verifyLoginUser, function(req, res) {
   donation.searchByPhone(req, res);
 });
 
@@ -24,12 +24,12 @@ router.get('/create',loginController.verifyLoginUser, function(req, res) {
 });
 
 // Guardar uma doação
-router.post('/save', function(req, res) {
+router.post('/save', loginController.verifyLoginUser, function(req, res) {
   donation.save(req, res);
 });
 
 // Obter doações no formato JSON
-router.get('/returnDonations', function(req, res) {
+router.get('/returnDonations', loginController.verifyLoginUser, function(req, res) {
   donation.returnDonations(req, res);
 });
 
