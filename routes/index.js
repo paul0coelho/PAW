@@ -5,7 +5,7 @@ var adminController = require("../controllers/AdminController.js");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.redirect('/login');
 });
 
 // Menu do administrador
