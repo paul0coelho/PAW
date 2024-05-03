@@ -219,7 +219,7 @@ adminController.profile = function(req, res) {
           if (!admin) {
               return res.status(404).send("Administrador não encontrado");
           }
-          res.render('profile', { admin: admin });
+          res.render('admin/profile', { admin: admin });
       })
       .catch(err => {
           console.log("Error:", err);
