@@ -22,6 +22,17 @@ donationController.list = function(req, res) {
     });
 };
 
+donationController.list2 = function(req, res) {
+  Donation.find()
+    .then(donations => {
+      res.json(donations);
+    })
+    .catch(err => {
+      console.log("Error:", err);
+      res.status(500).json({ error: 'Internal Server Error', details: err.message });
+    });
+};
+
 donationController.show = function(req, res) {
   Donation.findOne({ _id: req.params.id })
     .then(donation => {
@@ -36,6 +47,20 @@ donationController.show = function(req, res) {
     });
 };
 
+donationController.show2 = function(req, res) {
+  Donation.findOne({ _id: req.params.id })
+    .then(donation => {
+      if (!donation) {
+        return res.status(404).json({ error: 'Doação não encontrada' });
+      }
+      res.json(donation);
+    })
+    .catch(err => {
+      console.error("Error:", err);
+      res.status(500).json({ error: 'Internal Server Error', details: err.message });
+    });
+};
+
 donationController.searchByPhone = function(req, res) {
   Donation.find({phone: req.query.phone})
     .then(donations => {
@@ -47,6 +72,20 @@ donationController.searchByPhone = function(req, res) {
     .catch(err => {
       console.log("Error:", err);
       res.status(500).send('Internal Server Error');
+    });
+};
+
+donationController.searchByPhone2 = function(req, res) {
+  Donation.find({phone: req.query.phone})
+    .then(donations => {
+      if (!donations) {
+        return res.status(404).json({ error: 'Doações não encontradas' });
+      }
+      res.json(donations);
+    })
+    .catch(err => {
+      console.error("Error:", err);
+      res.status(500).json({ error: 'Internal Server Error', details: err.message });
     });
 };
 
@@ -94,6 +133,49 @@ donationController.save = function(req, res) {
     .catch(err => {
       console.log(err);
       res.render('../views/donations/create');
+    });
+};
+
+donationController.save2 = function(req, res) {
+  var donation = new Donation(req.body);
+
+  calculateGainedPoints(req.body.topPiecesNumber, req.body.bottomPiecesNumber, req.body.underwearPiecesNumber)
+    .then(gainedPoints => {
+      donation.gainedPoints = gainedPoints;
+      return addPointsAndVouchersGainedByDonation(gainedPoints, req.body.phone);
+    })
+    .then(() => {
+      return donation.save();
+    })
+    .then(savedDonation => {
+      console.log('Doação registada com sucesso.');
+
+      var fileDestination = path.join(__dirname, "..", "images", "donations", savedDonation._id.toString() + ".jpg");
+
+      fs.readFile(req.file.path, function(err, data) {
+        if (err) {
+          console.error("Erro ao ler o arquivo:", err);
+          return res.status(500).json({ error: "Erro ao ler o arquivo" });
+        }
+
+        fs.writeFile(fileDestination, data, function(err) {
+          if (err) {
+            console.error("Erro ao escrever o arquivo na pasta 'images':", err);
+            return res.status(500).json({ error: "Erro ao escrever o arquivo na pasta 'images'" });
+          }
+
+          fs.unlink(req.file.path, function(err) {
+            if (err) {
+              console.error("Erro ao remover o arquivo da pasta 'tmp':", err);
+            }
+          });
+          res.json(savedDonation);
+        });
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({ error: 'Internal Server Error', details: err.message });
     });
 };
 

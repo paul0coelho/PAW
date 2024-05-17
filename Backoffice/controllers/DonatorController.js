@@ -20,6 +20,17 @@ donatorController.list = function(req, res) {
     });
 };
 
+donatorController.list2 = function(req, res) {
+  Donator.find()
+    .then(donators => {
+      res.json(donators);
+    })
+    .catch(err => {
+      console.log("Error:", err);
+      res.status(500).json({ error: 'Internal Server Error', details: err.message });
+    });
+};
+
 donatorController.show = function(req, res) {
   Donator.findOne({_id: req.params.id})
     .then(donator => {
@@ -34,6 +45,20 @@ donatorController.show = function(req, res) {
     });
 };
 
+donatorController.show2 = function(req, res) {
+  Donator.findOne({_id: req.params.id})
+    .then(donator => {
+      if (!donator) {
+        return res.status(404).json({ error: 'Doador não encontrado' });
+      }
+      res.json(donator);
+    })
+    .catch(err => {
+      console.error("Error:", err);
+      res.status(500).json({ error: 'Internal Server Error', details: err.message });
+    });
+};
+
 donatorController.searchByPhone = function(req, res) {
   Donator.findOne({phone: req.query.phone})
     .then(donator => {
@@ -45,6 +70,20 @@ donatorController.searchByPhone = function(req, res) {
     .catch(err => {
       console.log("Error:", err);
       res.status(500).send('Internal Server Error');
+    });
+};
+
+donatorController.searchByPhone2 = function(req, res) {
+  Donator.findOne({phone: req.query.phone})
+    .then(donator => {
+      if (!donator) {
+        return res.status(404).json({ error: 'Doador não encontrado' });
+      }
+      res.json(donator);
+    })
+    .catch(err => {
+      console.error("Error:", err);
+      res.status(500).json({ error: 'Internal Server Error', details: err.message });
     });
 };
 
@@ -88,6 +127,42 @@ donatorController.save = function(req, res) {
     });
 };
 
+donatorController.save2 = function(req, res) {
+  var donator = new Donator(req.body);
+
+  donator.save()
+    .then(savedDonator => {
+      console.log('Doador registado com sucesso.');
+
+      var fileDestination = path.join(__dirname, "..", "images", "donators", savedDonator._id.toString() + ".jpg");
+
+      fs.readFile(req.file.path, function(err, data) {
+        if (err) {
+          console.error("Erro ao ler o arquivo:", err);
+          return res.status(500).json({ error: "Erro ao ler o arquivo" });
+        }
+
+        fs.writeFile(fileDestination, data, function(err) {
+          if (err) {
+            console.error("Erro ao escrever o arquivo na pasta 'images':", err);
+            return res.status(500).json({ error: "Erro ao escrever o arquivo na pasta 'images'" });
+          }
+
+          fs.unlink(req.file.path, function(err) {
+            if (err) {
+              console.error("Erro ao remover o arquivo da pasta 'tmp':", err);
+            }
+          });
+          res.json(savedDonator);
+        });
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({ error: 'Erro ao criar o doador', details: err.message });
+    });
+};
+
 donatorController.edit = function(req, res) {
   Donator.findOne({_id: req.params.id})
     .then(donator => {
@@ -99,6 +174,20 @@ donatorController.edit = function(req, res) {
     .catch(err => {
       console.log("Error:", err);
       res.status(500).send('Internal Server Error');
+    });
+};
+
+donatorController.edit2 = function(req, res) {
+  Donator.findOne({_id: req.params.id})
+    .then(donator => {
+      if (!donator) {
+        return res.status(404).json({ error: 'Doador não encontrado' });
+      }
+      res.json(donator);
+    })
+    .catch(err => {
+      console.error("Error:", err);
+      res.status(500).json({ error: 'Internal Server Error', details: err.message });
     });
 };
 
@@ -162,6 +251,65 @@ donatorController.update = function(req, res) {
     });
 };
 
+donatorController.update2 = function(req, res) {
+  Donator.findById(req.params.id)
+    .then(donator => {
+      if (!donator) {
+        return res.status(404).json({ error: 'Doador não encontrado' });
+      }
+
+      donator.name = req.body.name;
+      donator.phone = req.body.phone;
+      donator.address = req.body.address;
+
+      if (req.file) {
+        var fileDestination = path.join(__dirname, "..", "images", "donators", donator._id.toString() + ".jpg");
+
+        fs.readFile(req.file.path, function(err, data) {
+          if (err) {
+            console.error("Erro ao ler o arquivo:", err);
+            return res.status(500).json({ error: "Erro ao ler o arquivo" });
+          }
+
+          fs.writeFile(fileDestination, data, function(err) {
+            if (err) {
+              console.error("Erro ao escrever o arquivo na pasta 'images':", err);
+              return res.status(500).json({ error: "Erro ao escrever o arquivo na pasta 'images'" });
+            }
+
+            fs.unlink(req.file.path, function(err) {
+              if (err) {
+                console.error("Erro ao remover o arquivo da pasta 'tmp':", err);
+              }
+            });
+            donator.save()
+              .then(updatedDonator => {
+                console.log('Doador atualizado com sucesso.');
+                res.json(updatedDonator);
+              })
+              .catch(err => {
+                console.log(err);
+                res.status(500).json({ error: 'Erro ao atualizar o doador', details: err.message });
+              });
+          });
+        });
+      } else {
+        donator.save()
+          .then(updatedDonator => {
+            console.log('Doador atualizado com sucesso.');
+            res.json(updatedDonator);
+          })
+          .catch(err => {
+            console.log(err);
+            res.status(500).json({ error: 'Erro ao atualizar o doador', details: err.message });
+          });
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({ error: 'Erro ao atualizar o doador', details: err.message });
+    });
+};
 
 donatorController.delete = function(req, res) {
   Donator.findOneAndDelete({ _id: req.params.id })
@@ -185,6 +333,31 @@ donatorController.delete = function(req, res) {
     .catch(err => {
       console.log("Error:", err);
       res.status(500).send('Internal Server Error');
+    });
+};
+
+donatorController.delete2 = function(req, res) {
+  Donator.findOneAndDelete({ _id: req.params.id })
+    .then(donator => {
+      if (!donator) {
+        return res.status(404).json({ error: 'Entidade não encontrada' });
+      }
+
+      var imagePath = path.join(__dirname, '..', 'images', "donators", donator._id.toString() + '.jpg');
+      if (fs.existsSync(imagePath)) {
+        fs.unlink(imagePath, function(err) {
+          if (err) {
+            console.error('Erro ao remover a imagem associada à entidade:', err);
+          }
+        });
+      }
+
+      console.log("Doador excluído!");
+      res.json({ message: 'Doador excluído com sucesso' });
+    })
+    .catch(err => {
+      console.log("Error:", err);
+      res.status(500).json({ error: 'Erro ao excluir o doador', details: err.message });
     });
 };
 

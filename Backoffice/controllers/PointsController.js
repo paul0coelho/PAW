@@ -18,6 +18,17 @@ pointsController.list = function(req, res) {
     });
 };
 
+pointsController.list2 = function(req, res) {
+  Points.find()
+    .then(points => {
+      res.json(points);
+    })
+    .catch(err => {
+      console.log("Error:", err);
+      res.status(500).json({ error: 'Internal Server Error', details: err.message });
+    });
+};
+
 pointsController.show = function(req, res) {
     Points.findOne({ _id: "661ff5afe10497c901313a23" })
       .then(points => {
@@ -29,6 +40,20 @@ pointsController.show = function(req, res) {
       .catch(err => {
         console.log("Error:", err);
         res.status(500).send('Internal Server Error');
+    });
+};
+
+pointsController.show2 = function(req, res) {
+  Points.findOne({ _id: "661ff5afe10497c901313a23" })
+    .then(points => {
+      if (!points) {
+        return res.status(404).json({ error: 'Pontos não encontrados' });
+      }
+      res.json(points);
+    })
+    .catch(err => {
+      console.log("Error:", err);
+      res.status(500).json({ error: 'Internal Server Error', details: err.message });
     });
 };
 
@@ -45,6 +70,19 @@ pointsController.save = function(req, res) {
       });
   };
   
+  pointsController.save2 = function(req, res) {
+    var points = new Points(req.body);
+  
+    points.save()
+      .then(savedPoints => {
+        res.status(201).json(savedPoints);
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json({ error: 'Erro ao salvar os pontos', details: err.message });
+      });
+  };
+
   pointsController.edit = function(req, res) {
     Points.findOne({_id: "661ff5afe10497c901313a23"})
       .then(points => {
@@ -59,6 +97,20 @@ pointsController.save = function(req, res) {
       });
   };
   
+  pointsController.edit2 = function(req, res) {
+    Points.findOne({_id: req.params.id})
+      .then(point => {
+        if (!point) {
+          return res.status(404).json({ error: 'Pontos não encontrados' });
+        }
+        res.json(point);
+      })
+      .catch(err => {
+        console.error("Error:", err);
+        res.status(500).json({ error: 'Internal Server Error', details: err.message });
+      });
+  };
+
   pointsController.update = function(req, res) {
     Points.findByIdAndUpdate("661ff5afe10497c901313a23",{ 
       $set: { 
@@ -80,4 +132,24 @@ pointsController.save = function(req, res) {
       });
   };
 
+  pointsController.update2 = function(req, res) {
+    Points.findByIdAndUpdate("661ff5afe10497c901313a23", { 
+      $set: { 
+        topPiecesPoints: req.body.topPiecesPoints, 
+        bottomPiecesPoints: req.body.bottomPiecesPoints, 
+        underwearPiecesPoints: req.body.underwearPiecesPoints,
+        pointsPerVoucher: req.body.pointsPerVoucher
+      }
+    }, { new: true })
+      .then(points => {
+        if (!points) {
+          return res.status(404).json({ error: 'Pontos não encontrados' });
+        }
+        res.json(points);
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json({ error: 'Erro ao atualizar os pontos', details: err.message });
+      });
+  };
   module.exports = pointsController;
