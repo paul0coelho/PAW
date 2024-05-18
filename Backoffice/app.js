@@ -8,6 +8,9 @@ var cors = require('cors');
 var bodyParser = require('body-parser');
 var fs = require('fs');
 
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger/swagger.json')
+
 function imagesFoldersExists() {
   const imageFolders = [
     './images/admins',
@@ -85,6 +88,12 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
+app.use('/api/v1/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/api/v1/admins', admins);
+app.use('/api/v1/entities', entities);
+app.use('/api/v1/donators', donators);
+app.use('/api/v1/donations', donations);
+app.use('/api/v1/points', points);
 app.use('/', index);
 app.use('/admins', admins);
 app.use('/entities', entities);
