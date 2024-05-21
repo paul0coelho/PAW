@@ -19,25 +19,25 @@
               <td>Pontos atribuídos por cada peça superior doada</td>
             </tr>
             <tr>
-              <td><input type="text" name="topPiecesPoints" placeholder="<%= points.topPiecesPoints %>" /></td>
+              <td><input required="true" type="number" min=1 name="topPiecesPoints" placeholder="<%= points.topPiecesPoints %>" /></td>
             </tr>
             <tr>
               <td>Pontos atribuídos por cada peça inferior doada</td>
             </tr>
             <tr>
-              <td><input type="text" name="bottomPiecesPoints" placeholder="<%= points.bottomPiecesPoints %>" /></td>
+              <td><input required="true" type="number" min=1 name="bottomPiecesPoints" placeholder="<%= points.bottomPiecesPoints %>" /></td>
             </tr>
             <tr>
               <td>Pontos atribuídos por cada peça de roupa interior doada</td>
             </tr>
             <tr>
-              <td><input type="text" name="underwearPiecesPoints" placeholder="<%= points.underwearPiecesPoints %>" /></td>
+              <td><input required="true" type="number" min=1 name="underwearPiecesPoints" placeholder="<%= points.underwearPiecesPoints %>" /></td>
             </tr>
             <tr>
               <td>Pontos necessários para obter um vale</td>
             </tr>
             <tr>
-              <td><input type="text" name="pointsPerVoucher" placeholder="<%= points.pointsPerVoucher %>" /></td>
+              <td><input required="true" type="number" min=1 name="pointsPerVoucher" placeholder="<%= points.pointsPerVoucher %>" /></td>
             </tr>
             <tr>
               <td colspan="2"><button type="submit">Atualizar</button></td>
