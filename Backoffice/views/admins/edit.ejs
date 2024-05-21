@@ -19,19 +19,19 @@
               <td>Nome</td>
             </tr>
             <tr>
-              <td><input type="text" name="name" placeholder="<%= admin.name %>" /></td>
+              <td><input required="true" type="text" name="name" placeholder="<%= admin.name %>" /></td>
             </tr>
             <tr>
               <td>Email</td>
             </tr>
             <tr>
-              <td><input type="text" name="email" placeholder="<%= admin.email %>" /></td>
+              <td><input required="true" type="text" name="email" placeholder="<%= admin.email %>" /></td>
             </tr>
             <tr>
               <td>Telefone</td>
             </tr>
             <tr>
-              <td><input type="number" name="phone" placeholder="<%= admin.phone %>" /></td>
+              <td><input min=900000000 max=999999999 required="true" type="number" name="phone" placeholder="<%= admin.phone %>" /></td>
             </tr>
             <tr>
               <td>Fotografia</td>

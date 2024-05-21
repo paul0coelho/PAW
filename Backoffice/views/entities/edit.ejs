@@ -19,7 +19,7 @@
               <td>Nome</td>
             </tr>
             <tr>
-              <td><input type="text" name="name" placeholder="<%= entity.name %>" /></td>
+              <td><input required="true" type="text" name="name" placeholder="<%= entity.name %>" /></td>
             </tr>
             <tr>
               <td>Descrição</td>
@@ -37,13 +37,13 @@
               <td>Email</td>
             </tr>
             <tr>
-              <td><input type="text" name="email" placeholder="<%= entity.email %>" /></td>
+              <td><input required="true" type="text" name="email" placeholder="<%= entity.email %>" /></td>
             </tr>
             <tr>
               <td>Telefone</td>
             </tr>
             <tr>
-              <td><input type="number" name="phone" placeholder="<%= entity.phone %>" /></td>
+              <td><input min=900000000 max=999999999 type="number" name="phone" placeholder="<%= entity.phone %>" /></td>
             </tr>
             <tr>
               <td>Imagem / Logotipo</td>

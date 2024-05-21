@@ -19,12 +19,12 @@
               <td>Nome</td>
             </tr>
             <tr>
-              <td><input type="text" name="name" placeholder="<%= donator.name %>" /></td>
+              <td><input required="true" type="text" name="name" placeholder="<%= donator.name %>" /></td>
             </tr>
             <tr>
               <td>Telefone</td>
             </tr>
-              <td><input type="text" name="phone" placeholder="<%= donator.phone %>" /></td>
+              <td><input min=900000000 max=999999999 required="true" type="text" name="phone" placeholder="<%= donator.phone %>" /></td>
             </tr>
             <tr>
               <td>Morada</td>
