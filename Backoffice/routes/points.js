@@ -9,7 +9,7 @@ router.get('/',loginController.verifyLoginUser, function(req, res) {
 });
 
 // Menu de gestão de pontos
-router.get('/l',loginController.verifyLoginUser, function(req, res) {
+router.get('/l',function(req, res) {
   points.list2(req, res);
 });
 
@@ -19,7 +19,7 @@ router.get('/show/:id', loginController.verifyLoginUser, function(req, res) {
 });
 
 // Obter os pontos através do _id
-router.get('/show2/:id', loginController.verifyLoginUser, function(req, res) {
+router.get('/show2/:id', function(req, res) {
   points.show2(req, res);
 });
 
@@ -29,7 +29,7 @@ router.post('/save', loginController.verifyLoginUser, function(req, res) {
 });
 
 // Guardar os valores dos pontos
-router.post('/save2', loginController.verifyLoginUser, function(req, res) {
+router.post('/save2', function(req, res) {
   points.save2(req, res);
 });
 
@@ -39,7 +39,7 @@ router.get('/edit/:id', loginController.verifyLoginUser, function(req, res) {
 });
 
 // Editar os valores dos pontos
-router.get('/edit2/:id', loginController.verifyLoginUser, function(req, res) {
+router.get('/edit2/:id', function(req, res) {
   points.edit2(req, res);
 });
 
@@ -49,7 +49,7 @@ router.post('/update/:id', loginController.verifyLoginUser, function(req, res) {
 });
 
 // Atualizar os valores dos pontos após edição
-router.post('/update2/:id', loginController.verifyLoginUser, function(req, res) {
+router.post('/update2/:id', function(req, res) {
   points.update2(req, res);
 });
 

@@ -1,0 +1,89 @@
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    margin: 0;
+    display: flex;
+    background-color: #00659FFF;
+    color: white;
+    width: 100%;
+    height: 60px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 24px;
+}
+
+.header2 {
+    display: flex;
+    background-color: white;
+    width: 100%;
+    height: 50px;
+}
+
+h1, h2 {
+    margin-top: 15px;
+    margin-left: 20px;
+    font-size: 24px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+button {
+    margin-top: 15px;
+    margin-left: 20px;
+    height: 36px;
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 400;
+    color: #ffffff;
+    background: #00659FFF;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+td{
+    font-size: 14px; 
+    line-height: 22px; 
+    font-weight: 700;
+    margin-left: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-bottom: 100px;
+}
+
+table{
+    margin-left: 20px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+}
+
+h3{
+    margin-left: 20px;
+}
+a{
+    text-decoration: none; 
+    color: inherit;
+}
+
+img{
+    margin-left: 20px;
+    margin-top: 20px;
+    width:200px;
+}
+
+.password{
+    text-decoration: underline;
+}
+tr{
+    margin-bottom: 20px;
+}

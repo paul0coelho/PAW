@@ -9,7 +9,7 @@ router.get('/',loginController.verifyLoginUser, function(req, res) {
 });
 
 // Menu de gestão de doadores
-router.get('/l',loginController.verifyLoginUser, function(req, res) {
+router.get('/l', function(req, res) {
   donator.list2(req, res);
 });
 
@@ -19,7 +19,7 @@ router.get('/show/:id', loginController.verifyLoginUser, function(req, res) {
 });
 
 // Obter um doador pelo _id
-router.get('/show2/:id', loginController.verifyLoginUser, function(req, res) {
+router.get('/show2/:id', function(req, res) {
   donator.show2(req, res);
 });
 
@@ -29,7 +29,7 @@ router.get('/searchByPhone', loginController.verifyLoginUser, function(req, res)
 });
 
 // Obter um doador pelo contacto do doador
-router.get('/searchByPhone2', loginController.verifyLoginUser, function(req, res) {
+router.get('/searchByPhone2', function(req, res) {
   donator.searchByPhone2(req, res);
 });
 
@@ -44,7 +44,7 @@ router.post('/save', loginController.verifyLoginUser, function(req, res) {
 });
 
 // Guardar um doador
-router.post('/save2', loginController.verifyLoginUser, function(req, res) {
+router.post('/save2', function(req, res) {
   donator.save2(req, res);
 });
 
@@ -54,7 +54,7 @@ router.get('/edit/:id', loginController.verifyLoginUser, function(req, res) {
 });
 
 // Editar um doador
-router.get('/edit2/:id', loginController.verifyLoginUser, function(req, res) {
+router.get('/edit2/:id', function(req, res) {
   donator.edit2(req, res);
 });
 
@@ -64,7 +64,7 @@ router.post('/update/:id', loginController.verifyLoginUser, function(req, res) {
 });
 
 // Atualizar um doador após edição
-router.post('/update2/:id', loginController.verifyLoginUser, function(req, res) {
+router.post('/update2/:id', function(req, res) {
   donator.update2(req, res);
 });
 
@@ -74,7 +74,7 @@ router.post('/delete/:id', loginController.verifyLoginUser, function(req, res, n
 });
 
 // Eliminar um doador
-router.post('/delete2/:id', loginController.verifyLoginUser, function(req, res, next) {
+router.post('/delete2/:id', function(req, res, next) {
   donator.delete2(req, res);
 });
 

@@ -9,7 +9,7 @@ router.get('/',loginController.verifyLoginUser, function(req, res) {
 });
 
 // Menu de gestão de doações
-router.get('/l',loginController.verifyLoginUser, function(req, res) {
+router.get('/l', function(req, res) {
   donation.list2(req, res);
 });
 
@@ -19,7 +19,7 @@ router.get('/show/:id', loginController.verifyLoginUser, function(req, res) {
 });
 
 // Obter uma doação pelo _id
-router.get('/show2/:id', loginController.verifyLoginUser, function(req, res) {
+router.get('/show2/:id', function(req, res) {
   donation.show2(req, res);
 });
 
@@ -29,7 +29,7 @@ router.get('/searchByPhone', loginController.verifyLoginUser, function(req, res)
 });
 
 // Obter uma doação pelo contacto do doador
-router.get('/searchByPhone2', loginController.verifyLoginUser, function(req, res) {
+router.get('/searchByPhone2', function(req, res) {
   donation.searchByPhone2(req, res);
 });
 
@@ -44,7 +44,7 @@ router.post('/save', loginController.verifyLoginUser, function(req, res) {
 });
 
 // Guardar uma doação
-router.post('/save2', loginController.verifyLoginUser, function(req, res) {
+router.post('/save2', function(req, res) {
   donation.save2(req, res);
 });
 
