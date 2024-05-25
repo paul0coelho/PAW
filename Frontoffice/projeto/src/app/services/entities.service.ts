@@ -10,6 +10,7 @@ const httpOptions = {
     'Content-Type': 'application/json'
   })
 }
+
 @Injectable({
   providedIn: 'root'
 })
@@ -17,7 +18,23 @@ export class EntitiesService {
 
   constructor(private http: HttpClient) { }
 
-  getEntity(id:String): Observable<Entity> {
-    return this.http.get<Entity>(endpointEntities + "show2/" + id)
+  getEntities(): Observable<Entity[]> {
+    return this.http.get<Entity[]>(endpointEntities + "l", httpOptions);
+  }
+
+  getEntity(id: string): Observable<Entity> {
+    return this.http.get<Entity>(`${endpointEntities}show2/${id}`, httpOptions);
+  }
+
+  createEntity(entity: Entity): Observable<Entity> {
+    return this.http.post<Entity>(`${endpointEntities}save2`, entity, httpOptions);
+  }
+
+  updateEntity(id: string, entity: Entity): Observable<Entity> {
+    return this.http.post<Entity>(`${endpointEntities}update2/${id}`, entity, httpOptions);
+  }
+
+  deleteEntity(id: string): Observable<any> {
+    return this.http.post<any>(`${endpointEntities}delete2/${id}`, httpOptions);
   }
 }
