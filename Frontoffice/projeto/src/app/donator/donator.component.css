@@ -1,0 +1,70 @@
+body {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    text-align: center;
+    font-family: Arial, sans-serif;
+  }
+  
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #00659FFF;
+    color: white;
+  }
+  
+  .header2{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: white;
+    color: black;
+  }
+
+  header h1 {
+    margin: 0;
+  }
+  
+  nav button {
+    background-color: #00659FFF;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    margin: 0 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 15px;
+  }
+  
+  main {
+    margin-top: 50px;
+  }
+  
+  .actions {
+    margin: 20px 0;
+  }
+  
+  .actions button {
+    background-color: #00659FFF;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    margin: 0 10px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .partners {
+    margin-top: 40px;
+  }
+  
+  .logos img {
+    width: 100px;
+    margin: 10px 20px;
+  }
+  
