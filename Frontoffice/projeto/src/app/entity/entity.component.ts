@@ -18,15 +18,12 @@ export class EntityComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.params['id'];
-    console.log(`Fetching entity with id: ${id}`);
-    this.entitiesService.getEntity(id).subscribe(data => {
-      console.log('Received entity data:', data);
+    var idTemp = this.route.snapshot.params['id'];
+    this.entitiesService.getEntity(idTemp).subscribe((data : Entity)=>{
       this.entity = data;
-    }, error => {
-      console.error('Error fetching entity:', error);
-    });
+    })
   }
+
 
   navigateToEntities(): void {
     this.router.navigate(['/entities']);
