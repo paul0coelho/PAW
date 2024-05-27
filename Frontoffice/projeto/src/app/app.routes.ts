@@ -4,6 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { InitialPageComponent } from './initial-page/initial-page.component';
 import { DonatorComponent } from './donator/donator.component';
 import { EntityComponent } from './entity/entity.component';
+import { DonationRegistComponent } from './donation-regist/donation-regist.component';
 
 
 const routes: Routes = [
@@ -22,6 +23,10 @@ const routes: Routes = [
     {
         path: 'entity',
         component: EntityComponent,
+    },
+    {
+        path: 'registDonation',
+        component: DonationRegistComponent,
     }
 ];
 
