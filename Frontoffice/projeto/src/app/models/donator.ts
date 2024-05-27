@@ -1,4 +1,4 @@
-export class Admin{
+export class Donator{
     __id:String;
     name:String;
     phone:Number;
