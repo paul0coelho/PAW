@@ -5,6 +5,7 @@ import { InitialPageComponent } from './initial-page/initial-page.component';
 import { DonatorComponent } from './donator/donator.component';
 import { EntityComponent } from './entity/entity.component';
 import { DonationRegistComponent } from './donation-regist/donation-regist.component';
+import { EntitiesComponent } from './entities/entities.component';
 
 
 export const routes: Routes = [
@@ -21,12 +22,16 @@ export const routes: Routes = [
         component: DonatorComponent,
     },
     {
-        path: 'entities/show/:id',
-        component: EntityComponent,
-    },
-    {
         path: 'registDonation',
         component: DonationRegistComponent,
+    },
+    {
+        path: 'entities',
+        component: EntitiesComponent,
+    },
+    {
+        path: 'entities/show/:id',
+        component: EntityComponent,
     }
 ];
 

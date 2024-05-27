@@ -79,7 +79,7 @@ router.post('/delete2/:id', function(req, res, next) {
 });
 
 // Obter entidades no formato JSON
-router.get('/returnEntities', loginController.verifyLoginUser, function(req, res) {
+router.get('/returnEntities', function(req, res) {
   entity.returnEntities(req, res);
 });
 

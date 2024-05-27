@@ -19,7 +19,7 @@ export class EntityService {
   constructor(private http: HttpClient) { }
 
   getEntities(): Observable<Entity[]> {
-    return this.http.get<Entity[]>(endpointEntities + "l", httpOptions);
+    return this.http.get<Entity[]>(endpointEntities + "returnEntities", httpOptions);
   }
 
   getEntity(id: string): Observable<Entity> {

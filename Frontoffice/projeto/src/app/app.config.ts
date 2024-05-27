@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { AppRoutingModule  } from './app.routes';
 import { provideRouter } from '@angular/router';
 import { routes  } from './app.routes';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -20,8 +21,8 @@ import { routes  } from './app.routes';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
-
+    FormsModule,
+    CommonModule
   ],
 
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorInterceptor, multi:true}, provideRouter(routes), provideHttpClient()],
