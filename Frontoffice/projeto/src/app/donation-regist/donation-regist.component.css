@@ -1,13 +1,4 @@
-body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
 .header {
-    margin: 0;
     display: flex;
     background-color: #00659FFF;
     color: white;
@@ -15,6 +6,7 @@ body {
     height: 60px;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 24px;
+    text-align: left;
 }
 
 .header2 {
@@ -22,14 +14,16 @@ body {
     background-color: white;
     width: 100%;
     height: 50px;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 h1,
 h2 {
-    margin-top: 15px;
     margin-left: 20px;
     font-size: 24px;
     font-family: Arial, Helvetica, sans-serif;
+    text-align: left;
 }
 
 input[type="text"],
@@ -46,7 +40,7 @@ input[type="password"] {
     color: #BDC1CAFF;
     border-radius: 4px;
     border-width: 0px;
-    outline: none
+    outline: none;
 }
 
 button {
@@ -55,7 +49,6 @@ button {
     padding: 0 12px;
     display: flex;
     align-items: center;
-    justify-content: center;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
     line-height: 18px;
@@ -66,7 +59,6 @@ button {
     border-radius: 4px;
     cursor: pointer;
 }
-
 
 td {
     font-size: 14px;
@@ -79,11 +71,15 @@ td {
 table {
     margin-left: 20px;
     margin-top: 20px;
-    display: flex;
-    flex-direction: column;
+    border-collapse: collapse; 
+    align-items: flex-start;
 }
 
 a {
     text-decoration: none;
     color: inherit;
+}
+
+body {
+    margin: auto;
 }

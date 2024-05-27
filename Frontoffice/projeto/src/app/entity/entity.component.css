@@ -1,94 +1,86 @@
-body {
+.header {
   margin: 0;
-  padding: 0;
-}
-
-.container {
-  text-align: left;
-  font-family: Arial, sans-serif;
-}
-
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #00659FFF;
+  padding-left: 20px;
+  background-color: #00659F;
   color: white;
+  width: 100%;
   height: 60px;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: left;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
 }
 
 .header2 {
-  display: flex;
+  padding-left: 20px;
   background-color: white;
   width: 100%;
   height: 50px;
+  display: flex;
+  text-align: left;
 }
 
-h1,
-h2 {
-  margin-top: 15px;
-  margin-left: 20px;
+h1, h2 {
   font-size: 24px;
   font-family: Arial, Helvetica, sans-serif;
 }
 
-main h3 {
-  margin-left: 20px;
-}
-
-nav button {
-  background-color: #00659FFF;
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  margin: 0 5px;
-  cursor: pointer;
-  border-radius: 5px;
-  font-size: 15px;
-}
-
-main {
-  margin-top: 30px;
-}
-
-.actions {
-  margin: 20px 0;
-}
-
-.actions button {
-  background-color: #00659FFF;
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  margin: 0 10px;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.partners {
-  margin-top: 40px;
-}
-
-.logos img {
-  width: 100px;
-  margin: 10px 20px;
+.container {
+  padding-left: 20px;
 }
 
 table {
-  width: 100%;
-  max-width: 100%;
-  height: auto;
-  opacity: 1;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 14px;
-  box-sizing: border-box;
-}
-
-th {
-  background-color: rgb(164, 172, 192);
-  text-align: center;
+  margin-top: 20px;
 }
 
 td {
-  text-align: center;
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 700;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="password"] {
+  width: 306px;
+  height: 36px;
+  padding-left: 12px;
+  padding-right: 12px;
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 400;
+  background: #F3F4F6;
+  color: #BDC1CA;
+  border-radius: 4px;
+  border-width: 0px;
+  outline: none;
+}
+
+button {
+  margin-top: 15px;
+  height: 30px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 400;
+  color: #ffffff;
+  background: #00659F;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+body {
+  margin: auto;
 }

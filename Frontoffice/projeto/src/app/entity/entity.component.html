@@ -1,33 +1,39 @@
+<div class="header">
+  <a href="/entities">
+    <h1>Recicla Têxtil</h1>
+  </a>
+</div>
+<div class="header2">
+  <h2>Informações da Entidade</h2>
+</div>
 <div class="container">
-    <header>
-      <h1>Recicla Têxtil</h1>
-    </header>
-    <div class="header2">
-        <h2>Unicef</h2>
-    </div>
-    
-    <main>
-        <h3>Histórico de doações</h3>
-        <table>
-            <thead>
-              <tr>
-                <th>Contacto do Doador</th>
-                <th>Número de Peças Superiores</th>
-                <th>Número de Peças Inferiores</th>
-                <th>Número de Peças de Roupa Interior</th>
-                <th>Pontos obtidos</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>930613593</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>7</td>
-              </tr>
-            </tbody>
-          </table>
-    </main>
-  </div>
-  
+  <table>
+    <tbody>
+      <tr>
+        <td>Nome</td>
+        <td>:</td>
+        <td>{{entity?.name}}</td>
+      </tr>
+      <tr>
+        <td>Descrição</td>
+        <td>:</td>
+        <td>{{entity?.description}}</td>
+      </tr>
+      <tr>
+        <td>Morada</td>
+        <td>:</td>
+        <td>{{entity?.address}}</td>
+      </tr>
+      <tr>
+        <td>Email</td>
+        <td>:</td>
+        <td>{{entity?.email}}</td>
+      </tr>
+      <tr>
+        <td>Telefone</td>
+        <td>:</td>
+        <td>{{entity?.phone}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

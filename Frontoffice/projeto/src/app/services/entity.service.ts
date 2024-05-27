@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Entity } from '../models/entity';
 
-const endpointEntities = 'http://localhost:3000/entities/';
+const endpointEntities = 'http://localhost:3000/api/v1/entities/';
 
 const httpOptions = {
   headers: new HttpHeaders({

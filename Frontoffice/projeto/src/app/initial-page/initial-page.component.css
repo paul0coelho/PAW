@@ -17,6 +17,10 @@ header {
   color: white;
 }
 
+nav{
+  margin-right: 5px;
+}
+
 header h1 {
   margin: 0;
 }

@@ -9,7 +9,7 @@ router.get('/',loginController.verifyLoginUser, function(req, res) {
 });
 
 // Menu de gestão de entidades
-router.get('/l',loginController.verifyLoginUser, function(req, res) {
+router.get('/l', function(req, res) {
   entity.list2(req, res);
 });
 
@@ -19,7 +19,7 @@ router.get('/show/:id', loginController.verifyLoginUser, function(req, res) {
 });
 
 // Obter uma entidade através do _id
-router.get('/show2/:id', loginController.verifyLoginUser, function(req, res) {
+router.get('/show2/:id', function(req, res) {
   entity.show2(req, res);
 });
 
@@ -29,7 +29,7 @@ router.get('/searchByPhone', loginController.verifyLoginUser, function(req, res)
 });
 
 // Obter uma entidade através do telefone
-router.get('/searchByPhone2', loginController.verifyLoginUser, function(req, res) {
+router.get('/searchByPhone2', function(req, res) {
   entity.searchByPhone2(req, res);
 });
 
@@ -44,7 +44,7 @@ router.post('/save', loginController.verifyLoginUser, function(req, res) {
 });
 
 // Guardar uma entidade
-router.post('/save2', loginController.verifyLoginUser, function(req, res) {
+router.post('/save2', function(req, res) {
   entity.save2(req, res);
 });
 
@@ -54,7 +54,7 @@ router.get('/edit/:id', loginController.verifyLoginUser, function(req, res) {
 });
 
 // Editar uma entidade
-router.get('/edit2/:id', loginController.verifyLoginUser, function(req, res) {
+router.get('/edit2/:id', function(req, res) {
   entity.edit2(req, res);
 });
 
@@ -64,7 +64,7 @@ router.post('/update/:id', loginController.verifyLoginUser, function(req, res) {
 });
 
 // Atualizar uma entidade após edição
-router.post('/update2/:id', loginController.verifyLoginUser, function(req, res) {
+router.post('/update2/:id', function(req, res) {
   entity.update2(req, res);
 });
 
@@ -74,7 +74,7 @@ router.post('/delete/:id', loginController.verifyLoginUser, function(req, res, n
 });
 
 // Eliminar uma entidade
-router.post('/delete2/:id', loginController.verifyLoginUser, function(req, res, next) {
+router.post('/delete2/:id', function(req, res, next) {
   entity.delete2(req, res);
 });
 
