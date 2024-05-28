@@ -1,79 +1,79 @@
 .header {
+    margin: 0;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
     background-color: #00659FFF;
     color: white;
+    width: 100%;
     height: 60px;
-}
-
-.header2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 24px;
+    text-align: left;
+  }
+  
+  .header2 {
     display: flex;
     background-color: white;
     width: 100%;
     height: 50px;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-h1,
-h2 {
+  }
+  
+  h1, h2 {
+    margin-top: 15px;
     margin-left: 20px;
     font-size: 24px;
     font-family: Arial, Helvetica, sans-serif;
-}
-
-input[type="text"],
-input[type="number"],
-input[type="password"] {
-    width: 306px;
-    height: 36px;
-    padding-left: 12px;
-    padding-right: 12px;
-    font-size: 14px;
-    line-height: 22px;
-    font-weight: 400;
-    background: #F3F4F6FF;
-    color: #BDC1CAFF;
-    border-radius: 4px;
-    border-width: 0px;
-    outline: none;
-}
-
-button {
+  }
+  
+  button {
     margin-top: 15px;
-    margin-left: 0;
-    height: 30px;
+    margin-left: 20px;
+    height: 36px;
     padding: 0 12px;
     display: flex;
     align-items: center;
+    justify-content: center;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
-    line-height: 18px;
+    line-height: 22px;
     font-weight: 400;
     color: #ffffff;
     background: #00659FFF;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-}
-
-td {
-    font-size: 14px;
-    line-height: 22px;
+  }
+  
+  td{
+    font-size: 14px; 
+    line-height: 22px; 
     font-weight: 700;
     margin-left: 20px;
     font-family: Arial, Helvetica, sans-serif;
-    text-align: left;
-}
-
-table {
+    margin-bottom: 100px;
+  }
+  
+  table{
     margin-left: 20px;
     margin-top: 20px;
-    border-collapse: collapse;
-}
-
-a {
-    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+  }
+  
+  h3{
+    margin-left: 20px;
+  }
+  a{
+    text-decoration: none; 
     color: inherit;
-}
+  }
+  
+  img{
+    margin-left: 20px;
+    margin-top: 20px;
+    width:200px;
+  }
+  
+  tr{
+    margin-bottom: 20px;
+  }

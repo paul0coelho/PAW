@@ -26,9 +26,5 @@ export class EntityComponent implements OnInit {
       this.entity = data;
     })
   }
-
-
-  navigateToEntities(): void {
-    this.router.navigate(['/entities']);
-  }
+  
 }

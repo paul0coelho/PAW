@@ -392,7 +392,7 @@ entityController.delete2 = function(req, res) {
 entityController.returnEntities = function(req, res) {
   Entity.find()
     .then(entities => {
-      res.json(entities);
+      res.json({entities : entities});
     })
     .catch(err => {
       console.log("Error:", err);

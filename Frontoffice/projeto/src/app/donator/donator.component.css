@@ -24,6 +24,8 @@ h2 {
 
 nav{
   margin-right: 5px;
+  display: flex;
+  flex-direction: row;
 }
 
 nav button {

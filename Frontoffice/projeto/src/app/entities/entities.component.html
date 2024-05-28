@@ -1,1 +1,22 @@
-
+<div class="header">
+  <a href="/donator">
+    <h1>Recicla Têxtil</h1>
+  </a>
+</div>
+<div class="header2">
+  <h2>Lista de Entidades</h2>
+</div>
+<div class="entity-list">
+  <ul>
+    <li *ngFor="let entity of entities" class="entity-card">
+      <img src="" alt="{{ entity?.name }} logo" class="entity-logo">
+      <div class="entity-info">
+        <p><strong>Nome:</strong> {{ entity?.name }}</p>
+        <p><strong>Email:</strong> {{ entity?.email }}</p>
+        <p><strong>Telefone:</strong> {{ entity?.phone }}</p>
+        <p><strong>Descrição:</strong> {{ entity?.description }}</p>
+        <p><strong>Endereço:</strong> {{ entity?.address }}</p>
+      </div>
+    </li>
+  </ul>
+</div>

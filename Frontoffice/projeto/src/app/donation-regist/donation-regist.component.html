@@ -1,48 +1,48 @@
 <div class="header">
-      <a href="/donations">
-          <h1>Recicla Têxtil</h1>
-      </a>
-  </div>
-  <div class="header2">
-      <h2>Registar doação</h2>
-  </div>
-  <form action="/donations/save" method="post" enctype="multipart/form-data">
-      <table>
-          <tr>
-              <td>Contacto da Entidade</td>
-          </tr>
-          <tr>
-              <td>
-                  <input required="true" type="text" name="email" placeholder="Email" />
-                  <button type="button">Consultar lista de entidades</button>
-              </td>
-          </tr>
-          <tr>
-              <td>Número de Peças Superiores</td>
-          </tr>
-          <tr>
-              <td><input required="true" min=0 type="number" name="topPiecesNumber" /></td>
-          </tr>
-          <tr>
-              <td>Número de Peças Inferiores</td>
-          </tr>
-          <tr>
-              <td><input required="true" min=0 type="number" name="bottomPiecesNumber" /></td>
-          </tr>
-          <tr>
-              <td>Número de Peças de Roupa Interior</td>
-          </tr>
-          <tr>
-              <td><input required="true" min=0 type="number" name="underwearPiecesNumber" /></td>
-          </tr>
-          <tr>
-              <td>Insira uma fotografia das peças</td>
-          </tr>
-          <tr>
-              <td><input type="file" name="image" accept="image/*" /></td>
-          </tr>
-          <tr>
-              <td colspan="2"><button type="submit">Registar</button></td>
-          </tr>
-      </table>
+    <a href="/donations">
+        <h1>Recicla Têxtil</h1>
+    </a>
+</div>
+<div class="header2">
+    <h2>Registar doação</h2>
+</div>
+<form action="/donations/save" method="post" enctype="multipart/form-data">
+    <table>
+        <tr>
+            <td>Contacto da Entidade</td>
+        </tr>
+        <tr>
+            <td>
+                <input required="true" type="text" name="email" placeholder="Email" />
+                <a href="/entities"><button type="button">Consultar lista de entidades</button></a>
+            </td>
+        </tr>
+        <tr>
+            <td>Número de Peças Superiores</td>
+        </tr>
+        <tr>
+            <td><input required="true" min="0" type="number" name="topPiecesNumber" /></td>
+        </tr>
+        <tr>
+            <td>Número de Peças Inferiores</td>
+        </tr>
+        <tr>
+            <td><input required="true" min="0" type="number" name="bottomPiecesNumber" /></td>
+        </tr>
+        <tr>
+            <td>Número de Peças de Roupa Interior</td>
+        </tr>
+        <tr>
+            <td><input required="true" min="0" type="number" name="underwearPiecesNumber" /></td>
+        </tr>
+        <tr>
+            <td>Insira uma fotografia das peças</td>
+        </tr>
+        <tr>
+            <td><input type="file" name="image" accept="image/*" /></td>
+        </tr>
+        <tr>
+            <td colspan="2"><button type="submit">Registar</button></td>
+        </tr>
+    </table>
 </form>

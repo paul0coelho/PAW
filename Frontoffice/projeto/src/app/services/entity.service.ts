@@ -26,10 +26,6 @@ export class EntityService {
     return this.http.get<Entity>(`${endpointEntities}show2/${id}`, httpOptions);
   }
 
-  createEntity(entity: Entity): Observable<Entity> {
-    return this.http.post<Entity>(`${endpointEntities}save2`, entity, httpOptions);
-  }
-
   updateEntity(id: string, entity: Entity): Observable<Entity> {
     return this.http.post<Entity>(`${endpointEntities}update2/${id}`, entity, httpOptions);
   }
