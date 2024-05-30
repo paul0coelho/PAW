@@ -36,14 +36,14 @@ var DonationSchema = new mongoose.Schema({
     required: true,
     min: 1
   },
-  updated_at: { 
-    type: Date, 
-    default: Date.now 
-  },
   status: {
     type: String,
     enum: ['recebido', 'entregue', 'extraviado'],
     required: true
+  },
+  updated_at: { 
+    type: Date, 
+    default: Date.now 
   }
 });
 
