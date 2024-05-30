@@ -15,7 +15,7 @@ export class DonationRegistComponent implements OnInit {
   date = new Date()
 
   constructor(private rest: DonationService) {
-    this.donation = new Donation("", "", "", "info@unicef.pt", 912345678, 1, 1, 1, 0, this.date);
+    this.donation = new Donation("", "", "", "info@unicef.pt", 912345678, 1, 1, 1, 0, this.date,"");
   }
 
   ngOnInit(): void {

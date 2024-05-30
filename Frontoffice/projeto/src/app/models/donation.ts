@@ -9,9 +9,10 @@ export class Donation {
     underwearPiecesNumber: Number;
     gainedPoints: Number;
     updated_at: Date;
+    status:String;
 
     constructor(__id: String, donatorId:String, entityId:String, entityEmail:String, phone: Number, topPiecesNumber: Number, bottomPiecesNumber: Number, 
-        underwearPiecesNumber: Number, gainedPoints: Number, updated_at: Date) {
+        underwearPiecesNumber: Number, gainedPoints: Number, updated_at: Date, status:String) {
         this.__id = __id;
         this.donatorId = donatorId;
         this.entityId = entityId;
@@ -22,5 +23,6 @@ export class Donation {
         this.underwearPiecesNumber = underwearPiecesNumber;
         this.gainedPoints = gainedPoints;
         this.updated_at = updated_at;
+        this.status = status;
     }
 }

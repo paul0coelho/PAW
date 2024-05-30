@@ -168,7 +168,9 @@ donationController.save2 = function(req, res) {
       return Entity.findOne({ email: req.body.entityEmail });
     })
     .then(entity => {
-      
+      if (!entity) {
+        throw new Error('Entidade não encontrada');
+      }
       donation.entityId = entity._id;
 
       return calculateGainedPoints(req.body.topPiecesNumber, req.body.bottomPiecesNumber, req.body.underwearPiecesNumber);
