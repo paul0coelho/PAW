@@ -7,6 +7,7 @@ import { EntityComponent } from './entity/entity.component';
 import { DonationRegistComponent } from './donation-regist/donation-regist.component';
 import { EntitiesComponent } from './entities/entities.component';
 import { DonatorProfileComponent } from './donator-profile/donator-profile.component';
+import { DonatorDonationsComponent } from './donator-donations/donator-donations.component';
 
 
 export const routes: Routes = [
@@ -37,6 +38,10 @@ export const routes: Routes = [
     {
         path: 'entities/show/:id',
         component: EntityComponent,
+    },
+    {
+        path: 'donator/donations/:id',
+        component: DonatorDonationsComponent,
     }
 ];
 

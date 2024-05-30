@@ -2,6 +2,7 @@ var mongoose = require("mongoose");
 var Donation = require("../models/Donation");
 var Donator = require("../models/Donator");
 var Points = require("../models/Points");
+var Entity = require("../models/Entity");
 var path = require('path');
 var fs = require("fs");
 
@@ -96,7 +97,23 @@ donationController.create = function(req, res) {
 donationController.save = function(req, res) {
   var donation = new Donation(req.body);
 
-  calculateGainedPoints(req.body.topPiecesNumber, req.body.bottomPiecesNumber, req.body.underwearPiecesNumber)
+  Donator.findOne({ phone: 987654312 })
+    .then(donator => {
+      if (!donator) {
+        throw new Error('Doador não encontrado');
+      }
+      donation.donatorId = donator._id;
+
+      return Entity.findOne({ email: req.body.entityEmail });
+    })
+    .then(entity => {
+      if (!entity) {
+        throw new Error('Entidade não encontrada' + req.body.entityEmail);
+      }
+      donation.entityId = entity._id;
+
+      return calculateGainedPoints(req.body.topPiecesNumber, req.body.bottomPiecesNumber, req.body.underwearPiecesNumber);
+    })
     .then(gainedPoints => {
       donation.gainedPoints = gainedPoints;
       return addPointsAndVouchersGainedByDonation(gainedPoints, req.body.phone);
@@ -132,14 +149,28 @@ donationController.save = function(req, res) {
     })
     .catch(err => {
       console.log(err);
-      res.render('../views/donations/create');
+      res.status(500).send('Internal Server Error');
     });
 };
 
 donationController.save2 = function(req, res) {
   var donation = new Donation(req.body);
 
-  calculateGainedPoints(req.body.topPiecesNumber, req.body.bottomPiecesNumber, req.body.underwearPiecesNumber)
+  Donator.findOne({ phone: 987654312 })
+    .then(donator => {
+      if (!donator) {
+        throw new Error('Doador não encontrado');
+      }
+      donation.donatorId = donator._id;
+
+      return Entity.findOne({ email: req.body.email });
+    })
+    .then(entity => {
+      
+      donation.entityId = entity._id;
+
+      return calculateGainedPoints(req.body.topPiecesNumber, req.body.bottomPiecesNumber, req.body.underwearPiecesNumber);
+    })
     .then(gainedPoints => {
       donation.gainedPoints = gainedPoints;
       return addPointsAndVouchersGainedByDonation(gainedPoints, req.body.phone);
@@ -235,5 +266,32 @@ donationController.returnDonations = function(req, res) {
       res.status(500).send('Internal Server Error');
     });
 };
+
+donationController.returnDonationsByDonatorId = function(req, res) {
+  var donatorId = req.params.id;
+  
+  Donation.find({ donatorId: donatorId })
+    .then(donations => {
+      res.json(donations);
+    })
+    .catch(err => {
+      console.log("Error:", err);
+      res.status(500).json({ error: 'Internal Server Error', details: err.message });
+    });
+};
+
+donationController.returnDonationsByEntityId = function(req, res) {
+  var entityId = req.params.id;
+  
+  Donation.find({ entityId: entityId })
+    .then(donations => {
+      res.json(donations);
+    })
+    .catch(err => {
+      console.log("Error:", err);
+      res.status(500).json({ error: 'Internal Server Error', details: err.message });
+    });
+};
+
 
 module.exports = donationController;

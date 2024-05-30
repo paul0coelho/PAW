@@ -9,6 +9,10 @@ var DonationSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  entityEmail: {
+    type: String,
+    required: true
+  },
   phone: {
     type: Number,
     min: 900000000,

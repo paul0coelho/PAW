@@ -44,13 +44,18 @@ router.post('/save', loginController.verifyLoginUser, function(req, res) {
 });
 
 // Guardar uma doação
-router.post('/save2', loginController.verifyLoginUser, function(req, res) {
+router.post('/save2', function(req, res) {
   donation.save2(req, res);
 });
 
 // Obter doações no formato JSON
-router.get('/returnDonations', loginController.verifyLoginUser, function(req, res) {
-  donation.returnDonations(req, res);
+router.get('/returnDonationsByDonatorId', function(req, res) {
+  donation.returnDonationsByDonatorId(req, res);
+});
+
+// Obter doações no formato JSON
+router.get('/returnDonationsByEntityId', function(req, res) {
+  donation.returnDonationsByEntityId(req, res);
 });
 
 module.exports = router;

@@ -1,0 +1,22 @@
+<div class="header">
+    <a href="/donator">
+      <h1>Recicla Têxtil</h1>
+    </a>
+  </div>
+  <div class="header2">
+    <h2>Histórico de doações</h2>
+  </div>
+  <div class="donation-list">
+    <ul>
+      <li *ngFor="let donation of donations" class="donation-card">
+        <div class="donation-info">
+          <p><strong>Email da entidade:</strong> {{ donation?.entityEmail }}</p>
+          <p><strong>Número de peças superiores:</strong> {{ donation?.topPiecesNumber }}</p>
+          <p><strong>Número de peças inferiores:</strong> {{ donation?.bottomPiecesNumber }}</p>
+          <p><strong>Número de peças de roupa interior:</strong> {{ donation?.underwearPiecesNumber }}</p>
+          <p><strong>Pontos ganhos:</strong> {{ donation?.gainedPoints }}</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+  
