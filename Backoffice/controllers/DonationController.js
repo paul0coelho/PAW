@@ -156,14 +156,16 @@ donationController.save = function(req, res) {
 donationController.save2 = function(req, res) {
   var donation = new Donation(req.body);
 
-  Donator.findOne({ phone: 987654312 })
+  donation.status = "entregue";
+  
+  Donator.findOne({ phone: req.body.phone })
     .then(donator => {
       if (!donator) {
         throw new Error('Doador não encontrado');
       }
       donation.donatorId = donator._id;
 
-      return Entity.findOne({ email: req.body.email });
+      return Entity.findOne({ email: req.body.entityEmail });
     })
     .then(entity => {
       
@@ -180,35 +182,14 @@ donationController.save2 = function(req, res) {
     })
     .then(savedDonation => {
       console.log('Doação registada com sucesso.');
-
-      var fileDestination = path.join(__dirname, "..", "images", "donations", savedDonation._id.toString() + ".jpg");
-
-      fs.readFile(req.file.path, function(err, data) {
-        if (err) {
-          console.error("Erro ao ler o arquivo:", err);
-          return res.status(500).json({ error: "Erro ao ler o arquivo" });
-        }
-
-        fs.writeFile(fileDestination, data, function(err) {
-          if (err) {
-            console.error("Erro ao escrever o arquivo na pasta 'images':", err);
-            return res.status(500).json({ error: "Erro ao escrever o arquivo na pasta 'images'" });
-          }
-
-          fs.unlink(req.file.path, function(err) {
-            if (err) {
-              console.error("Erro ao remover o arquivo da pasta 'tmp':", err);
-            }
-          });
-          res.json(savedDonation);
-        });
-      });
+      res.json(savedDonation);
     })
     .catch(err => {
       console.log(err);
       res.status(500).json({ error: 'Internal Server Error', details: err.message });
     });
 };
+
 
 function addPointsAndVouchersGainedByDonation(pointsGained, phone) {
   return Donator.findOne({ phone: phone })

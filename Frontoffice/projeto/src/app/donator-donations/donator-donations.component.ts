@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Donation } from '../models/donation';
 import { DonationService } from '../services/donation.service';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -14,14 +15,15 @@ import { CommonModule } from '@angular/common';
 export class DonatorDonationsComponent implements OnInit {
   donations?: Donation[];
 
-  constructor(private donationService: DonationService) { }
+  constructor(private donationService: DonationService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.getDonationsByDonatorId();
   }
 
   getDonationsByDonatorId() {
-    this.donationService.getDonationsByDonatorId().subscribe((data: any) => {
+    var idTemp = this.route.snapshot.params['id'];
+    this.donationService.getDonationsByDonatorId(idTemp).subscribe((data: any) => {
       this.donations = data.donations;
       console.log(this.donations);
     });

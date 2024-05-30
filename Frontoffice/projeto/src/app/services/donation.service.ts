@@ -26,12 +26,12 @@ export class DonationService {
     return this.http.get<Donation[]>(endpointDonations + "l", httpOptions);
   }
 
-  getDonationsByDonatorId(): Observable<Donation[]> {
-    return this.http.get<Donation[]>(endpointDonations + "returnDonationsByDonatorId", httpOptions);
+  getDonationsByDonatorId(id: string): Observable<Donation[]> {
+    return this.http.get<Donation[]>(`${endpointDonations}returnDonationsByDonatorId/${id}`, httpOptions);
   }
 
-  getDonationsByEntityId(): Observable<Donation[]> {
-    return this.http.get<Donation[]>(endpointDonations + "returnDonationsByEntityId", httpOptions);
+  getDonationsByEntityId(id: string): Observable<Donation[]> {
+    return this.http.get<Donation[]>(`${endpointDonations}returnDonationsByEntityId/${id}`, httpOptions);
   }
 
   getDonation(id: string): Observable<Donation> {

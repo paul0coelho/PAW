@@ -49,12 +49,12 @@ router.post('/save2', function(req, res) {
 });
 
 // Obter doações no formato JSON
-router.get('/returnDonationsByDonatorId', function(req, res) {
+router.get('/returnDonationsByDonatorId/:id', function(req, res) {
   donation.returnDonationsByDonatorId(req, res);
 });
 
 // Obter doações no formato JSON
-router.get('/returnDonationsByEntityId', function(req, res) {
+router.get('/returnDonationsByEntityId/:id', function(req, res) {
   donation.returnDonationsByEntityId(req, res);
 });
 
