@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 import { InitialPageComponent } from './initial-page/initial-page.component';
 import { DonatorComponent } from './donator/donator.component';
 import { EntityProfileComponent } from './entity-profile/entity-profile.component';
@@ -14,6 +15,10 @@ export const routes: Routes = [
     {
         path: 'login',
         component: LoginComponent,
+    },
+    {
+        path: 'register',
+        component: RegisterComponent,
     },
     {
         path: 'welcomePage',

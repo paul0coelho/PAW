@@ -18,25 +18,13 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  login(email: string, password:string): Observable<AuthRestModelResponse>{
-    return this.http.post<AuthRestModelResponse>(`${API_ENDPOINT}/loginSubmitted`, new LoginModel( email, password));
+  login(email: string, password:string): Observable<any>{
+    return this.http.post<any>(`${API_ENDPOINT}/loginDonator`, { email, password }, httpOptions);
   }
 
 
   logout() {
     localStorage.removeItem('currentUser');
   }
-
-  register(username: string, password: string) :  Observable<AuthRestModelResponse>{
-      return this.http.post<any>(`${API_ENDPOINT}/`, new LoginModel( username, password))
-  }
-}
-export interface AuthRestModelResponse{
-
 }
 
-export class LoginModel{
-
-  constructor(public email:string, public password:string){}
-
-}

@@ -1225,6 +1225,7 @@
         "name",
         "phone",
         "address",
+        "password",
         "gainedPoints",
         "vouchers"
       ],
@@ -1244,6 +1245,9 @@
         "address": {
           "type": "string"
         },
+        "password": {
+          "type": "string"
+      },
         "gainedPoints": {
           "type": "integer",
           "min": 0,

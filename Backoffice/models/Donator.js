@@ -5,6 +5,11 @@ var DonatorSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  email:{
+    type: String,
+    required: true,
+    unique:true
+  },
   phone: {
     type: Number,
     min: 900000000,
@@ -24,6 +29,11 @@ var DonatorSchema = new mongoose.Schema({
     type: Number,
     min: 0,
     default: 0
+  },
+  password: {
+    type: String,
+    required: true,
+    unique:true
   },
   updated_at: { 
     type: Date,

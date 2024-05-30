@@ -1,16 +1,17 @@
 <div class="login-card">
-    <h1>Recicla Têxtil</h1>
+    <h1 class="clickable-title" (click)="redirectToHome()">Recicla Têxtil</h1>
     <div class="login-container">
-      <h2>Entrar</h2><br><br>
+      <a class="entities">Entidades</a>
+      <h2>Login Doadores</h2><br><br>
   
       
         <label for="email">Email:</label><br>
-        <input id="email" placeholder="example@gmail.com" [(ngModel)]="email" name="email" type="email" required><br>
+        <input id="email" placeholder="example@gmail.com" [(ngModel)]="email" name="email" type="text" required><br>
   
         <label for="password">Password:</label><br>
         <div class="password-container">
           <input id="password" placeholder="**********************" [(ngModel)]="password" name="password" type="password" required>
-          <i class="fa fa-eye-slash" (click)="togglePasswordVisibility()"></i>
+          <!--<i class="fa fa-eye-slash" (click)="togglePasswordVisibility()"></i>-->
         </div><br>
   
         <button class="login-button" (click)="login()"> Login </button>

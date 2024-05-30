@@ -13,27 +13,30 @@ export class LoginComponent implements OnInit{
 
   email: string;
   password:string;
-  showPassword:boolean;
+  
 
-  constructor(private router: Router, private authServive: AuthService) { 
-    this.password="";
+  constructor(private router: Router, private authService: AuthService) { 
     this.email="";
-    this.showPassword=false;
+    this.password="";
+    
+    
   }
+  /*
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
     const passwordInput = document.getElementById('password') as HTMLInputElement;
     passwordInput.type = this.showPassword ? 'text' : 'password';
   }
+  */
 
   ngOnInit(): void {
   }
 
   login(): void{
-    this.authServive.login(this.email, this.password).subscribe((user : any)=>{
+    this.authService.login(this.email, this.password).subscribe((user : any)=>{
       if (user && user.token) {
         localStorage.setItem('currentUser', JSON.stringify(user));
-        this.router.navigate(['/']);
+        this.router.navigate(['/donator']);
       } else {
         alert('Erro no login!');
       }
@@ -41,14 +44,24 @@ export class LoginComponent implements OnInit{
   }
  
 
+  /*
   register(): void{
     this.authServive.register(this.email, this.password).subscribe((user : any)=>{
       if (user && user.token) {
         localStorage.setItem('currentUser', JSON.stringify(user));
-        this.router.navigate(['/']);
+        this.router.navigate(['/login']);
       } else {
         alert('Erro no login!');
       }
     })
+  }
+  */
+
+  register(): void {
+    this.router.navigate(['/register']);
+  }
+
+  redirectToHome() {
+    this.router.navigate(['/welcomePage']);
   }
 }

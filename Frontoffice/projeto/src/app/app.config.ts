@@ -5,6 +5,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS, provideHttpClient } from '@angular
 import { AuthInterceptorInterceptor } from './interceptors/auth.interceptor';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 import { AppRoutingModule } from './app.routes';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
@@ -15,6 +16,7 @@ import { DonationRegistComponent } from './donation-regist/donation-regist.compo
   declarations: [
     AppComponent,
     LoginComponent,
+    RegisterComponent,
     DonationRegistComponent
   ],
   imports: [
