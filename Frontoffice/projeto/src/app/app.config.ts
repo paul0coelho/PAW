@@ -15,13 +15,13 @@ import { DonationRegistComponent } from './donation-regist/donation-regist.compo
   declarations: [
     AppComponent,
     LoginComponent,
-    DonationRegistComponent  // Declare your component
+    DonationRegistComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule,  // Add FormsModule here
+    FormsModule,
     CommonModule
   ],
   providers: [

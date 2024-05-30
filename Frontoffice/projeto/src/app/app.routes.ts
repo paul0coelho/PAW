@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { InitialPageComponent } from './initial-page/initial-page.component';
 import { DonatorComponent } from './donator/donator.component';
-import { EntityComponent } from './entity/entity.component';
+import { EntityProfileComponent } from './entity-profile/entity-profile.component';
 import { DonationRegistComponent } from './donation-regist/donation-regist.component';
 import { EntitiesComponent } from './entities/entities.component';
 import { DonatorProfileComponent } from './donator-profile/donator-profile.component';
@@ -24,7 +24,7 @@ export const routes: Routes = [
         component: DonatorComponent,
     },
     {
-        path: 'donator/show/:id',
+        path: 'donator/profile/:id',
         component: DonatorProfileComponent,
     },
     {
@@ -36,8 +36,8 @@ export const routes: Routes = [
         component: EntitiesComponent,
     },
     {
-        path: 'entities/show/:id',
-        component: EntityComponent,
+        path: 'entity/profile/:id',
+        component: EntityProfileComponent,
     },
     {
         path: 'donator/donations/:id',

@@ -249,11 +249,9 @@ donationController.returnDonations = function(req, res) {
 };
 
 donationController.returnDonationsByDonatorId = function(req, res) {
-  var donatorId = req.params.id;
-  
-  Donation.find({ donatorId: donatorId })
+  Donation.find({ donatorId: req.params.id })
     .then(donations => {
-      res.json(donations);
+      res.json({donations : donations});
     })
     .catch(err => {
       console.log("Error:", err);
@@ -262,11 +260,9 @@ donationController.returnDonationsByDonatorId = function(req, res) {
 };
 
 donationController.returnDonationsByEntityId = function(req, res) {
-  var entityId = req.params.id;
-  
-  Donation.find({ entityId: entityId })
+  Donation.find({ entityId: req.params.id })
     .then(donations => {
-      res.json(donations);
+      res.json({donations : donations});
     })
     .catch(err => {
       console.log("Error:", err);

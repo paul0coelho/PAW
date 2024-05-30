@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Donator } from '../models/donator';
 
-const endpointDonators = 'http://localhost:3000/donators/';
+const endpointDonators = 'http://localhost:3000/api/v1/donators/';
 
 const httpOptions = {
   headers: new HttpHeaders({

@@ -4,14 +4,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { EntityService } from '../services/entity.service';
 
 @Component({
-  selector: 'app-entity',
+  selector: 'app-entity-profile',
   standalone: true,
   imports: [],
-  templateUrl: './entity.component.html',
-  styleUrl: './entity.component.css'
+  templateUrl: './entity-profile.component.html',
+  styleUrl: './entity-profile.component.css'
 })
 
-export class EntityComponent implements OnInit {
+export class EntityProfileComponent implements OnInit {
   entity?: Entity
 
   constructor(
