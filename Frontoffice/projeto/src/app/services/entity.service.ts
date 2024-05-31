@@ -15,8 +15,11 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class EntityService {
+  private selectedEntity: Entity;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+    this.selectedEntity = new Entity("","","",0,"","");
+  }
 
   getEntities(): Observable<Entity[]> {
     return this.http.get<Entity[]>(endpointEntities + "returnEntities", httpOptions);
@@ -32,5 +35,13 @@ export class EntityService {
 
   deleteEntity(id: string): Observable<any> {
     return this.http.post<any>(`${endpointEntities}delete2/${id}`, httpOptions);
+  }
+
+  setSelectedEntity(entity: Entity): void {
+    this.selectedEntity = entity;
+  }
+
+  getSelectedEntity(): Entity {
+    return this.selectedEntity;
   }
 }

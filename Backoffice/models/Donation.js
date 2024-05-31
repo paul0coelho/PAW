@@ -2,15 +2,13 @@ var mongoose = require('mongoose');
 
 var DonationSchema = new mongoose.Schema({
   donatorId: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Donators',
     required: true
   },
   entityId: {
-    type: String,
-    required: true
-  },
-  entityEmail: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Entities',
     required: true
   },
   phone: {

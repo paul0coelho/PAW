@@ -9,13 +9,15 @@
 <div class="donationForm">
     <table>
         <tr>
-            <td>Contacto da Entidade</td>
-        </tr>
-        <tr>
             <td>
-                <input required="true" type="text" [(ngModel)]="donation.entityEmail" placeholder="Email" />
                 <a href="/entities"><button type="button">Consultar lista de entidades</button></a>
             </td>
+        </tr>
+        <tr>
+            <td>Entidade Selecionada</td>
+        </tr>
+        <tr>
+            <td class="entity" [(ngModel)]="selectedEntity.name">{{ selectedEntity.name || 'Nenhuma entidade selecionada' }}</td>
         </tr>
         <tr>
             <td>Telefone</td>

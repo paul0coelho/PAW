@@ -154,10 +154,9 @@ donationController.save = function(req, res) {
 };
 
 donationController.save2 = function(req, res) {
-  var donation = new Donation(req.body);
-
+  const donation = new Donation(req.body);
   donation.status = "entregue";
-  
+
   Donator.findOne({ phone: req.body.phone })
     .then(donator => {
       if (!donator) {
@@ -165,7 +164,7 @@ donationController.save2 = function(req, res) {
       }
       donation.donatorId = donator._id;
 
-      return Entity.findOne({ email: req.body.entityEmail });
+      return Entity.findOne({ _id: req.body.entityId});
     })
     .then(entity => {
       if (!entity) {

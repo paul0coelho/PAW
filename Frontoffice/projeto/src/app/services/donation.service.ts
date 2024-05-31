@@ -18,8 +18,8 @@ export class DonationService {
 
   constructor(private http: HttpClient) { }
 
-  registDonation(donation: Donation): Observable<Donation> {
-    return this.http.post<Donation>(`${endpointDonations}save2`, donation, httpOptions);
+  registDonation(donation:Donation): Observable<Donation> {
+    return this.http.post<Donation>(`${endpointDonations}save2`, donation,httpOptions);
   }
 
   getDonations(): Observable<Donation[]> {

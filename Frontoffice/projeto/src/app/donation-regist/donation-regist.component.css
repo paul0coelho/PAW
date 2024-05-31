@@ -41,8 +41,9 @@ input[type="password"] {
 }
 
 button {
-    margin-top: 15px;
+    margin-top: 10px;
     margin-left: 0;
+    margin-bottom: 10px;
     height: 30px;
     padding: 0 12px;
     display: flex;
@@ -63,13 +64,24 @@ td {
     line-height: 22px;
     font-weight: 700;
     margin-left: 20px;
+    margin-top: 30px;
     font-family: Arial, Helvetica, sans-serif;
     text-align: left;
 }
 
+td.entity {
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 700;
+    margin-left: 20px;
+    margin-top: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: left;
+    font-weight: lighter;
+}
+
 table {
     margin-left: 20px;
-    margin-top: 20px;
     border-collapse: collapse;
 }
 
