@@ -9,7 +9,7 @@ router.get('/',loginController.verifyLoginUser, function(req, res) {
 });
 
 // Menu de gestão de pontos
-router.get('/l',loginController.verifyLoginUser, function(req, res) {
+router.get('/l', function(req, res) {
   points.list2(req, res);
 });
 

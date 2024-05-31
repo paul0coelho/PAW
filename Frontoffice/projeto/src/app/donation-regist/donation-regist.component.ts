@@ -4,6 +4,7 @@ import { Donation } from '../models/donation';
 import { DonationService } from '../services/donation.service';
 import { EntityService } from '../services/entity.service';
 import { Entity } from '../models/entity';
+import { Donator } from '../models/donator'
 
 @Component({
   selector: 'app-donation-regist',
@@ -15,11 +16,13 @@ export class DonationRegistComponent implements OnInit {
   @Input() donation: Donation;
 
   selectedEntity: Entity;
+  selectedDonator: Donator;
   date = new Date();
 
   constructor(private rest: DonationService, private restEntity: EntityService) {
-    this.donation = new Donation("", "", "", 912345678, 1, 1, 1, 0, this.date, "entregue");
+    this.selectedDonator = new Donator("","",0,"",0,0,"");
     this.selectedEntity = new Entity("","","",0,"","");
+    this.donation = new Donation("", this.selectedDonator, this.selectedEntity, 912345678, 1, 1, 1, 0, this.date, "entregue");
   }
 
   ngOnInit(): void {
@@ -28,7 +31,7 @@ export class DonationRegistComponent implements OnInit {
 
   add(): void {
     if (this.selectedEntity) {
-      this.donation.entityId = this.selectedEntity._id;
+      this.donation.entityId._id = this.selectedEntity._id;
     }
 
     this.rest.registDonation(this.donation).subscribe((data: any) => {

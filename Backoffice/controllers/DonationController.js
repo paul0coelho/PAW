@@ -242,6 +242,7 @@ donationController.returnDonations = function(req, res) {
 
 donationController.returnDonationsByDonatorId = function(req, res) {
   Donation.find({ donatorId: req.params.id })
+  .populate('entityId', 'name')
     .then(donations => {
       res.json({donations : donations});
     })
@@ -253,8 +254,9 @@ donationController.returnDonationsByDonatorId = function(req, res) {
 
 donationController.returnDonationsByEntityId = function(req, res) {
   Donation.find({ entityId: req.params.id })
+    .populate('donatorId', 'name')
     .then(donations => {
-      res.json({donations : donations});
+      res.json({ donations });
     })
     .catch(err => {
       console.log("Error:", err);

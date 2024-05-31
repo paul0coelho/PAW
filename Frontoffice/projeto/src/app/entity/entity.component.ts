@@ -6,13 +6,13 @@ import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
-  selector: 'app-entity-donations',
+  selector: 'app-entity',
   standalone:true,
   imports:[CommonModule],
-  templateUrl: './entity-donations.component.html',
-  styleUrls: ['./entity-donations.component.css']
+  templateUrl: './entity.component.html',
+  styleUrls: ['./entity.component.css']
 })
-export class EntityDonationsComponent implements OnInit {
+export class EntityComponent implements OnInit {
   donations?: Donation[];
 
   constructor(private donationService: DonationService, private route: ActivatedRoute) { }
