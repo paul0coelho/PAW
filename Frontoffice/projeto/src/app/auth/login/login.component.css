@@ -92,13 +92,3 @@ button:hover {
     cursor: pointer;
 }
 
-.entities {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    color: #0a0a0a;
-    text-decoration: none;
-    font-weight: bold;
-    cursor: pointer;
-    text-decoration: underline;
-}

@@ -23,6 +23,11 @@ var EntitySchema = new mongoose.Schema({
     max: 999999999,
     unique:true
   },
+  password: {
+    type: String,
+    required: true,
+    unique:true
+  },
   updated_at: { type: Date, default: Date.now },
 });
 

@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken')
 const config = require('../jwt_secret/config')
 const bcrypt = require('bcryptjs')
 const Donator = require('../models/Donator')
+const Entity = require('../models/Entity')
 var fs = require("fs")
 
 mongoose.connect('mongodb+srv://paul0:1234@cluster0.gat7grz.mongodb.net/PAW?retryWrites=true&w=majority&appName=Cluster0')
@@ -60,26 +61,37 @@ loginController.verifyLoginUser = function(req, res, next) {
         res.redirect('/login')
     }
 }
-
-loginController.loginDonator = function(req, res) {
+loginController.login = function(req, res) {
+    // Primeiro tenta encontrar o usuário no modelo Donator
     Donator.findOne({ email: req.body.email }).then(donator => {
-        if (!donator) {
-            return res.status(404).json({ error: 'User not found' });
+        if (donator) {
+            return checkUserAndPassword(donator, 'donator');
+        } else {
+            // Se não encontrado como Donator, tenta encontrar como Entity
+            return Entity.findOne({ email: req.body.email }).then(entity => {
+                if (entity) {
+                    return checkUserAndPassword(entity, 'entity');
+                } else {
+                    // Se nenhum usuário foi encontrado como Entity
+                    return res.status(404).json({ error: 'User not found' });
+                }
+            });
         }
+    }).catch(err => {
+        console.error(err);
+        return res.status(500).json({ error: 'Error on the server.' });
+    });
 
-        var passwordIsValid = bcrypt.compareSync(req.body.password, donator.password);
+    function checkUserAndPassword(user, userType) {
+        var passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
         if (!passwordIsValid) {
             return res.status(401).json({ auth: false, token: null });
         }
 
-        var token = jwt.sign({ email: donator.email }, config.secret, { expiresIn: 86400 });
-
-        res.status(200).json({ auth: true, token: token });
-    }).catch(err => {
-        return res.status(500).json({ error: 'Error on the server.' });
-    });
-}
-
+        var token = jwt.sign({ email: user.email, userType: userType }, config.secret, { expiresIn: 86400 });
+        return res.status(200).json({ auth: true, token: token, userType: userType });
+    }
+};
 loginController.logoutDonator = function (req,res){
     res.status(200).json({auth: false, token: null});
 }
@@ -106,6 +118,31 @@ loginController.registerDonator = function(req,res){
     }catch (err) {
         console.log(err);
         res.status(500).json({ error: 'Erro ao registrar o doador'});
+    }
+}
+loginController.registerEntity = function(req,res){
+
+    try{
+        var hashedPassword = bcrypt.hashSync(req.body.password,10);
+
+        const entity = new Entity({
+            name: req.body.name,
+            description: req.body.description,
+            address: req.body.address,
+            email: req.body.email,
+            phone: req.body.phone,
+            password: hashedPassword
+        });
+        const savedEntity = entity.save();
+
+        var token = jwt.sign({ email: savedEntity.email }, config.secret, { expiresIn: 86400 });
+
+       
+        res.status(200).json({ auth: true, token: token });
+
+    }catch (err) {
+        console.log(err);
+        res.status(500).json({ error: 'Erro ao registrar entidade'});
     }
 }
 

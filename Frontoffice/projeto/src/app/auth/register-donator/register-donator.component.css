@@ -70,18 +70,30 @@ input[type="password"] {
     padding-right: 30px;
 }
 
-/* Icone para mostrar/esconder a senha (opcional)
-.fa {
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-    cursor: pointer;
-}
-*/
 
 .clickable-title {
     cursor: pointer;
+}
+
+
+.page-option {
+    padding: 5px 15px;
+    cursor: pointer;
+    font-size: 14px;
+    color: white;
+    background-color: #007BFF;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+    width: 80px;
+    font-weight: bold;
+    margin-left: 400px;
+}
+
+
+
+.page-option:hover {
+    background-color: darkblue;
 }
 
 

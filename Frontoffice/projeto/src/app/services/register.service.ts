@@ -15,13 +15,13 @@ export class RegisterService {
 
   constructor(private http: HttpClient) { }
 
-  register(name: string, email: string, phone:number, address: string, password: string) :  Observable<any>{
-    return this.http.post<any>(`${API_ENDPOINT}/login/register`, new RegisterModel( name, email, phone, address, password))
+  registerDonator(name: string, email: string, phone:number, address: string, password: string) :  Observable<any>{
+    return this.http.post<any>(`${API_ENDPOINT}/login/registerDonator`,{name,email,phone,address,password}, httpOptions)
+}
+
+registerEntity(name: string, description: string, email: string, phone:number, address: string, password: string) :  Observable<any>{
+  return this.http.post<any>(`${API_ENDPOINT}/login/registerEntity`,{name,description,email,phone,address,password}, httpOptions)
 }
  
 }
-export class RegisterModel{
 
-  constructor(public name:string, public email:string,public phone:number,public address:string, public password:string){}
-
-}

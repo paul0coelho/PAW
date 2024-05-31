@@ -6,7 +6,7 @@ const loginController = require('../controllers/LoginController.js')
 // Página de login
 router.get('/', loginController.login );
 
-router.post('/loginDonator', loginController.loginDonator);
+router.post('/login', loginController.login);
 
 // Efetuar login
 router.post('/loginSubmitted', loginController.submittedLogin );
@@ -18,7 +18,9 @@ router.get('/logoutDonator', loginController.logoutDonator);
 
 router.get('/profileDonator', loginController.profileDonator);
 
-router.post('/register', loginController.registerDonator);
+router.post('/registerDonator', loginController.registerDonator);
+
+router.post('/registerEntity', loginController.registerEntity);
 
 
 module.exports = router;
