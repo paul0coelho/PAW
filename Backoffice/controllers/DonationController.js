@@ -177,7 +177,7 @@ donationController.save2 = function(req, res) {
     })
     .then(gainedPoints => {
       donation.gainedPoints = gainedPoints;
-      return addPointsAndVouchersGainedByDonation(gainedPoints, req.body.phone);
+      return addPointsGainedByDonation(gainedPoints, req.body.phone);
     })
     .then(() => {
       return donation.save();
@@ -193,7 +193,7 @@ donationController.save2 = function(req, res) {
 };
 
 
-function addPointsAndVouchersGainedByDonation(pointsGained, phone) {
+function addPointsGainedByDonation(pointsGained, phone) {
   return Donator.findOne({ phone: phone })
     .then(donator => {
       if (!donator) {
@@ -207,15 +207,6 @@ function addPointsAndVouchersGainedByDonation(pointsGained, phone) {
           }
           
           donator.gainedPoints += pointsGained;
-
-          var gainedVouchers = 0;
-
-          while(donator.gainedPoints >= points.pointsPerVoucher){
-            gainedVouchers++;
-            donator.gainedPoints -= points.pointsPerVoucher;
-          }
-
-          donator.vouchers += gainedVouchers;
           
           return donator.save();
         });
