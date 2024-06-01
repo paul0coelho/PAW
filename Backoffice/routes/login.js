@@ -4,7 +4,7 @@ const router = express.Router();
 const loginController = require('../controllers/LoginController.js')
 
 // Página de login
-router.get('/', loginController.login );
+router.get('/', loginController.login2 );
 
 router.post('/login', loginController.login);
 
