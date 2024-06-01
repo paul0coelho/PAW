@@ -25,7 +25,6 @@ export class DonatorDonationsComponent implements OnInit {
     var idTemp = this.route.snapshot.params['id'];
     this.donationService.getDonationsByDonatorId(idTemp).subscribe((data: any) => {
       this.donations = data.donations;
-      console.log(this.donations);
     });
   
   }

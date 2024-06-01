@@ -11,6 +11,7 @@ import { EntitiesComponent } from './entities/entities.component';
 import { DonatorProfileComponent } from './donator-profile/donator-profile.component';
 import { DonatorDonationsComponent } from './donator-donations/donator-donations.component';
 import { EntityComponent } from './entity/entity.component';
+import { PlotlyComponent} from './plotly/plotly.component';
 
 
 export const routes: Routes = [
@@ -31,7 +32,7 @@ export const routes: Routes = [
         component: InitialPageComponent,
     },
     {
-        path: 'donator',
+        path: 'donator/:id',
         component: DonatorComponent,
     },
     {
@@ -57,6 +58,10 @@ export const routes: Routes = [
     {
         path: 'entity/:id',
         component: EntityComponent,
+    },
+    {
+        path: 'plotly',
+        component: PlotlyComponent,
     }
 ];
 

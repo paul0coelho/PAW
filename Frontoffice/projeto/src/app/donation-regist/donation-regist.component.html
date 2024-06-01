@@ -1,50 +1,55 @@
 <div class="header">
     <a href="/donations">
-        <h1>Recicla Têxtil</h1>
+      <h1>Recicla Têxtil</h1>
     </a>
-</div>
-<div class="header2">
+  </div>
+  <div class="header2">
     <h2>Registar doação</h2>
-</div>
-<div class="donationForm">
+  </div>
+  <div class="donationForm">
     <table>
-        <tr>
-            <td>
-                <a href="/entities"><button type="button">Consultar lista de entidades</button></a>
-            </td>
-        </tr>
-        <tr>
-            <td>Entidade Selecionada</td>
-        </tr>
-        <tr>
-            <td class="entity" [(ngModel)]="selectedEntity.name">{{ selectedEntity.name || 'Nenhuma entidade selecionada' }}</td>
-        </tr>
-        <tr>
-            <td>Telefone</td>
-        </tr>
-        <tr>
-            <td><input required="true" type="number" [(ngModel)]="donation.phone" /></td>
-        </tr>
-        <tr>
-            <td>Número de Peças Superiores</td>
-        </tr>
-        <tr>
-            <td><input required="true" min="0" type="number" [(ngModel)]="donation.topPiecesNumber" /></td>
-        </tr>
-        <tr>
-            <td>Número de Peças Inferiores</td>
-        </tr>
-        <tr>
-            <td><input required="true" min="0" type="number" [(ngModel)]="donation.bottomPiecesNumber" /></td>
-        </tr>
-        <tr>
-            <td>Número de Peças de Roupa Interior</td>
-        </tr>
-        <tr>
-            <td><input required="true" min="0" type="number" [(ngModel)]="donation.underwearPiecesNumber" /></td>
-        </tr>
-        <tr>
-            <td colspan="2"><button (click)="add()">Registar</button></td>
-        </tr>
+      <tr>
+        <td>
+          <a href="/entities"><button type="button">Consultar lista de entidades</button></a>
+        </td>
+      </tr>
+      <tr>
+        <td>Entidade Selecionada</td>
+      </tr>
+      <tr>
+        <td class="entity" [(ngModel)]="selectedEntity.name">{{ selectedEntity.name || 'Nenhuma entidade selecionada' }}</td>
+      </tr>
+      <tr>
+        <td>Telefone</td>
+      </tr>
+      <tr>
+        <td><input required="true" type="number" [(ngModel)]="donation.phone" /></td>
+      </tr>
+      <tr>
+        <td>Número de Peças Superiores</td>
+      </tr>
+      <tr>
+        <td><input required="true" min="0" type="number" [(ngModel)]="donation.topPiecesNumber" /></td>
+      </tr>
+      <tr>
+        <td>Número de Peças Inferiores</td>
+      </tr>
+      <tr>
+        <td><input required="true" min="0" type="number" [(ngModel)]="donation.bottomPiecesNumber" /></td>
+      </tr>
+      <tr>
+        <td>Número de Peças de Roupa Interior</td>
+      </tr>
+      <tr>
+        <td><input required="true" min="0" type="number" [(ngModel)]="donation.underwearPiecesNumber" /></td>
+      </tr>
+      <tr *ngIf="simulatedPoints !== null">
+        <td>Pontos que poderá ganhar: {{ simulatedPoints }}</td>
+      </tr>
+      <tr>
+        <td colspan="2"><button (click)="add()">Registar</button></td>
+        <td colspan="2"><button (click)="simulatePoints()">Simular</button></td>
+      </tr>
     </table>
-</div>
+  </div>
+  
