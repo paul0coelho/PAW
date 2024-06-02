@@ -48,9 +48,9 @@ export class DonationRegistComponent implements OnInit {
 
   simulatePoints(): void {
     this.pointsService.getPoints().subscribe((pointsData: Points) => {
-      const topPoints = pointsData.topPiecesPoints * Number(this.donation.topPiecesNumber);
-      const bottomPoints = pointsData.bottomPiecesPoints * Number(this.donation.bottomPiecesNumber);
-      const underwearPoints = pointsData.underwearPiecesPoints * Number(this.donation.underwearPiecesNumber);
+      const topPoints = Number(pointsData.topPiecesPoints) * Number(this.donation.topPiecesNumber);
+      const bottomPoints = Number(pointsData.bottomPiecesPoints) * Number(this.donation.bottomPiecesNumber);
+      const underwearPoints = Number(pointsData.underwearPiecesPoints) * Number(this.donation.underwearPiecesNumber);
       this.simulatedPoints = topPoints + bottomPoints + underwearPoints;
     }, error => {
       console.error('Erro ao obter pontos: ', error);

@@ -19,7 +19,7 @@ pointsController.list = function(req, res) {
 };
 
 pointsController.list2 = function(req, res) {
-  Points.find()
+  Points.findById('661ff5afe10497c901313a23')
     .then(points => {
       res.json(points);
     })
