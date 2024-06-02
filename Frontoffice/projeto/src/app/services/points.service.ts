@@ -21,4 +21,8 @@ export class PointsService {
   getPoints(): Observable<Points> {
     return this.http.get<Points>(endpointPoints + "l", httpOptions);
   }
+
+  exchangePointsForVoucher(donatorId: string): Observable<any> {
+    return this.http.post<any>(`${endpointPoints}exchangePoints/${donatorId}`, {}, httpOptions);
+  }
 }

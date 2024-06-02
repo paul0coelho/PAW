@@ -9,7 +9,7 @@
 <div class="entity-list">
   <ul>
     <li *ngFor="let entity of entities" class="entity-card">
-      <img src="" class="entity-logo">
+      <img id="image" [src]="entity.imageUrl" />
       <div class="entity-info">
         <p><strong>Nome:</strong> {{ entity?.name }}</p>
         <p><strong>Email:</strong> {{ entity?.email }}</p>

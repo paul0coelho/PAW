@@ -1,1 +1,14 @@
-<p>points works!</p>
+<div class="container">
+    <header>
+      <h1>Recicla Têxtil</h1>
+    </header>
+    <div class="header2">
+      <h2>Seus Pontos</h2>
+    </div>
+    <div class="points-info">
+      <p>Os seus pontos: {{ totalPoints }}</p>
+      <p>Pontos necessários para um voucher: {{ pointsNeededForVoucher }}</p>
+      <button (click)="exchangePoints()">Trocar pontos por voucher</button>
+    </div>
+  </div>
+  

@@ -11,6 +11,8 @@ import { Donation } from '../models/donation';
 })
 export class DonatorComponent implements OnInit {
   donations?: Donation[];
+  totalPoints: number = 0;
+  totalDonations: number = 0;
 
   constructor(
     private plot: PlotlyService,
@@ -29,12 +31,14 @@ export class DonatorComponent implements OnInit {
         const dates: string[] = [];
         const cumulativePoints: number[] = [];
 
-        let totalPoints = 0;
+        this.totalPoints = 0;
+        this.totalDonations = this.donations.length;
+
         for (const donation of this.donations) {
           const date = new Date(donation.updated_at);
           dates.push(date.toLocaleDateString());
-          totalPoints += Number(donation.gainedPoints);
-          cumulativePoints.push(totalPoints);
+          this.totalPoints += Number(donation.gainedPoints);
+          cumulativePoints.push(this.totalPoints);
         }
 
         this.plot.plotLine("Evolução do número de pontos", "plot", dates, cumulativePoints);

@@ -264,5 +264,28 @@ donationController.returnDonationsByEntityId = function(req, res) {
     });
 };
 
+donationController.exchangePointsForVoucher = function(req, res) {
+  const donatorId = req.params.donatorId;
+
+  Donator.findById(donatorId)
+    .then(donator => {
+      if (!donator) {
+        return res.status(404).json({ error: 'Doador não encontrado' });
+      }
+
+      return Points.findOne().then(points => {
+        if (!points) {
+          throw new Error('Pontos não encontrados');
+        }
+
+        if (donator.gainedPoints < points.pointsPerVoucher) {
+          return res.status(400).json({ error: 'Pontos insuficientes para trocar por um voucher' });
+        }
+
+        donator.gainedPoints -= points.pointsPerVoucher;
+    });
+});
+}
+
 
 module.exports = donationController;

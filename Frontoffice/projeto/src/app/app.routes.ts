@@ -12,6 +12,7 @@ import { DonatorProfileComponent } from './donator-profile/donator-profile.compo
 import { DonatorDonationsComponent } from './donator-donations/donator-donations.component';
 import { EntityComponent } from './entity/entity.component';
 import { PlotlyComponent} from './plotly/plotly.component';
+import { PointsComponent } from './points/points.component';
 
 
 export const routes: Routes = [
@@ -62,7 +63,8 @@ export const routes: Routes = [
     {
         path: 'plotly',
         component: PlotlyComponent,
-    }
+    },
+    { path: 'points/:id', component: PointsComponent }
 ];
 
 @NgModule({

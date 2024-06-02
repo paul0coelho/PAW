@@ -1,12 +1,46 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { PointsService } from '../services/points.service';
+import { ActivatedRoute } from '@angular/router';
+import { DonatorService } from '../services/donator.service';
+import { Donator } from '../models/donator';
 
 @Component({
   selector: 'app-points',
-  standalone: true,
-  imports: [],
   templateUrl: './points.component.html',
-  styleUrl: './points.component.css'
+  styleUrls: ['./points.component.css']
 })
-export class PointsComponent {
+export class PointsComponent implements OnInit {
+  pointsNeededForVoucher: number = 0;
+  totalPoints: number = 0;
+  donatorId: string = '';
 
+  constructor(
+    private pointsService: PointsService,
+    private route: ActivatedRoute,
+    private donatorService: DonatorService
+  ) { }
+
+  ngOnInit(): void {
+    this.donatorId = this.route.snapshot.params['id'];
+    this.donatorService.getDonator(this.donatorId).subscribe((data: Donator) => {
+      this.totalPoints = Number(data.gainedPoints);
+    });
+
+    this.pointsService.getPoints().subscribe((data: any) => {
+      this.pointsNeededForVoucher = data.pointsPerVoucher;
+    });
+
+  }
+
+  exchangePoints(): void {
+    if (this.totalPoints >= this.pointsNeededForVoucher) {
+      this.pointsService.exchangePointsForVoucher(this.donatorId).subscribe(() => {
+        alert('Pontos trocados por voucher com sucesso!');
+      }, error => {
+        alert('Erro ao trocar pontos por voucher.');
+      });
+    } else {
+      alert('Pontos insuficientes para trocar por um voucher.');
+    }
+  }
 }

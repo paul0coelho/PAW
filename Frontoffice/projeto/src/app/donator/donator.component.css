@@ -1,3 +1,8 @@
+.container{
+  display:contents;
+  width:min-content;
+}
+
 header {
   display: flex;
   justify-content: space-between;
@@ -66,4 +71,36 @@ main {
 .logos img {
   width: 100px;
   margin: 10px 20px;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0;
+}
+
+.stat-box {
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 20px;
+  text-align: center;
+  width: 200px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.stat-box h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.stat-box p {
+  margin: 10px 0 0;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+#plot{
+  width: 1200px;
+  height: 430px;
 }

@@ -58,4 +58,8 @@ router.get('/returnDonationsByEntityId/:id', function(req, res) {
   donation.returnDonationsByEntityId(req, res);
 });
 
+router.post('/exchangePoints', function(req, res) {
+  donation.exchangePointsForVoucher(req, res);
+});
+
 module.exports = router;

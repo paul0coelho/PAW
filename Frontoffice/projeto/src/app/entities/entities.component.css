@@ -55,6 +55,7 @@ h1, h2 {
 
 .entity-info {
     flex: 1;
+    margin-left: 20px;
 }
 
 .entity-info p {

@@ -3,6 +3,7 @@ import { Entity } from '../models/entity';
 import { EntityService } from '../services/entity.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-entities',
@@ -16,7 +17,8 @@ export class EntitiesComponent implements OnInit {
 
   constructor(
     private entityService: EntityService,
-    private router: Router
+    private router: Router,
+    private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
@@ -26,7 +28,19 @@ export class EntitiesComponent implements OnInit {
   getEntities() {
     this.entityService.getEntities().subscribe((data: any) => {
       this.entities = data.entities;
-      console.log(this.entities);
+      if (this.entities) {
+        this.entities.forEach(entity => {
+          let imageObservable;
+          imageObservable = this.entityService.getEntityImage(entity._id);
+          imageObservable.subscribe((imageBlob) => {
+            const objectURL = URL.createObjectURL(imageBlob);
+            entity.imageUrl = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+            console.log(entity.imageUrl)
+          });
+        });
+      }
+    }, error => {
+      console.error('Error while fetching entities', error);
     });
   }
 
