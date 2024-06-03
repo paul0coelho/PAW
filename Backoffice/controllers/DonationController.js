@@ -266,7 +266,7 @@ donationController.returnDonationsByEntityId = function(req, res) {
 };
 
 donationController.exchangePointsForVoucher = function(req, res) {
-  const donatorId = req.params.donatorId;
+  const donatorId = req.params.id;
 
   Donator.findById(donatorId)
     .then(donator => {

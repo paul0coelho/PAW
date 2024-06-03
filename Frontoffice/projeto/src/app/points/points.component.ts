@@ -35,14 +35,10 @@ export class PointsComponent implements OnInit {
   }
 
   exchangePoints(): void {
-    if (this.totalPoints >= this.pointsNeededForVoucher) {
       this.pointsService.exchangePointsForVoucher(this.donatorId).subscribe(() => {
         alert('Pontos trocados por voucher com sucesso!');
       }, error => {
         alert('Erro ao trocar pontos por voucher.');
       });
-    } else {
-      alert('Pontos insuficientes para trocar por um voucher.');
-    }
   }
 }
