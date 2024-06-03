@@ -31,7 +31,7 @@ export class EntitiesComponent implements OnInit {
 
   getEntities() {
     this.entityService.getEntities().subscribe((data: any) => {
-      this.entities = data.entities || []; // Ensure entities is always an array
+      this.entities = data.entities || [];
       if (this.entities.length > 0) {
         this.entities.forEach(entity => {
           let imageObservable;
