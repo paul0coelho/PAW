@@ -53,6 +53,10 @@ router.get('/edit/:id', loginController.verifyLoginUser, function(req, res) {
   entity.edit(req, res);
 });
 
+router.post('/acceptEntity/:id', loginController.verifyLoginUser, function(req, res) {
+  entity.acceptEntity(req, res);
+});
+
 // Editar uma entidade
 router.get('/edit2/:id', function(req, res) {
   entity.edit2(req, res);

@@ -7,10 +7,11 @@ export class Entity {
     address: String;
     email: String;
     phone: Number;
+    accepted: String;
     updated_at: Date;
     imageUrl:SafeUrl;
   
-    constructor(_id: String, name: String, email: String, phone: Number, description: String, address: String,
+    constructor(_id: String, name: String, email: String, phone: Number, description: String, address: String, accepted:String,
       updated_at: Date = new Date(), imageUrl:SafeUrl) {
       this._id = _id;
       this.name = name;
@@ -20,6 +21,7 @@ export class Entity {
       this.address = address;
       this.updated_at = updated_at;
       this.imageUrl = imageUrl;
+      this.accepted = accepted;
     }
   }
   

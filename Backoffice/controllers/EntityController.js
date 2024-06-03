@@ -187,6 +187,24 @@ entityController.edit = function(req, res) {
     });
 };
 
+entityController.acceptEntity = function(req, res) {
+  Entity.findOne({_id: req.params.id})
+    .then(entity => {
+      if (!entity) {
+        return res.status(404).send('Entidade não encontrada');
+      }
+      entity.accepted = 'aceite';
+      return entity.save();
+    })
+    .then(() => {
+      res.redirect("/entities");
+    })
+    .catch(err => {
+      console.log("Error:", err);
+      res.status(500).send('Internal Server Error');
+    });
+};
+
 entityController.edit2 = function(req, res) {
   Entity.findOne({_id: req.params.id})
     .then(entity => {
@@ -390,7 +408,7 @@ entityController.delete2 = function(req, res) {
 };
 
 entityController.returnEntities = function(req, res) {
-  Entity.find()
+  Entity.find({ accepted: 'aceite' })
     .then(entities => {
       res.json({entities : entities});
     })
@@ -399,6 +417,7 @@ entityController.returnEntities = function(req, res) {
       res.status(500).send('Internal Server Error');
     });
 };
+
 
 function isValidEmail(email) {
   var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

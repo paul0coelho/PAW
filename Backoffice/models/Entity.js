@@ -28,6 +28,11 @@ var EntitySchema = new mongoose.Schema({
     required: true,
     unique:true
   },
+  accepted: {
+    type: String,
+    enum: ['em espera', 'aceite'],
+    required: true
+  },
   updated_at: { type: Date, default: Date.now },
 });
 
