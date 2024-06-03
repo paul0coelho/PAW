@@ -1,14 +1,27 @@
 <div class="container">
-    <header>
+  <header>
       <h1>Recicla Têxtil</h1>
-    </header>
-    <div class="header2">
-      <h2>Seus Pontos</h2>
-    </div>
-    <div class="points-info">
-      <p>Os seus pontos: {{ totalPoints }}</p>
-      <p>Pontos necessários para um voucher: {{ pointsNeededForVoucher }}</p>
-      <button (click)="exchangePoints()">Trocar pontos por voucher</button>
-    </div>
+  </header>
+  <div class="header2">
+      <h2>Pontos e vouchers</h2>
   </div>
-  
+  <div class="points-info">
+      <table>
+          <tr>
+              <td>Os seus pontos: {{ totalPoints }}</td>
+          </tr>
+          <tr>
+              <td>Vouchers acumulados: {{ vouchersNumber }}</td>
+          </tr>
+          <tr>
+              <td>Pontos necessários para um voucher:</td>
+              <td>{{ pointsNeededForVoucher }}</td>
+          </tr>
+          <tr>
+              <td colspan="2">
+                  <button (click)="exchangePoints()">Trocar pontos por voucher</button>
+              </td>
+          </tr>
+      </table>
+  </div>
+</div>

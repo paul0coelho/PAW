@@ -12,6 +12,7 @@ import { Donator } from '../models/donator';
 export class PointsComponent implements OnInit {
   pointsNeededForVoucher: number = 0;
   totalPoints: number = 0;
+  vouchersNumber: number = 0;
   donatorId: string = '';
 
   constructor(
@@ -24,6 +25,7 @@ export class PointsComponent implements OnInit {
     this.donatorId = this.route.snapshot.params['id'];
     this.donatorService.getDonator(this.donatorId).subscribe((data: Donator) => {
       this.totalPoints = Number(data.gainedPoints);
+      this.vouchersNumber = Number(data.vouchers);
     });
 
     this.pointsService.getPoints().subscribe((data: any) => {
