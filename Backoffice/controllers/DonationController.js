@@ -241,8 +241,8 @@ donationController.returnDonations = function(req, res) {
     });
 };
 
-donationController.returnDonationsByDonatorId = function(req, res) {
-  Donation.find({ donatorId: req.params.id })
+donationController.returnDonationsByDonatorId= function(req, res) {
+  Donation.find({donatorId: req.donatorId })
   .populate('entityId', 'name')
     .then(donations => {
       res.json({donations : donations});

@@ -1,45 +1,44 @@
 <div class="header">
-    <a href="/donator">
-      <h1>Recicla Têxtil</h1>
-    </a>
-  </div>
-  <div class="header2">
-    <h2>Informações do Doador</h2>
-  </div>
-  <div class="container">
-    <table>
+  <a href="/donator">
+    <h1>Recicla Têxtil</h1>
+  </a>
+</div>
+<div class="header2">
+  <h2>Informações do Doador</h2>
+</div>
+<div class="container">
+  <table *ngIf="donator">
       <tbody>
-        <tr>
-          <td>Nome</td>
-          <td>:</td>
-          <td>{{donator?.name}}</td>
-        </tr>
-        <tr>
-          <td>Telefone</td>
-          <td>:</td>
-          <td>{{donator?.phone}}</td>
-        </tr>
-        <tr>
-          <td>Morada</td>
-          <td>:</td>
-          <td>{{donator?.address}}</td>
-        </tr>
-        <tr>
-          <td>Telefone</td>
-          <td>:</td>
-          <td>{{donator?.phone}}</td>
-        </tr>
-        <tr>
-            <td>Pontos acomulados</td>
-            <td>:</td>
-            <td>{{donator?.gainedPoints}}</td>
-        </tr>
-        <tr>
-            <td>Vouchers acomulados</td>
-            <td>:</td>
-            <td>{{donator?.vouchers}}</td>
-        </tr>
+          <tr>
+              <td>Nome</td>
+              <td>:</td>
+              <td>{{donator.name}}</td>
+          </tr>
+          <tr>
+              <td>Telefone</td>
+              <td>:</td>
+              <td>{{donator.phone}}</td>
+          </tr>
+          <tr>
+              <td>Morada</td>
+              <td>:</td>
+              <td>{{donator.address}}</td>
+          </tr>
+          <tr>
+              <td>Pontos acumulados</td>
+              <td>:</td>
+              <td>{{donator.gainedPoints}}</td>
+          </tr>
+          <tr>
+              <td>Vouchers acumulados</td>
+              <td>:</td>
+              <td>{{donator.vouchers}}</td>
+          </tr>
       </tbody>
-    </table>
+  </table>
+  <div *ngIf="!donator">
+      <p>Não foi possível encontrar os dados do doador.</p>
   </div>
+</div>
+
   

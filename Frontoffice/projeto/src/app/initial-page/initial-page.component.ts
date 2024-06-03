@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-initial-page',
@@ -8,5 +9,15 @@ import { Component } from '@angular/core';
   styleUrl: './initial-page.component.css'
 })
 export class InitialPageComponent {
+
+  constructor(private router: Router){}; 
+  
+  redirectToRegisterD(){
+    this.router.navigate(['/registerDonator']);
+  }
+  redirectToRegisterE(){
+    this.router.navigate(['/registerEntity']);
+  }
+
 
 }

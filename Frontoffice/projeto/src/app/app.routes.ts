@@ -8,11 +8,12 @@ import { DonatorComponent } from './donator/donator.component';
 import { EntityProfileComponent } from './entity-profile/entity-profile.component';
 import { DonationRegistComponent } from './donation-regist/donation-regist.component';
 import { EntitiesComponent } from './entities/entities.component';
-import { DonatorProfileComponent } from './donator-profile/donator-profile.component';
 import { DonatorDonationsComponent } from './donator-donations/donator-donations.component';
 import { EntityComponent } from './entity/entity.component';
 import { PlotlyComponent} from './plotly/plotly.component';
 import { PointsComponent } from './points/points.component';
+
+import { DonatorProfileComponent } from './donator-profile/donator-profile.component'; 
 
 
 export const routes: Routes = [
@@ -33,11 +34,11 @@ export const routes: Routes = [
         component: InitialPageComponent,
     },
     {
-        path: 'donator/:id',
+        path: 'donator',
         component: DonatorComponent,
     },
     {
-        path: 'donator/profile/:id',
+        path: 'profileDonator',
         component: DonatorProfileComponent,
     },
     {

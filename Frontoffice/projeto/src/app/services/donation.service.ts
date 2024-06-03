@@ -6,6 +6,7 @@ import { Donation } from '../models/donation';
 const endpointDonations = 'http://localhost:3000/api/v1/donations/';
 
 const httpOptions = {
+  
   headers: new HttpHeaders({
     'Content-Type': 'application/json'
   })
@@ -26,7 +27,7 @@ export class DonationService {
     return this.http.get<Donation[]>(endpointDonations + "l", httpOptions);
   }
 
-  getDonationsByDonatorId(id: string): Observable<Donation[]> {
+  getDonationsByDonatorId2(id: string): Observable<Donation[]> {
     return this.http.get<Donation[]>(`${endpointDonations}returnDonationsByDonatorId/${id}`, httpOptions);
   }
 
@@ -36,5 +37,15 @@ export class DonationService {
 
   getDonation(id: string): Observable<Donation> {
     return this.http.get<Donation>(`${endpointDonations}show2/${id}`, httpOptions);
+  }
+
+  getDonationsByDonatorId(): Observable<Donation[]> {
+    const token = localStorage.getItem('accessToken');
+    const authHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.get<Donation[]>(`${endpointDonations}returnDonationsByDonatorId`, { headers: authHeaders });
   }
 }

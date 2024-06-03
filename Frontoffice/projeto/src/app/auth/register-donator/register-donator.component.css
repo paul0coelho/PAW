@@ -76,25 +76,4 @@ input[type="password"] {
 }
 
 
-.page-option {
-    padding: 5px 15px;
-    cursor: pointer;
-    font-size: 14px;
-    color: white;
-    background-color: #007BFF;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    transition: background-color 0.3s, color 0.3s;
-    width: 80px;
-    font-weight: bold;
-    margin-left: 400px;
-}
-
-
-
-.page-option:hover {
-    background-color: darkblue;
-}
-
-
 

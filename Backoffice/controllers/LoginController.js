@@ -96,10 +96,14 @@ loginController.logoutDonator = function (req,res){
     res.status(200).json({auth: false, token: null});
 }
 
-loginController.registerDonator = function(req,res){
-
-    try{
-        var hashedPassword = bcrypt.hashSync(req.body.password,10);
+loginController.registerDonator = async function(req, res) {
+    try {
+        const emailExistsEntity = await Entity.findOne({ email: req.body.email });
+        if (emailExistsEntity) {
+            return res.status(400).json({ error: 'Email já está em uso por outro doador.' });
+        }
+      
+        var hashedPassword = bcrypt.hashSync(req.body.password, 10);
 
         const donator = new Donator({
             name: req.body.name,
@@ -108,22 +112,24 @@ loginController.registerDonator = function(req,res){
             address: req.body.address,
             password: hashedPassword
         });
-        const savedDonator = donator.save();
 
-        var token = jwt.sign({ email: savedDonator.email }, config.secret, { expiresIn: 86400 });
+        const savedDonator = await donator.save();
+        var token = jwt.sign({id: savedDonator._id, email: savedDonator.email }, config.secret, { expiresIn: 86400 });
 
-       
         res.status(200).json({ auth: true, token: token });
-
-    }catch (err) {
+    } catch (err) {
         console.log(err);
-        res.status(500).json({ error: 'Erro ao registrar o doador'});
+        res.status(500).json({ error: 'Erro ao registrar o doador' });
     }
 }
-loginController.registerEntity = function(req,res){
+loginController.registerEntity = async function(req, res) {
+    try {
+        const emailExistsDonator = await Donator.findOne({ email: req.body.email });
+        if (emailExistsDonator) {
+            return res.status(400).json({ error: 'Email já está em uso por um doador.' });
+        }
 
-    try{
-        var hashedPassword = bcrypt.hashSync(req.body.password,10);
+        var hashedPassword = bcrypt.hashSync(req.body.password, 10);
 
         const entity = new Entity({
             name: req.body.name,
@@ -133,16 +139,14 @@ loginController.registerEntity = function(req,res){
             phone: req.body.phone,
             password: hashedPassword
         });
-        const savedEntity = entity.save();
 
+        const savedEntity = await entity.save();
         var token = jwt.sign({ email: savedEntity.email }, config.secret, { expiresIn: 86400 });
 
-       
         res.status(200).json({ auth: true, token: token });
-
-    }catch (err) {
+    } catch (err) {
         console.log(err);
-        res.status(500).json({ error: 'Erro ao registrar entidade'});
+        res.status(500).json({ error: 'Erro ao registrar entidade' });
     }
 }
 
@@ -161,18 +165,24 @@ loginController.profileDonator = function(req,res, next){
       });
 }
 
-loginController.verifyTokenDonator = function(req, res, next){
+loginController.verifyToken = function(req, res, next) {
+    let token = req.headers['authorization'];
+    if (!token) {
+        console.log("Token not provided");
+        return res.status(403).send({ auth: false, message: 'No token provided.' });
+    }
 
-    var token = req.headers['x-access-token'];
+    token = token.split(' ')[1];
 
-    if(!token)
-        return res.status(403).json({auth: false, message: 'No token provided.'});
+    jwt.verify(token, config.secret, (err, decoded) => {
+        if (err) {
+            console.log("Token verification failed", err);
+            return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
+        }
 
-    jwt.verify(token, config.secret, function(err,decoded){
-        if(err)
-            return res.status(500).json({auth: false, message: 'Failed to authenticate token.'});
-
+        console.log("Token verified, email:", decoded.email);
         req.donatorEmail = decoded.email;
+        req.donatorId = decoded.id;
         next();
     });
 }

@@ -16,7 +16,7 @@ router.get('/logout', loginController.logout );
 
 router.get('/logoutDonator', loginController.logoutDonator);
 
-router.get('/profileDonator', loginController.profileDonator);
+router.get('/profileDonator', loginController.verifyToken, loginController.profileDonator);
 
 router.post('/registerDonator', loginController.registerDonator);
 

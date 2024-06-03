@@ -37,4 +37,14 @@ export class DonatorService {
   deleteDonator(id: string): Observable<any> {
     return this.http.post<any>(`${endpointDonators}delete2/${id}`, httpOptions);
   }
+
+  getDonatorProfile(): Observable<Donator> {
+    const token = localStorage.getItem('accessToken');
+    const authHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<Donator>('http://localhost:3000/login/profileDonator', { headers: authHeaders });
+  }
+
 }

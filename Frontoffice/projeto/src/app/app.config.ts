@@ -13,20 +13,23 @@ import { routes } from './app.routes';
 import { CommonModule } from '@angular/common';
 import { DonationRegistComponent } from './donation-regist/donation-regist.component'; 
 
+import { DonatorProfileComponent } from './donator-profile/donator-profile.component'; 
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterDonatorComponent,
     RegisterEntityComponent,
-    DonationRegistComponent
+    DonationRegistComponent,
+    DonatorProfileComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    CommonModule
+    CommonModule,
+    AppRoutingModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorInterceptor, multi: true },

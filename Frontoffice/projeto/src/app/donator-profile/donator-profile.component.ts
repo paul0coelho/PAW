@@ -4,27 +4,31 @@ import { DonatorService } from '../services/donator.service';
 import { Donator } from '../models/donator';
 
 @Component({
-  selector: 'app-entity',
-  standalone: true,
-  imports: [],
+  selector: 'app-donator-profile',
   templateUrl: './donator-profile.component.html',
-  styleUrl: './donator-profile.component.css'
+  styleUrls: ['./donator-profile.component.css']
 })
 
 export class DonatorProfileComponent implements OnInit {
   donator?:Donator;
+  error?: string;
 
   constructor(
-    private route: ActivatedRoute, 
     private router: Router, 
-    private donatorsService: DonatorService
+    private donatorService: DonatorService
   ) { }
 
   ngOnInit(): void {
-    var idTemp = this.route.snapshot.params['id'];
-    this.donatorsService.getDonator(idTemp).subscribe((data : Donator)=>{
-      this.donator = data;
-    })
+    this.donatorService.getDonatorProfile().subscribe({
+      next: (data: Donator) => {
+        this.donator = data;
+      },
+      error: (error: any) => {
+        this.error = 'Failed to load donator profile';
+        console.error('Error loading donator profile:', error);
+         this.router.navigate(['/login']);
+      }
+    });
   }
 
 }

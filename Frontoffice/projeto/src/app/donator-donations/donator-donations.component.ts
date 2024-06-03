@@ -18,12 +18,12 @@ export class DonatorDonationsComponent implements OnInit {
   constructor(private donationService: DonationService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.getDonationsByDonatorId();
+    this.getDonationsByDonatorId2();
   }
 
-  getDonationsByDonatorId() {
+  getDonationsByDonatorId2() {
     var idTemp = this.route.snapshot.params['id'];
-    this.donationService.getDonationsByDonatorId(idTemp).subscribe((data: any) => {
+    this.donationService.getDonationsByDonatorId2(idTemp).subscribe((data: any) => {
       this.donations = data.donations;
     });
   

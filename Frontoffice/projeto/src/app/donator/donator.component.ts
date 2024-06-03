@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PlotlyService } from '../services/plotly.service';
 import { DonationService } from '../services/donation.service';
-import { ActivatedRoute } from '@angular/router';
 import { Donation } from '../models/donation';
 
 @Component({
@@ -17,12 +16,11 @@ export class DonatorComponent implements OnInit {
   constructor(
     private plot: PlotlyService,
     private donationService: DonationService,
-    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    const idTemp = this.route.snapshot.params['id'];
-    this.donationService.getDonationsByDonatorId(idTemp).subscribe((data: any) => {
+
+    this.donationService.getDonationsByDonatorId().subscribe((data: any) => {
       this.donations = data.donations;
 
       if (this.donations) {
@@ -35,6 +33,7 @@ export class DonatorComponent implements OnInit {
         this.totalDonations = this.donations.length;
 
         for (const donation of this.donations) {
+          console.log(donation.gainedPoints);
           const date = new Date(donation.updated_at);
           dates.push(date.toLocaleDateString());
           this.totalPoints += Number(donation.gainedPoints);
