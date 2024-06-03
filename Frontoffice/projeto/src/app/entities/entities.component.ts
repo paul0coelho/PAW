@@ -4,16 +4,20 @@ import { EntityService } from '../services/entity.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms'; // Import FormsModule
 
 @Component({
   selector: 'app-entities',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule], // Add FormsModule here
   templateUrl: './entities.component.html',
   styleUrls: ['./entities.component.css']
 })
 export class EntitiesComponent implements OnInit {
-  entities?: Entity[];
+  entities: Entity[] = [];
+  searchTermName: string = '';
+  searchTermAddress: string = '';
+  searchTermDescription: string = '';
 
   constructor(
     private entityService: EntityService,
@@ -27,8 +31,8 @@ export class EntitiesComponent implements OnInit {
 
   getEntities() {
     this.entityService.getEntities().subscribe((data: any) => {
-      this.entities = data.entities;
-      if (this.entities) {
+      this.entities = data.entities || []; // Ensure entities is always an array
+      if (this.entities.length > 0) {
         this.entities.forEach(entity => {
           let imageObservable;
           imageObservable = this.entityService.getEntityImage(entity._id);
@@ -47,5 +51,13 @@ export class EntitiesComponent implements OnInit {
   selectEntity(entity: Entity) {
     this.entityService.setSelectedEntity(entity);
     this.router.navigate(['/registDonation']);
+  }
+
+  filterEntities(): Entity[] {
+    return this.entities.filter(entity =>
+      entity.name.toLowerCase().includes(this.searchTermName.trim().toLowerCase()) &&
+      entity.address.toLowerCase().includes(this.searchTermAddress.trim().toLowerCase()) &&
+      entity.description.toLowerCase().includes(this.searchTermDescription.trim().toLowerCase())
+    );
   }
 }
