@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Donation } from '../models/donation';
 import { DonationService } from '../services/donation.service';
 import { EntityService } from '../services/entity.service';
-import { PointsService } from '../services/points.service';  // Import PointsService
+import { PointsService } from '../services/points.service';
 import { Entity } from '../models/entity';
 import { Donator } from '../models/donator';
 import { Points } from '../models/points';
@@ -19,7 +19,7 @@ export class DonationRegistComponent implements OnInit {
 
   selectedEntity: Entity;
   selectedDonator: Donator;
-  points:Points | null;
+  points: Points | null;
   date = new Date();
   simulatedPoints: number | null = null;
 
@@ -55,5 +55,9 @@ export class DonationRegistComponent implements OnInit {
     }, error => {
       console.error('Erro ao obter pontos: ', error);
     });
+  }
+
+  submitDonationForm(): void {
+    this.add();
   }
 }

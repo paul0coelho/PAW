@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Points } from '../models/points';
 
 const endpointPoints = 'http://localhost:3000/api/v1/points/';
+const endpointDonations = 'http://localhost:3000/api/v1/donations/';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -23,6 +24,6 @@ export class PointsService {
   }
 
   exchangePointsForVoucher(donatorId: string): Observable<any> {
-    return this.http.post<any>(`${endpointPoints}exchangePoints/${donatorId}`, {}, httpOptions);
+    return this.http.post<any>(`${endpointDonations}exchangePoints/${donatorId}`, httpOptions);
   }
 }

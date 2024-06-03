@@ -273,7 +273,7 @@ donationController.exchangePointsForVoucher = function(req, res) {
         return res.status(404).json({ error: 'Doador não encontrado' });
       }
 
-      return Points.findOne().then(points => {
+      return Points.findOne({_id:'661ff5afe10497c901313a23'}).then(points => {
         if (!points) {
           throw new Error('Pontos não encontrados');
         }
@@ -283,9 +283,22 @@ donationController.exchangePointsForVoucher = function(req, res) {
         }
 
         donator.gainedPoints -= points.pointsPerVoucher;
+
+        donator.vouchers++;
+
+        return donator.save().then(() => {
+          res.json({ message: 'Pontos trocados por voucher com sucesso!' });
+        });
+      });
+    })
+    .catch(err => {
+      console.error("Erro ao trocar pontos por voucher:", err);
+      if (!res.headersSent) {
+        res.status(500).json({ error: 'Erro ao trocar pontos por voucher', details: err.message });
+      }
     });
-});
-}
+};
+
 
 
 module.exports = donationController;

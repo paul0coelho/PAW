@@ -7,49 +7,80 @@
     <h2>Registar doação</h2>
   </div>
   <div class="donationForm">
-    <table>
-      <tr>
-        <td>
-          <a href="/entities"><button type="button">Consultar lista de entidades</button></a>
-        </td>
-      </tr>
-      <tr>
-        <td>Entidade Selecionada</td>
-      </tr>
-      <tr>
-        <td class="entity" [(ngModel)]="selectedEntity.name">{{ selectedEntity.name || 'Nenhuma entidade selecionada' }}</td>
-      </tr>
-      <tr>
-        <td>Telefone</td>
-      </tr>
-      <tr>
-        <td><input required="true" type="number" [(ngModel)]="donation.phone" /></td>
-      </tr>
-      <tr>
-        <td>Número de Peças Superiores</td>
-      </tr>
-      <tr>
-        <td><input required="true" min="0" type="number" [(ngModel)]="donation.topPiecesNumber" /></td>
-      </tr>
-      <tr>
-        <td>Número de Peças Inferiores</td>
-      </tr>
-      <tr>
-        <td><input required="true" min="0" type="number" [(ngModel)]="donation.bottomPiecesNumber" /></td>
-      </tr>
-      <tr>
-        <td>Número de Peças de Roupa Interior</td>
-      </tr>
-      <tr>
-        <td><input required="true" min="0" type="number" [(ngModel)]="donation.underwearPiecesNumber" /></td>
-      </tr>
-      <tr *ngIf="simulatedPoints !== null">
-        <td>Pontos que poderá ganhar: {{ simulatedPoints }}</td>
-      </tr>
-      <tr>
-        <td colspan="2"><button (click)="add()">Registar</button></td>
-        <td colspan="2"><button (click)="simulatePoints()">Simular</button></td>
-      </tr>
-    </table>
+    <form (ngSubmit)="submitDonationForm()" #donationForm="ngForm">
+      <table>
+        <tr>
+          <td>
+            <a href="/entities"><button type="button">Consultar lista de entidades</button></a>
+          </td>
+        </tr>
+        <tr>
+          <td>Entidade Selecionada</td>
+        </tr>
+        <tr>
+          <td class="entity" [(ngModel)]="selectedEntity.name">{{ selectedEntity.name || 'Nenhuma entidade selecionada' }}</td>
+        </tr>
+        <tr>
+          <td>Telefone</td>
+        </tr>
+        <tr>
+          <td>
+            <input required type="number" [(ngModel)]="donation.phone" placeholder="Telefone" #phone="ngModel" min="900000000" max="999999999" name="phone">
+            <div *ngIf="phone.errors && (phone.dirty || phone.touched)" class="alert">
+              <div *ngIf="phone.errors['required']">Campo obrigatório</div>
+              <div *ngIf="phone.errors['min'] || phone.errors['max']">
+                O número de telefone deve ter exatamente 9 caracteres e estar entre 900000000 e 999999999
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>Número de Peças Superiores</td>
+        </tr>
+        <tr>
+          <td>
+            <input required type="number" min="0" [(ngModel)]="donation.topPiecesNumber" #topPiecesNumber="ngModel" name="topPiecesNumber" />
+            <div *ngIf="topPiecesNumber.errors && (topPiecesNumber.dirty || topPiecesNumber.touched)" class="alert">
+              <div *ngIf="topPiecesNumber.errors['required']">Campo obrigatório</div>
+              <div *ngIf="topPiecesNumber.errors['min']">Número de peças superiores deve ser pelo menos 0</div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>Número de Peças Inferiores</td>
+        </tr>
+        <tr>
+          <td>
+            <input required type="number" min="0" [(ngModel)]="donation.bottomPiecesNumber" #bottomPiecesNumber="ngModel" name="bottomPiecesNumber" />
+            <div *ngIf="bottomPiecesNumber.errors && (bottomPiecesNumber.dirty || bottomPiecesNumber.touched)" class="alert">
+              <div *ngIf="bottomPiecesNumber.errors['required']">Campo obrigatório</div>
+              <div *ngIf="bottomPiecesNumber.errors['min']">Número de peças inferiores deve ser pelo menos 0</div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>Número de Peças de Roupa Interior</td>
+        </tr>
+        <tr>
+          <td>
+            <input required type="number" min="0" [(ngModel)]="donation.underwearPiecesNumber" #underwearPiecesNumber="ngModel" name="underwearPiecesNumber" />
+            <div *ngIf="underwearPiecesNumber.errors && (underwearPiecesNumber.dirty || underwearPiecesNumber.touched)" class="alert">
+              <div *ngIf="underwearPiecesNumber.errors['required']">Campo obrigatório</div>
+              <div *ngIf="underwearPiecesNumber.errors['min']">Número de peças de roupa interior deve ser pelo menos 0</div>
+            </div>
+          </td>
+        </tr>
+        <tr *ngIf="simulatedPoints !== null">
+          <td>Pontos que poderá ganhar:</td>
+          <td>{{ simulatedPoints }}</td>
+        </tr>
+        <tr>
+          <td colspan="2"><button type="button" (click)="simulatePoints()">Simular</button></td>
+        </tr>
+        <tr>
+          <td colspan="2"><button type="submit" [disabled]="donationForm.invalid">Registar</button></td>
+        </tr>
+      </table>
+    </form>
   </div>
   
