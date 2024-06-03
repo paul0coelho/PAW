@@ -172,7 +172,7 @@ donationController.save2 = function(req, res) {
       }
       donation.entityId = entity._id;
 
-      return calculateGainedPoints(req.body.topPiecesNumber, req.body.bottomPiecesNumber, req.body.underwearPiecesNumber);
+      return calculateGainedPoints(req.body.topPiecesNumber, req.body.bottomPiecesNumber, req.body.underwearPiecesNumber, req.body.moneyDonated);
     })
     .then(gainedPoints => {
       donation.gainedPoints = gainedPoints;
@@ -213,7 +213,7 @@ function addPointsGainedByDonation(pointsGained, phone) {
 }
 
 
-function calculateGainedPoints(topPiecesNumber, bottomPiecesNumber, underwearPiecesNumber) {
+function calculateGainedPoints(topPiecesNumber, bottomPiecesNumber, underwearPiecesNumber, moneyDonated) {
   return Points.findOne({_id:'661ff5afe10497c901313a23'})
     .then(points => {
       if (!points) {
@@ -224,6 +224,7 @@ function calculateGainedPoints(topPiecesNumber, bottomPiecesNumber, underwearPie
       gainedPoints += topPiecesNumber * points.topPiecesPoints;
       gainedPoints += bottomPiecesNumber * points.bottomPiecesPoints;
       gainedPoints += underwearPiecesNumber * points.underwearPiecesPoints;
+      gainedPoints += moneyDonated * points.pointsPerEuroDonated
 
       return parseInt(gainedPoints);
     });

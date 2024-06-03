@@ -70,6 +70,18 @@
             </div>
           </td>
         </tr>
+        <tr>
+          <td>Dinheiro</td>
+        </tr>
+        <tr>
+          <td>
+            <input required type="number" min="0" [(ngModel)]="donation.moneyDonated" #moneyDonated="ngModel" name="moneyDonated" />
+            <div *ngIf="moneyDonated.errors && (moneyDonated.dirty || moneyDonated.touched)" class="alert">
+              <div *ngIf="moneyDonated.errors['required']">Campo obrigatório</div>
+              <div *ngIf="moneyDonated.errors['min']">O valor deve ser pelo menos 0 €</div>
+            </div>
+          </td>
+        </tr>
         <tr *ngIf="simulatedPoints !== null">
           <td>Pontos que poderá ganhar:</td>
           <td>{{ simulatedPoints }}</td>

@@ -29,6 +29,10 @@ var DonationSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
+  moneyDonated: {
+    type: Number,
+    required: true
+  },
   gainedPoints: {
     type: Number,
     required: true,

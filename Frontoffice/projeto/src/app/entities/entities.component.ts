@@ -4,12 +4,12 @@ import { EntityService } from '../services/entity.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms'; // Import FormsModule
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-entities',
   standalone: true,
-  imports: [CommonModule, FormsModule], // Add FormsModule here
+  imports: [CommonModule, FormsModule],
   templateUrl: './entities.component.html',
   styleUrls: ['./entities.component.css']
 })

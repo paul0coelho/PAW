@@ -26,8 +26,8 @@ export class DonationRegistComponent implements OnInit {
   constructor(private rest: DonationService, private restEntity: EntityService, private pointsService: PointsService) {
     this.selectedDonator = new Donator("","",0,"",0,0,"");
     this.selectedEntity = new Entity("","","",0,"","",undefined,"");
-    this.points = new Points("",0,0,0,0)
-    this.donation = new Donation("", this.selectedDonator, this.selectedEntity, 912345678, 1, 1, 1, 0, this.date, "entregue");
+    this.points = new Points("",0,0,0,0,0)
+    this.donation = new Donation("", this.selectedDonator, this.selectedEntity, 912345678, 1, 1, 1, 0, 0, this.date, "entregue");
   }
 
   ngOnInit(): void {
@@ -51,7 +51,8 @@ export class DonationRegistComponent implements OnInit {
       const topPoints = Number(pointsData.topPiecesPoints) * Number(this.donation.topPiecesNumber);
       const bottomPoints = Number(pointsData.bottomPiecesPoints) * Number(this.donation.bottomPiecesNumber);
       const underwearPoints = Number(pointsData.underwearPiecesPoints) * Number(this.donation.underwearPiecesNumber);
-      this.simulatedPoints = topPoints + bottomPoints + underwearPoints;
+      const moneyPoints = Number(pointsData.pointsPerEuroDonated) * Number(this.donation.moneyDonated);
+      this.simulatedPoints = topPoints + bottomPoints + underwearPoints + moneyPoints;
     }, error => {
       console.error('Erro ao obter pontos: ', error);
     });
