@@ -88,7 +88,7 @@ loginController.login = function(req, res) {
             return res.status(401).json({ auth: false, token: null });
         }
 
-        var token = jwt.sign({ email: user.email, userType: userType }, config.secret, { expiresIn: 86400 });
+        var token = jwt.sign({id:user._id, email: user.email, userType: userType }, config.secret, { expiresIn: 86400 });
         return res.status(200).json({ auth: true, token: token, userType: userType });
     }
 };
@@ -100,7 +100,7 @@ loginController.registerDonator = async function(req, res) {
     try {
         const emailExistsEntity = await Entity.findOne({ email: req.body.email });
         if (emailExistsEntity) {
-            return res.status(400).json({ error: 'Email já está em uso por outro doador.' });
+            return res.status(400).json({ error: 'Email já está em uso por outra entidade.' });
         }
       
         var hashedPassword = bcrypt.hashSync(req.body.password, 10);
@@ -181,6 +181,8 @@ loginController.verifyToken = function(req, res, next) {
         }
 
         console.log("Token verified, email:", decoded.email);
+        console.log("Token verified, id:", decoded.id);
+
         req.donatorEmail = decoded.email;
         req.donatorId = decoded.id;
         next();
