@@ -23,6 +23,8 @@
       <button type="submit" class="add"><i class="fas fa-plus" id="add-button"></i>Adicionar Entidade</button>
     </form>
   </div>
+  
+  <h3>Entidades Aceitas</h3>
   <table>
     <thead>
       <tr>
@@ -36,7 +38,7 @@
       </tr>
     </thead>
     <tbody>
-      <% entities.forEach(entity => { %>
+      <% entities.filter(entity => entity.accepted === 'aceite').forEach(entity => { %>
       <tr>
         <td><%= entity.name %></td>
         <td><%= entity.description %></td>
@@ -53,6 +55,41 @@
       <% }); %>
     </tbody>
   </table>
+  
+  <h3>Entidades em Espera</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Descrição</th>
+        <th>Morada</th>
+        <th>Email</th>
+        <th>Telefone</th>
+        <th> </th>
+        <th> </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% entities.filter(entity => entity.accepted !== 'aceite').forEach(entity => { %>
+      <tr>
+        <td><%= entity.name %></td>
+        <td><%= entity.description %></td>
+        <td><%= entity.address %></td>
+        <td><%= entity.email %></td> 
+        <td><%= entity.phone %></td>
+        <td id="edit-row">
+          <form action="/entities/acceptEntity/<%= entity._id %>" method="post">
+            <button type="submit" id="accept-button"><i class="fas fa-check"></i></button>
+          </form>
+        </td>
+        <td id="remove-row">
+          <form action="/entities/delete/<%= entity._id %>" method="post">
+            <button type="submit" id="eliminate-button"><i class="fas fa-times"></i></button>
+          </form>
+        </td>
+      </tr>
+      <% }); %>
+    </tbody>
+  </table>
 </body>
 </html>
-

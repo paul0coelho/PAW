@@ -6,6 +6,7 @@ const bcrypt = require('bcryptjs')
 const Donator = require('../models/Donator')
 const Entity = require('../models/Entity')
 var fs = require("fs")
+const transporter = require('./mailer')
 
 mongoose.connect('mongodb+srv://paul0:1234@cluster0.gat7grz.mongodb.net/PAW?retryWrites=true&w=majority&appName=Cluster0')
 .then(()=>console.log('connection succesful'))
@@ -137,11 +138,30 @@ loginController.registerEntity = async function(req, res) {
             address: req.body.address,
             email: req.body.email,
             phone: req.body.phone,
-            password: hashedPassword
+            password: hashedPassword,
+            accepted: 'em espera'
         });
 
         const savedEntity = await entity.save();
         var token = jwt.sign({ email: savedEntity.email }, config.secret, { expiresIn: 86400 });
+
+        const admins = await mongoUser.find();
+        const adminEmails = admins.map(admin => admin.email);
+
+        const mailOptions = {
+            from: 'recilatextil5@gmail.com',
+            to: adminEmails,
+            subject: 'Nova Entidade Registada',
+            text: `A entidade ${savedEntity.name} está à espera para ser aceita.`
+        };
+
+        transporter.sendMail(mailOptions, function(error, info) {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log('Email enviado: ' + info.response);
+            }
+        });
 
         res.status(200).json({ auth: true, token: token });
     } catch (err) {
