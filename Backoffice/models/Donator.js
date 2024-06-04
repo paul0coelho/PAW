@@ -35,6 +35,10 @@ var DonatorSchema = new mongoose.Schema({
     required: true,
     unique:true
   },
+  canvasser:{
+    type: Boolean,
+    required:true
+  },
   updated_at: { 
     type: Date,
     default: Date.now

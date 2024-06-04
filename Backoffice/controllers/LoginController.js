@@ -152,7 +152,7 @@ loginController.registerEntity = async function(req, res) {
             from: 'recilatextil5@gmail.com',
             to: adminEmails,
             subject: 'Nova Entidade Registada',
-            text: `A entidade ${savedEntity.name} está à espera para ser aceita.`
+            text: `A entidade ${savedEntity.name} registou-se e está à espera para ser aceita.`
         };
 
         transporter.sendMail(mailOptions, function(error, info) {
