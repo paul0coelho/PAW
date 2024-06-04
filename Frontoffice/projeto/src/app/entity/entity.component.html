@@ -10,7 +10,7 @@
   </div>
   <div class="donation-list">
     <ul>
-      <li *ngFor="let donation of donations" class="donation-card">
+      <li *ngFor="let donation of paginatedDonations()" class="donation-card">
         <div class="donation-info">
           <p><strong>Nome do doador:</strong> {{ donation?.donatorId?.name }}</p>
           <p><strong>Número de peças superiores:</strong> {{ donation?.topPiecesNumber }}</p>
@@ -21,7 +21,9 @@
         </div>
       </li>
     </ul>
+    <div class="pagination-controls">
+      <button (click)="prevPage()" [disabled]="currentPage === 1">Anterior</button>
+      <button (click)="nextPage()" [disabled]="currentPage === totalPages">Próxima</button>
+    </div>
   </div>
 </div>
-  
-

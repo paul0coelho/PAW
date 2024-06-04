@@ -13,7 +13,7 @@
 </div>
 <div class="entity-list">
   <ul>
-    <li *ngFor="let entity of filterEntities()" class="entity-card">
+    <li *ngFor="let entity of paginatedEntities()" class="entity-card">
       <img id="image" [src]="entity.imageUrl" />
       <div class="entity-info">
         <p><strong>Nome:</strong> {{ entity?.name }}</p>
@@ -25,4 +25,8 @@
       </div>
     </li>
   </ul>
+  <div class="pagination-controls">
+    <button (click)="prevPage()" [disabled]="currentPage === 1">Anterior</button>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages">Próxima</button>
+  </div>
 </div>

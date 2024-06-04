@@ -65,7 +65,7 @@ h1, h2 {
 }
 
 button {
-    height: 36px;
+    height: 30px;
     padding: 0 12px;
     display: flex;
     align-items: center;
@@ -94,7 +94,7 @@ img {
 }
 
 .search-container {
-    padding: 20px;
+    padding: 15px;
     background-color: white;
     text-align: left;
     padding-left: 20px;
@@ -111,4 +111,15 @@ img {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
     margin-right: 20px;
+}
+
+.pagination-controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+}
+
+.pagination-controls button {
+    margin: 0; 
 }

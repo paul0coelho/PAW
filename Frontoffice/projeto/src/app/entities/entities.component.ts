@@ -18,6 +18,8 @@ export class EntitiesComponent implements OnInit {
   searchTermName: string = '';
   searchTermAddress: string = '';
   searchTermDescription: string = '';
+  currentPage: number = 1;
+  itemsPerPage: number = 5;
 
   constructor(
     private entityService: EntityService,
@@ -39,7 +41,6 @@ export class EntitiesComponent implements OnInit {
           imageObservable.subscribe((imageBlob) => {
             const objectURL = URL.createObjectURL(imageBlob);
             entity.imageUrl = this.sanitizer.bypassSecurityTrustUrl(objectURL);
-            console.log(entity.imageUrl)
           });
         });
       }
@@ -59,5 +60,26 @@ export class EntitiesComponent implements OnInit {
       entity.address.toLowerCase().includes(this.searchTermAddress.trim().toLowerCase()) &&
       entity.description.toLowerCase().includes(this.searchTermDescription.trim().toLowerCase())
     );
+  }
+
+  paginatedEntities(): Entity[] {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    return this.filterEntities().slice(startIndex, startIndex + this.itemsPerPage);
+  }
+
+  nextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+    }
+  }
+
+  prevPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+    }
+  }
+
+  get totalPages(): number {
+    return Math.ceil(this.filterEntities().length / this.itemsPerPage);
   }
 }

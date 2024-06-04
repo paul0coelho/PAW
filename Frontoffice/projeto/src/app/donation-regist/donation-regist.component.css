@@ -59,6 +59,25 @@ button {
     cursor: pointer;
 }
 
+button.simulate {
+    margin-top: 10px;
+    margin-left: 0;
+    margin-bottom: 10px;
+    height: 30px;
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 400;
+    color: #00659FFF;
+    background: #ffffff;
+    border: 2px solid #00659FFF;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
 td {
     font-size: 14px;
     line-height: 22px;
@@ -88,4 +107,9 @@ table {
 a {
     text-decoration: none;
     color: inherit;
+}
+
+.button-container {
+    display: flex;
+    gap: 10px;
 }
