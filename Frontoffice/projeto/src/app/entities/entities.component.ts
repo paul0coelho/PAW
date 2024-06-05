@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-entities',
@@ -24,10 +25,16 @@ export class EntitiesComponent implements OnInit {
   constructor(
     private entityService: EntityService,
     private router: Router,
-    private sanitizer: DomSanitizer
-  ) {}
+    private sanitizer: DomSanitizer,
+    private route: ActivatedRoute
+  ) { }
+
+  showSelectButton: boolean = false;
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      this.showSelectButton = params['showSelectButton'] !== 'false';
+    });
     this.getEntities();
   }
 

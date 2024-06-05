@@ -21,6 +21,10 @@ header h1 {
   font-size: 24px;
 }
 
+h2{
+  margin-bottom: 20px;
+}
+
 nav button {
   background-color: #00659FFF;
   border: none;

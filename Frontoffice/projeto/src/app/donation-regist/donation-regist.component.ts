@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Donation } from '../models/donation';
 import { DonationService } from '../services/donation.service';
 import { EntityService } from '../services/entity.service';
@@ -22,8 +22,15 @@ export class DonationRegistComponent implements OnInit {
   points: Points | null;
   date = new Date();
   simulatedPoints: number | null = null;
+  isSimulation: boolean = false;
 
-  constructor(private donationService: DonationService, private entityService: EntityService, private pointsService: PointsService) {
+  constructor(
+    private donationService: DonationService, 
+    private entityService: EntityService, 
+    private pointsService: PointsService, 
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
     this.selectedDonator = new Donator("","",0,"",0,0,"",false);
     this.selectedEntity = new Entity("","","",0,"","","",undefined,"",);
     this.points = new Points("",0,0,0,0,0)
@@ -32,6 +39,9 @@ export class DonationRegistComponent implements OnInit {
 
   ngOnInit(): void {
     this.selectedEntity = this.entityService.getSelectedEntity();
+    this.route.queryParams.subscribe(params => {
+      this.isSimulation = params['simulate'] === 'true';
+    });
   }
 
   add(): void {
@@ -59,6 +69,12 @@ export class DonationRegistComponent implements OnInit {
   }
 
   submitDonationForm(): void {
-    this.add();
+    if (!this.isSimulation) {
+      this.add();
+    }
+  }
+
+  redirectToEntities(params: { showSelectButton: boolean }) {
+    this.router.navigate(['/entities'], { queryParams: params });
   }
 }

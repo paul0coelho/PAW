@@ -18,6 +18,11 @@ export class InitialPageComponent {
   redirectToRegisterE(){
     this.router.navigate(['/registerEntity']);
   }
-
-
+  redirectToEntities(params: { showSelectButton: boolean }) {
+    this.router.navigate(['/entities'], { queryParams: params });
+  }
+  redirectToSimulation() {
+    this.router.navigate(['/registDonation'], { queryParams: { simulate: true } });
+  }
+  
 }

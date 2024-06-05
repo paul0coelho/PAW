@@ -14,8 +14,8 @@
         realizarem doações às entidades que são nossas parceiras.
       </p>
       <div class="actions">
-        <button class="join">Junte-se a nós</button>
-        <button class="simulate">Fazer Simulação</button>
+        <button (click)="redirectToEntities({ showSelectButton: false })">Entidades Registadas</button>
+        <button (click) ="redirectToSimulation()">Fazer Simulação</button>
       </div>
     </main>
   </div>

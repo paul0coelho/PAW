@@ -1,5 +1,5 @@
 <div class="header">
-  <a href="/donator">
+  <a [attr.href]="showSelectButton ? '/welcomePage' : '/donator'">
     <h1>Recicla Têxtil</h1>
   </a>
 </div>
@@ -21,9 +21,9 @@
         <p><strong>Telefone:</strong> {{ entity?.phone }}</p>
         <p><strong>Descrição:</strong> {{ entity?.description }}</p>
         <p><strong>Morada:</strong> {{ entity?.address }}</p>
-        <button (click)="selectEntity(entity)">Selecionar</button>
+        <button *ngIf="showSelectButton" (click)="selectEntity(entity)">Selecionar</button>
       </div>
-    </li>
+    </li>    
   </ul>
   <div class="pagination-controls">
     <button (click)="prevPage()" [disabled]="currentPage === 1">Anterior</button>

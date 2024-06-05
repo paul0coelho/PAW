@@ -1,29 +1,29 @@
 <div class="header">
-  <a href="/donator">
+  <a [attr.href]="isSimulation ? '/welcomePage' : '/donator'">
     <h1>Recicla Têxtil</h1>
   </a>
 </div>
 <div class="header2">
-  <h2>Registar doação</h2>
+  <h2>{{ isSimulation ? 'Simular Doação' : 'Registar Doação' }}</h2>
 </div>
 <div class="donationForm">
   <form (ngSubmit)="submitDonationForm()" #donationForm="ngForm">
     <table>
-      <tr>
+      <tr *ngIf="!isSimulation">
         <td>
-          <a href="/entities"><button type="button">Consultar lista de entidades</button></a>
+          <button type="button" (click)="redirectToEntities({ showSelectButton: true })">Consultar lista de entidades</button>
         </td>
       </tr>
-      <tr>
+      <tr *ngIf="!isSimulation">
         <td>Entidade Selecionada</td>
       </tr>
-      <tr>
-        <td class="entity" [(ngModel)]="selectedEntity.name">{{ selectedEntity.name || 'Nenhuma entidade selecionada' }}</td>
+      <tr *ngIf="!isSimulation">
+        <td class="entity">{{ selectedEntity.name || 'Nenhuma entidade selecionada' }}</td>
       </tr>
-      <tr>
+      <tr *ngIf="!isSimulation">
         <td>Telefone</td>
       </tr>
-      <tr>
+      <tr *ngIf="!isSimulation">
         <td>
           <input required type="number" [(ngModel)]="donation.phone" placeholder="Telefone" #phone="ngModel" min="900000000" max="999999999" name="phone">
           <div *ngIf="phone.errors && (phone.dirty || phone.touched)" class="alert">
@@ -89,7 +89,7 @@
       <tr>
         <td colspan="2">
           <div class="button-container">
-            <button type="submit" [disabled]="donationForm.invalid">Registar</button>
+            <button type="submit" [disabled]="donationForm.invalid" *ngIf="!isSimulation">Registar</button>
             <button class="simulate" type="button" (click)="simulatePoints()">Simular</button>
           </div>
         </td>
