@@ -22,8 +22,15 @@ export class DonatorService {
     return this.http.get<Donator[]>(endpointDonators + "l", httpOptions);
   }
 
-  getDonator(id: string): Observable<Donator> {
-    return this.http.get<Donator>(`${endpointDonators}show2/${id}`, httpOptions);
+  
+  getDonator(): Observable<Donator> {
+    const token = localStorage.getItem('accessToken');
+    const authHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.get<Donator>(`${endpointDonators}show2`, { headers: authHeaders });
   }
 
   createDonator(donator: Donator): Observable<Donator> {

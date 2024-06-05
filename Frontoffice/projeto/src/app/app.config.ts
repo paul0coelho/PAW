@@ -14,6 +14,7 @@ import { CommonModule } from '@angular/common';
 import { DonationRegistComponent } from './donation-regist/donation-regist.component'; 
 
 import { DonatorProfileComponent } from './donator-profile/donator-profile.component'; 
+import { EntityProfileComponent } from './entity-profile/entity-profile.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { DonatorProfileComponent } from './donator-profile/donator-profile.compo
     RegisterDonatorComponent,
     RegisterEntityComponent,
     DonationRegistComponent,
-    DonatorProfileComponent
+    DonatorProfileComponent,
+    EntityProfileComponent
   ],
   imports: [
     BrowserModule,

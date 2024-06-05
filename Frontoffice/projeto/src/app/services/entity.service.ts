@@ -50,4 +50,13 @@ export class EntityService {
     return this.http.get(images + 'entities/' + id + '.jpg', { responseType: 'blob' });
   }
 
+  getEntityProfile(): Observable<Entity> {
+    const token = localStorage.getItem('accessToken');
+    const authHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`  
+    });
+    return this.http.get<Entity>('http://localhost:3000/login/profileEntity', { headers: authHeaders });
+  }
+
 }

@@ -242,7 +242,7 @@ donationController.returnDonations = function(req, res) {
 };
 
 donationController.returnDonationsByDonatorId= function(req, res) {
-  Donation.find({donatorId: req.donatorId })
+  Donation.find({donatorId: req.id })
   .populate('entityId', 'name')
     .then(donations => {
       res.json({donations : donations});
@@ -266,9 +266,9 @@ donationController.returnDonationsByEntityId = function(req, res) {
 };
 
 donationController.exchangePointsForVoucher = function(req, res) {
-  const donatorId = req.params.id;
+  
 
-  Donator.findById(donatorId)
+  Donator.findById(req.id)
     .then(donator => {
       if (!donator) {
         return res.status(404).json({ error: 'Doador não encontrado' });

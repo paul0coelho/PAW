@@ -7,33 +7,36 @@
   <h2>Informações da Entidade</h2>
 </div>
 <div class="container">
-  <table>
+  <table *ngIf="entity">
     <tbody>
       <tr>
         <td>Nome</td>
         <td>:</td>
-        <td>{{entity?.name}}</td>
+        <td>{{entity.name}}</td>
       </tr>
       <tr>
         <td>Descrição</td>
         <td>:</td>
-        <td>{{entity?.description}}</td>
+        <td>{{entity.description}}</td>
       </tr>
       <tr>
         <td>Morada</td>
         <td>:</td>
-        <td>{{entity?.address}}</td>
+        <td>{{entity.address}}</td>
       </tr>
       <tr>
         <td>Email</td>
         <td>:</td>
-        <td>{{entity?.email}}</td>
+        <td>{{entity.email}}</td>
       </tr>
       <tr>
         <td>Telefone</td>
         <td>:</td>
-        <td>{{entity?.phone}}</td>
+        <td>{{entity.phone}}</td>
       </tr>
     </tbody>
   </table>
+  <div *ngIf="!entity">
+    <p>Não foi possível encontrar os dados do doador.</p>
+</div>
 </div>

@@ -23,7 +23,7 @@ export class DonationRegistComponent implements OnInit {
   date = new Date();
   simulatedPoints: number | null = null;
 
-  constructor(private rest: DonationService, private restEntity: EntityService, private pointsService: PointsService) {
+  constructor(private donationService: DonationService, private entityService: EntityService, private pointsService: PointsService) {
     this.selectedDonator = new Donator("","",0,"",0,0,"",false);
     this.selectedEntity = new Entity("","","",0,"","","",undefined,"",);
     this.points = new Points("",0,0,0,0,0)
@@ -31,7 +31,7 @@ export class DonationRegistComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.selectedEntity = this.restEntity.getSelectedEntity();
+    this.selectedEntity = this.entityService.getSelectedEntity();
   }
 
   add(): void {
@@ -39,7 +39,7 @@ export class DonationRegistComponent implements OnInit {
       this.donation.entityId._id = this.selectedEntity._id;
     }
 
-    this.rest.registDonation(this.donation).subscribe((data: any) => {
+    this.donationService.registDonation(this.donation).subscribe((data: any) => {
       alert('Doação registrada com sucesso!');
     }, error => {
       alert('Erro ao registrar doação para a entidade ' + error.message);

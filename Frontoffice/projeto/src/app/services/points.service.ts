@@ -23,7 +23,12 @@ export class PointsService {
     return this.http.get<Points>(endpointPoints + "l", httpOptions);
   }
 
-  exchangePointsForVoucher(donatorId: string): Observable<any> {
-    return this.http.post<any>(`${endpointDonations}exchangePoints/${donatorId}`, httpOptions);
+  exchangePointsForVoucher(): Observable<any> {
+    const token = localStorage.getItem('accessToken');
+    const authHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.post<any>(`${endpointDonations}exchangePoints`, httpOptions);
   }
 }

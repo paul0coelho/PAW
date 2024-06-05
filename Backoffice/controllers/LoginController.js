@@ -143,7 +143,7 @@ loginController.registerEntity = async function(req, res) {
         });
 
         const savedEntity = await entity.save();
-        var token = jwt.sign({ email: savedEntity.email }, config.secret, { expiresIn: 86400 });
+        var token = jwt.sign({id: savedEntity._id, email: savedEntity.email }, config.secret, { expiresIn: 86400 });
 
         const admins = await mongoUser.find();
         const adminEmails = admins.map(admin => admin.email);
@@ -171,13 +171,28 @@ loginController.registerEntity = async function(req, res) {
 }
 
 loginController.profileDonator = function(req,res, next){
-    const donatorEmail = req.donatorEmail;
+    const donatorEmail = req.email;
     Donator.findOne({ email: donatorEmail })
       .then(donator => {
         if (!donator) {
           return res.status(404).json({ error: "Doador não encontrado" });
         }
         res.json(donator);
+      })
+      .catch(err => {
+        console.log("Error:", err);
+        res.status(500).json({ error: 'Internal Server Error', details: err.message });
+      });
+}
+
+loginController.profileEntity = function(req,res, next){
+    const entityEmail = req.email;
+    Entity.findOne({ email: entityEmail })
+      .then(entity => {
+        if (!entity) {
+          return res.status(404).json({ error: "Entidade não encontrado" });
+        }
+        res.json(entity);
       })
       .catch(err => {
         console.log("Error:", err);
@@ -203,8 +218,8 @@ loginController.verifyToken = function(req, res, next) {
         console.log("Token verified, email:", decoded.email);
         console.log("Token verified, id:", decoded.id);
 
-        req.donatorEmail = decoded.email;
-        req.donatorId = decoded.id;
+        req.email = decoded.email;
+        req.id = decoded.id;
         next();
     });
 }

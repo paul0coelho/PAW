@@ -18,6 +18,8 @@ router.get('/logoutDonator', loginController.logoutDonator);
 
 router.get('/profileDonator', loginController.verifyToken, loginController.profileDonator);
 
+router.get('/profileEntity', loginController.verifyToken, loginController.profileEntity);
+
 router.post('/registerDonator', loginController.registerDonator);
 
 router.post('/registerEntity', loginController.registerEntity);

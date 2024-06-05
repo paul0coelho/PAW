@@ -5,7 +5,6 @@ import { RegisterDonatorComponent } from './auth/register-donator/register-donat
 import { RegisterEntityComponent } from './auth/register-entity/register-entity.component';
 import { InitialPageComponent } from './initial-page/initial-page.component';
 import { DonatorComponent } from './donator/donator.component';
-import { EntityProfileComponent } from './entity-profile/entity-profile.component';
 import { DonationRegistComponent } from './donation-regist/donation-regist.component';
 import { EntitiesComponent } from './entities/entities.component';
 import { DonatorDonationsComponent } from './donator-donations/donator-donations.component';
@@ -13,7 +12,8 @@ import { EntityComponent } from './entity/entity.component';
 import { PlotlyComponent} from './plotly/plotly.component';
 import { PointsComponent } from './points/points.component';
 
-import { DonatorProfileComponent } from './donator-profile/donator-profile.component'; 
+import { DonatorProfileComponent } from './donator-profile/donator-profile.component';
+import { EntityProfileComponent } from './entity-profile/entity-profile.component'; 
 
 
 export const routes: Routes = [
@@ -42,6 +42,10 @@ export const routes: Routes = [
         component: DonatorProfileComponent,
     },
     {
+        path: 'profileEntity',
+        component: EntityProfileComponent,
+    },
+    {
         path: 'registDonation',
         component: DonationRegistComponent,
     },
@@ -50,11 +54,7 @@ export const routes: Routes = [
         component: EntitiesComponent,
     },
     {
-        path: 'entity/profile/:id',
-        component: EntityProfileComponent,
-    },
-    {
-        path: 'donator/donations/:id',
+        path: 'donator/donations',
         component: DonatorDonationsComponent,
     },
     {
@@ -65,7 +65,7 @@ export const routes: Routes = [
         path: 'plotly',
         component: PlotlyComponent,
     },
-    { path: 'points/:id', component: PointsComponent }
+    { path: 'points', component: PointsComponent }
 ];
 
 @NgModule({

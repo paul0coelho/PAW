@@ -56,8 +56,6 @@ router.get('/returnDonationsByEntityId/:id', function(req, res) {
   donation.returnDonationsByEntityId(req, res);
 });
 
-router.post('/exchangePoints/:id', function(req, res) {
-  donation.exchangePointsForVoucher(req, res);
-});
-
+router.post('/exchangePoints',loginController.verifyToken,donation.exchangePointsForVoucher);
+  
 module.exports = router;

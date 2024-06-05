@@ -76,6 +76,14 @@ input[type="password"] {
 .clickable-title {
     cursor: pointer;
 }
+a{
+    text-decoration: none;
+}
+
+footer{
+    margin-top: 20px;
+    margin-left: 280px;
+}
 
 
 

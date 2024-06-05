@@ -46,7 +46,7 @@ donatorController.show = function(req, res) {
 };
 
 donatorController.show2 = function(req, res) {
-  Donator.findOne({_id: req.params.id})
+  Donator.findOne({_id: req.id})
     .then(donator => {
       if (!donator) {
         return res.status(404).json({ error: 'Doador não encontrado' });

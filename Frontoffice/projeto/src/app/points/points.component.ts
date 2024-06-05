@@ -22,8 +22,7 @@ export class PointsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.donatorId = this.route.snapshot.params['id'];
-    this.donatorService.getDonator(this.donatorId).subscribe((data: Donator) => {
+    this.donatorService.getDonator().subscribe((data: Donator) => {
       this.totalPoints = Number(data.gainedPoints);
       this.vouchersNumber = Number(data.vouchers);
     });
@@ -38,7 +37,7 @@ export class PointsComponent implements OnInit {
     if(this.totalPoints < this.pointsNeededForVoucher){
       alert('Pontos não suficientes para a troca')
     }   
-    this.pointsService.exchangePointsForVoucher(this.donatorId).subscribe(() => {
+    this.pointsService.exchangePointsForVoucher().subscribe(() => {
         alert('Pontos trocados por voucher com sucesso!');
       }, error => {
         alert('Erro ao trocar pontos por voucher.');

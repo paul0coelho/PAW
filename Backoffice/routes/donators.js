@@ -18,10 +18,8 @@ router.get('/show/:id', loginController.verifyLoginUser, function(req, res) {
   donator.show(req, res);
 });
 
-// Obter um doador pelo _id
-router.get('/show2/:id', function(req, res) {
-  donator.show2(req, res);
-});
+
+router.get('/show2', loginController.verifyToken, donator.show2);
 
 // Obter um doador pelo contacto do doador
 router.get('/searchByPhone', loginController.verifyLoginUser, function(req, res) {

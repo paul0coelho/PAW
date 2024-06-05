@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit{
       if (response.userType === 'donator') {
         this.router.navigate(['/donator']);
       } else if (response.userType === 'entity') {
-        this.router.navigate(['/entities']); 
+        this.router.navigate(['/profileEntity']); 
       } else {
         this.router.navigate(['/error']); 
       }
