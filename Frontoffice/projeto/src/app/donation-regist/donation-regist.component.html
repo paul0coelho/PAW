@@ -20,20 +20,6 @@
       <tr *ngIf="!isSimulation">
         <td class="entity">{{ selectedEntity.name || 'Nenhuma entidade selecionada' }}</td>
       </tr>
-      <tr *ngIf="!isSimulation">
-        <td>Telefone</td>
-      </tr>
-      <tr *ngIf="!isSimulation">
-        <td>
-          <input required type="number" [(ngModel)]="donation.phone" placeholder="Telefone" #phone="ngModel" min="900000000" max="999999999" name="phone">
-          <div *ngIf="phone.errors && (phone.dirty || phone.touched)" class="alert">
-            <div *ngIf="phone.errors['required']">Campo obrigatório</div>
-            <div *ngIf="phone.errors['min'] || phone.errors['max']">
-              O número de telefone deve ter exatamente 9 caracteres e estar entre 900000000 e 999999999
-            </div>
-          </div>
-        </td>
-      </tr>
       <tr>
         <td>Número de Peças Superiores</td>
       </tr>

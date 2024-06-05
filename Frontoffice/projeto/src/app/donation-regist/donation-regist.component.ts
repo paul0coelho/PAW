@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Donation } from '../models/donation';
+import { DonatorService } from '../services/donator.service';
 import { DonationService } from '../services/donation.service';
 import { EntityService } from '../services/entity.service';
 import { PointsService } from '../services/points.service';
@@ -27,7 +28,8 @@ export class DonationRegistComponent implements OnInit {
   constructor(
     private donationService: DonationService, 
     private entityService: EntityService, 
-    private pointsService: PointsService, 
+    private pointsService: PointsService,
+    private donatorService: DonatorService,
     private router: Router,
     private route: ActivatedRoute
   ) {
@@ -39,6 +41,10 @@ export class DonationRegistComponent implements OnInit {
 
   ngOnInit(): void {
     this.selectedEntity = this.entityService.getSelectedEntity();
+    this.donatorService.getDonator().subscribe((data:any)=> {
+      this.donation.phone = data.phone;
+
+    })
     this.route.queryParams.subscribe(params => {
       this.isSimulation = params['simulate'] === 'true';
     });

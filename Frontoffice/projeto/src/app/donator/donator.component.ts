@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { PlotlyService } from '../services/plotly.service';
 import { DonationService } from '../services/donation.service';
 import { Donation } from '../models/donation';
@@ -16,6 +17,7 @@ export class DonatorComponent implements OnInit {
   constructor(
     private plot: PlotlyService,
     private donationService: DonationService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -43,5 +45,11 @@ export class DonatorComponent implements OnInit {
         this.plot.plotLine("Evolução do número de pontos", "plot", dates, cumulativePoints);
       }
     });
+  }
+
+  encerrarSessao(): void {
+    
+    localStorage.removeItem('accessToken');
+    this.router.navigate(['/login']);
   }
 }

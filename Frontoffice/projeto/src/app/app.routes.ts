@@ -10,6 +10,7 @@ import { EntitiesComponent } from './entities/entities.component';
 import { DonatorDonationsComponent } from './donator-donations/donator-donations.component';
 import { EntityComponent } from './entity/entity.component';
 import { PlotlyComponent} from './plotly/plotly.component';
+import { AuthGuard } from './auth.guard';
 import { PointsComponent } from './points/points.component';
 
 import { DonatorProfileComponent } from './donator-profile/donator-profile.component';
@@ -36,10 +37,12 @@ export const routes: Routes = [
     {
         path: 'donator',
         component: DonatorComponent,
+        canActivate: [AuthGuard],
     },
     {
         path: 'profileDonator',
         component: DonatorProfileComponent,
+        canActivate: [AuthGuard],
     },
     {
         path: 'profileEntity',
@@ -48,6 +51,7 @@ export const routes: Routes = [
     {
         path: 'registDonation',
         component: DonationRegistComponent,
+        canActivate: [AuthGuard],
     },
     {
         path: 'entities',
@@ -56,6 +60,7 @@ export const routes: Routes = [
     {
         path: 'donator/donations',
         component: DonatorDonationsComponent,
+        canActivate: [AuthGuard],
     },
     {
         path: 'entity/:id',

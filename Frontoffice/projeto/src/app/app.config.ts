@@ -12,7 +12,7 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { CommonModule } from '@angular/common';
 import { DonationRegistComponent } from './donation-regist/donation-regist.component'; 
-
+import { AuthGuard } from './auth.guard';
 import { DonatorProfileComponent } from './donator-profile/donator-profile.component'; 
 import { EntityProfileComponent } from './entity-profile/entity-profile.component';
 
@@ -36,7 +36,8 @@ import { EntityProfileComponent } from './entity-profile/entity-profile.componen
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorInterceptor, multi: true },
     provideRouter(routes),
-    provideHttpClient()
+    provideHttpClient(),
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

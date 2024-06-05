@@ -23,8 +23,28 @@ export class AuthService {
   }
 
 
-  logout() {
-    localStorage.removeItem('currentUser');
+  logout(): void {
+    localStorage.removeItem('accessToken');
   }
+
+  isLoggedIn(): boolean {
+    return !!this.getToken();
+  }
+
+  isTokenValid(): boolean {
+    const token = this.getToken();
+    if (!token) {
+      return false;
+    }
+    return true;
+}
+
+getToken(): string | null {
+  return localStorage.getItem('accessToken');
+}
+
+setToken(token: string): void {
+  localStorage.setItem('accessToken', token);
+}
 }
 

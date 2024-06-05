@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit{
  login(): void {
   this.authService.login(this.email, this.password).subscribe((response: any) => {
     if (response && response.token) {
-      localStorage.setItem('currentUser', JSON.stringify(response));
+      localStorage.setItem('accessToken', JSON.stringify(response));
       if (response.userType === 'donator') {
         this.router.navigate(['/donator']);
       } else if (response.userType === 'entity') {
