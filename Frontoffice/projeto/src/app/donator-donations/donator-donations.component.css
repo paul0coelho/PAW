@@ -89,3 +89,14 @@ img {
     width: 100px;
     height: auto;
 }
+
+.pagination-controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+}
+
+.pagination-controls button {
+    margin: 0; 
+}

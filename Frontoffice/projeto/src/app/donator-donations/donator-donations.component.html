@@ -1,23 +1,26 @@
 <div class="header">
-    <a href="/donator">
-      <h1>Recicla Têxtil</h1>
-    </a>
+  <a href="/donator">
+    <h1>Recicla Têxtil</h1>
+  </a>
+</div>
+<div class="header2">
+  <h2>Histórico de doações</h2>
+</div>
+<div class="donation-list">
+  <ul>
+    <li *ngFor="let donation of paginatedDonations()" class="donation-card">
+      <div class="donation-info">
+        <p><strong>Nome da entidade:</strong> {{ donation?.entityId?.name }}</p>
+        <p><strong>Número de peças superiores:</strong> {{ donation?.topPiecesNumber }}</p>
+        <p><strong>Número de peças inferiores:</strong> {{ donation?.bottomPiecesNumber }}</p>
+        <p><strong>Número de peças de roupa interior:</strong> {{ donation?.underwearPiecesNumber }}</p>
+        <p><strong>Dinheiro:</strong> {{ donation?.moneyDonated }}€</p>
+        <p><strong>Pontos ganhos:</strong> {{ donation?.gainedPoints }}</p>
+      </div>
+    </li>
+  </ul>
+  <div class="pagination-controls">
+    <button (click)="prevPage()" [disabled]="currentPage === 1">Anterior</button>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages">Próxima</button>
   </div>
-  <div class="header2">
-    <h2>Histórico de doações</h2>
-  </div>
-  <div class="donation-list">
-    <ul>
-      <li *ngFor="let donation of donations" class="donation-card">
-        <div class="donation-info">
-          <p><strong>Nome da entidade:</strong> {{ donation?.entityId?.name }}</p>
-          <p><strong>Número de peças superiores:</strong> {{ donation?.topPiecesNumber }}</p>
-          <p><strong>Número de peças inferiores:</strong> {{ donation?.bottomPiecesNumber }}</p>
-          <p><strong>Número de peças de roupa interior:</strong> {{ donation?.underwearPiecesNumber }}</p>
-          <p><strong>Dinheiro:</strong> {{ donation?.moneyDonated }}€</p>
-          <p><strong>Pontos ganhos:</strong> {{ donation?.gainedPoints }}</p>
-        </div>
-      </li>
-    </ul>
-  </div>
-  
+</div>
