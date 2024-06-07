@@ -3,6 +3,8 @@ var Donation = require("../models/Donation");
 var Donator = require("../models/Donator");
 var Points = require("../models/Points");
 var Entity = require("../models/Entity");
+var Admins = require("../models/Admin");
+const transporter = require('./mailer')
 var path = require('path');
 var fs = require("fs");
 
@@ -12,17 +14,18 @@ mongoose.connect('mongodb+srv://paul0:1234@cluster0.gat7grz.mongodb.net/PAW?retr
   .then(() => console.log('connection successful'))
   .catch((err) => console.error(err));
 
-donationController.list = function(req, res) {
-  Donation.find()
-    .then(donations => {
-      res.render("../views/donations/showAll", { donations: donations });
-    })
-    .catch(err => {
-      console.log("Error:", err);
-      res.status(500).send('Internal Server Error');
-    });
-};
-
+  donationController.list = function(req, res) {
+    Donation.find()
+      .populate('donatorId', 'name')
+      .populate('entityId', 'name')
+      .then(donations => {
+        res.render("../views/donations/showAll", { donations: donations });
+      })
+      .catch(err => {
+        console.log("Error:", err);
+        res.status(500).send('Internal Server Error');
+      });
+  };
 donationController.list2 = function(req, res) {
   Donation.find()
     .then(donations => {
@@ -164,7 +167,7 @@ donationController.save2 = function(req, res) {
       }
       donation.donatorId = donator._id;
 
-      return Entity.findOne({ _id: req.body.entityId});
+      return Entity.findOne({ _id: req.body.entityId });
     })
     .then(entity => {
       if (!entity) {
@@ -172,23 +175,52 @@ donationController.save2 = function(req, res) {
       }
       donation.entityId = entity._id;
 
-      return calculateGainedPoints(req.body.topPiecesNumber, req.body.bottomPiecesNumber, req.body.underwearPiecesNumber, req.body.moneyDonated);
+      return calculateGainedPoints(
+        req.body.topPiecesNumber, 
+        req.body.bottomPiecesNumber, 
+        req.body.underwearPiecesNumber, 
+        req.body.moneyDonated
+      );
     })
     .then(gainedPoints => {
       donation.gainedPoints = gainedPoints;
-    })
-    .then(() => {
       return donation.save();
     })
     .then(savedDonation => {
       console.log('Doação registada com sucesso.');
-      res.json(savedDonation);
+
+      return Donation.findById(savedDonation._id)
+        .populate('donatorId', 'name')
+        .populate('entityId', 'name');
+    })
+    .then(populatedDonation => {
+      const donatorName = populatedDonation.donatorId.name;
+      const entityName = populatedDonation.entityId.name;
+
+      return Admins.find()
+        .then(admins => {
+          const adminEmails = admins.map(admin => admin.email);
+
+          const mailOptions = {
+            from: 'recilatextil5@gmail.com',
+            to: adminEmails,
+            subject: 'Nova Doação Registada',
+            text: `A doação do doador ${donatorName} para a entidade ${entityName} está à espera para ser aceite.`
+          };
+
+          return transporter.sendMail(mailOptions);
+        })
+        .then(info => {
+          console.log('Email enviado: ' + info.response);
+          res.json(populatedDonation);
+        });
     })
     .catch(err => {
       console.log(err);
       res.status(500).json({ error: 'Internal Server Error', details: err.message });
     });
 };
+
 
 donationController.delete = function(req, res) {
   Donation.findOneAndDelete({ _id: req.params.id })
