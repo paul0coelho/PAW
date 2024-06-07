@@ -112,14 +112,16 @@ pointsController.save = function(req, res) {
   };
 
   pointsController.update = function(req, res) {
-    Points.findByIdAndUpdate("661ff5afe10497c901313a23",{ 
+    Points.findByIdAndUpdate("661ff5afe10497c901313a23", { 
       $set: { 
         topPiecesPoints: req.body.topPiecesPoints, 
         bottomPiecesPoints: req.body.bottomPiecesPoints, 
         underwearPiecesPoints: req.body.underwearPiecesPoints,
-        pointsPerVoucher: req.body.pointsPerVoucher
+        pointsPerVoucher: req.body.pointsPerVoucher,
+        pointsPerEuroDonated: req.body.pointsPerEuroDonated,
+        pointsPerNewUser: req.body.pointsPerNewUser
       }
-    },{ new: true })
+    }, { new: true })
       .then(points => {
         if (!points) {
           return res.status(404).send('');
@@ -131,6 +133,7 @@ pointsController.save = function(req, res) {
         res.render("../views/points/edit", { points: req.body });
       });
   };
+
 
   pointsController.update2 = function(req, res) {
     Points.findByIdAndUpdate("661ff5afe10497c901313a23", { 

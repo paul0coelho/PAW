@@ -11,7 +11,7 @@
       </a>
     </div>
     <div class="header2">
-      <h2>Pontos atribuídos por cada tipo de peça doada</h2>
+      <h2>Pontos atribuídos</h2>
     </div>
     <div class="container">
       <table>
@@ -36,6 +36,18 @@
             <td>:</td>
             <td><%= points.pointsPerVoucher %></td>
           </tr>
+          <tr>
+            <td>Pontos ganhos por euro doado</td>
+            <td>:</td>
+            <td><%= points.pointsPerEuroDonated %></td>
+          </tr>
+          <tr>
+            <tr>
+              <td>Pontos ganhos por doador angariado</td>
+              <td>:</td>
+              <td><%= points.pointsPerNewUser %></td>
+            </tr>
+            <tr>
         </tbody>
       </table>
       <form action="/points/edit/661ff5afe10497c901313a23" method="get">

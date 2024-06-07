@@ -11,7 +11,7 @@
         </a>
       </div>
       <div class="header2">
-        <h2>Editar Pontos atribuídos a cada tipo de peça</h2>
+        <h2>Editar Pontos atribuídos</h2>
       </div>
       <form action="/points/update/661ff5afe10497c901313a23" method="post">
         <table>
@@ -38,6 +38,18 @@
             </tr>
             <tr>
               <td><input required="true" type="number" min=1 name="pointsPerVoucher" placeholder="<%= points.pointsPerVoucher %>" /></td>
+            </tr>
+            <tr>
+              <td>Pontos ganhos por euro doado</td>
+            </tr>
+            <tr>
+              <td><input required="true" type="number" min=1 name="pointsPerEuroDonated" placeholder="<%= points.pointsPerEuroDonated %>" /></td>
+            </tr>
+            <tr>
+              <td>Pontos ganhos por doador angariado</td>
+            </tr>
+            <tr>
+              <td><input required="true" type="number" min=1 name="pointsPerNewUser" placeholder="<%= points.pointsPerNewUser %>" /></td>
             </tr>
             <tr>
               <td colspan="2"><button type="submit">Atualizar</button></td>
