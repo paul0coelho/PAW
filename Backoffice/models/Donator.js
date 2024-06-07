@@ -35,8 +35,8 @@ var DonatorSchema = new mongoose.Schema({
     required: true,
     unique:true
   },
-  canvasser:{
-    type: Boolean,
+  canvasserCode:{
+    type: String,
     required:true
   },
   updated_at: { 

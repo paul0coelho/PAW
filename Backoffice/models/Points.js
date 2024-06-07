@@ -26,6 +26,11 @@ var PointsSchema = new mongoose.Schema({
     min:1,
     required:true
   },
+  pointsPerNewUser: {
+    type: Number,
+    min:1,
+    required:true
+  },
   updated_at: { type: Date, default: Date.now },
 });
 

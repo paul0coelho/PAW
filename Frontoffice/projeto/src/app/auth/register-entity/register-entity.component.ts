@@ -15,6 +15,7 @@ export class RegisterEntityComponent {
   phone: number | null = null;
   address: string;
   password:string;
+  selectedFile: File;
 
   constructor(private router: Router, private registerService: RegisterService) { 
     this.password="";
@@ -23,16 +24,28 @@ export class RegisterEntityComponent {
     this.description="";
     this.address="";
     this.phone= null;
+    const defaultContent = new Blob(['Conteúdo inicial'], { type: 'text/plain' });
+    this.selectedFile = new File([defaultContent], 'arquivoInicial.txt', { type: 'text/plain' });
     
   }
 
   ngOnInit(): void {
   }
   
+  onFileSelected(event: Event) {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      this.selectedFile=file;
+    }
+  }
+
+
   registerEntity(): void{
     
     if(this.phone){
-    this.registerService.registerEntity(this.name,this.description, this.email, this.phone, this.address, this.password).subscribe((user : any)=>{
+    this.registerService.registerEntity(this.name,this.description, this.email, this.phone, this.address, this.password, this.selectedFile).subscribe((user : any)=>{
       if (user && user.token) {
         localStorage.setItem('currentUser', JSON.stringify(user));
         this.router.navigate(['/entities']);

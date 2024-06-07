@@ -57,5 +57,12 @@ router.get('/returnDonationsByEntityId/:id', function(req, res) {
 });
 
 router.post('/exchangePoints',loginController.verifyToken,donation.exchangePointsForVoucher);
+
+router.post('/acceptDonation/:id', loginController.verifyLoginUser, function(req, res) {
+  donation.acceptDonation(req, res);
+});
   
+router.post('/delete/:id', loginController.verifyLoginUser, function(req, res, next) {
+  donation.delete(req, res);
+});
 module.exports = router;

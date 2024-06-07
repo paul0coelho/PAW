@@ -13,7 +13,7 @@
     background-color: white;
     padding: 30px;
     border-radius: 10px;
-    height: 500px;
+    height: 550px;
     width: 500px;
     margin-top: 10px;
 }
@@ -58,6 +58,7 @@ input[type="password"] {
     cursor: pointer;
     font-weight: bold;
     margin-left: 80px;
+    margin-top: 20px;
 }
 
 .login-button:hover {

@@ -6,11 +6,11 @@ export class Donator{
     gainedPoints:Number;
     vouchers:Number;
     password:String;
-    canvasser:Boolean;
+    canvasserCode:String;
     updated_at: Date;
 
     constructor(__id:String, name:String, phone:Number, address:String, gainedPoints:Number, vouchers:Number, password:String,
-        canvasser:Boolean, updated_at: Date = new Date()){
+        canvasserCode:String, updated_at: Date = new Date()){
         this.__id = __id;
         this.name = name;
         this.phone = phone;
@@ -19,6 +19,6 @@ export class Donator{
         this.vouchers = vouchers;
         this.password = password;
         this.updated_at = updated_at;
-        this.canvasser = canvasser;
+        this.canvasserCode = canvasserCode;
     }
 }

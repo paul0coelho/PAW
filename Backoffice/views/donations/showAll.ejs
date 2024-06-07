@@ -23,24 +23,70 @@
       <button type="submit" class="add"><i class="fas fa-plus" id="add-button"></i>Registar Doação</button>
     </form>
   </div>
+
+  <h3>Doações Aceitas</h3>
   <table>
     <thead>
       <tr>
-        <th>Contacto do Doador</th>
+        <th>Doador</th>
+        <th>Entidade</th>
         <th>Número de Peças Superiores</th>
         <th>Número de Peças Inferiores</th>
         <th>Número de Peças de Roupa Interior</th>
+        <th>Dinheiro</th>
         <th>Pontos obtidos</th>
       </tr>
     </thead>
     <tbody>
-      <% donations.forEach(donation => { %>
+      <% donations.filter(donation => donation.status === 'aceite').forEach(donation => { %>
       <tr>
-        <td><%= donation.phone %></td>
+        <td><%= donation.donatorId.name %></td>
+        <td><%= donation.entityId.name %></td>
         <td id="points-column"><%= donation.topPiecesNumber %></td>
         <td id="points-column"><%= donation.bottomPiecesNumber %></td>
         <td id="points-column"><%= donation.underwearPiecesNumber %></td>
+        <td id="points-column"><%= donation.moneyDonated %></td>
         <td id="points-column"><%= donation.gainedPoints %></td>
+      </tr>
+      <% }); %>
+    </tbody>
+  </table>
+
+  <h3>Doações em Espera</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Doador</th>
+        <th>Entidade</th>
+        <th>Número de Peças Superiores</th>
+        <th>Número de Peças Inferiores</th>
+        <th>Número de Peças de Roupa Interior</th>
+        <th>Dinheiro</th>
+        <th>Pontos obtidos</th>
+        <th> </th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% donations.filter(donation => donation.status !== 'aceite').forEach(donation => { %>
+      <tr>
+        <td><%= donation.donatorId.name %></td>
+        <td><%= donation.entityId.name %></td>
+        <td id="points-column"><%= donation.topPiecesNumber %></td>
+        <td id="points-column"><%= donation.bottomPiecesNumber %></td>
+        <td id="points-column"><%= donation.underwearPiecesNumber %></td>
+        <td id="points-column"><%= donation.moneyDonated %></td>
+        <td id="points-column"><%= donation.gainedPoints %></td>
+        <td id="edit-row">
+          <form action="/donations/acceptDonation/<%= donation._id %>" method="post">
+            <button type="submit" id="accept-button"><i class="fas fa-check"></i></button>
+          </form>
+        </td>
+        <td id="remove-row">
+          <form action="/donations/delete/<%= donation._id %>" method="post">
+            <button type="submit" id="eliminate-button"><i class="fas fa-times"></i></button>
+          </form>
+        </td>
       </tr>
       <% }); %>
     </tbody>

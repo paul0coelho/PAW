@@ -28,6 +28,9 @@
             <input id="password" placeholder="**********************" [(ngModel)]="password" name="password" type="password" required>
           </div>
     
+          <label for="upload-input" id="upload-label">Escolher imagem</label>
+          <input type="file" id="upload-input" name="file" accept="image/" (change)="onFileSelected($event)" />
+
           <button class="login-button" (click)="registerEntity()"> Register </button>
   
 

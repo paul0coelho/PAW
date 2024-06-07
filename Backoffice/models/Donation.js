@@ -36,11 +36,10 @@ var DonationSchema = new mongoose.Schema({
   gainedPoints: {
     type: Number,
     required: true,
-    min: 1
   },
   status: {
     type: String,
-    enum: ['recebido', 'entregue', 'extraviado'],
+    enum: ['em espera', 'aceite'],
     required: true
   },
   updated_at: { 

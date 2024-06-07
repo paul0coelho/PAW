@@ -14,33 +14,33 @@ export class RegisterDonatorComponent {
   phone: number | null;
   address: string;
   password:string;
+  canvasserCode: string;
   
-  
-
   constructor(private router: Router, private registerService: RegisterService) { 
     this.password="";
     this.email="";
     this.name="";
     this.address="";
     this.phone= null;
+    this.canvasserCode = ""
     
   }
   ngOnInit(): void {
   }
   
-  registerDonator(): void{
-    
-    if(this.phone){
-    this.registerService.registerDonator(this.name, this.email, this.phone, this.address, this.password).subscribe((user : any)=>{
-      if (user && user.token) {
-        localStorage.setItem('currentUser', JSON.stringify(user));
-        this.router.navigate(['/login']);
-      } else {
-        alert('Erro no login!');
-      }
-    })
+  registerDonator(): void {
+    if (this.phone) {
+      this.registerService.registerDonator(this.name, this.email, this.phone, this.address, this.password, this.canvasserCode).subscribe((user: any) => {
+        if (user && user.token) {
+          localStorage.setItem('currentUser', JSON.stringify(user));
+          this.router.navigate(['/login']);
+        } else {
+          alert('Erro no login!');
+        }
+      });
+    }
   }
-  }
+  
   selectPage(){
     this.router.navigate(['/registerEntity']);
   }

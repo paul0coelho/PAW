@@ -33,10 +33,10 @@ export class DonationRegistComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {
-    this.selectedDonator = new Donator("","",0,"",0,0,"",false);
+    this.selectedDonator = new Donator("","",0,"",0,0,"","");
     this.selectedEntity = new Entity("","","",0,"","","",undefined,"",);
-    this.points = new Points("",0,0,0,0,0)
-    this.donation = new Donation("", this.selectedDonator, this.selectedEntity, 912345678, 1, 1, 1, 0, 0, this.date, "entregue");
+    this.points = new Points("",0,0,0,0,0,0)
+    this.donation = new Donation("", this.selectedDonator, this.selectedEntity, 912345678, 1, 1, 1, 0, 0, this.date, "em espera");
   }
 
   ngOnInit(): void {

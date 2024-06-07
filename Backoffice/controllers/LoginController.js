@@ -5,8 +5,10 @@ const config = require('../jwt_secret/config')
 const bcrypt = require('bcryptjs')
 const Donator = require('../models/Donator')
 const Entity = require('../models/Entity')
+const Points = require('../models/Points')
 var fs = require("fs")
 const transporter = require('./mailer')
+var path = require('path')
 
 mongoose.connect('mongodb+srv://paul0:1234@cluster0.gat7grz.mongodb.net/PAW?retryWrites=true&w=majority&appName=Cluster0')
 .then(()=>console.log('connection succesful'))
@@ -111,8 +113,20 @@ loginController.registerDonator = async function(req, res) {
             email: req.body.email,
             phone: req.body.phone,
             address: req.body.address,
-            password: hashedPassword
+            password: hashedPassword,
+            canvasserCode: req.body.email
         });
+
+        if (req.body.canvasserCode) {
+            const canvasser = await Donator.findOne({ email: req.body.canvasserCode });
+            if (canvasser) {
+                const points = await Points.findOne({_id:'661ff5afe10497c901313a23'});
+                if (points) {
+                    canvasser.gainedPoints += points.pointsPerNewUser;
+                    await canvasser.save();
+                }
+            }
+        }
 
         const savedDonator = await donator.save();
         var token = jwt.sign({id: savedDonator._id, email: savedDonator.email }, config.secret, { expiresIn: 86400 });
@@ -123,6 +137,7 @@ loginController.registerDonator = async function(req, res) {
         res.status(500).json({ error: 'Erro ao registrar o doador' });
     }
 }
+
 loginController.registerEntity = async function(req, res) {
     try {
         const emailExistsDonator = await Donator.findOne({ email: req.body.email });
@@ -144,6 +159,31 @@ loginController.registerEntity = async function(req, res) {
 
         const savedEntity = await entity.save();
         var token = jwt.sign({id: savedEntity._id, email: savedEntity.email }, config.secret, { expiresIn: 86400 });
+
+        var fileDestination = path.join(__dirname, "..", "images", "entities", savedEntity._id.toString() + ".jpg");
+        
+
+        fs.readFile(req.file.path, function (err, data) {
+          if (err) {
+            console.error("Error reading file:", err);
+            return res.status(500).send("Error reading file");
+          }
+
+          fs.writeFile(fileDestination, data, function (err) {
+            if (err) {
+              console.error("Error writing file:", err);
+              return res.status(500).send("Error writing file");
+            }
+            fs.unlink(req.file.path, function (err) {
+              if (err) {
+                console.error(
+                  "Erro ao remover o arquivo da pasta 'tmp':",
+                  err
+                );
+              }
+            });
+          });
+        });
 
         const admins = await mongoUser.find();
         const adminEmails = admins.map(admin => admin.email);

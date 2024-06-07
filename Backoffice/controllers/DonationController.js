@@ -155,7 +155,7 @@ donationController.save = function(req, res) {
 
 donationController.save2 = function(req, res) {
   const donation = new Donation(req.body);
-  donation.status = "entregue";
+  donation.status = "em espera";
 
   Donator.findOne({ phone: req.body.phone })
     .then(donator => {
@@ -176,7 +176,6 @@ donationController.save2 = function(req, res) {
     })
     .then(gainedPoints => {
       donation.gainedPoints = gainedPoints;
-      return addPointsGainedByDonation(gainedPoints, req.body.phone);
     })
     .then(() => {
       return donation.save();
@@ -188,6 +187,31 @@ donationController.save2 = function(req, res) {
     .catch(err => {
       console.log(err);
       res.status(500).json({ error: 'Internal Server Error', details: err.message });
+    });
+};
+
+donationController.delete = function(req, res) {
+  Donation.findOneAndDelete({ _id: req.params.id })
+    .then(donation => {
+      if (!donation) {
+        return res.status(404).send('Doação não encontrada');
+      }
+
+      var donationPath = path.join(__dirname, '..', 'images', "donations", donation._id.toString() + '.jpg');
+      if (fs.existsSync(donationPath)) {
+        fs.unlink(donationPath, function(err) {
+          if (err) {
+            console.error('Erro ao remover a imagem associada à doação:', err);
+          }
+        });
+      }
+
+      console.log("Doação excluída!");
+      res.redirect("/donations");
+    })
+    .catch(err => {
+      console.log("Error:", err);
+      res.status(500).send('Internal Server Error');
     });
 };
 
@@ -300,6 +324,31 @@ donationController.exchangePointsForVoucher = function(req, res) {
     });
 };
 
+donationController.acceptDonation = function(req, res) {
+  Donation.findOne({ _id: req.params.id })
+    .then(donation => {
+      if (!donation) {
+        return res.status(404).send('Doação não encontrada');
+      }
+
+      donation.status = 'aceite';
+
+      return calculateGainedPoints(donation.topPiecesNumber, donation.bottomPiecesNumber, donation.underwearPiecesNumber, donation.moneyDonated)
+        .then(gainedPoints => {
+          return addPointsGainedByDonation(gainedPoints, donation.phone);
+        })
+        .then(() => {
+          return donation.save();
+        });
+    })
+    .then(() => {
+      res.redirect("/donations");
+    })
+    .catch(err => {
+      console.log("Error:", err);
+      res.status(500).send('Internal Server Error');
+    });
+};
 
 
 module.exports = donationController;

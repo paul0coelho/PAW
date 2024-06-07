@@ -75,6 +75,7 @@ app.use(upload.single('image'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.use(cors({ origin: 'http://localhost:4200' }));
 app.use(cors());
 
 // view engine setup
