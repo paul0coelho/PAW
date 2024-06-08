@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Entity } from '../models/entity';
 
 const API_ENDPOINT = 'http://localhost:3000';
 const httpOptions = {
@@ -21,8 +22,15 @@ export class RegisterService {
   }
 
 
-  registerEntity(name: string, description: string, email: string, phone: number, address: string, password: string, file: File): Observable<any> {
-    return this.http.post<any>(`${API_ENDPOINT}/login/registerEntity`, { name, description, email, phone, address, password, file })
+  registerEntity(entity: Entity, file: File): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('file', file);
+
+    Object.keys(entity).forEach((key) => {
+      formData.append(key, (entity as any)[key]);
+    });
+
+    return this.http.post<any>(`${API_ENDPOINT}/login/registerEntity`, formData);
   }
 
 }

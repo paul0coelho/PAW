@@ -63,9 +63,9 @@ export class EntitiesComponent implements OnInit {
 
   filterEntities(): Entity[] {
     return this.entities.filter(entity =>
-      entity.name.toLowerCase().includes(this.searchTermName.trim().toLowerCase()) &&
-      entity.address.toLowerCase().includes(this.searchTermAddress.trim().toLowerCase()) &&
-      entity.description.toLowerCase().includes(this.searchTermDescription.trim().toLowerCase())
+      (entity.name?.toLowerCase().includes(this.searchTermName.trim().toLowerCase()) ?? false) &&
+      (entity.address?.toLowerCase().includes(this.searchTermAddress.trim().toLowerCase()) ?? false) &&
+      (entity.description?.toLowerCase().includes(this.searchTermDescription.trim().toLowerCase()) ?? false)
     );
   }
 

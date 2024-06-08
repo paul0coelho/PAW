@@ -32,7 +32,7 @@ export class DonatorComponent implements OnInit {
           this.actualPoints = donator.gainedPoints;
   
           if (this.donations) {
-            this.donations.sort((a, b) => new Date(a.updated_at).getTime() - new Date(b.updated_at).getTime());
+            this.donations.sort((a, b) => new Date(a.updated_at ?? 0).getTime() - new Date(b.updated_at ?? 0).getTime());
     
             const dates: string[] = [];
             const cumulativePoints: number[] = [];
@@ -42,7 +42,7 @@ export class DonatorComponent implements OnInit {
     
             for (const donation of this.donations.filter(donation => donation.status === "aceite")) {
               console.log(donation.gainedPoints);
-              const date = new Date(donation.updated_at);
+              const date = new Date(donation.updated_at ?? new Date());
               dates.push(date.toLocaleDateString());
               this.totalPoints += Number(donation.gainedPoints);
               cumulativePoints.push(this.totalPoints);
@@ -55,10 +55,7 @@ export class DonatorComponent implements OnInit {
     });
   }
   
-
-
   encerrarSessao(): void {
-
     localStorage.removeItem('accessToken');
     this.router.navigate(['/login']);
   }

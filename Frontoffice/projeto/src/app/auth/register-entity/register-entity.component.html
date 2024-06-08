@@ -2,45 +2,36 @@
   <a href="/welcomePage">
     <h1>Recicla Têxtil</h1>
   </a>
-      <div class="register-container">
-        
-          <h2>Registar Entidade</h2>
-  
-          <label for="name">Name:</label>
-          <input id="name" placeholder="Entidade 123" [(ngModel)]="name" name="name" type="text" required><br>
+  <div class="register-container">
+    <h2>Registar Entidade</h2>
 
-          <label for="email">Descrição:</label>
-          <input id="description" placeholder="Legal" [(ngModel)]="description" name="description" type="text" required><br>
-          
-  
-          <label for="email">Email:</label>
-          <input id="email" placeholder="example@gmail.com" [(ngModel)]="email" name="email" type="text" required><br>
-          
-          <label for="phone">Telefone:</label>
-          <input id="phone" min=900000000 max=999999999 placeholder="Telefone" [(ngModel)]="phone" name="phone" type="text" required><br>
-    
-  
-          <label for="address">Morada:</label>
-          <input id="address" placeholder="Rua" [(ngModel)]="address" name="address" type="text" required><br>
-  
-          <label for="password">Password:</label>
-          <div class="password-container">
-            <input id="password" placeholder="**********************" [(ngModel)]="password" name="password" type="password" required>
-          </div>
-    
-          <label for="upload-input" id="upload-label">Escolher imagem</label>
-          <input type="file" id="upload-input" name="file" accept="image/" (change)="onFileSelected($event)" />
+    <label for="name">Nome:</label>
+    <input id="name" placeholder="Entidade 123" [(ngModel)]="entity.name" name="name" type="text" required><br>
 
-          <button class="login-button" (click)="registerEntity()"> Register </button>
-  
+    <label for="description">Descrição:</label>
+    <input id="description" placeholder="Legal" [(ngModel)]="entity.description" name="description" type="text" required><br>
 
-          <footer>
-            <p>Já tem um conta?<a href="/login">  Iniciar Sessão</a></p>
-          </footer>
-        
-      </div>
+    <label for="email">Email:</label>
+    <input id="email" placeholder="example@gmail.com" [(ngModel)]="entity.email" name="email" type="text" required><br>
+
+    <label for="phone">Telefone:</label>
+    <input id="phone" placeholder="Telefone" [(ngModel)]="entity.phone" name="phone" type="text" required><br>
+
+    <label for="address">Morada:</label>
+    <input id="address" placeholder="Rua" [(ngModel)]="entity.address" name="address" type="text" required><br>
+
+    <label for="password">Password:</label>
+    <div class="password-container">
+      <input id="password" placeholder="**********************" [(ngModel)]="entity.password" name="password" type="password" required>
+    </div>
+
+    <label for="upload-input" id="upload-label">Escolher imagem</label>
+    <input type="file" id="upload-input" (change)="onFileSelected($event)" />
+
+    <button class="login-button" (click)="submitForm()"> Register </button>
+
+    <footer>
+      <p>Já tem um conta?<a href="/login">  Iniciar Sessão</a></p>
+    </footer>
   </div>
-  
-  
-  
-  
+</div>

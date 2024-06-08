@@ -1,4 +1,5 @@
 export class Donator{
+<<<<<<< Updated upstream
     __id:String;
     name:String;
     email:String;
@@ -23,4 +24,15 @@ export class Donator{
         this.updated_at = updated_at;
         this.canvasserCode = canvasserCode;
     }
+=======
+    __id?:String;
+    name?:String;
+    phone?:Number;
+    address?:String;
+    gainedPoints?:Number;
+    vouchers?:Number;
+    password?:String;
+    canvasserCode?:String;
+    updated_at?: Date;
+>>>>>>> Stashed changes
 }

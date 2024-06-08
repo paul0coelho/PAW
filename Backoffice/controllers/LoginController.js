@@ -145,7 +145,7 @@ loginController.registerEntity = async function(req, res) {
             return res.status(400).json({ error: 'Email já está em uso por um doador.' });
         }
 
-        var hashedPassword = bcrypt.hashSync(req.body.password, 10);
+        const hashedPassword = bcrypt.hashSync(req.body.password, 10);
 
         const entity = new Entity({
             name: req.body.name,
@@ -158,32 +158,18 @@ loginController.registerEntity = async function(req, res) {
         });
 
         const savedEntity = await entity.save();
-        var token = jwt.sign({id: savedEntity._id, email: savedEntity.email }, config.secret, { expiresIn: 86400 });
+        const token = jwt.sign({ id: savedEntity._id, email: savedEntity.email }, config.secret, { expiresIn: 86400 });
 
-        var fileDestination = path.join(__dirname, "..", "images", "entities", savedEntity._id.toString() + ".jpg");
-        
+        if (req.file) {
+            const fileDestination = path.join(__dirname, '..', 'images', 'entities', savedEntity._id.toString() + path.extname(req.file.originalname));
 
-        fs.readFile(req.file.path, function (err, data) {
-          if (err) {
-            console.error("Error reading file:", err);
-            return res.status(500).send("Error reading file");
-          }
-
-          fs.writeFile(fileDestination, data, function (err) {
-            if (err) {
-              console.error("Error writing file:", err);
-              return res.status(500).send("Error writing file");
-            }
-            fs.unlink(req.file.path, function (err) {
-              if (err) {
-                console.error(
-                  "Erro ao remover o arquivo da pasta 'tmp':",
-                  err
-                );
-              }
+            fs.rename(req.file.path, fileDestination, function(err) {
+                if (err) {
+                    console.error('Error moving file:', err);
+                    return res.status(500).send('Error moving file');
+                }
             });
-          });
-        });
+        }
 
         const admins = await mongoUser.find();
         const adminEmails = admins.map(admin => admin.email);

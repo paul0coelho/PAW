@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const loginController = require('../controllers/LoginController.js')
+const multer = require('multer');
+const upload = multer({ dest: 'images/entities' });
 
 // Página de login
 router.get('/', loginController.login2 );
@@ -21,7 +23,7 @@ router.get('/profileEntity', loginController.verifyToken, loginController.profil
 
 router.post('/registerDonator', loginController.registerDonator);
 
-router.post('/registerEntity', loginController.registerEntity);
+router.post('/login/registerEntity', upload.single('file'), loginController.registerEntity);
 
 
 module.exports = router;

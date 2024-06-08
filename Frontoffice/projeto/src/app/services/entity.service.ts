@@ -19,7 +19,7 @@ export class EntityService {
   private selectedEntity: Entity;
 
   constructor(private http: HttpClient) { 
-    this.selectedEntity = new Entity("","","",0,"","","",undefined,"",);
+    this.selectedEntity = new Entity();
   }
 
   getEntities(): Observable<Entity[]> {
