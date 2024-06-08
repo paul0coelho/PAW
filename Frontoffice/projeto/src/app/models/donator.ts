@@ -1,30 +1,4 @@
 export class Donator{
-<<<<<<< Updated upstream
-    __id:String;
-    name:String;
-    email:String;
-    phone:Number;
-    address:String;
-    gainedPoints:Number;
-    vouchers:Number;
-    password:String;
-    canvasserCode:String;
-    updated_at: Date;
-
-    constructor(__id:String, name:String, email:String, phone:Number, address:String, gainedPoints:Number, vouchers:Number, password:String,
-        canvasserCode:String, updated_at: Date = new Date()){
-        this.__id = __id;
-        this.name = name;
-        this.email = email;
-        this.phone = phone;
-        this.address = address;
-        this.gainedPoints = gainedPoints;
-        this.vouchers = vouchers;
-        this.password = password;
-        this.updated_at = updated_at;
-        this.canvasserCode = canvasserCode;
-    }
-=======
     __id?:String;
     name?:String;
     phone?:Number;
@@ -34,5 +8,4 @@ export class Donator{
     password?:String;
     canvasserCode?:String;
     updated_at?: Date;
->>>>>>> Stashed changes
 }
