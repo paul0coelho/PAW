@@ -12,7 +12,7 @@ export class DonatorEditComponent {
   donator: Donator;
 
   constructor(private donatorService: DonatorService, private router: Router){
-    this.donator = new Donator("","","",0,"",0,0,"","");
+    this.donator = new Donator();
   }
 
   ngOnInit(): void {

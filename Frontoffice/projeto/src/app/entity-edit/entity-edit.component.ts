@@ -12,7 +12,7 @@ export class EntityEditComponent {
   entity: Entity;
 
   constructor(private entityService: EntityService, private router: Router){
-    this.entity = new Entity("","","",0,"","","",undefined,"",);
+    this.entity = new Entity();
   }
 
   ngOnInit(): void {
