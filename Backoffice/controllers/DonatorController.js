@@ -178,7 +178,7 @@ donatorController.edit = function(req, res) {
 };
 
 donatorController.edit2 = function(req, res) {
-  Donator.findOne({_id: req.params.id})
+  Donator.findOne({_id: req.id})
     .then(donator => {
       if (!donator) {
         return res.status(404).json({ error: 'Doador não encontrado' });
@@ -252,13 +252,14 @@ donatorController.update = function(req, res) {
 };
 
 donatorController.update2 = function(req, res) {
-  Donator.findById(req.params.id)
+  Donator.findById(req.id)
     .then(donator => {
       if (!donator) {
         return res.status(404).json({ error: 'Doador não encontrado' });
       }
 
       donator.name = req.body.name;
+      donator.email = req.body.email;
       donator.phone = req.body.phone;
       donator.address = req.body.address;
 

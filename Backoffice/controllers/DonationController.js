@@ -310,7 +310,7 @@ donationController.returnDonationsByDonatorId= function(req, res) {
 };
 
 donationController.returnDonationsByEntityId = function(req, res) {
-  Donation.find({ entityId: req.params.id })
+  Donation.find({ entityId: req.id })
     .populate('donatorId', 'name')
     .then(donations => {
       res.json({ donations });

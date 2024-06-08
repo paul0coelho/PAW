@@ -30,9 +30,17 @@ export class EntityService {
     return this.http.get<Entity>(`${endpointEntities}show2/${id}`, httpOptions);
   }
 
-  updateEntity(id: string, entity: Entity): Observable<Entity> {
-    return this.http.post<Entity>(`${endpointEntities}update2/${id}`, entity, httpOptions);
+ 
+
+  updateEntity(entity: Entity): Observable<Entity> {
+    const token = localStorage.getItem('accessToken');
+    const authHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.post<Entity>(`${endpointEntities}update2`, entity, { headers: authHeaders });
   }
+
 
   deleteEntity(id: string): Observable<any> {
     return this.http.post<any>(`${endpointEntities}delete2/${id}`, httpOptions);

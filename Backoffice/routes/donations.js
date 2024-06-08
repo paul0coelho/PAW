@@ -52,9 +52,7 @@ router.post('/save2', function(req, res) {
 router.get('/returnDonationsByDonatorId', loginController.verifyToken, donation.returnDonationsByDonatorId);
 
 // Obter doações no formato JSON
-router.get('/returnDonationsByEntityId/:id', function(req, res) {
-  donation.returnDonationsByEntityId(req, res);
-});
+router.get('/returnDonationsByEntityId', loginController.verifyToken, donation.returnDonationsByEntityId);
 
 router.post('/exchangePoints',loginController.verifyToken,donation.exchangePointsForVoucher);
 

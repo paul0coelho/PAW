@@ -52,24 +52,18 @@ router.get('/edit/:id', loginController.verifyLoginUser, function(req, res) {
 });
 
 // Editar um doador
-router.get('/edit2/:id', function(req, res) {
-  donator.edit2(req, res);
-});
+router.get('/edit2/:id', loginController.verifyToken, donator.edit2);
 
 // Atualizar um doador após edição
 router.post('/update/:id', loginController.verifyLoginUser, function(req, res) {
   donator.update(req, res);
 });
 
-// Atualizar um doador após edição
-router.post('/update2/:id',function(req, res) {
-  donator.update2(req, res);
-});
+
+router.post('/update2', loginController.verifyToken, donator.update2);
 
 // Eliminar um doador
-router.post('/delete/:id', loginController.verifyLoginUser, function(req, res, next) {
-  donator.delete(req, res);
-});
+router.post('/delete/:id', loginController.verifyToken, donator.update2);
 
 // Eliminar um doador
 router.post('/delete2/:id',  function(req, res, next) {

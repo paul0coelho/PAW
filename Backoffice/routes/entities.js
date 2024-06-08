@@ -67,10 +67,9 @@ router.post('/update/:id', loginController.verifyLoginUser, function(req, res) {
   entity.update(req, res);
 });
 
-// Atualizar uma entidade após edição
-router.post('/update2/:id', function(req, res) {
-  entity.update2(req, res);
-});
+
+
+router.post('/update2', loginController.verifyToken, entity.update2);
 
 // Eliminar uma entidade
 router.post('/delete/:id', loginController.verifyLoginUser, function(req, res, next) {

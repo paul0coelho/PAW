@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Donation } from '../models/donation';
 import { DonationService } from '../services/donation.service';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-entity',
@@ -16,15 +16,14 @@ export class EntityComponent implements OnInit {
   currentPage: number = 1;
   itemsPerPage: number = 5;
 
-  constructor(private donationService: DonationService, private route: ActivatedRoute) { }
+  constructor(private donationService: DonationService, private router: Router) { }
 
   ngOnInit(): void {
     this.getDonationsByEntityId();
   }
 
   getDonationsByEntityId() {
-    var idTemp = this.route.snapshot.params['id'];
-    this.donationService.getDonationsByEntityId(idTemp).subscribe((data: any) => {
+    this.donationService.getDonationsByEntityId().subscribe((data: any) => {
       this.donations = data.donations;
       console.log(this.donations);
     });
@@ -49,5 +48,11 @@ export class EntityComponent implements OnInit {
 
   get totalPages(): number {
     return this.donations ? Math.ceil(this.donations.length / this.itemsPerPage) : 0;
+  }
+
+  encerrarSessao(): void {
+    
+    localStorage.removeItem('accessToken');
+    this.router.navigate(['/login']);
   }
 }

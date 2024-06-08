@@ -12,7 +12,8 @@ import { EntityComponent } from './entity/entity.component';
 import { PlotlyComponent} from './plotly/plotly.component';
 import { AuthGuard } from './auth.guard';
 import { PointsComponent } from './points/points.component';
-
+import { DonatorEditComponent } from './donator-edit/donator-edit.component';
+import { EntityEditComponent } from './entity-edit/entity-edit.component';
 import { DonatorProfileComponent } from './donator-profile/donator-profile.component';
 import { EntityProfileComponent } from './entity-profile/entity-profile.component'; 
 
@@ -63,14 +64,25 @@ export const routes: Routes = [
         canActivate: [AuthGuard],
     },
     {
-        path: 'entity/:id',
+        path: 'entity',
         component: EntityComponent,
     },
     {
         path: 'plotly',
         component: PlotlyComponent,
     },
-    { path: 'points', component: PointsComponent }
+    { 
+        path: 'points', 
+        component: PointsComponent 
+    },
+    { 
+        path: 'editDonator', 
+        component: DonatorEditComponent 
+    },
+    { 
+        path: 'editEntity', 
+        component: EntityEditComponent 
+    }
 ];
 
 @NgModule({

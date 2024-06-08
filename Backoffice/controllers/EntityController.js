@@ -294,7 +294,7 @@ entityController.update2 = function(req, res) {
     return res.status(400).json({ error: 'Email inválido' });
   }
 
-  Entity.findById(req.params.id)
+  Entity.findById(req.id)
     .then(entity => {
       if (!entity) {
         return res.status(404).json({ error: 'Entidade não encontrada' });

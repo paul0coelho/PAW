@@ -15,6 +15,8 @@ import { DonationRegistComponent } from './donation-regist/donation-regist.compo
 import { AuthGuard } from './auth.guard';
 import { DonatorProfileComponent } from './donator-profile/donator-profile.component'; 
 import { EntityProfileComponent } from './entity-profile/entity-profile.component';
+import { DonatorEditComponent } from './donator-edit/donator-edit.component';
+import { EntityEditComponent } from './entity-edit/entity-edit.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { EntityProfileComponent } from './entity-profile/entity-profile.componen
     RegisterEntityComponent,
     DonationRegistComponent,
     DonatorProfileComponent,
-    EntityProfileComponent
+    EntityProfileComponent,
+    DonatorEditComponent,
+    EntityEditComponent
   ],
   imports: [
     BrowserModule,

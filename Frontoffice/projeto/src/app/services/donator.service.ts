@@ -37,8 +37,13 @@ export class DonatorService {
     return this.http.post<Donator>(`${endpointDonators}save2`, donator, httpOptions);
   }
 
-  updateDonator(id: string, donator: Donator): Observable<Donator> {
-    return this.http.post<Donator>(`${endpointDonators}update2/${id}`, donator, httpOptions);
+  updateDonator(donator: Donator): Observable<Donator> {
+    const token = localStorage.getItem('accessToken');
+    const authHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.post<Donator>(`${endpointDonators}update2`, donator, { headers: authHeaders });
   }
 
   deleteDonator(id: string): Observable<any> {

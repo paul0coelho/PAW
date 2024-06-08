@@ -31,7 +31,7 @@ export class DonationService {
     return this.http.get<Donation[]>(`${endpointDonations}returnDonationsByDonatorId/${id}`, httpOptions);
   }
 
-  getDonationsByEntityId(id: string): Observable<Donation[]> {
+  getDonationsByEntityId2(id: string): Observable<Donation[]> {
     return this.http.get<Donation[]>(`${endpointDonations}returnDonationsByEntityId/${id}`, httpOptions);
   }
 
@@ -47,5 +47,15 @@ export class DonationService {
     });
 
     return this.http.get<Donation[]>(`${endpointDonations}returnDonationsByDonatorId`, { headers: authHeaders });
+  }
+
+  getDonationsByEntityId(): Observable<Donation[]> {
+    const token = localStorage.getItem('accessToken');
+    const authHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.get<Donation[]>(`${endpointDonations}returnDonationsByEntityId`, { headers: authHeaders });
   }
 }
