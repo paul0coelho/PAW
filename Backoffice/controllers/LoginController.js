@@ -131,6 +131,17 @@ loginController.registerDonator = async function(req, res) {
         const savedDonator = await donator.save();
         var token = jwt.sign({id: savedDonator._id, email: savedDonator.email }, config.secret, { expiresIn: 86400 });
 
+        if (req.file) {
+            const fileDestination = path.join(__dirname, '..', 'images', 'donators', savedDonator._id.toString() + ".jpg");
+
+            fs.rename(req.file.path, fileDestination, function(err) {
+                if (err) {
+                    console.error('Error moving file:', err);
+                    return res.status(500).send('Error moving file');
+                }
+            });
+        }
+
         res.status(200).json({ auth: true, token: token });
     } catch (err) {
         console.log(err);

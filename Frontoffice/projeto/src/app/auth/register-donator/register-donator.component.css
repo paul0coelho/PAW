@@ -25,9 +25,7 @@ h1 {
     margin-bottom: 1px;
     
 }
-a{
-    text-decoration: none;
-}
+
 h2 {
     text-align: center;
     margin-bottom: px;
@@ -35,6 +33,7 @@ h2 {
 
 label {
     display: block;
+    margin-bottom: 10px;
     
 }
 
@@ -47,6 +46,7 @@ input[type="password"] {
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
+    
 }
 
 .login-button {
@@ -58,6 +58,7 @@ input[type="password"] {
     cursor: pointer;
     font-weight: bold;
     margin-left: 80px;
+    margin-top: 20px;
 }
 
 .login-button:hover {
@@ -75,6 +76,9 @@ input[type="password"] {
 
 .clickable-title {
     cursor: pointer;
+}
+a{
+    text-decoration: none;
 }
 
 footer{

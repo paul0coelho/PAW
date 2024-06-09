@@ -11,6 +11,38 @@ const mongoose = require('mongoose');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger/swagger.json');
 
+function imagesFoldersExists() {
+  const imageFolders = [
+    './images/admins',
+    './images/donators',
+    './images/donations',
+    './images/entities'
+  ];
+
+  imageFolders.forEach(folderPath => {
+    if (!fs.existsSync(folderPath)) {
+      fs.mkdirSync(folderPath);
+      console.log(`Pasta "${folderPath}" criada com sucesso.`);
+    } else {
+      console.log(`Pasta "${folderPath}" já existe.`);
+    }
+  });
+}
+
+function tmpExists() {
+  const tmpFolderPath = './tmp';
+
+  if (!fs.existsSync(tmpFolderPath)) {
+    fs.mkdirSync(tmpFolderPath);
+    console.log('Pasta "tmp" criada com sucesso.');
+  } else {
+    console.log('Pasta "tmp" já existe.');
+  }
+}
+
+imagesFoldersExists();
+tmpExists();
+
 mongoose.connect('mongodb+srv://paul0:1234@cluster0.gat7grz.mongodb.net/PAW?retryWrites=true&w=majority&appName=Cluster0', { useNewUrlParser: true })
     .catch((err) => console.error(err));
 
