@@ -25,7 +25,9 @@ export class RegisterEntityComponent {
   }
 
   submitForm(): void {
-    if (this.entity.phone && this.selectedFile) {
+    if (this.entity.phone) {
+      console.log(this.entity)
+      console.log(this.selectedFile)
       this.registerService.registerEntity(this.entity, this.selectedFile).subscribe(
         (response) => {
           console.log('Instituição registada com sucesso:', response);

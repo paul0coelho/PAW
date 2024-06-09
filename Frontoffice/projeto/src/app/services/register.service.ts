@@ -26,9 +26,16 @@ export class RegisterService {
     const formData: FormData = new FormData();
     formData.append('file', file);
 
-    Object.keys(entity).forEach((key) => {
-      formData.append(key, (entity as any)[key]);
+    const entityAny: any = entity;
+
+    Object.keys(entityAny).forEach((key) => {
+      if (entityAny[key] !== undefined) {
+        formData.append(key, entityAny[key]);
+      }
     });
+
+    console.log(entity);
+    console.log(file);
 
     return this.http.post<any>(`${API_ENDPOINT}/login/registerEntity`, formData);
   }

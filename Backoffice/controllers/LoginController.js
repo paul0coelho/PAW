@@ -161,7 +161,7 @@ loginController.registerEntity = async function(req, res) {
         const token = jwt.sign({ id: savedEntity._id, email: savedEntity.email }, config.secret, { expiresIn: 86400 });
 
         if (req.file) {
-            const fileDestination = path.join(__dirname, '..', 'images', 'entities', savedEntity._id.toString() + path.extname(req.file.originalname));
+            const fileDestination = path.join(__dirname, '..', 'images', 'entities', savedEntity._id.toString() + ".jpg");
 
             fs.rename(req.file.path, fileDestination, function(err) {
                 if (err) {
