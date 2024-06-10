@@ -44,6 +44,9 @@ export class EntitiesComponent implements OnInit {
       if (this.entities.length > 0) {
         this.entities.forEach(entity => {
           let imageObservable;
+          if(!entity._id){
+            return
+          }
           imageObservable = this.entityService.getEntityImage(entity._id);
           imageObservable.subscribe((imageBlob) => {
             const objectURL = URL.createObjectURL(imageBlob);

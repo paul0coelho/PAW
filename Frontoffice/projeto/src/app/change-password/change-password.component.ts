@@ -16,6 +16,12 @@ export class ChangePasswordComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
+  redirectToProfile(): void {
+    const userType = localStorage.getItem('userType')
+    const profileRoute = userType === 'donator' ? '/profileDonator' : '/profileEntity';
+    this.router.navigate([profileRoute]);
+  }
+
   checkPasswords(): void {
     this.passwordMismatch = this.newPassword !== this.confirmPassword;
   }

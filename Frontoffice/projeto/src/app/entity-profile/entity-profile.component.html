@@ -10,6 +10,9 @@
   <table *ngIf="entity">
     <tbody>
       <tr>
+        <img *ngIf="entity.imageUrl" [src]="entity.imageUrl" alt="Profile Image">
+      </tr>
+      <tr>
         <td>Nome</td>
         <td>:</td>
         <td>{{entity.name}}</td>

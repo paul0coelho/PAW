@@ -4,7 +4,8 @@ import { Observable } from 'rxjs';
 import { Entity } from '../models/entity';
 
 const endpointEntities = 'http://localhost:3000/api/v1/entities/';
-const images = 'http://localhost:3000/images/';
+
+const IMAGES_ENDPOINT = 'http://localhost:3000/images/';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -54,8 +55,8 @@ export class EntityService {
     return this.selectedEntity;
   }
 
-  getEntityImage(id: String|undefined): Observable<Blob> {
-    return this.http.get(images + 'entities/' + id + '.jpg', { responseType: 'blob' });
+  getEntityImage(id: string): Observable<Blob> {
+    return this.http.get(`${IMAGES_ENDPOINT}entities/${id}.jpg`, { responseType: 'blob' });
   }
 
   getEntityProfile(): Observable<Entity> {

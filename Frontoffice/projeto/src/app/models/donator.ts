@@ -1,5 +1,7 @@
+import { SafeUrl } from "@angular/platform-browser";
+
 export class Donator{
-    __id?:String;
+    _id?:string;
     name?:String;
     phone?:Number;
     email?:String;
@@ -9,4 +11,5 @@ export class Donator{
     password?:String;
     canvasserCode?:String;
     updated_at?: Date;
+    imageUrl?:SafeUrl;
 }

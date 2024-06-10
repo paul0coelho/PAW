@@ -9,6 +9,9 @@
 <div class="container">
   <table *ngIf="donator">
       <tbody>
+        <tr>
+          <img *ngIf="donator.imageUrl" [src]="donator.imageUrl" alt="Image">
+        </tr>
           <tr>
               <td>Nome</td>
               <td>:</td>

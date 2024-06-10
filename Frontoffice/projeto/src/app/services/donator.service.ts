@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Donator } from '../models/donator';
 
 const endpointDonators = 'http://localhost:3000/api/v1/donators/';
+const IMAGES_ENDPOINT = 'http://localhost:3000/images/';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -57,6 +58,10 @@ export class DonatorService {
       'Authorization': `Bearer ${token}`
     });
     return this.http.get<Donator>('http://localhost:3000/login/profileDonator', { headers: authHeaders });
+  }
+
+  getDonatorImage(id: string): Observable<Blob> {
+    return this.http.get(`${IMAGES_ENDPOINT}donators/${id}.jpg`, { responseType: 'blob' });
   }
 
 }
