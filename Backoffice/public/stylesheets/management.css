@@ -87,6 +87,14 @@ button#eliminate-button {
     color: rgb(0, 0, 0);
 }
 
+button#accept-button {
+    height: 29px;
+    background-color: #FAFAFBFF;
+    border: none;
+    align-items: center;
+    color: rgb(0, 0, 0);
+}
+
 button#add {
     height: 29px;
     background-color: white;
@@ -98,6 +106,7 @@ button#add {
 
 i#add-button{
     margin-right: 10px;
+    color: rgb(0, 0, 0);
 }
 
 td#edit-row{
