@@ -54,11 +54,6 @@ export class EntityService {
   getSelectedEntity(): Entity {
     return this.selectedEntity;
   }
-
-  getEntityImage(id: string): Observable<Blob> {
-    return this.http.get(`${IMAGES_ENDPOINT}entities/${id}.jpg`, { responseType: 'blob' });
-  }
-
   getEntityProfile(): Observable<Entity> {
     const token = localStorage.getItem('accessToken');
     const authHeaders = new HttpHeaders({
@@ -67,5 +62,11 @@ export class EntityService {
     });
     return this.http.get<Entity>('http://localhost:3000/login/profileEntity', { headers: authHeaders });
   }
+
+  getEntityImage(id: string): Observable<Blob> {
+    return this.http.get(`${IMAGES_ENDPOINT}entities/${id}.jpg`, { responseType: 'blob' });
+  }
+
+  
 
 }

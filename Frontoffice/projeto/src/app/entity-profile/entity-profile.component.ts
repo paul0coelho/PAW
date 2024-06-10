@@ -22,20 +22,7 @@ export class EntityProfileComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
     this.loadEntityProfile();
-
-    this.entityService.getEntityProfile().subscribe({
-      next: (data: Entity) => {
-        this.entity = data;
-      },
-      error: (error: any) => {
-        this.error = 'Failed to load entity profile';
-        console.error('Error loading entity profile:', error);
-         this.router.navigate(['/login']);
-      }
-      
-    })
   }
   private loadEntityProfile(): void {
     this.entityService.getEntityProfile().subscribe({
