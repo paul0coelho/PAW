@@ -1,5 +1,6 @@
 var mongoose = require("mongoose");
 var Entity = require("../models/Entity");
+var bcrypt = require('bcryptjs');
 var path = require('path');
 var fs = require("fs");
 
@@ -423,5 +424,31 @@ function isValidEmail(email) {
   var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
 }
+
+entityController.changePasswordEntity = async function(req, res) {
+  try {
+    const entity = await Entity.findById(req.id);
+    if (!entity) {
+      return res.status(404).json({ error: 'Entidade não encontrada' });
+    }
+
+    const isMatch = await bcrypt.compare(req.body.currentPassword, entity.password);
+    if (!isMatch) {
+      return res.status(400).json({ error: 'Senha atual incorreta' });
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(req.body.newPassword, salt);
+
+    entity.password = hashedPassword;
+    await entity.save();
+
+    res.json({ message: 'Senha alterada com sucesso' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Erro ao alterar a senha', details: err.message });
+  }
+};
+
 
 module.exports = entityController;

@@ -53,6 +53,7 @@ export class EntityComponent implements OnInit {
   encerrarSessao(): void {
     
     localStorage.removeItem('accessToken');
+    localStorage.removeItem('userType');
     this.router.navigate(['/login']);
   }
 }

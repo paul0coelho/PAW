@@ -15,7 +15,8 @@ import { PointsComponent } from './points/points.component';
 import { DonatorEditComponent } from './donator-edit/donator-edit.component';
 import { EntityEditComponent } from './entity-edit/entity-edit.component';
 import { DonatorProfileComponent } from './donator-profile/donator-profile.component';
-import { EntityProfileComponent } from './entity-profile/entity-profile.component'; 
+import { EntityProfileComponent } from './entity-profile/entity-profile.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 export const routes: Routes = [
@@ -82,7 +83,12 @@ export const routes: Routes = [
     { 
         path: 'editEntity', 
         component: EntityEditComponent 
+    },
+    { 
+        path: 'changePassword', 
+        component: ChangePasswordComponent 
     }
+
 ];
 
 @NgModule({

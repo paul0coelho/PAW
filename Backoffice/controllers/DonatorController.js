@@ -1,6 +1,7 @@
 var mongoose = require("mongoose");
 var Donator = require("../models/Donator");
 var path = require('path');
+var bcrypt = require('bcryptjs');
 var fs = require("fs");
 
 var donatorController = {};
@@ -371,6 +372,31 @@ donatorController.returnDonators = function(req, res) {
       console.log("Error:", err);
       res.status(500).send('Internal Server Error');
     });
+};
+
+donatorController.changePasswordDonator = async function(req, res) {
+  try {
+    const donator = await Donator.findById(req.id);
+    if (!donator) {
+      return res.status(404).json({ error: 'Doador não encontrado' });
+    }
+
+    const isMatch = await bcrypt.compare(req.body.currentPassword, donator.password);
+    if (!isMatch) {
+      return res.status(400).json({ error: 'Senha atual incorreta' });
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(req.body.newPassword, salt);
+
+    donator.password = hashedPassword;
+    await donator.save();
+
+    res.json({ message: 'Senha alterada com sucesso' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Erro ao alterar a senha', details: err.message });
+  }
 };
 
 module.exports = donatorController;

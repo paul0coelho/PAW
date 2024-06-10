@@ -461,7 +461,7 @@ adminController.editPassword = async function(req, res) {
 };
 
 adminController.editPassword2 = async function(req, res) {
-  const userEmail = req.userEmail;
+  const userEmail = req.email;
   const { currentPassword, newPassword, confirmPassword } = req.body;
 
   try {

@@ -86,4 +86,6 @@ router.get('/returnEntities', function(req, res) {
   entity.returnEntities(req, res);
 });
 
+router.post('/changePasswordEntity', loginController.verifyToken, entity.changePasswordEntity);
+
 module.exports = router;

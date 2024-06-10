@@ -17,6 +17,7 @@ import { DonatorProfileComponent } from './donator-profile/donator-profile.compo
 import { EntityProfileComponent } from './entity-profile/entity-profile.component';
 import { DonatorEditComponent } from './donator-edit/donator-edit.component';
 import { EntityEditComponent } from './entity-edit/entity-edit.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { EntityEditComponent } from './entity-edit/entity-edit.component';
     DonatorProfileComponent,
     EntityProfileComponent,
     DonatorEditComponent,
-    EntityEditComponent
+    EntityEditComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,

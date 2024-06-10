@@ -75,4 +75,6 @@ router.get('/returnDonators', function(req, res) {
   donator.returnDonators(req, res);
 });
 
+router.post('/changePasswordDonator', loginController.verifyToken, donator.changePasswordDonator);
+
 module.exports = router;
