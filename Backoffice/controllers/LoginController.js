@@ -122,6 +122,20 @@ loginController.registerDonator = async function(req, res) {
             if (canvasser) {
                 const points = await Points.findOne({_id:'661ff5afe10497c901313a23'});
                 if (points) {
+                    const mailOptions = {
+                        from: 'recilatextil5@gmail.com',
+                        to: req.body.canvasserCode,
+                        subject: 'Novo doador Angariado',
+                        text: `O doador ${req.body.name} utilizou o seu código no registo. Com isso, ganhou ${points.pointsPerNewUser} pontos.`
+                    };
+    
+                    transporter.sendMail(mailOptions, function(error, info) {
+                        if (error) {
+                            console.log(error);
+                        } else {
+                            console.log('Email enviado: ' + info.response);
+                        }
+                    });
                     canvasser.gainedPoints += points.pointsPerNewUser;
                     await canvasser.save();
                 }
