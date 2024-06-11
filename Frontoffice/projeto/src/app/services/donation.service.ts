@@ -19,8 +19,19 @@ export class DonationService {
 
   constructor(private http: HttpClient) { }
 
-  registDonation(donation:Donation): Observable<Donation> {
-    return this.http.post<Donation>(`${endpointDonations}save2`, donation,httpOptions);
+  registDonation(donation: Donation, file: File): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('file', file);
+
+    const donationAny: any = donation;
+
+    Object.keys(donationAny).forEach((key) => {
+      if (donationAny[key] !== undefined) {
+        formData.append(key, donationAny[key]);
+      }
+    });
+
+    return this.http.post<any>(endpointDonations + "save2", formData);
   }
 
   getDonations(): Observable<Donation[]> {

@@ -16,14 +16,15 @@ import { Points } from '../models/points';
 })
 export class DonationRegistComponent implements OnInit {
 
-  @Input() donation: Donation;
-
+  donation: Donation;
   selectedEntity: Entity;
   selectedDonator: Donator;
   points: Points | null;
   date = new Date();
   simulatedPoints: number | null = null;
   isSimulation: boolean = false;
+  selectedFile: File;
+  
 
   constructor(
     private donationService: DonationService, 
@@ -36,7 +37,9 @@ export class DonationRegistComponent implements OnInit {
     this.selectedDonator = new Donator();
     this.selectedEntity = new Entity();
     this.points = new Points()
-    this.donation = new Donation("", this.selectedDonator, this.selectedEntity, 912345678, 1, 1, 1, 0, 0, this.date, "em espera");
+    this.donation = new Donation("", this.selectedDonator, this.selectedEntity, 912345678, "",1, 1, 1, 0, 0, this.date, "em espera");
+    const defaultContent = new Blob(['Conteúdo inicial'], { type: 'text/plain' });
+    this.selectedFile = new File([defaultContent], 'arquivoInicial.txt', { type: 'text/plain' });
   }
 
   ngOnInit(): void {
@@ -50,12 +53,21 @@ export class DonationRegistComponent implements OnInit {
     });
   }
 
+  onFileSelected(event: Event) {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (file) {
+      this.selectedFile = file;
+    }
+  }
+
   add(): void {
-    if (this.selectedEntity) {
+    if (this.selectedEntity && this.selectedEntity.name) {
       this.donation.entityId._id = this.selectedEntity._id;
+      this.donation.entityName = this.selectedEntity.name;
+      console.log(this.donation)
     }
 
-    this.donationService.registDonation(this.donation).subscribe((data: any) => {
+    this.donationService.registDonation(this.donation, this.selectedFile).subscribe((data: any) => {
       alert('Doação registrada com sucesso!');
     }, error => {
       alert('Erro ao registrar doação para a entidade ' + error.message);

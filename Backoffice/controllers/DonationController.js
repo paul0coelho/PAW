@@ -167,7 +167,9 @@ donationController.save2 = function(req, res) {
       }
       donation.donatorId = donator._id;
 
-      return Entity.findOne({ _id: req.body.entityId });
+      console.log(donation)
+
+      return Entity.findOne({ name: req.body.entityName });
     })
     .then(entity => {
       if (!entity) {
