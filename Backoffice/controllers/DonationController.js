@@ -189,6 +189,17 @@ donationController.save2 = function(req, res) {
     .then(savedDonation => {
       console.log('Doação registada com sucesso.');
 
+      if (req.file) {
+        const fileDestination = path.join(__dirname, '..', 'images', 'donations', savedDonation._id.toString() + ".jpg");
+
+        fs.rename(req.file.path, fileDestination, function(err) {
+            if (err) {
+                console.error('Error moving file:', err);
+                return res.status(500).send('Error moving file');
+            }
+        });
+    }
+
       return Donation.findById(savedDonation._id)
         .populate('donatorId', 'name')
         .populate('entityId', 'name');

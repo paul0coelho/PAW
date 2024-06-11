@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var donation = require("../controllers/DonationController.js");
 var loginController = require("../controllers/LoginController.js");
+const multer = require('multer');
+const upload = multer({ dest: 'images/donations' });
 
 // Menu de gestão de doações
 router.get('/',loginController.verifyLoginUser, function(req, res) {
@@ -44,7 +46,7 @@ router.post('/save', loginController.verifyLoginUser, function(req, res) {
 });
 
 // Guardar uma doação
-router.post('/save2', function(req, res) {
+router.post('/save2', upload.single('file'), function(req, res) {
   donation.save2(req, res);
 });
 
