@@ -55,6 +55,12 @@
         </tr>
         <tr>
           <td>
+            <label for="upload-input" id="upload-label">Escolher imagem</label>
+            <input type="file" id="upload-input" (change)="onFileSelected($event)" />
+          </td>
+        </tr>
+        <tr>
+          <td>
             <button type="submit" (click)="onSubmit()">Salvar</button>
           </td>
         </tr>

@@ -38,7 +38,32 @@ export class DonatorService {
     return this.http.post<Donator>(`${endpointDonators}save2`, donator, httpOptions);
   }
 
-  updateDonator(donator: Donator): Observable<Donator> {
+  updateDonator(donator: Donator, file: File): Observable<Donator> {
+    const token = localStorage.getItem('accessToken');
+    const authHeaders = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+  
+    const formData: FormData = new FormData();
+  
+   
+    if (file) {
+      formData.append('profileImage', file);
+    }
+  
+    
+    const donatorAny: any = donator;
+    Object.keys(donatorAny).forEach((key) => {
+      if (donatorAny[key] !== undefined && key !== 'profileImage') {
+        formData.append(key, donatorAny[key]);
+      }
+    });
+  
+    
+    return this.http.post<Donator>(`${endpointDonators}update2`, formData, { headers: authHeaders });
+  }
+
+  updateDonator2(donator: Donator): Observable<Donator> {
     const token = localStorage.getItem('accessToken');
     const authHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -63,5 +88,6 @@ export class DonatorService {
   getDonatorImage(id: string): Observable<Blob> {
     return this.http.get(`${IMAGES_ENDPOINT}donators/${id}.jpg`, { responseType: 'blob' });
   }
+
 
 }

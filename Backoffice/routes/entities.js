@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var entity = require("../controllers/EntityController.js");
 var loginController = require("../controllers/LoginController.js");
+const multer = require('multer');
+const uploadEntity = multer({ dest: 'images/entities' });
 
 // Menu de gestão de entidades
 router.get('/',loginController.verifyLoginUser, function(req, res) {
@@ -69,7 +71,7 @@ router.post('/update/:id', loginController.verifyLoginUser, function(req, res) {
 
 
 
-router.post('/update2', loginController.verifyToken, entity.update2);
+router.post('/update2', loginController.verifyToken, uploadEntity.single('profileImage'), entity.update2);
 
 // Eliminar uma entidade
 router.post('/delete/:id', loginController.verifyLoginUser, function(req, res, next) {

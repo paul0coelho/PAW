@@ -33,7 +33,30 @@ export class EntityService {
 
  
 
-  updateEntity(entity: Entity): Observable<Entity> {
+  updateEntity(entity: Entity, file: File): Observable<Entity> {
+    const token = localStorage.getItem('accessToken');
+    const authHeaders = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    const formData: FormData = new FormData();
+  
+    if (file) {
+      formData.append('profileImage', file);
+    }
+  
+    
+    const entityAny: any = entity;
+    Object.keys(entityAny).forEach((key) => {
+      if (entityAny[key] !== undefined && key !== 'profileImage') {
+        formData.append(key, entityAny[key]);
+      }
+    });
+  
+    
+    return this.http.post<Entity>(`${endpointEntities}update2`, formData, { headers: authHeaders });
+  }
+  updateEntity2(entity: Entity): Observable<Entity> {
     const token = localStorage.getItem('accessToken');
     const authHeaders = new HttpHeaders({
       'Content-Type': 'application/json',

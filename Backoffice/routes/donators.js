@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var donator = require("../controllers/DonatorController.js");
 var loginController = require("../controllers/LoginController.js");
+const multer = require('multer');
+const uploadDonator = multer({ dest: 'images/donations' });
 
 // Menu de gestão de doadores
 router.get('/',loginController.verifyLoginUser, function(req, res) {
@@ -60,7 +62,7 @@ router.post('/update/:id', loginController.verifyLoginUser, function(req, res) {
 });
 
 
-router.post('/update2', loginController.verifyToken, donator.update2);
+router.post('/update2', loginController.verifyToken, uploadDonator.single('profileImage'), donator.update2);
 
 // Eliminar um doador
 router.post('/delete/:id', loginController.verifyToken, donator.update2);
