@@ -91,4 +91,8 @@ button:hover {
 .clickable-title {
     cursor: pointer;
 }
+.error-message {
+    color: red;
+    margin-bottom: 10px;
+  }
 

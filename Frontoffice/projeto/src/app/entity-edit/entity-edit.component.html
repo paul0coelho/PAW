@@ -11,25 +11,20 @@
           <td>
             <label for="name">Nome:</label>
             <input id="name" required type="text" [(ngModel)]="entity.name" placeholder="Nome" #name="ngModel" name="name">
-            <div *ngIf="name.errors && (name.dirty || name.touched)" class="alert">
-              <div *ngIf="name.errors['required']">Campo obrigatório</div>
-            </div>
+            <div *ngIf="name.errors && (name.dirty || name.touched)" class="alert"></div>
           </td>
         </tr>
         <tr>
             <td>
               <label for="description">Descrição:</label>
-              <input id="description" required type="text" [(ngModel)]="entity.description" placeholder="Descrição" #name="ngModel" name="description">
-             
+              <input id="description" required type="text" [(ngModel)]="entity.description" placeholder="Descrição" #name="ngModel" name="description">       
             </td>
           </tr>
         <tr>
           <td>
             <label for="email">Email:</label>
             <input id="email" required type="text" [(ngModel)]="entity.email" placeholder="Email" #email="ngModel" name="email">
-            <div *ngIf="email.errors && (email.dirty || email.touched)" class="alert">
-              <div *ngIf="email.errors['required']">Campo obrigatório</div>
-            </div>
+            <div *ngIf="email.errors && (email.dirty || email.touched)" class="alert"></div>
           </td>
         </tr>
         <tr>
@@ -37,7 +32,6 @@
             <label for="phone">Telefone:</label>
             <input id="phone" required type="number" [(ngModel)]="entity.phone" placeholder="Telefone" #phone="ngModel" min="900000000" max="999999999" name="phone">
             <div *ngIf="phone.errors && (phone.dirty || phone.touched)" class="alert">
-              <div *ngIf="phone.errors['required']">Campo obrigatório</div>
               <div *ngIf="phone.errors['min'] || phone.errors['max']">
                 O número de telefone deve ter exatamente 9 dígitos e estar entre 900000000 e 999999999.
               </div>
