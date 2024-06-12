@@ -51,6 +51,9 @@ router.post('/save2', upload.single('file'), function(req, res) {
 });
 
 // Obter doações no formato JSON
+router.get('/returnDonations', donation.returnDonations);
+
+// Obter doações no formato JSON
 router.get('/returnDonationsByDonatorId', loginController.verifyToken, donation.returnDonationsByDonatorId);
 
 // Obter doações no formato JSON

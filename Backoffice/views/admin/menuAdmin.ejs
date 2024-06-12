@@ -63,13 +63,14 @@
 
       fetch('/entities/returnEntities')
       .then(response => response.json())
-      .then(entities => {
-        let totalEntities = entities.length;
-        document.getElementById('totalEntities').innerHTML = "<p>Número de entidades<p> " + totalEntities;
+      .then(data => {
+      let totalEntities = data.entities.length;
+       document.getElementById('totalEntities').innerHTML = "<p>Número de entidades<p> " + totalEntities;
       })
       .catch(err => {
-        console.error('Erro ao buscar dados de doadores:', err);
+       console.error('Erro ao buscar dados de entidades:', err);
       });
+
 
       fetch('/donations/returnDonations')
       .then(response => response.json())

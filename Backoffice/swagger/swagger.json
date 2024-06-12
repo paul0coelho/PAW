@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "Swagger do backoffice",
+    "description": "Swagger correspondente à REST API para o Frontoffice",
     "version": "1.0.0",
     "title": "Swagger Item API"
   },
@@ -27,9 +27,15 @@
     {
       "name": "Points",
       "description": "Representation of our points"
+    },
+    {
+      "name": "Authentication",
+      "description": "Representation of our authentication routes"
     }
   ],
-  "schemes": ["http"],
+  "schemes": [
+    "http"
+  ],
   "paths": {
     "/admins/l": {
       "get": {
@@ -40,7 +46,9 @@
             "bearerAuth": []
           }
         ],
-        "tags": ["Admins"],
+        "tags": [
+          "Admins"
+        ],
         "responses": {
           "200": {
             "description": "Lista de administradores",
@@ -70,7 +78,9 @@
             "bearerAuth": []
           }
         ],
-        "tags": ["Admins"],
+        "tags": [
+          "Admins"
+        ],
         "parameters": [
           {
             "name": "_id",
@@ -110,7 +120,9 @@
             "bearerAuth": []
           }
         ],
-        "tags": ["Admins"],
+        "tags": [
+          "Admins"
+        ],
         "parameters": [
           {
             "name": "email",
@@ -150,7 +162,9 @@
             "bearerAuth": []
           }
         ],
-        "tags": ["Admins"],
+        "tags": [
+          "Admins"
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -182,7 +196,9 @@
             "bearerAuth": []
           }
         ],
-        "tags": ["Admins"],
+        "tags": [
+          "Admins"
+        ],
         "parameters": [
           {
             "name": "_id",
@@ -215,7 +231,9 @@
             "bearerAuth": []
           }
         ],
-        "tags": ["Admins"],
+        "tags": [
+          "Admins"
+        ],
         "parameters": [
           {
             "name": "_id",
@@ -260,7 +278,9 @@
             "bearerAuth": []
           }
         ],
-        "tags": ["Admins"],
+        "tags": [
+          "Admins"
+        ],
         "parameters": [
           {
             "name": "_id",
@@ -284,844 +304,1223 @@
         }
       }
     },
-  "/donations/l": {
-    "get": {
-      "summary": "Listar todas as doações (JSON)",
-      "operationId": "listDonationsJson",
-      "security": [
-        {
-          "bearerAuth": []
+    "/donations/l": {
+      "get": {
+        "summary": "Listar todas as doações (JSON)",
+        "operationId": "listDonationsJson",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Donations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de doações",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Donation"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
         }
-      ],
-      "tags": ["Donations"],
-      "responses": {
-        "200": {
-          "description": "Lista de doações",
+      }
+    },
+    "/donations/show2/{id}": {
+      "get": {
+        "summary": "Obter doação por ID (JSON)",
+        "operationId": "getDonationByIdJson",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Donations"
+        ],
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalhes da doação",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Donation"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Doação não encontrada"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    },
+    "/donations/searchByPhone2": {
+      "get": {
+        "summary": "Obter doação por número de telefone (JSON)",
+        "operationId": "getDonationByPhoneJson",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Donations"
+        ],
+        "parameters": [
+          {
+            "name": "phone",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalhes da doação",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Donation"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Doação não encontrada"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    },
+    "/donations/save2": {
+      "post": {
+        "summary": "Criar nova doação (JSON)",
+        "operationId": "saveDonation2",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Donations"
+        ],
+        "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/Donation"
+                "$ref": "#/definitions/Donation"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Doação criada com sucesso"
+          },
+          "400": {
+            "description": "Dados inválidos"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    },
+    "/donations/returnDonationsByDonatorId/{donatorId}": {
+      "get": {
+        "summary": "Obter doações por ID do doador (JSON)",
+        "operationId": "returnDonationsByDonatorId",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Donations"
+        ],
+        "parameters": [
+          {
+            "name": "donatorId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de doações do doador",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Donation"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Doações não encontradas"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    },
+    "/donations/returnDonationsByEntityId/{entityId}": {
+      "get": {
+        "summary": "Obter doações por ID da entidade (JSON)",
+        "operationId": "returnDonationsByEntityId",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Donations"
+        ],
+        "parameters": [
+          {
+            "name": "entityId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de doações da entidade",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Donation"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Doações não encontradas"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    },
+    "/donations/exchangePointsForVoucher": {
+      "post": {
+        "summary": "Trocar pontos por voucher",
+        "operationId": "exchangePointsForVoucher",
+        "tags": [
+          "Donations"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pontos trocados por voucher com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Pontos insuficientes para trocar por um voucher",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Doador não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro ao trocar pontos por voucher",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "string"
+                    }
+                  }
                 }
               }
             }
           }
-        },
-        "500": {
-          "description": "Erro interno do servidor"
         }
       }
-    }
-  },
-  "/donations/show2/{id}": {
-    "get": {
-      "summary": "Obter doação por ID (JSON)",
-      "operationId": "getDonationByIdJson",
-      "security": [
-        {
-          "bearerAuth": []
-        }
-      ],
-      "tags": ["Donations"],
-      "parameters": [
-        {
-          "name": "_id",
-          "in": "path",
-          "required": true,
-          "schema": {
-            "type": "string"
+    },
+    "/donators/l": {
+      "get": {
+        "summary": "Listar todos os doadores (JSON)",
+        "operationId": "listDonatorsJson",
+        "security": [
+          {
+            "bearerAuth": []
           }
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Detalhes da doação",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Donation"
+        ],
+        "tags": [
+          "Donators"
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de doadores",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Donator"
+                  }
+                }
               }
             }
+          },
+          "500": {
+            "description": "Erro interno do servidor"
           }
-        },
-        "404": {
-          "description": "Doação não encontrada"
-        },
-        "500": {
-          "description": "Erro interno do servidor"
         }
       }
-    }
-  },
-  "/donations/searchByPhone2": {
-    "get": {
-      "summary": "Obter doação por número de telefone (JSON)",
-      "operationId": "getDonationByPhoneJson",
-      "security": [
-        {
-          "bearerAuth": []
-        }
-      ],
-      "tags": ["Donations"],
-      "parameters": [
-        {
-          "name": "phone",
-          "in": "query",
-          "required": true,
-          "schema": {
-            "type": "string"
+    },
+    "/donators/show2/{id}": {
+      "get": {
+        "summary": "Obter doador por ID (JSON)",
+        "operationId": "getDonatorByIdJson",
+        "security": [
+          {
+            "bearerAuth": []
           }
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Detalhes da doação",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Donation"
-              }
-            }
-          }
-        },
-        "404": {
-          "description": "Doação não encontrada"
-        },
-        "500": {
-          "description": "Erro interno do servidor"
-        }
-      }
-    }
-  },
-  "/donations/save2": {
-    "post": {
-      "summary": "Criar nova doação (JSON)",
-      "operationId": "saveDonation2",
-      "security": [
-        {
-          "bearerAuth": []
-        }
-      ],
-      "tags": ["Donations"],
-      "requestBody": {
-        "content": {
-          "multipart/form-data": {
+        ],
+        "tags": [
+          "Donators"
+        ],
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "required": true,
             "schema": {
-              "$ref": "#/components/schemas/Donation"
+              "type": "string"
             }
           }
-        }
-      },
-      "responses": {
-        "200": {
-          "description": "Doação criada com sucesso"
-        },
-        "400": {
-          "description": "Dados inválidos"
-        },
-        "500": {
-          "description": "Erro interno do servidor"
-        }
-      }
-    }
-  },
-  "/donators/l": {
-    "get": {
-      "summary": "Listar todos os doadores (JSON)",
-      "operationId": "listDonatorsJson",
-      "security": [
-        {
-          "bearerAuth": []
-        }
-      ],
-      "tags": ["Donators"],
-      "responses": {
-        "200": {
-          "description": "Lista de doadores",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalhes do doador",
+            "content": {
+              "application/json": {
+                "schema": {
                   "$ref": "#/components/schemas/Donator"
                 }
               }
             }
+          },
+          "404": {
+            "description": "Doador não encontrado"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
           }
-        },
-        "500": {
-          "description": "Erro interno do servidor"
         }
       }
-    }
-  },
-  "/donators/show2/{id}": {
-    "get": {
-      "summary": "Obter doador por ID (JSON)",
-      "operationId": "getDonatorByIdJson",
-      "security": [
-        {
-          "bearerAuth": []
-        }
-      ],
-      "tags": ["Donators"],
-      "parameters": [
-        {
-          "name": "_id",
-          "in": "path",
-          "required": true,
-          "schema": {
-            "type": "string"
+    },
+    "/donators/searchByPhone2": {
+      "get": {
+        "summary": "Obter doador por número de telefone (JSON)",
+        "operationId": "getDonatorByPhoneJson",
+        "security": [
+          {
+            "bearerAuth": []
           }
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Detalhes do doador",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Donator"
-              }
-            }
-          }
-        },
-        "404": {
-          "description": "Doador não encontrado"
-        },
-        "500": {
-          "description": "Erro interno do servidor"
-        }
-      }
-    }
-  },
-  "/donators/searchByPhone2": {
-    "get": {
-      "summary": "Obter doador por número de telefone (JSON)",
-      "operationId": "getDonatorByPhoneJson",
-      "security": [
-        {
-          "bearerAuth": []
-        }
-      ],
-      "tags": ["Donators"],
-      "parameters": [
-        {
-          "name": "phone",
-          "in": "query",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Detalhes do doador",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Donator"
-              }
-            }
-          }
-        },
-        "404": {
-          "description": "Doador não encontrado"
-        },
-        "500": {
-          "description": "Erro interno do servidor"
-        }
-      }
-    }
-  },
-  "/donators/save2": {
-    "post": {
-      "summary": "Criar novo doador (JSON)",
-      "operationId": "saveDonator2",
-      "security": [
-        {
-          "bearerAuth": []
-        }
-      ],
-      "tags": ["Donators"],
-      "requestBody": {
-        "content": {
-          "multipart/form-data": {
+        ],
+        "tags": [
+          "Donators"
+        ],
+        "parameters": [
+          {
+            "name": "phone",
+            "in": "query",
+            "required": true,
             "schema": {
-              "$ref": "#/components/schemas/Donator"
+              "type": "string"
             }
           }
-        }
-      },
-      "responses": {
-        "200": {
-          "description": "Doador criado com sucesso"
-        },
-        "400": {
-          "description": "Dados inválidos"
-        },
-        "500": {
-          "description": "Erro interno do servidor"
-        }
-      }
-    }
-  },
-  "/donators/edit2/{id}": {
-    "get": {
-      "summary": "Editar doador por ID (JSON)",
-      "operationId": "editDonatorByIdJson",
-      "security": [
-        {
-          "bearerAuth": []
-        }
-      ],
-      "tags": ["Donators"],
-      "parameters": [
-        {
-          "name": "_id",
-          "in": "path",
-          "required": true,
-          "schema": {
-            "type": "string"
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalhes do doador",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Donator"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Doador não encontrado"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
           }
         }
-      ],
-      "responses": {
-        "200": {
-          "description": "Detalhes do doador para edição",
+      }
+    },
+    "/donators/save2": {
+      "post": {
+        "summary": "Criar novo doador (JSON)",
+        "operationId": "saveDonator2",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Donators"
+        ],
+        "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
                 "$ref": "#/components/schemas/Donator"
               }
             }
           }
         },
-        "404": {
-          "description": "Doador não encontrado"
-        },
-        "500": {
-          "description": "Erro interno do servidor"
-        }
-      }
-    }
-  },
-  "/donators/update2/{id}": {
-    "post": {
-      "summary": "Atualizar doador por ID (JSON)",
-      "operationId": "updateDonatorByIdJson",
-      "security": [
-        {
-          "bearerAuth": []
-        }
-      ],
-      "tags": ["Donators"],
-      "parameters": [
-        {
-          "name": "_id",
-          "in": "path",
-          "required": true,
-          "schema": {
-            "type": "string"
+        "responses": {
+          "200": {
+            "description": "Doador criado com sucesso"
+          },
+          "400": {
+            "description": "Dados inválidos"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
           }
         }
-      ],
-      "requestBody": {
-        "content": {
-          "multipart/form-data": {
+      }
+    },
+    "/donators/edit2/{id}": {
+      "get": {
+        "summary": "Editar doador por ID (JSON)",
+        "operationId": "editDonatorByIdJson",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Donators"
+        ],
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "required": true,
             "schema": {
-              "$ref": "#/components/schemas/Donator"
+              "type": "string"
             }
           }
-        }
-      },
-      "responses": {
-        "200": {
-          "description": "Doador atualizado com sucesso"
-        },
-        "404": {
-          "description": "Doador não encontrado"
-        },
-        "500": {
-          "description": "Erro interno do servidor"
-        }
-      }
-    }
-  },
-  "/donators/delete2/{id}": {
-    "post": {
-      "summary": "Excluir doador por ID (JSON)",
-      "operationId": "deleteDonatorByIdJson",
-      "security": [
-        {
-          "bearerAuth": []
-        }
-      ],
-      "tags": ["Donators"],
-      "parameters": [
-        {
-          "name": "_id",
-          "in": "path",
-          "required": true,
-          "schema": {
-            "type": "string"
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalhes do doador para edição",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Donator"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Doador não encontrado"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
           }
         }
-      ],
-      "responses": {
-        "200": {
-          "description": "Doador excluído com sucesso"
+      }
+    },
+    "/donators/update2/{id}": {
+      "post": {
+        "summary": "Atualizar doador por ID (JSON)",
+        "operationId": "updateDonatorByIdJson",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Donators"
+        ],
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Donator"
+              }
+            }
+          }
         },
-        "404": {
-          "description": "Doador não encontrado"
-        },
-        "500": {
-          "description": "Erro interno do servidor"
+        "responses": {
+          "200": {
+            "description": "Doador atualizado com sucesso"
+          },
+          "404": {
+            "description": "Doador não encontrado"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
         }
       }
-    }
-  },
-  "/entities/l": {
-    "get": {
-      "summary": "Listar todas as entidades (JSON)",
-      "operationId": "listEntitiesJson",
-      "security": [
-        {
-          "bearerAuth": []
-        }
-      ],
-      "tags": ["Entities"],
-      "responses": {
-        "200": {
-          "description": "Lista de entidades",
+    },
+    "/donators/changePassword": {
+      "post": {
+        "summary": "Alterar senha do doador",
+        "operationId": "changePasswordDonator",
+        "tags": [
+          "Donators"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "type": "array",
-                "items": {
+                "type": "object",
+                "properties": {
+                  "currentPassword": {
+                    "type": "string",
+                    "description": "Senha atual do doador"
+                  },
+                  "newPassword": {
+                    "type": "string",
+                    "description": "Nova senha para o doador"
+                  }
+                },
+                "required": [
+                  "currentPassword",
+                  "newPassword"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Senha alterada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Senha atual incorreta",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Doador não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro ao alterar a senha",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/entities/l": {
+      "get": {
+        "summary": "Listar todas as entidades (JSON)",
+        "operationId": "listEntitiesJson",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Entities"
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de entidades",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Entity"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    },
+    "/entities/show2/{id}": {
+      "get": {
+        "summary": "Obter entidade por ID (JSON)",
+        "operationId": "getEntityByIdJson",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Entities"
+        ],
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalhes da entidade",
+            "content": {
+              "application/json": {
+                "schema": {
                   "$ref": "#/components/schemas/Entity"
                 }
               }
             }
+          },
+          "404": {
+            "description": "Entidade não encontrada"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
           }
-        },
-        "500": {
-          "description": "Erro interno do servidor"
         }
       }
-    }
-  },
-  "/entities/show2/{id}": {
-    "get": {
-      "summary": "Obter entidade por ID (JSON)",
-      "operationId": "getEntityByIdJson",
-      "security": [
-        {
-          "bearerAuth": []
-        }
-      ],
-      "tags": ["Entities"],
-      "parameters": [
-        {
-          "name": "_id",
-          "in": "path",
-          "required": true,
-          "schema": {
-            "type": "string"
+    },
+    "/entities/searchByPhone2": {
+      "get": {
+        "summary": "Obter entidade por número de telefone (JSON)",
+        "operationId": "getEntityByPhoneJson",
+        "security": [
+          {
+            "bearerAuth": []
           }
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Detalhes da entidade",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Entity"
-              }
-            }
-          }
-        },
-        "404": {
-          "description": "Entidade não encontrada"
-        },
-        "500": {
-          "description": "Erro interno do servidor"
-        }
-      }
-    }
-  },
-  "/entities/searchByPhone2": {
-    "get": {
-      "summary": "Obter entidade por número de telefone (JSON)",
-      "operationId": "getEntityByPhoneJson",
-      "security": [
-        {
-          "bearerAuth": []
-        }
-      ],
-      "tags": ["Entities"],
-      "parameters": [
-        {
-          "name": "phone",
-          "in": "query",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Detalhes da entidade",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Entity"
-              }
-            }
-          }
-        },
-        "404": {
-          "description": "Entidade não encontrada"
-        },
-        "500": {
-          "description": "Erro interno do servidor"
-        }
-      }
-    }
-  },
-  "/entities/save2": {
-    "post": {
-      "summary": "Criar nova entidade (JSON)",
-      "operationId": "saveEntity2",
-      "security": [
-        {
-          "bearerAuth": []
-        }
-      ],
-      "tags": ["Entities"],
-      "requestBody": {
-        "content": {
-          "multipart/form-data": {
+        ],
+        "tags": [
+          "Entities"
+        ],
+        "parameters": [
+          {
+            "name": "phone",
+            "in": "query",
+            "required": true,
             "schema": {
-              "$ref": "#/components/schemas/Entity"
+              "type": "string"
             }
           }
-        }
-      },
-      "responses": {
-        "200": {
-          "description": "Entidade criada com sucesso"
-        },
-        "400": {
-          "description": "Dados inválidos"
-        },
-        "500": {
-          "description": "Erro interno do servidor"
-        }
-      }
-    }
-  },
-  "/entities/edit2/{id}": {
-    "get": {
-      "summary": "Editar entidade por ID (JSON)",
-      "operationId": "editEntityByIdJson",
-      "security": [
-        {
-          "bearerAuth": []
-        }
-      ],
-      "tags": ["Entities"],
-      "parameters": [
-        {
-          "name": "_id",
-          "in": "path",
-          "required": true,
-          "schema": {
-            "type": "string"
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalhes da entidade",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Entity"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Entidade não encontrada"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
           }
         }
-      ],
-      "responses": {
-        "200": {
-          "description": "Detalhes da entidade para edição",
+      }
+    },
+    "/entities/save2": {
+      "post": {
+        "summary": "Criar nova entidade (JSON)",
+        "operationId": "saveEntity2",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Entities"
+        ],
+        "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
                 "$ref": "#/components/schemas/Entity"
               }
             }
           }
         },
-        "404": {
-          "description": "Entidade não encontrada"
-        },
-        "500": {
-          "description": "Erro interno do servidor"
-        }
-      }
-    }
-  },
-  "/entities/update2/{id}": {
-    "post": {
-      "summary": "Atualizar entidade por ID (JSON)",
-      "operationId": "updateEntityByIdJson",
-      "security": [
-        {
-          "bearerAuth": []
-        }
-      ],
-      "tags": ["Entities"],
-      "parameters": [
-        {
-          "name": "_id",
-          "in": "path",
-          "required": true,
-          "schema": {
-            "type": "string"
+        "responses": {
+          "200": {
+            "description": "Entidade criada com sucesso"
+          },
+          "400": {
+            "description": "Dados inválidos"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
           }
         }
-      ],
-      "requestBody": {
-        "content": {
-          "multipart/form-data": {
+      }
+    },
+    "/entities/edit2/{id}": {
+      "get": {
+        "summary": "Editar entidade por ID (JSON)",
+        "operationId": "editEntityByIdJson",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Entities"
+        ],
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "required": true,
             "schema": {
-              "$ref": "#/components/schemas/Entity"
+              "type": "string"
             }
           }
-        }
-      },
-      "responses": {
-        "200": {
-          "description": "Entidade atualizada com sucesso"
-        },
-        "404": {
-          "description": "Entidade não encontrada"
-        },
-        "500": {
-          "description": "Erro interno do servidor"
-        }
-      }
-    }
-  },
-  "/entities/delete2/{id}": {
-    "post": {
-      "summary": "Excluir entidade por ID (JSON)",
-      "operationId": "deleteEntityByIdJson",
-      "security": [
-        {
-          "bearerAuth": []
-        }
-      ],
-      "tags": ["Entities"],
-      "parameters": [
-        {
-          "name": "_id",
-          "in": "path",
-          "required": true,
-          "schema": {
-            "type": "string"
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalhes da entidade para edição",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Entity"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Entidade não encontrada"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
           }
         }
-      ],
-      "responses": {
-        "200": {
-          "description": "Entidade excluída com sucesso"
+      }
+    },
+    "/entities/update2/{id}": {
+      "post": {
+        "summary": "Atualizar entidade por ID (JSON)",
+        "operationId": "updateEntityByIdJson",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Entities"
+        ],
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Entity"
+              }
+            }
+          }
         },
-        "404": {
-          "description": "Entidade não encontrada"
-        },
-        "500": {
-          "description": "Erro interno do servidor"
+        "responses": {
+          "200": {
+            "description": "Entidade atualizada com sucesso"
+          },
+          "404": {
+            "description": "Entidade não encontrada"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
         }
       }
-    }
-  },
-  "/points/l": {
-    "get": {
-      "summary": "Listar todos os pontos (JSON)",
-      "operationId": "listPointsJson",
-      "security": [
-        {
-          "bearerAuth": []
+    },
+    "/entities/returnEntities": {
+      "get": {
+        "summary": "Listar todas as entidades aceitas (JSON)",
+        "operationId": "returnEntities",
+        "tags": [
+          "Entities"
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de entidades aceitas",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "entities": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/Entity"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
         }
-      ],
-      "tags": ["Points"],
-      "responses": {
-        "200": {
-          "description": "Lista de pontos",
+      }
+    },
+    "/entities/changePassword": {
+      "post": {
+        "summary": "Alterar senha da entidade",
+        "operationId": "changePasswordEntity",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Entities"
+        ],
+        "parameters": [
+          {
+            "name": "currentPassword",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "newPassword",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Senha alterada com sucesso"
+          },
+          "400": {
+            "description": "Senha atual incorreta"
+          },
+          "404": {
+            "description": "Entidade não encontrada"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    },
+    "/registerDonator": {
+      "post": {
+        "summary": "Registrar um novo doador",
+        "operationId": "registerDonator",
+        "tags": [
+          "Authentication"
+        ],
+        "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "type": "array",
-                "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "phone": {
+                    "type": "string"
+                  },
+                  "address": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "canvasserCode": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name",
+                  "email",
+                  "phone",
+                  "address",
+                  "password"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Doador registrado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "auth": {
+                      "type": "boolean"
+                    },
+                    "token": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Email já está em uso por outra entidade"
+          },
+          "500": {
+            "description": "Erro ao registrar o doador"
+          }
+        }
+      }
+    },
+    "/registerEntity": {
+      "post": {
+        "summary": "Registrar uma nova entidade",
+        "operationId": "registerEntity",
+        "tags": [
+          "Authentication"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "address": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "phone": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name",
+                  "description",
+                  "address",
+                  "email",
+                  "phone",
+                  "password"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Entidade registrada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "auth": {
+                      "type": "boolean"
+                    },
+                    "token": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Email já está em uso por um doador"
+          },
+          "500": {
+            "description": "Erro ao registrar a entidade"
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "summary": "Login de utilizador",
+        "operationId": "login",
+        "tags": [
+          "Authentication"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "email",
+                  "password"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login bem-sucedido",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "auth": {
+                      "type": "boolean"
+                    },
+                    "token": {
+                      "type": "string"
+                    },
+                    "userType": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Senha inválida"
+          },
+          "404": {
+            "description": "Utilizador não encontrado"
+          },
+          "500": {
+            "description": "Erro no servidor"
+          }
+        }
+      }
+    },
+    "/points/l": {
+      "get": {
+        "summary": "Obter pontos por ID",
+        "operationId": "listPoints",
+        "tags": [
+          "Points"
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalhes dos pontos",
+            "content": {
+              "application/json": {
+                "schema": {
                   "$ref": "#/components/schemas/Points"
                 }
               }
             }
-          }
-        },
-        "500": {
-          "description": "Erro interno do servidor"
-        }
-      }
-    }
-  },
-  "/points/show2/{id}": {
-    "get": {
-      "summary": "Obter pontos por ID (JSON)",
-      "operationId": "getPointsByIdJson",
-      "security": [
-        {
-          "bearerAuth": []
-        }
-      ],
-      "tags": ["Points"],
-      "parameters": [
-        {
-          "name": "_id",
-          "in": "path",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Detalhes dos pontos",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Points"
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "string"
+                    }
+                  }
+                }
               }
             }
           }
-        },
-        "404": {
-          "description": "Pontos não encontrados"
-        },
-        "500": {
-          "description": "Erro interno do servidor"
         }
       }
     }
   },
-  "/points/save2": {
-    "post": {
-      "summary": "Criar novos pontos (JSON)",
-      "operationId": "savePoints2",
-      "security": [
-        {
-          "bearerAuth": []
-        }
-      ],
-      "tags": ["Points"],
-      "requestBody": {
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/schemas/Points"
-            }
-          }
-        }
-      },
-      "responses": {
-        "201": {
-          "description": "Pontos criados com sucesso"
-        },
-        "500": {
-          "description": "Erro interno do servidor"
-        }
-      }
-    }
-  },
-  "/points/edit2/{id}": {
-    "get": {
-      "summary": "Editar pontos por ID (JSON)",
-      "operationId": "editPointsByIdJson",
-      "security": [
-        {
-          "bearerAuth": []
-        }
-      ],
-      "tags": ["Points"],
-      "parameters": [
-        {
-          "name": "_id",
-          "in": "path",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Detalhes dos pontos para edição",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Points"
-              }
-            }
-          }
-        },
-        "404": {
-          "description": "Pontos não encontrados"
-        },
-        "500": {
-          "description": "Erro interno do servidor"
-        }
-      }
-    }
-  },
-  "/points/update2/{id}": {
-    "post": {
-      "summary": "Atualizar pontos por ID (JSON)",
-      "operationId": "updatePointsByIdJson",
-      "security": [
-        {
-          "bearerAuth": []
-        }
-      ],
-      "tags": ["Points"],
-      "parameters": [
-        {
-          "name": "_id",
-          "in": "path",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
-      "requestBody": {
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/schemas/Points"
-            }
-          }
-        }
-      },
-      "responses": {
-        "200": {
-          "description": "Pontos atualizados com sucesso"
-        },
-        "404": {
-          "description": "Pontos não encontrados"
-        },
-        "500": {
-          "description": "Erro interno do servidor"
-        }
-      }
-    }
-  }  
-},
   "securityDefinitions": {
     "item_jwt_auth": {
       "type": "apiKey",
@@ -1132,7 +1531,12 @@
   "definitions": {
     "Admin": {
       "type": "object",
-      "required": ["name", "email", "phone", "password"],
+      "required": [
+        "name",
+        "email",
+        "phone",
+        "password"
+      ],
       "properties": {
         "_id": {
           "type": "string"
@@ -1151,6 +1555,10 @@
         },
         "password": {
           "type": "string"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -1162,7 +1570,10 @@
     },
     "Item": {
       "type": "object",
-      "required": ["name", "description"],
+      "required": [
+        "name",
+        "description"
+      ],
       "properties": {
         "_id": {
           "type": "string"
@@ -1178,14 +1589,24 @@
     "Donation": {
       "type": "object",
       "required": [
+        "donatorId",
+        "entityId",
         "phone",
         "topPiecesNumber",
         "bottomPiecesNumber",
         "underwearPiecesNumber",
-        "gainedPoints"
+        "moneyDonated",
+        "gainedPoints",
+        "status"
       ],
       "properties": {
         "_id": {
+          "type": "string"
+        },
+        "donatorId": {
+          "type": "string"
+        },
+        "entityId": {
           "type": "string"
         },
         "phone": {
@@ -1206,10 +1627,25 @@
           "type": "integer",
           "format": "int64"
         },
+        "moneyDonated": {
+          "type": "integer",
+          "format": "int64"
+        },
         "gainedPoints": {
           "type": "integer",
           "format": "int64",
           "min": 1
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "em espera",
+            "aceite"
+          ]
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -1223,17 +1659,22 @@
       "type": "object",
       "required": [
         "name",
+        "email",
         "phone",
         "address",
         "password",
         "gainedPoints",
-        "vouchers"
+        "vouchers",
+        "canvasserCode"
       ],
       "properties": {
         "_id": {
           "type": "string"
         },
         "name": {
+          "type": "string"
+        },
+        "email": {
           "type": "string"
         },
         "phone": {
@@ -1245,9 +1686,6 @@
         "address": {
           "type": "string"
         },
-        "password": {
-          "type": "string"
-      },
         "gainedPoints": {
           "type": "integer",
           "min": 0,
@@ -1257,6 +1695,16 @@
           "type": "integer",
           "min": 0,
           "default": 0
+        },
+        "password": {
+          "type": "string"
+        },
+        "canvasserCode": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -1268,7 +1716,12 @@
     },
     "Entity": {
       "type": "object",
-      "required": ["name", "email"],
+      "required": [
+        "name",
+        "email",
+        "password",
+        "accepted"
+      ],
       "properties": {
         "_id": {
           "type": "string"
@@ -1289,6 +1742,20 @@
           "type": "integer",
           "min": 900000000,
           "max": 999999999
+        },
+        "password": {
+          "type": "string"
+        },
+        "accepted": {
+          "type": "string",
+          "enum": [
+            "em espera",
+            "aceite"
+          ]
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -1304,7 +1771,9 @@
         "topPiecesPoints",
         "bottomPiecesPoints",
         "underwearPiecesPoints",
-        "pointsPerVoucher"
+        "pointsPerVoucher",
+        "pointsPerEuroDonated",
+        "pointsPerNewUser"
       ],
       "properties": {
         "_id": {
@@ -1325,6 +1794,18 @@
         "pointsPerVoucher": {
           "type": "integer",
           "min": 1
+        },
+        "pointsPerEuroDonated": {
+          "type": "integer",
+          "min": 1
+        },
+        "pointsPerNewUser": {
+          "type": "integer",
+          "min": 1
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     }
