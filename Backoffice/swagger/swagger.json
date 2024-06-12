@@ -669,7 +669,7 @@
         ],
         "parameters": [
           {
-            "name": "_id",
+            "name": "id",
             "in": "path",
             "required": true,
             "schema": {
@@ -787,7 +787,7 @@
         ],
         "parameters": [
           {
-            "name": "_id",
+            "name": "id",
             "in": "path",
             "required": true,
             "schema": {
@@ -829,7 +829,7 @@
         ],
         "parameters": [
           {
-            "name": "_id",
+            "name": "id",
             "in": "path",
             "required": true,
             "schema": {
@@ -963,319 +963,319 @@
       }
     },
     "/entities/l": {
-      "get": {
-        "summary": "Listar todas as entidades (JSON)",
-        "operationId": "listEntitiesJson",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "tags": [
-          "Entities"
-        ],
-        "responses": {
-          "200": {
-            "description": "Lista de entidades",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Entity"
-                  }
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Erro interno do servidor"
-          }
+    "get": {
+      "summary": "Listar todas as entidades (JSON)",
+      "operationId": "listEntitiesJson",
+      "security": [
+        {
+          "bearerAuth": []
         }
-      }
-    },
-    "/entities/show2/{id}": {
-      "get": {
-        "summary": "Obter entidade por ID (JSON)",
-        "operationId": "getEntityByIdJson",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "tags": [
-          "Entities"
-        ],
-        "parameters": [
-          {
-            "name": "_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Detalhes da entidade",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Entity"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Entidade não encontrada"
-          },
-          "500": {
-            "description": "Erro interno do servidor"
-          }
-        }
-      }
-    },
-    "/entities/searchByPhone2": {
-      "get": {
-        "summary": "Obter entidade por número de telefone (JSON)",
-        "operationId": "getEntityByPhoneJson",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "tags": [
-          "Entities"
-        ],
-        "parameters": [
-          {
-            "name": "phone",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Detalhes da entidade",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Entity"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Entidade não encontrada"
-          },
-          "500": {
-            "description": "Erro interno do servidor"
-          }
-        }
-      }
-    },
-    "/entities/save2": {
-      "post": {
-        "summary": "Criar nova entidade (JSON)",
-        "operationId": "saveEntity2",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "tags": [
-          "Entities"
-        ],
-        "requestBody": {
+      ],
+      "tags": [
+        "Entities"
+      ],
+      "responses": {
+        "200": {
+          "description": "Lista de entidades",
           "content": {
-            "multipart/form-data": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Entity"
+                }
+              }
+            }
+          }
+        },
+        "500": {
+          "description": "Erro interno do servidor"
+        }
+      }
+    }
+  },
+  "/entities/show2/{id}": {
+    "get": {
+      "summary": "Obter entidade por ID (JSON)",
+      "operationId": "getEntityByIdJson",
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "tags": [
+        "Entities"
+      ],
+      "parameters": [
+        {
+          "name": "_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Detalhes da entidade",
+          "content": {
+            "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/Entity"
               }
             }
           }
         },
-        "responses": {
-          "200": {
-            "description": "Entidade criada com sucesso"
-          },
-          "400": {
-            "description": "Dados inválidos"
-          },
-          "500": {
-            "description": "Erro interno do servidor"
-          }
+        "404": {
+          "description": "Entidade não encontrada"
+        },
+        "500": {
+          "description": "Erro interno do servidor"
         }
       }
-    },
-    "/entities/edit2/{id}": {
-      "get": {
-        "summary": "Editar entidade por ID (JSON)",
-        "operationId": "editEntityByIdJson",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "tags": [
-          "Entities"
-        ],
-        "parameters": [
-          {
-            "name": "_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Detalhes da entidade para edição",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Entity"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Entidade não encontrada"
-          },
-          "500": {
-            "description": "Erro interno do servidor"
+    }
+  },
+  "/entities/searchByPhone2": {
+    "get": {
+      "summary": "Obter entidade por número de telefone (JSON)",
+      "operationId": "getEntityByPhoneJson",
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "tags": [
+        "Entities"
+      ],
+      "parameters": [
+        {
+          "name": "phone",
+          "in": "query",
+          "required": true,
+          "schema": {
+            "type": "string"
           }
         }
-      }
-    },
-    "/entities/update2/{id}": {
-      "post": {
-        "summary": "Atualizar entidade por ID (JSON)",
-        "operationId": "updateEntityByIdJson",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "tags": [
-          "Entities"
-        ],
-        "parameters": [
-          {
-            "name": "_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
+      ],
+      "responses": {
+        "200": {
+          "description": "Detalhes da entidade",
           "content": {
-            "multipart/form-data": {
+            "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/Entity"
               }
             }
           }
         },
-        "responses": {
-          "200": {
-            "description": "Entidade atualizada com sucesso"
-          },
-          "404": {
-            "description": "Entidade não encontrada"
-          },
-          "500": {
-            "description": "Erro interno do servidor"
-          }
+        "404": {
+          "description": "Entidade não encontrada"
+        },
+        "500": {
+          "description": "Erro interno do servidor"
         }
       }
-    },
-    "/entities/returnEntities": {
-      "get": {
-        "summary": "Listar todas as entidades aceitas (JSON)",
-        "operationId": "returnEntities",
-        "tags": [
-          "Entities"
-        ],
-        "responses": {
-          "200": {
-            "description": "Lista de entidades aceitas",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "entities": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/definitions/Entity"
-                      }
+    }
+  },
+  "/entities/save2": {
+    "post": {
+      "summary": "Criar nova entidade (JSON)",
+      "operationId": "saveEntity2",
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "tags": [
+        "Entities"
+      ],
+      "requestBody": {
+        "content": {
+          "multipart/form-data": {
+            "schema": {
+              "$ref": "#/components/schemas/Entity"
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Entidade criada com sucesso"
+        },
+        "400": {
+          "description": "Dados inválidos"
+        },
+        "500": {
+          "description": "Erro interno do servidor"
+        }
+      }
+    }
+  },
+  "/entities/edit2/{id}": {
+    "get": {
+      "summary": "Editar entidade por ID (JSON)",
+      "operationId": "editEntityByIdJson",
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "tags": [
+        "Entities"
+      ],
+      "parameters": [
+        {
+          "name": "_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Detalhes da entidade para edição",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Entity"
+              }
+            }
+          }
+        },
+        "404": {
+          "description": "Entidade não encontrada"
+        },
+        "500": {
+          "description": "Erro interno do servidor"
+        }
+      }
+    }
+  },
+  "/entities/update2/{id}": {
+    "post": {
+      "summary": "Atualizar entidade por ID (JSON)",
+      "operationId": "updateEntityByIdJson",
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "tags": [
+        "Entities"
+      ],
+      "parameters": [
+        {
+          "name": "_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "content": {
+          "multipart/form-data": {
+            "schema": {
+              "$ref": "#/components/schemas/Entity"
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Entidade atualizada com sucesso"
+        },
+        "404": {
+          "description": "Entidade não encontrada"
+        },
+        "500": {
+          "description": "Erro interno do servidor"
+        }
+      }
+    }
+  },
+  "/entities/returnEntities": {
+    "get": {
+      "summary": "Listar todas as entidades aceitas (JSON)",
+      "operationId": "returnEntities",
+      "tags": [
+        "Entities"
+      ],
+      "responses": {
+        "200": {
+          "description": "Lista de entidades aceitas",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "entities": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Entity"
                     }
                   }
                 }
               }
             }
-          },
-          "500": {
-            "description": "Erro interno do servidor"
           }
+        },
+        "500": {
+          "description": "Erro interno do servidor"
         }
       }
-    },
-    "/entities/changePassword": {
-      "post": {
-        "summary": "Alterar senha da entidade",
-        "operationId": "changePasswordEntity",
-        "security": [
-          {
-            "bearerAuth": []
+    }
+  },
+  "/entities/changePassword": {
+    "post": {
+      "summary": "Alterar senha da entidade",
+      "operationId": "changePasswordEntity",
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "tags": [
+        "Entities"
+      ],
+      "parameters": [
+        {
+          "name": "currentPassword",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "type": "string"
           }
-        ],
-        "tags": [
-          "Entities"
-        ],
-        "parameters": [
-          {
-            "name": "currentPassword",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "newPassword",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Senha alterada com sucesso"
-          },
-          "400": {
-            "description": "Senha atual incorreta"
-          },
-          "404": {
-            "description": "Entidade não encontrada"
-          },
-          "500": {
-            "description": "Erro interno do servidor"
+        },
+        {
+          "name": "newPassword",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "type": "string"
           }
         }
+      ],
+      "responses": {
+        "200": {
+          "description": "Senha alterada com sucesso"
+        },
+        "400": {
+          "description": "Senha atual incorreta"
+        },
+        "404": {
+          "description": "Entidade não encontrada"
+        },
+        "500": {
+          "description": "Erro interno do servidor"
+        }
       }
-    },
+    }
+  },
     "/registerDonator": {
       "post": {
         "summary": "Registrar um novo doador",
