@@ -1,4 +1,6 @@
 .header {
+    margin: 0;
+    display: flex;
     background-color: #00659FFF;
     color: white;
     width: 100%;
@@ -6,9 +8,6 @@
     font-family: Arial, Helvetica, sans-serif;
     font-size: 24px;
     text-align: left;
-    align-items: center;
-    padding-left: 20px;
-    box-sizing: border-box;
 }
 
 .header2 {

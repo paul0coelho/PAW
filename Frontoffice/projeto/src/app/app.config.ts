@@ -18,6 +18,8 @@ import { EntityProfileComponent } from './entity-profile/entity-profile.componen
 import { DonatorEditComponent } from './donator-edit/donator-edit.component';
 import { EntityEditComponent } from './entity-edit/entity-edit.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { HeaderComponent } from './header/header.component';
+import { PointsComponent } from './points/points.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,10 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     EntityProfileComponent,
     DonatorEditComponent,
     EntityEditComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    HeaderComponent,
+    PointsComponent
+
   ],
   imports: [
     BrowserModule,

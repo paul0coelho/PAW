@@ -7,44 +7,43 @@
   <h2>Informações do Doador</h2>
 </div>
 <div class="container">
-  <table *ngIf="donator">
+  <div class="profile-info">
+    <img *ngIf="donator?.imageUrl" [src]="donator?.imageUrl" alt="Image">
+    <table *ngIf="donator">
       <tbody>
         <tr>
-          <img *ngIf="donator.imageUrl" [src]="donator.imageUrl" alt="Image">
+          <td>Nome</td>
+          <td>:</td>
+          <td>{{donator.name}}</td>
         </tr>
-          <tr>
-              <td>Nome</td>
-              <td>:</td>
-              <td>{{donator.name}}</td>
-          </tr>
-          <tr>
-              <td>Telefone</td>
-              <td>:</td>
-              <td>{{donator.phone}}</td>
-          </tr>
-          <tr>
-              <td>Morada</td>
-              <td>:</td>
-              <td>{{donator.address}}</td>
-          </tr>
-          <tr>
-              <td>Pontos acumulados</td>
-              <td>:</td>
-              <td>{{donator.gainedPoints}}</td>
-          </tr>
-          <tr>
-              <td>Vouchers acumulados</td>
-              <td>:</td>
-              <td>{{donator.vouchers}}</td>
-          </tr>
+        <tr>
+          <td>Telefone</td>
+          <td>:</td>
+          <td>{{donator.phone}}</td>
+        </tr>
+        <tr>
+          <td>Morada</td>
+          <td>:</td>
+          <td>{{donator.address}}</td>
+        </tr>
+        <tr>
+          <td>Pontos acumulados</td>
+          <td>:</td>
+          <td>{{donator.gainedPoints}}</td>
+        </tr>
+        <tr>
+          <td>Vouchers acumulados</td>
+          <td>:</td>
+          <td>{{donator.vouchers}}</td>
+        </tr>
       </tbody>
-  </table>
-  <div *ngIf="!donator">
+    </table>
+    <div *ngIf="!donator" class="no-data">
       <p>Não foi possível encontrar os dados do doador.</p>
+    </div>
   </div>
-
-  <a href="/editDonator"><button >Editar perfil</button></a>
-  <a href="/changePassword"><button >Editar password</button></a>
+  <div class="buttons">
+    <a href="/editDonator"><button>Editar perfil</button></a>
+    <a href="/changePassword"><button>Editar password</button></a>
+  </div>
 </div>
-
-  

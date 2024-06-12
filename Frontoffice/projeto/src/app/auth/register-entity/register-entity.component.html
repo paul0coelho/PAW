@@ -18,7 +18,7 @@
       </div><br>
 
       <label for="email">Email:</label>
-      <input id="email" placeholder="example@gmail.com" [(ngModel)]="entity.email" name="email" type="email" required #entityEmail="ngModel">
+      <input id="email" placeholder="example@gmail.com" [(ngModel)]="entity.email" name="email" type="text" required #entityEmail="ngModel">
       <div *ngIf="entityEmail.errors && (entityEmail.dirty || entityEmail.touched)" class="alert">
         <div *ngIf="entityEmail.errors['required']">Campo obrigatório</div>
         <div *ngIf="entityEmail.errors['email']">Formato de email inválido</div>

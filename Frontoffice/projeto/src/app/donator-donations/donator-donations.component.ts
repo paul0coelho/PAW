@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Donation } from '../models/donation';
 import { DonationService } from '../services/donation.service';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -17,7 +16,7 @@ export class DonatorDonationsComponent implements OnInit {
   currentPage: number = 1;
   itemsPerPage: number = 5;
 
-  constructor(private donationService: DonationService, private route: ActivatedRoute) { }
+  constructor(private donationService: DonationService) { }
 
   ngOnInit(): void {
     this.getDonationsByDonatorId();

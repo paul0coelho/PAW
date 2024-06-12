@@ -49,15 +49,15 @@ export const routes: Routes = [
     {
         path: 'profileEntity',
         component: EntityProfileComponent,
-    },
-    {
-        path: 'registDonation',
-        component: DonationRegistComponent,
         canActivate: [AuthGuard],
     },
     {
+        path: 'registDonation',
+        component: DonationRegistComponent
+    },
+    {
         path: 'entities',
-        component: EntitiesComponent,
+        component: EntitiesComponent
     },
     {
         path: 'donator/donations',
@@ -67,6 +67,7 @@ export const routes: Routes = [
     {
         path: 'entity',
         component: EntityComponent,
+        canActivate: [AuthGuard],
     },
     {
         path: 'plotly',
@@ -74,19 +75,27 @@ export const routes: Routes = [
     },
     { 
         path: 'points', 
-        component: PointsComponent 
+        component: PointsComponent,
+        canActivate: [AuthGuard],
     },
     { 
         path: 'editDonator', 
-        component: DonatorEditComponent 
+        component: DonatorEditComponent,
+        canActivate: [AuthGuard],
     },
     { 
         path: 'editEntity', 
-        component: EntityEditComponent 
+        component: EntityEditComponent,
+        canActivate: [AuthGuard], 
     },
     { 
         path: 'changePassword', 
-        component: ChangePasswordComponent 
+        component: ChangePasswordComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: '**',
+        redirectTo: '/login'
     }
 
 ];

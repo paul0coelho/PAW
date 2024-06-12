@@ -12,7 +12,7 @@
       </div><br>
 
       <label for="email">Email:</label>
-      <input id="email" placeholder="example@gmail.com" [(ngModel)]="donator.email" name="email" type="email" required #email="ngModel">
+      <input id="email" placeholder="example@gmail.com" [(ngModel)]="donator.email" name="email" type="text" required #email="ngModel">
       <div *ngIf="email.errors && (email.dirty || email.touched)" class="alert">
         <div *ngIf="email.errors['required']">Campo obrigatório</div>
         <div *ngIf="email.errors['email']">Formato de email inválido</div>
@@ -37,7 +37,7 @@
         <div *ngIf="password.errors && (password.dirty || password.touched)" class="alert">
           <div *ngIf="password.errors['required']">Campo obrigatório</div>
         </div>
-      </div><br>
+      </div>
 
       <label for="canvasserCode">Código do Angariador:</label>
       <input id="canvasserCode" placeholder="Código do Angariador" [(ngModel)]="donator.canvasserCode" name="canvasserCode" type="text"><br>
