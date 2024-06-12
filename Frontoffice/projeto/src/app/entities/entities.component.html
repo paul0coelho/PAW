@@ -27,6 +27,7 @@
   </ul>
   <div class="pagination-controls">
     <button (click)="prevPage()" [disabled]="currentPage === 1">Anterior</button>
+    <p>{{currentPage}}/{{totalPages}}</p>
     <button (click)="nextPage()" [disabled]="currentPage === totalPages">Próxima</button>
   </div>
 </div>
