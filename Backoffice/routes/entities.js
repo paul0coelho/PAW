@@ -69,8 +69,7 @@ router.post('/update/:id', loginController.verifyLoginUser, function(req, res) {
   entity.update(req, res);
 });
 
-
-
+// Atualização dos dados de uma entidade
 router.post('/update2', loginController.verifyToken, uploadEntity.single('profileImage'), entity.update2);
 
 // Eliminar uma entidade
@@ -88,6 +87,7 @@ router.get('/returnEntities', function(req, res) {
   entity.returnEntities(req, res);
 });
 
+// Alteração de palavra-passe por parte da entidade
 router.post('/changePasswordEntity', loginController.verifyToken, entity.changePasswordEntity);
 
 module.exports = router;

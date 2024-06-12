@@ -15,7 +15,6 @@ import { Points } from '../models/points';
   styleUrls: ['./donation-regist.component.css']
 })
 export class DonationRegistComponent implements OnInit {
-
   donation: Donation;
   selectedEntity: Entity;
   selectedDonator: Donator;
@@ -24,7 +23,6 @@ export class DonationRegistComponent implements OnInit {
   simulatedPoints: number | null = null;
   isSimulation: boolean = false;
   selectedFile: File;
-  
 
   constructor(
     private donationService: DonationService, 
@@ -68,9 +66,9 @@ export class DonationRegistComponent implements OnInit {
     }
 
     this.donationService.registDonation(this.donation, this.selectedFile).subscribe((data: any) => {
-      alert('Doação registrada com sucesso!');
+      alert('Doação registada com sucesso!');
     }, error => {
-      alert('Erro ao registrar doação para a entidade ' + error.message);
+      alert('Erro ao registar doação para a entidade ' + error.message);
     });
   }
 

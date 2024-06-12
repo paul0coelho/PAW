@@ -16,15 +16,19 @@ router.post('/loginSubmitted', loginController.submittedLogin );
 // Efetuar logout
 router.get('/logout', loginController.logout );
 
+// Efetuar logout do doador
 router.get('/logoutDonator', loginController.logoutDonator);
 
+// Perfil do doador autenticado
 router.get('/profileDonator', loginController.verifyToken, loginController.profileDonator);
 
+// Perfil da entidade autenticada
 router.get('/profileEntity', loginController.verifyToken, loginController.profileEntity);
 
+// Registo de novo doador
 router.post('/registerDonator', uploadDonator.single('file'), loginController.registerDonator);
 
+// Registo de nova entidade
 router.post('/registerEntity', uploadEntity.single('file'), loginController.registerEntity);
-
 
 module.exports = router;

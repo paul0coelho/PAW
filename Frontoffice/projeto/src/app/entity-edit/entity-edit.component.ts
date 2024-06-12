@@ -30,17 +30,16 @@ export class EntityEditComponent {
   }
 
   onSubmit(): void {
-    
     if (this.selectedFile) {
       this.entityService.updateEntity(this.entity, this.selectedFile).subscribe(() => {
-        alert('Entidade alterado com sucesso!');
+        alert('Entidade alterada com sucesso!');
         this.router.navigate(['/profileEntity']);
       }, error => {
         alert('Erro ao editar entidade: ' + error.message);
       });
     } else {
       this.entityService.updateEntity2(this.entity).subscribe(() => {
-        alert('Entidade alterado com sucesso!');
+        alert('Entidade alterada com sucesso!');
         this.router.navigate(['/profileEntity']);
       }, error => {
         alert('Erro ao editar entidade: ' + error.message);

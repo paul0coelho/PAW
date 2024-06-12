@@ -14,18 +14,19 @@ mongoose.connect('mongodb+srv://paul0:1234@cluster0.gat7grz.mongodb.net/PAW?retr
   .then(() => console.log('connection successful'))
   .catch((err) => console.error(err));
 
-  donationController.list = function(req, res) {
-    Donation.find()
-      .populate('donatorId', 'name')
-      .populate('entityId', 'name')
-      .then(donations => {
-        res.render("../views/donations/showAll", { donations: donations });
-      })
-      .catch(err => {
-        console.log("Error:", err);
-        res.status(500).send('Internal Server Error');
-      });
-  };
+donationController.list = function(req, res) {
+  Donation.find()
+    .populate('donatorId', 'name')
+    .populate('entityId', 'name')
+    .then(donations => {
+      res.render("../views/donations/showAll", { donations: donations });
+    })
+    .catch(err => {
+      console.log("Error:", err);
+      res.status(500).send('Internal Server Error');
+    });
+};
+
 donationController.list2 = function(req, res) {
   Donation.find()
     .then(donations => {
@@ -234,7 +235,6 @@ donationController.save2 = function(req, res) {
     });
 };
 
-
 donationController.delete = function(req, res) {
   Donation.findOneAndDelete({ _id: req.params.id })
     .then(donation => {
@@ -280,7 +280,6 @@ function addPointsGainedByDonation(pointsGained, phone) {
         });
     });
 }
-
 
 function calculateGainedPoints(topPiecesNumber, bottomPiecesNumber, underwearPiecesNumber, moneyDonated) {
   return Points.findOne({_id:'661ff5afe10497c901313a23'})
@@ -335,8 +334,6 @@ donationController.returnDonationsByEntityId = function(req, res) {
 };
 
 donationController.exchangePointsForVoucher = function(req, res) {
-  
-
   Donator.findById(req.id)
     .then(donator => {
       if (!donator) {
@@ -394,6 +391,5 @@ donationController.acceptDonation = function(req, res) {
       res.status(500).send('Internal Server Error');
     });
 };
-
 
 module.exports = donationController;

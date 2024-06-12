@@ -61,7 +61,7 @@ router.post('/update/:id', loginController.verifyLoginUser, function(req, res) {
   donator.update(req, res);
 });
 
-
+// Atualização dos dados de um doador
 router.post('/update2', loginController.verifyToken, uploadDonator.single('profileImage'), donator.update2);
 
 // Eliminar um doador
@@ -77,6 +77,7 @@ router.get('/returnDonators', function(req, res) {
   donator.returnDonators(req, res);
 });
 
+// Alteração de palavra-passe por parte do doador
 router.post('/changePasswordDonator', loginController.verifyToken, donator.changePasswordDonator);
 
 module.exports = router;

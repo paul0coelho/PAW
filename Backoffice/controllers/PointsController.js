@@ -79,7 +79,7 @@ pointsController.save = function(req, res) {
       })
       .catch(err => {
         console.log(err);
-        res.status(500).json({ error: 'Erro ao salvar os pontos', details: err.message });
+        res.status(500).json({ error: 'Erro ao guardar os pontos', details: err.message });
       });
   };
 
@@ -155,4 +155,5 @@ pointsController.save = function(req, res) {
         res.status(500).json({ error: 'Erro ao atualizar os pontos', details: err.message });
       });
   };
+
   module.exports = pointsController;

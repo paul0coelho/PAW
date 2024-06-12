@@ -63,19 +63,17 @@ loginController.verifyLoginUser = function(req, res, next) {
     } else {
         res.redirect('/login')
     }
-}
+};
+
 loginController.login = function(req, res) {
-    // Primeiro tenta encontrar o usuário no modelo Donator
     Donator.findOne({ email: req.body.email }).then(donator => {
         if (donator) {
             return checkUserAndPassword(donator, 'donator');
         } else {
-            // Se não encontrado como Donator, tenta encontrar como Entity
             return Entity.findOne({ email: req.body.email }).then(entity => {
                 if (entity) {
                     return checkUserAndPassword(entity, 'entity');
                 } else {
-                    // Se nenhum usuário foi encontrado como Entity
                     return res.status(404).json({ error: 'User not found' });
                 }
             });
@@ -95,15 +93,16 @@ loginController.login = function(req, res) {
         return res.status(200).json({ auth: true, token: token, userType: userType });
     }
 };
+
 loginController.logoutDonator = function (req,res){
     res.status(200).json({auth: false, token: null});
-}
+};
 
 loginController.registerDonator = async function(req, res) {
     try {
         const emailExistsEntity = await Entity.findOne({ email: req.body.email });
         if (emailExistsEntity) {
-            return res.status(400).json({ error: 'Email já está em uso por outra entidade.' });
+            return res.status(400).json({ error: 'Email pertencente a uma entidade.' });
         }
       
         var hashedPassword = bcrypt.hashSync(req.body.password, 10);
@@ -159,7 +158,7 @@ loginController.registerDonator = async function(req, res) {
         res.status(200).json({ auth: true, token: token });
     } catch (err) {
         console.log(err);
-        res.status(500).json({ error: 'Erro ao registrar o doador' });
+        res.status(500).json({ error: 'Erro ao registar o doador' });
     }
 }
 
@@ -167,7 +166,7 @@ loginController.registerEntity = async function(req, res) {
     try {
         const emailExistsDonator = await Donator.findOne({ email: req.body.email });
         if (emailExistsDonator) {
-            return res.status(400).json({ error: 'Email já está em uso por um doador.' });
+            return res.status(400).json({ error: 'Email pertencente a um doador.' });
         }
 
         const hashedPassword = bcrypt.hashSync(req.body.password, 10);
@@ -217,7 +216,7 @@ loginController.registerEntity = async function(req, res) {
         res.status(200).json({ auth: true, token: token });
     } catch (err) {
         console.log(err);
-        res.status(500).json({ error: 'Erro ao registrar entidade' });
+        res.status(500).json({ error: 'Erro ao registar entidade' });
     }
 }
 
@@ -241,7 +240,7 @@ loginController.profileEntity = function(req,res, next){
     Entity.findOne({ email: entityEmail })
       .then(entity => {
         if (!entity) {
-          return res.status(404).json({ error: "Entidade não encontrado" });
+          return res.status(404).json({ error: "Entidade não encontrada" });
         }
         res.json(entity);
       })

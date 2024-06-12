@@ -9,7 +9,7 @@ const endpointEntities = 'http://localhost:3000/api/v1/entities/';
 const API_ENDPOINT = 'http://localhost:3000/login';
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type':  'application/json'
+    'Content-Type': 'application/json'
   })
 };
 
@@ -21,16 +21,15 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  login(email: string, password:string): Observable<any>{
+  login(email: string, password: string): Observable<any> {
     return this.http.post<any>(`${API_ENDPOINT}/login`, { email, password }, httpOptions)
-    .pipe(tap(response => {
-      localStorage.setItem('accessToken', response.token);
-      localStorage.setItem('userType', response.userType); 
-      console.log('Logged in as:', response.userType); 
-    }));
+      .pipe(tap(response => {
+        localStorage.setItem('accessToken', response.token);
+        localStorage.setItem('userType', response.userType);
+        console.log('Logged in as:', response.userType);
+      }));
 
   }
-
 
   logout(): void {
     localStorage.removeItem('accessToken');
@@ -47,27 +46,27 @@ export class AuthService {
       return false;
     }
     return true;
-}
+  }
 
-getToken(): string | null {
-  return localStorage.getItem('accessToken');
-}
+  getToken(): string | null {
+    return localStorage.getItem('accessToken');
+  }
 
-setToken(token: string): void {
-  localStorage.setItem('accessToken', token);
-}
+  setToken(token: string): void {
+    localStorage.setItem('accessToken', token);
+  }
 
-changePassword(currentPassword: string, newPassword: string, userType: string): Observable<any> {
-  const token = localStorage.getItem('accessToken');
-  const authHeaders = new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${token}`
-  });
+  changePassword(currentPassword: string, newPassword: string, userType: string): Observable<any> {
+    const token = localStorage.getItem('accessToken');
+    const authHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
 
-  const body = { currentPassword, newPassword };
-  const endpoint = userType === 'donator' ? `${endpointDonators}changePasswordDonator` : `${endpointEntities}changePasswordEntity`;
+    const body = { currentPassword, newPassword };
+    const endpoint = userType === 'donator' ? `${endpointDonators}changePasswordDonator` : `${endpointEntities}changePasswordEntity`;
 
-  return this.http.post<any>(endpoint, body, { headers: authHeaders });
-}
+    return this.http.post<any>(endpoint, body, { headers: authHeaders });
+  }
 }
 

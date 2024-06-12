@@ -23,7 +23,7 @@ export class DonatorService {
     return this.http.get<Donator[]>(endpointDonators + "l", httpOptions);
   }
 
-  
+
   getDonator(): Observable<Donator> {
     const token = localStorage.getItem('accessToken');
     const authHeaders = new HttpHeaders({
@@ -43,23 +43,21 @@ export class DonatorService {
     const authHeaders = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-  
+
     const formData: FormData = new FormData();
-  
-   
+
+
     if (file) {
       formData.append('profileImage', file);
     }
-  
-    
+
     const donatorAny: any = donator;
     Object.keys(donatorAny).forEach((key) => {
       if (donatorAny[key] !== undefined && key !== 'profileImage') {
         formData.append(key, donatorAny[key]);
       }
     });
-  
-    
+
     return this.http.post<Donator>(`${endpointDonators}update2`, formData, { headers: authHeaders });
   }
 
@@ -88,6 +86,4 @@ export class DonatorService {
   getDonatorImage(id: string): Observable<Blob> {
     return this.http.get(`${IMAGES_ENDPOINT}donators/${id}.jpg`, { responseType: 'blob' });
   }
-
-
 }

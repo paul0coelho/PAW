@@ -19,7 +19,7 @@ const httpOptions = {
 export class EntityService {
   private selectedEntity: Entity;
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {
     this.selectedEntity = new Entity();
   }
 
@@ -31,8 +31,6 @@ export class EntityService {
     return this.http.get<Entity>(`${endpointEntities}show2/${id}`, httpOptions);
   }
 
- 
-
   updateEntity(entity: Entity, file: File): Observable<Entity> {
     const token = localStorage.getItem('accessToken');
     const authHeaders = new HttpHeaders({
@@ -40,22 +38,21 @@ export class EntityService {
     });
 
     const formData: FormData = new FormData();
-  
+
     if (file) {
       formData.append('profileImage', file);
     }
-  
-    
+
     const entityAny: any = entity;
     Object.keys(entityAny).forEach((key) => {
       if (entityAny[key] !== undefined && key !== 'profileImage') {
         formData.append(key, entityAny[key]);
       }
     });
-  
-    
+
     return this.http.post<Entity>(`${endpointEntities}update2`, formData, { headers: authHeaders });
   }
+
   updateEntity2(entity: Entity): Observable<Entity> {
     const token = localStorage.getItem('accessToken');
     const authHeaders = new HttpHeaders({
@@ -64,7 +61,6 @@ export class EntityService {
     });
     return this.http.post<Entity>(`${endpointEntities}update2`, entity, { headers: authHeaders });
   }
-
 
   deleteEntity(id: string): Observable<any> {
     return this.http.post<any>(`${endpointEntities}delete2/${id}`, httpOptions);
@@ -77,11 +73,12 @@ export class EntityService {
   getSelectedEntity(): Entity {
     return this.selectedEntity;
   }
+
   getEntityProfile(): Observable<Entity> {
     const token = localStorage.getItem('accessToken');
     const authHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`  
+      'Authorization': `Bearer ${token}`
     });
     return this.http.get<Entity>('http://localhost:3000/login/profileEntity', { headers: authHeaders });
   }
@@ -89,7 +86,4 @@ export class EntityService {
   getEntityImage(id: string): Observable<Blob> {
     return this.http.get(`${IMAGES_ENDPOINT}entities/${id}.jpg`, { responseType: 'blob' });
   }
-
-  
-
 }

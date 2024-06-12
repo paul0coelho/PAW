@@ -35,7 +35,7 @@ export class ChangePasswordComponent {
     const userType = localStorage.getItem('userType');
 
     if(!userType){
-        alert('Tipo de usuário não encontrado');
+        alert('Tipo de utilizador não encontrado');
         return;
     }
 

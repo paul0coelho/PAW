@@ -27,16 +27,16 @@ export class DonatorProfileComponent implements OnInit {
     this.donatorService.getDonatorProfile().subscribe({
       next: (data: Donator) => {
         this.donator = data;
-        console.log('Profile data:', data);
+        console.log('Informação do perfil:', data);
         if (data._id) {
           this.loadProfileImage(data._id);
         } else {
-          console.error('Donator ID is undefined');
+          console.error('O id do doador é indefinido');
         }
       },
       error: (error: any) => {
-        this.error = 'Failed to load donator profile';
-        console.error('Error loading donator profile:', error);
+        this.error = 'Falha ao carregar perfil do doador';
+        console.error('Falha ao carregar perfil do doador:', error);
         this.router.navigate(['/login']);
       }
     });
@@ -44,7 +44,7 @@ export class DonatorProfileComponent implements OnInit {
 
   private loadProfileImage(id: string): void {
     if (!id) {
-      console.error('Cannot load image, ID is undefined');
+      console.error('Não foi possível carregar a imagem, o id é indefinido');
       return;
     }
 
@@ -56,7 +56,7 @@ export class DonatorProfileComponent implements OnInit {
         }
       },
       error: (error: any) => {
-        console.error('Error loading profile image:', error);
+        console.error('Erro ao carregar imagem de perfil:', error);
       }
     });
   }

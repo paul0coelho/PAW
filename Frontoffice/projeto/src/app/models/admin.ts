@@ -14,5 +14,4 @@ export class Admin{
         this.password = password;
         this.updated_at = updated_at;
     }
-
 }

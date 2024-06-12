@@ -23,5 +23,4 @@ export class FileUploaderService {
     formData.append("title", title);
     return this.http.post<any>(endpoint + 'file_and_data_upload', formData);
   }
-
 }

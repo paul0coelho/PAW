@@ -53,19 +53,23 @@ router.post('/save2', upload.single('file'), function(req, res) {
 // Obter doações no formato JSON
 router.get('/returnDonations', donation.returnDonations);
 
-// Obter doações no formato JSON
+// Obter doações efetuadas por um dado doador no formato JSON 
 router.get('/returnDonationsByDonatorId', loginController.verifyToken, donation.returnDonationsByDonatorId);
 
-// Obter doações no formato JSON
+// Obter doações efetuadas por uma dada entidade no formato JSON
 router.get('/returnDonationsByEntityId', loginController.verifyToken, donation.returnDonationsByEntityId);
 
+// Troca de pontos por vouchers por parte de um doador
 router.post('/exchangePoints',loginController.verifyToken,donation.exchangePointsForVoucher);
 
+// Verficação e aprovação de uma doação "em espera"
 router.post('/acceptDonation/:id', loginController.verifyLoginUser, function(req, res) {
   donation.acceptDonation(req, res);
 });
-  
+
+// Remoção de uma doação "em espera"
 router.post('/delete/:id', loginController.verifyLoginUser, function(req, res, next) {
   donation.delete(req, res);
 });
+
 module.exports = router;

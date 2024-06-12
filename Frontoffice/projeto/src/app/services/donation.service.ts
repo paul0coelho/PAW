@@ -6,7 +6,6 @@ import { Donation } from '../models/donation';
 const endpointDonations = 'http://localhost:3000/api/v1/donations/';
 
 const httpOptions = {
-  
   headers: new HttpHeaders({
     'Content-Type': 'application/json'
   })

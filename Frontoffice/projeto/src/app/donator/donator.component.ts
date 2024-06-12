@@ -48,7 +48,7 @@ export class DonatorComponent implements OnInit {
               cumulativePoints.push(this.totalPoints);
             }
     
-            this.plot.plotLine("Evolução do número de pontos", "plot", dates, cumulativePoints);
+            this.plot.plotLine("Evolução do número de pontos (através de doações)", "plot", dates, cumulativePoints);
           }
         }
       });

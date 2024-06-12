@@ -28,16 +28,16 @@ export class EntityProfileComponent implements OnInit {
     this.entityService.getEntityProfile().subscribe({
       next: (data: Entity) => {
         this.entity = data;
-        console.log('Profile data:', data);
+        console.log('Informação do perfil:', data);
         if (data._id) {
           this.loadProfileImage(data._id);
         } else {
-          console.error('Donator ID is undefined');
+          console.error('Id da entidade não definido');
         }
       },
       error: (error: any) => {
-        this.error = 'Failed to load donator profile';
-        console.error('Error loading donator profile:', error);
+        this.error = 'Falha ao carregar perfil da entidade';
+        console.error('Falha ao carregar perfil da entidade: ', error);
         this.router.navigate(['/login']);
       }
     });
@@ -45,7 +45,7 @@ export class EntityProfileComponent implements OnInit {
 
   private loadProfileImage(id: string): void {
     if (!id) {
-      console.error('Cannot load image, ID is undefined');
+      console.error('Não foi possível carregar a imagem, id indefinido');
       return;
     }
 
@@ -57,7 +57,7 @@ export class EntityProfileComponent implements OnInit {
         }
       },
       error: (error: any) => {
-        console.error('Error loading profile image:', error);
+        console.error('Erro ao carregar imagem de perfil:', error);
       }
     });
   }

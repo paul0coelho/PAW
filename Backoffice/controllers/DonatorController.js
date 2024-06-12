@@ -333,7 +333,7 @@ donatorController.changePasswordDonator = async function(req, res) {
 
     const isMatch = await bcrypt.compare(req.body.currentPassword, donator.password);
     if (!isMatch) {
-      return res.status(400).json({ error: 'Senha atual incorreta' });
+      return res.status(400).json({ error: 'Palavra-passe atual incorreta' });
     }
 
     const salt = await bcrypt.genSalt(10);
@@ -342,10 +342,10 @@ donatorController.changePasswordDonator = async function(req, res) {
     donator.password = hashedPassword;
     await donator.save();
 
-    res.json({ message: 'Senha alterada com sucesso' });
+    res.json({ message: 'Palavra-passe alterada com sucesso' });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Erro ao alterar a senha', details: err.message });
+    res.status(500).json({ error: 'Erro ao alterar a palavra-passe', details: err.message });
   }
 };
 

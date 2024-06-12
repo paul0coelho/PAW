@@ -58,7 +58,7 @@
         document.getElementById('totalDonators').innerHTML = "<p>Número de doadores<p> " + totalDonors;
       })
       .catch(err => {
-        console.error('Erro ao buscar dados de doadores:', err);
+        console.error('Erro ao procurar dados de doadores:', err);
       });
 
       fetch('/entities/returnEntities')
@@ -68,7 +68,7 @@
        document.getElementById('totalEntities').innerHTML = "<p>Número de entidades<p> " + totalEntities;
       })
       .catch(err => {
-       console.error('Erro ao buscar dados de entidades:', err);
+       console.error('Erro ao procurar dados de entidades:', err);
       });
 
 
@@ -132,7 +132,7 @@
       document.getElementById('totalPoints').innerHTML = "<p>Pontos distribuídos <p>" + totalPoints;
       })
       .catch(err => {
-        console.error('Erro ao buscar dados de doação:', err);
+        console.error('Erro ao procurar dados de doação:', err);
       });
       </script>
 </body>
