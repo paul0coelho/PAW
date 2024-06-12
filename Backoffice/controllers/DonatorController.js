@@ -313,56 +313,6 @@ donatorController.update2 = function(req, res) {
     });
 };
 
-donatorController.delete = function(req, res) {
-  Donator.findOneAndDelete({ _id: req.params.id })
-    .then(donator => {
-      if (!donator) {
-        return res.status(404).send('Entidade não encontrada');
-      }
-
-      var imagePath = path.join(__dirname, '..', 'images', "donators", donator._id.toString() + '.jpg');
-      if (fs.existsSync(imagePath)) {
-        fs.unlink(imagePath, function(err) {
-          if (err) {
-            console.error('Erro ao remover a imagem associada à entidade:', err);
-          }
-        });
-      }
-
-      console.log("Doador excluído!");
-      res.redirect("/donators");
-    })
-    .catch(err => {
-      console.log("Error:", err);
-      res.status(500).send('Internal Server Error');
-    });
-};
-
-donatorController.delete2 = function(req, res) {
-  Donator.findOneAndDelete({ _id: req.params.id })
-    .then(donator => {
-      if (!donator) {
-        return res.status(404).json({ error: 'Entidade não encontrada' });
-      }
-
-      var imagePath = path.join(__dirname, '..', 'images', "donators", donator._id.toString() + '.jpg');
-      if (fs.existsSync(imagePath)) {
-        fs.unlink(imagePath, function(err) {
-          if (err) {
-            console.error('Erro ao remover a imagem associada à entidade:', err);
-          }
-        });
-      }
-
-      console.log("Doador excluído!");
-      res.json({ message: 'Doador excluído com sucesso' });
-    })
-    .catch(err => {
-      console.log("Error:", err);
-      res.status(500).json({ error: 'Erro ao excluir o doador', details: err.message });
-    });
-};
-
 donatorController.returnDonators = function(req, res) {
   Donator.find()
     .then(donators => {
